@@ -338,7 +338,7 @@ h1 {
   <li><a href="https://drive.google.com/file/d/1Ju_1b_FnDTIHf-FlXGGB2NydRdcEyTvD/view?usp=drive_link" class="Data">🍿The Skeleton Key</a></li>
   <li><a href="https://drive.google.com/file/d/1rpQOIKmizYLLt2zpg_yxlQ87EJxM4McV/view?usp=drive_link" class="Data">🍿The Gentlemens</a></li>
   <li><a href="https://drive.google.com/file/d/1J_QXOeCBTdR6oklV_4Mj0xrJGBhTKaVq/view?usp=drive_link" class="Data">🍿Maligno</a></li>
-  <li><a href="https://drive.google.com/drive/folders/1cGFgWZiyO7h6psxppOJ1_rKmjmsVflG9?usp=drive_link" class="Data">🍿Ghosts</a></li>
+  <li><a href="https://drive.google.com/drive/folders/1--zY-EDd-hEMXABqGu04OguwquiZeAlV" class="Data">🍿Ghosts</a></li>
   <li><a href="https://drive.google.com/drive/folders/1cAcwzT70xX6M--ZHZAuL37o9EVXk0Xr8?usp=drive_link" class="Data">🍿Marianne</a></li>
   <li><a href="https://drive.google.com/drive/folders/1ZkWRZfmVkzaUWAlhJa1ZMfpeK2ymxou8?usp=drive_link" class="Data">🍿Merlina Addams</a></li>
   <li><a href="https://drive.google.com/drive/folders/1cH0AN9kGdHLcwl2A_QPRcmU2PRpjdtDt?usp=drive_link" class="Data">🍿The Bastard Son Of Devil</a></li>
