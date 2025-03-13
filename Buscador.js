@@ -52,15 +52,16 @@ section {
     justify-content: center;
     align-items: center;
 }
-input {    
+input {  
+    color: #fff;  
     width: 90%;
     padding: 10px;
     outline: none;
     z-index: 9999;
-    font-weight: 600;
+    font-weight: bold;
     border-radius: 20px;
-    background: gold;
-    border: 2px solid red;   
+    background: linear-gradient(to right, blue, blue, white);
+    border: 2px solid #aaa;   
 }
 #Lista {
     scale: 90%;
