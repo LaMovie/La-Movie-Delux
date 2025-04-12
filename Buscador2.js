@@ -4,7 +4,21 @@ var Lista2 = [
   { name: "📺Ritmos Tv", url: "https://bit.ly/3unJf9W" },
   { name: "📺Pop Tv", url: "https://bit.ly/3R5TwQT" },
   { name: "📺South Park Tv", url: "https://pluto.tv/es/live-tv/south-park-pvt2/details" },
-  { name: "📺Bob Esponja Tv", url: "https://pluto.tv/live-tv/bob-esponja-pantalones-quadrados1?utm_source=plutotv&utm_medium=share&utm_campaign=1000201&utm_content=1000735" },
+  { name: "📺Bum Tv", url: "https://movil.ejeserver.com/live/visiondorada.m3u8" },
+  { name: "📺Lilo y Stitch Tv", url: "https://cloudvideo.servers10.com:8081/impactotv/index.m3u8" },
+  { name: "📺Activa Tv", url: "https://streamtv.mediasector.es/hls/activatv/index.m3u8"}, 
+  { name: "📺Vevo R&B Tv", url: "https://is.gd/FLLYMV"}, 
+  { name: "📺4Fun Tv", url: "https://stream.4fun.tv:8888/hls/4f.m3u8"}, 
+  { name: "📺Bob Esponja Tv", url: "https://is.gd/O95aRO"}, 
+  { name: "📺Cine Terror Tv", url: "https://is.gd/GyYDz0"}, 
+  { name: "📺Vevo 90s Tv", url: "https://is.gd/qONOfE"}, 
+  { name: "📺Series Tv", url: "https://is.gd/tit1cW"}, 
+  { name: "📺Studio Delta Tv", url: "https://5ce9406b73c33.streamlock.net/RSD/ngrp:livestream_all/playlist.m3u8"}, 
+  { name: "📺Toons Tv", url: "https://is.gd/Y01en3"}, 
+  { name: "📺Comedy Center Tv", url: "https://is.gd/AV8Q3O"}, 
+  { name: "📺GH Tv", url: "https://tv.ghtelevision.com:3018/live/ghtelevisionlive.m3u8"}, 
+  { name: "📺El Hormiguero Tv", url: "https://fast-channels.atresmedia.com/648ef5882bfab0e4627e0d61/648ef5882bfab0e4627e0d61.m3u8"}, 
+  { name: "📺Classic Tv", url: "https://is.gd/7CaWXu"},
   { name: "⚙️Sofia 1", url: "https://drive.google.com/drive/folders/1-1XNTcBjHMPOia_zXKWZNhdQQUe2SaNE" },
   { name: "⚙️Sofia 2", url: "https://drive.google.com/drive/folders/1-1wPR4nf8fmRQ-HNQvkfP0H1HJHxm6yb" },
   { name: "⚙️Sofia 3", url: "https://drive.google.com/drive/folders/1DgwNQiBR3xvrI3yOgw4Wlv4uUCZxugmf" },
@@ -480,7 +494,7 @@ var Lista2 = [
   { NAME: "🍿Hotel Transylvania 4", URL: "https://drive.google.com/file/d/14n-3SiNFegq-50WqJ0EddfmisBoV-d9q/view?usp=drivesdk" },
   { NAME: "🍿Los Locos Addams 2", URL: "https://drive.google.com/file/d/127f2MOqAviF3fiNXP0ewXu6EA3nCqmCR/view?usp.com/file/d/127f2MOqAviF3fiNXP0ewXu6EA3nCqqCR/view?usp=drivesdk" },
   { NAME: "🍿Un Detective Suelto En Hollywood 4", URL: "https://share.vidyard.com/watch/goaK9CpkwALc6wMALX8XWq?" },
-  { NAME: "📺Universal-Img Tv", URL: "https://imagenuniversaltv.net:3771/live/iutvlive.m3u8" },
+  { NAME: "📺Universal Tv", URL: "https://imagenuniversaltv.net:3771/live/iutvlive.m3u8" },
   { NAME: "📺IPTV", URL: "https://lamovie.github.io/IPTV/" },
   { NAME: "🍿Observados", URL: "https://drive.google.com/file/d/1JSub0W-ieTSGolShmHgYHYeOzn9Qwiq2/view?usp=drivesdk" },
   { NAME: "🍿Evil Dead 1", URL: "https://drive.google.com/file/d/1NCDSC_xcgQnH-X-EiToNlG5b6ldbVCfr/view?usp=drivesdk" },
@@ -489,7 +503,7 @@ var Lista2 = [
   { NAME: "🍿Heroes", URL: "https://lamovie.github.io/HEROES/" },
   { NAME: "🍿El Astronauta", URL: "https://drive.google.com/file/d/1jqHmSdsdd1SyvqJuHhwp9B5x4E4QaR5n/view?usp=drivesdk" },
   { NAME: "🍿Bad Boys 4", URL: "https://drive.google.com/file/d/1kDpXxuLzNpR4GqLFKYq_3ZIVItSEmDNy/view?usp:drivesdk" },
-  { NAME: "🍿Deadpool 3", URL: "https://drive.google.com/file/d/1X8lkdllwCh1Fm53iMg-24fsq00irex8UA/view?usp=drivesdk" },
+  { NAME: "🍿Deadpool 3", URL: "https://drive.google.com/file/d/1X8lkdllwCh1Fm53iMg-24fsq0irex8UA/view?usp=drivesdk" },
   { NAME: "🍿Umbrella Academy 4", URL: "https://drive.google.com/drive/folders/1DGkZqf7DPtm-6mJJzdQGNlD95H-oPOYG" },
   { NAME: "📺Dark Play Tv", URL: "https://lamovie.github.io/DARK-TV/" },
   { NAME: "📺Bass Nation Tv", URL: "https://lamovie.github.io/BASS-NATION-TV/" },
@@ -519,11 +533,13 @@ var Lista2 = [
     { NAME: "🍿Aida 8", URL: "https://drive.google.com/drive/folders/1yPCOh-1_Apnx_1U7w0_BdOG5AQYg3MJ0" },
     { NAME: "🍿Mas Dura Sera La Caida", URL: "https://drive.google.com/file/d/1YN3y0cDubKVSZGNykXrIsVyf1fRALOBP/view?usp=drivesdk" },
     { NAME: "🍿Venom 3", URL: "https://drive.google.com/file/d/1ZjWemm3wMKkjs4k3YSVb2F1QeVUMYppi/view?usp=drivesdk" },
+    { NAME: "🍿Un Rey En La Habana", URL: "https://drive.google.com/file/d/1liAuNkkrDf-eUm0vcCau_tspejvG0LfT/view?usp=drivesdk"},
+    { NAME: "🍿Agentes Del Desorden", URL: "https://drive.google.com/file/d/10j-eMI6Z1bBW3gdU8rk9gerV9e4pe6S4/view?usp=drivesdk"}
 ];
 
 // Selecciona la lista existente
 var lista = document.getElementById("Lista");
-
+ 
 // Agrega los nuevos elementos dinámicamente
 Lista2.forEach(item => {
   var li = document.createElement("li");
