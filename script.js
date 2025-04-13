@@ -86,7 +86,7 @@ function Links(iframe) {
 }
         <!-- Musica -->
 
-    var videos = ['https://da.gd/SBoUUq', 'https://da.gd/aag2LL', 'https://da.gd/f9BB', 'https://da.gd/nfJ9tm', 'https://bit.ly/49D9ppk', 'https://lamovie.github.io/BASS-NATION-ONLINE/'];
+    var videos = ['https://5ce9406b73c33.streamlock.net/RSD/ngrp:livestream_all/playlist.m3u8', 'https://stream.4fun.tv:8888/hls/4f.m3u8', 'https://streamtv.mediasector.es/hls/activatv/index.m3u8', 'https://is.gd/7CaWXu', 'https://is.gd/qONOfE', 'https://lamovie.github.io/BASS-NATION-ONLINE/'];
     var currentVideoIndex = 0;
 
     function adelantarVideo() {
