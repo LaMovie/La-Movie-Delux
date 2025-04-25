@@ -319,6 +319,7 @@ header .menu{
     border-radius: 10px;
     object-fit: cover;
     scroll-snap-align: start;
+    background: rgb(255, 130, 0);
   &:hover {
      transform: perspective(200px)rotateY(45deg);
      padding-left: 5%;
