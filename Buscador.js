@@ -65,7 +65,7 @@ input {
     outline: none;
     font-weight: 600;
     border-radius: 20px;
-    background: gold;
+    background: linear-gradient(to right, blue, blue, white);
     border: 2px solid red;   
 }
 #Lista {
