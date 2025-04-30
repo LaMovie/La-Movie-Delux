@@ -1,47 +1,54 @@
-document.addEventListener("keyup", e=>{
- 
-        <!-- TILDES -->
-  function Tildes(texto) {
-       return texto.normalize("NFD").replace(/[\u0300-\u036f]/g, "").toLowerCase();
-};  
-     
-      var In = e.target.value.toLowerCase().trim();
-      var Data = document.querySelectorAll(".Data");
-      let foundMatch = false;
-      var Input = Tildes(In.replace(/\s+/g, ' '));
- 
-  if (e.target.matches("#buscador")){          
-   
-      Lista.style.display = Input === '' ? "none" : "block";
- 
-  Data.forEach(item => {
-        if (item.textContent.toLowerCase().includes(Input)) {
-          item.classList.remove("filtro");
-          foundMatch = true;
-        } else {
-          item.classList.add("filtro");
-        }
-      });
+document.addEventListener("keyup", e => {
+
+  // TILDES
+  function Tildes(texto, preservarÑ = false) {
+    let limpio = texto.normalize("NFD").replace(/[\u0300-\u036f]/g, "").toLowerCase();
+    if (!preservarÑ) {
+      limpio = limpio.replace(/ñ/g, "n");
+    }
+    return limpio;
+  }
+
+  var In = e.target.value.toLowerCase().trim();
+  var incluyeÑ = In.includes("ñ");
+  var Data = document.querySelectorAll(".Data");
+  let foundMatch = false;
+  var Input = Tildes(In.replace(/\s+/g, ' '), incluyeÑ);
+
+  if (e.target.matches("#buscador")) {
+    Lista.style.display = Input === '' ? "none" : "block";
+
+    Data.forEach(item => {
+      let itemText = Tildes(item.textContent.toLowerCase(), incluyeÑ);
+      if (itemText.includes(Input)) {
+        item.classList.remove("filtro");
+        foundMatch = true;
+      } else {
+        item.classList.add("filtro");
+      }
+    });
+
     No.style.display = foundMatch ? "none" : "block";
   }
-    
-     <!-- Manejo del Enter -->
-  
-    if (e.key === "Enter") {
-      var Int = e.target.value.toLowerCase().trim();
-      var inputValue = Tildes(Int.replace(/\s+/g, ' '));
-      var matchedItem = [...document.querySelectorAll(".Data")].find(
-        item => item.textContent.toLowerCase() === inputValue
-      );
 
-      if (matchedItem) {
-        window.location.href = matchedItem.href;
-      } else {
-        buscador.value = '';
-        Lista.style.display = 'none';
-  No.style.display = "none";
-      }
+  // Manejo del Enter
+  if (e.key === "Enter") {
+    var Int = e.target.value.toLowerCase().trim();
+    var incluyeÑ = Int.includes("ñ");
+    var inputValue = Tildes(Int.replace(/\s+/g, ' '), incluyeÑ);
+
+    var matchedItem = [...document.querySelectorAll(".Data")].find(
+      item => Tildes(item.textContent.toLowerCase(), incluyeÑ) === inputValue
+    );
+
+    if (matchedItem) {
+      window.location.href = matchedItem.href;
+    } else {
+      buscador.value = '';
+      Lista.style.display = 'none';
+      No.style.display = "none";
     }
+  }
 });
 
          <!-- HTML -->
