@@ -1,5 +1,10 @@
 document.addEventListener("keyup", e=>{
  
+        <!-- TILDES -->
+  function Tildes(texto) {
+       return texto.normalize("NFD").replace(/[\u0300-\u036f]/g, "").toLowerCase();
+};  
+     
       var In = e.target.value.toLowerCase().trim();
       var Data = document.querySelectorAll(".Data");
       let foundMatch = false;
