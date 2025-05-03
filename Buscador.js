@@ -202,8 +202,7 @@ h1 {
  };   
         function evento() {
     var style = document.createElement('style');
-    style.innerHTML = 
- `
+    style.innerHTML = `
 <style>
 #contenedor-main::-webkit-scrollbar {
     width: 3px;
