@@ -198,7 +198,7 @@ h1 {
  
  
         function Handle {
-     if(window.innerWidth > Window.innerHeight) ? evento() : invento();
+  var orientation = (window.innerWidth > window.innerHeight) ? evento() : invento();
  };   
         function evento() {
     var style = document.createElement('style');
@@ -219,9 +219,24 @@ h1 {
 </style>  
  `;
  document.head.appendChild(style);
- };
+};
   
-       
+       function invento() {
+    var style = document.createElement('style');
+    style.innerHTML = 
+ `
+<style>
+#Lista::-webkit-scrollbar {
+    display: none;
+}
+</style>  
+ `;
+ document.head.appendChild(style);  
+};
+
+   window.addEventListener("resize", Handle);   
+           Handle();   
+         
      
      
      
