@@ -204,19 +204,19 @@ h1 {
     var style = document.createElement('style');
     style.innerHTML = `
 <style>
-#contenedor-main::-webkit-scrollbar {
+#Lista::-webkit-scrollbar {
     width: 3px;
     background: transparent;
 }
-#contenedor-main::-webkit-scrollbar-thumb {
+#Lista::-webkit-scrollbar-thumb {
     border-radius: 10px;
-    background: #80808080;
+    background: #ff4081;
 }
-#contenedor-main::-webkit-scrollbar-track {
+#Lista::-webkit-scrollbar-track {
     background: transparent; 
 } 
 </style>  
- `;
+`;
  document.head.appendChild(style);
 };
   
@@ -225,7 +225,7 @@ h1 {
     style.innerHTML = 
  `
 <style>
-#contenedor-main::-webkit-scrollbar {
+#Lista::-webkit-scrollbar {
     display: none;
 }
 </style>  
