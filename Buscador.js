@@ -201,43 +201,44 @@ h1 {
   var orientation = (window.innerWidth > window.innerHeight) ? evento() : invento();
  };   
         function evento() {
-    var style = document.createElement('style');
-    style.innerHTML = `
-<style>
-#Lista::-webkit-scrollbar {
-    width: 3px;
-    background: transparent;
-}
-#Lista::-webkit-scrollbar-thumb {
-    border-radius: 10px;
-    background: #ff4081;
-}
-#Lista::-webkit-scrollbar-track {
-    background: transparent; 
-} 
-</style>  
-`;
- document.head.appendChild(style);
+  var style = document.createElement('style');
+  style.innerHTML = `
+    #Lista::-webkit-scrollbar {
+        width: 6px;
+        background: transparent;
+    }
+    #Lista::-webkit-scrollbar-thumb {
+        border-radius: 10px;
+        background: #80808080;
+    }
+    #Lista::-webkit-scrollbar-track {
+        background: transparent; 
+    } 
+  `;
+  document.head.appendChild(style);
 };
-  
+
+
        function invento() {
-    var style = document.createElement('style');
-    style.innerHTML = 
- `
-<style>
-#Lista::-webkit-scrollbar {
-    display: none;
-}
-</style>  
- `;
- document.head.appendChild(style);  
+  var style = document.createElement('style');
+  style.innerHTML = `
+    #Lista::-webkit-scrollbar {
+        display: none;
+    }
+  `;
+  document.head.appendChild(style);
 };
 
    window.addEventListener("resize", Handle);   
            Handle();   
          
      
-     
+ if (!document.querySelector('#scroll-style')) {
+  var style = document.createElement('style');
+  style.id = 'scroll-style';
+  style.innerHTML = `...`;
+  document.head.appendChild(style);
+};    
      
      
      
