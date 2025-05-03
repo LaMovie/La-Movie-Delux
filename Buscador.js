@@ -205,15 +205,15 @@ h1 {
     style.innerHTML = 
  `
 <style>
-#Lista::-webkit-scrollbar {
-    height: 3px;
+#contenedor-main::-webkit-scrollbar {
+    width: 3px;
     background: transparent;
 }
-#Lista::-webkit-scrollbar-thumb {
+#contenedor-main::-webkit-scrollbar-thumb {
     border-radius: 10px;
     background: #80808080;
 }
-#Lista::-webkit-scrollbar-track {
+#contenedor-main::-webkit-scrollbar-track {
     background: transparent; 
 } 
 </style>  
@@ -226,7 +226,7 @@ h1 {
     style.innerHTML = 
  `
 <style>
-#Lista::-webkit-scrollbar {
+#contenedor-main::-webkit-scrollbar {
     display: none;
 }
 </style>  
