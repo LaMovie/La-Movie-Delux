@@ -206,7 +206,7 @@ h1 {
  `
 <style>
 #Lista::-webkit-scrollbar {
-    height: 2px;
+    height: 3px;
     background: transparent;
 }
 #Lista::-webkit-scrollbar-thumb {
