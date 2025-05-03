@@ -114,7 +114,18 @@ function Links(iframe) {
 
 
 
-
+var P = document.querySelectorAll('.P');
+  var T = document.querySelectorAll('.thumbnail');
+    
+ 
+  P.forEach(p => p.onclick = () => {
+  p.style.color = '#4f9';
+  T.forEach(img => img.style.opacity = '.2');
+  T.forEach(t => t.onclick = () => {
+  p.style.color = '#fff';
+  T.forEach(img => img.style.opacity = '1');
+ });
+}); 
 
 
 
