@@ -211,7 +211,7 @@ h1 {
 }
 #Lista::-webkit-scrollbar-thumb {
     border-radius: 10px;
-    background: #ff4081;
+    background: #80808080;
 }
 #Lista::-webkit-scrollbar-track {
     background: transparent; 
