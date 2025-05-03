@@ -195,7 +195,45 @@ h1 {
        No.alt = 'No EnCoNTraDO';
       No.style.color = '#fff';   
      
-     
+ 
+ 
+        function Handle {
+     if(window.innerWidth > Window.innerHeight) ? evento() : invento();
+ };   
+        function evento() {
+    var style = document.createElement('style');
+    style.innerHTML = 
+ `
+<style>
+#Lista::-webkit-scrollbar {
+    width: 5px;
+    background: transparent;
+}
+#Lista::-webkit-scrollbar-thumb {
+    border-radius: 10px;
+    background: #ff4081;
+}
+#Lista::-webkit-scrollbar-track {
+    background: transparent; 
+} 
+</style>  
+ `;
+ document.head.appendChild(style);
+ };
+  
+       function invento() {
+    var style = document.createElement('style');
+    style.innerHTML = 
+ `
+<style>
+#Lista::-webkit-scrollbar {
+    display: none;
+}
+</style>  
+ `;
+ document.head.appendChild(style);       
+ };
+         
      
      
      
