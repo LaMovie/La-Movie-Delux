@@ -221,19 +221,7 @@ h1 {
  document.head.appendChild(style);
  };
   
-       function invento() {
-    var style = document.createElement('style');
-    style.innerHTML = 
- `
-<style>
-#Lista::-webkit-scrollbar {
-    display: none;
-}
-</style>  
- `;
- document.head.appendChild(style);       
- };
-         
+       
      
      
      
