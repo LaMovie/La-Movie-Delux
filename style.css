@@ -381,7 +381,7 @@ footer{
     color: #fff;
   &:hover {
       font-size: 20px;
-      color: gold;
+      color: blue;
   }
 }
 .Gallery {
