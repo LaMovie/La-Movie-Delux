@@ -451,7 +451,9 @@ a {
       border-radius: 50px;
       background: gray;
 }
-
+#Oculto {
+    display: none;
+}
 
 
 
