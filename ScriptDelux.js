@@ -51,12 +51,9 @@ document.addEventListener("keyup", e => {
   }
 });
 
-         <!-- HTML -->
-         
- var HTML =
-  `
+var HTML = `
 <style>
-@import url('https://fonts.googleapis.com/css2?family=Poppins:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Poppins:wght@400;600&display=swap');
 section {
     width: 55%;
     height: 7vh;
@@ -101,10 +98,10 @@ li {
 }
 a {
     color: #fff;
-  &:hover {
-     color: #4f9;
-     text-shadow: 0 0 10px red;
- }
+}
+a:hover {
+    color: #4f9;
+    text-shadow: 0 0 10px red;
 }
 #No {
     scale: 80%;
@@ -113,57 +110,45 @@ a {
 }
 </style>
 
-<style>
-:root {
-  --bg: #110921;
-  --purple: #3720b4;
-  --green: #5ff8c2;
-  --font: 'Roboto Mono', sans-serif;
-}
-h1 {
-  font-size: 3vw;
-}
-</style>
-</head>
-<body>
 <section id="contenedor-main">
-    <div>
-        <input type="text" name="buscador" id="buscador" placeholder="Buscar...">
-           <br/><br/>
-         
-           </div>
+  <div>
+    <input type="text" name="buscador" id="buscador" placeholder="Buscar...">
+    <ul id="Lista"></ul>
+    <img id="No" src="https://bit.ly/3y2BVCO" alt="No EnCoNTraDO" style="display: none;">
+    <br><br>
+  </div>
 </section>
-<img id="No" src="https://bit.ly/3y2BVCO"/>
 `;
 
-     Aux.innerHTML = HTML;
+var Aux = document.getElementById("Aux");  // ← ESTA LÍNEA FALTABA
+Aux.innerHTML = HTML;
 
- buscador.addEventListener('keydown', function(event) {
-   if (event.key === 'Enter') { 
-                event.preventDefault(); 
-  var TextPre = buscador.value.toLowerCase().trim(); 
-  let Prefijo;
- 
- if (TextPre.includes('tv')) {
+buscador.addEventListener('keydown', function(event) {
+  if (event.key === 'Enter') { 
+    event.preventDefault(); 
+    var TextPre = buscador.value.toLowerCase().trim(); 
+    let Prefijo;
+
+    if (TextPre.includes('tv')) {
          Prefijo = '📺';
      } else if(TextPre.includes('sofia')){
          Prefijo = '⚙️';
      } else {
          Prefijo = '🍿';
      }   
-   var Texto = Prefijo + TextPre;       
-   buscador.value = Texto; 
+    var Texto = Prefijo + TextPre;       
+    buscador.value = Texto; 
   }
-});    
-       No.alt = 'No EnCoNTraDO';
-      No.style.color = '#fff';   
-     
- 
- 
-        function Handle() {
+});
+
+No.alt = 'No EnCoNTraDO';
+No.style.color = '#fff';
+
+function Handle() {
   var orientation = (window.innerWidth > window.innerHeight) ? evento() : invento();
- };   
-        function evento() {
+};   
+
+function evento() {
   var style = document.createElement('style');
   style.innerHTML = `
     #Lista::-webkit-scrollbar {
@@ -181,8 +166,7 @@ h1 {
   document.head.appendChild(style);
 };
 
-
-       function invento() {
+function invento() {
   var style = document.createElement('style');
   style.innerHTML = `
     #Lista::-webkit-scrollbar {
@@ -192,16 +176,5 @@ h1 {
   document.head.appendChild(style);
 };
 
-   window.addEventListener("resize", Handle);   
-           Handle();   
-         
-     
- if (!document.querySelector('#scroll-style')) {
-  var style = document.createElement('style');
-  style.id = 'scroll-style';
-  style.innerHTML = `...`;
-  document.head.appendChild(style);
-};    
-     
-     
-     
+window.addEventListener("resize", Handle);   
+Handle();
