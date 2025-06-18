@@ -43,6 +43,7 @@ document.addEventListener("keyup", e => {
 
     if (matchedItem) {
       window.location.href = matchedItem.href;
+      buscador.value = '';
     } else {
       Lista.style.display = 'none';
       No.style.display = "none";
