@@ -182,6 +182,10 @@ h1 {
          Check();
      };
      
+   
+   Lista.onclick = () => {
+     buscador.value = '';
+ }; 
  
  
         function Handle() {
