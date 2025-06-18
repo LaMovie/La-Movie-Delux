@@ -1,36 +1,3 @@
-       function Check() {
-   window.location.href = "https://h5.swplayer.com/es/search?keyword=" + buscador.value;
-     buscador.value = '';
- }
- 
-     // CLICK DINAMICO
- document.addEventListener('click', function (event) {
-  if (event.target.closest('#Lista a')) {
-    event.preventDefault();
-    var enlace = event.target.closest('#Lista a');
-    var texto = enlace.textContent.trim();
- 
-    window.location.href = "https://h5.swplayer.com/es/search?keyword=" + encodeURIComponent(texto);
-    buscador.value = '';
-  }
-});
-
-
-       // SEARCH CLICK
-    Search.onclick = () => {
-    if (buscador.value === '') {
- if (buscador.style.display === 'block') {
-  buscador.style.display = 'none';
-              } else {
-  buscador.style.display = 'block';
-         }   
-        } else {
-          Check();
-       } 
-     };
-     
-
-
 document.addEventListener("keyup", e => {
 
   // TILDES
@@ -63,7 +30,40 @@ document.addEventListener("keyup", e => {
 
     No.style.display = foundMatch ? "none" : "block";
   }
+
+  // Manejo del Enter
+  if (e.key === "Enter") {
+    var Int = e.target.value.toLowerCase().trim();
+    var incluyeÑ = Int.includes("ñ");
+    var inputValue = Tildes(Int.replace(/\s+/g, ' '), incluyeÑ);
+
+    var matchedItem = [...document.querySelectorAll(".Data")].find(
+      item => Tildes(item.textContent.toLowerCase(), incluyeÑ) === inputValue
+    );
+
+    if (matchedItem) {
+      window.location.href = matchedItem.href;
+    } else {
+      buscador.value = '';
+      Lista.style.display = 'none';
+      No.style.display = "none";
+    }
+  }
 });
+
+     
+        function Check() {
+            window.location.href = "https://h5.swplayer.com/es/search?keyword=" + buscador.value;
+       buscador.value = '';
+    };
+
+       // SEARCH CLICK
+    Search.onclick = () => {
+    if (buscador.value !== '') {
+            Check();
+      } 
+   };
+     
 
 
          <!-- HTML -->
@@ -122,10 +122,9 @@ a {
  }
 }
 #No {
-    scale: 70%;
+    scale: 80%;
     display: none;
-    position: fixed; 
-    border-radius: 50px;
+    position: fixed;
 }
 </style>
 
@@ -144,9 +143,7 @@ h1 {
 <body>
 <section id="contenedor-main">
     <div>
-  <form onsubmit="event.preventDefault(); Check()">
         <input type="text" name="buscador" id="buscador" placeholder="Buscar...">
-  </form>
            <br/><br/>
      <ul id="Lista"></ul>
     
@@ -157,15 +154,31 @@ h1 {
 
      Aux.innerHTML = HTML;
 
-  
+ buscador.addEventListener('keydown', function(event) {
+   if (event.key === 'Enter') { 
+                event.preventDefault(); 
+  var TextPre = buscador.value.toLowerCase().trim(); 
+  let Prefijo;
+ 
+ if (TextPre.includes('tv')) {
+         Prefijo = '📺';
+     } else if(TextPre.includes('sofia')){
+         Prefijo = '⚙️';
+     } else {
+         Prefijo = '🍿';
+     }   
+   var Texto = Prefijo + TextPre;       
+   buscador.value = Texto; 
+  }
+});    
        No.alt = 'No EnCoNTraDO';
       No.style.color = '#fff';   
-     
 
-      No.onclick = () => {
+
+    No.onclick = () => {
          Check();
      };
- 
+     
  
  
         function Handle() {
@@ -212,7 +225,7 @@ h1 {
 };    
      
   
-  
+ // https://bit.ly/3y2BVCO  
 
 
      
