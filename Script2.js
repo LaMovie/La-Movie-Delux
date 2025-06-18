@@ -106,9 +106,10 @@ a {
  }
 }
 #No {
-    scale: 80%;
+    scale: 70%;
     display: none;
-    position: fixed;
+    position: fixed; 
+    border-radius: 50px;
 }
 </style>
 
@@ -135,7 +136,7 @@ h1 {
     
            </div>
 </section>
-<img id="No" src="https://bit.ly/3y2BVCO"/>
+<img id="No" src="https://is.gd/NjNew4"/>
 `;
 
      Aux.innerHTML = HTML;
