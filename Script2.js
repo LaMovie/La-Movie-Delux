@@ -47,6 +47,7 @@ document.addEventListener("keyup", e => {
       buscador.value = '';
       Lista.style.display = 'none';
       No.style.display = "none";
+           Check();
     }
   }
 });
@@ -122,9 +123,10 @@ a {
  }
 }
 #No {
-    scale: 80%;
+    scale: 70%;
     display: none;
-    position: fixed;
+    position: fixed; 
+    border-radius: 50px;
 }
 </style>
 
