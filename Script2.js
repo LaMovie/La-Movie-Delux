@@ -15,6 +15,21 @@
 });
 
 
+       // SEARCH CLICK
+    Search.onclick = () => {
+    if (buscador.value === '') {
+ if (buscador.style.display === 'block') {
+  buscador.style.display = 'none';
+              } else {
+  buscador.style.display = 'block';
+         }   
+        } else {
+          Check();
+       } 
+     };
+     
+
+
 document.addEventListener("keyup", e => {
 
   // TILDES
@@ -145,6 +160,11 @@ h1 {
        No.alt = 'No EnCoNTraDO';
       No.style.color = '#fff';   
      
+
+      No.onclick = () => {
+         Check();
+     };
+ 
  
  
         function Handle() {
