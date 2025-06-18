@@ -128,6 +128,9 @@ a {
     margin-top: 2vh;
     position: fixed; 
     border-radius: 50px;
+  &:hover {
+      filter: hue-rotate(90deg);
+  }
 }
 </style>
 
