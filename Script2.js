@@ -44,7 +44,6 @@ document.addEventListener("keyup", e => {
     if (matchedItem) {
       window.location.href = matchedItem.href;
     } else {
-      buscador.value = '';
       Lista.style.display = 'none';
       No.style.display = "none";
            Check();
@@ -125,6 +124,7 @@ a {
 #No {
     scale: 70%;
     display: none;
+    margin-top: 2vh;
     position: fixed; 
     border-radius: 50px;
 }
