@@ -11,6 +11,7 @@
     var texto = enlace.textContent.trim();
  
     window.location.href = "https://h5.swplayer.com/es/search?keyword=" + encodeURIComponent(texto);
+    buscador.value = '';
   }
 });
 
