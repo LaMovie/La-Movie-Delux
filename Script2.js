@@ -117,7 +117,6 @@ li {
 }
 a {
     color: #fff;
-    text-decoration: none;
   &:hover {
      color: #4f9;
      text-shadow: 0 0 10px red;
