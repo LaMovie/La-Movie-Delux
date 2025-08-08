@@ -189,7 +189,7 @@ header .menu{
     justify-content: center;
 }
 .thumbnail::-webkit-scrollbar{
-    width: 0;
+    
 }
 .thumbnail .item{
     width: 150px;
@@ -348,8 +348,7 @@ header .menu{
      filter: opacity(85%) saturate(80%); 
 }
 .Container::-webkit-scrollbar {
-    width: 0px;
-    background: transparent;
+    
 }
 .H3 {
     text-align: left;
