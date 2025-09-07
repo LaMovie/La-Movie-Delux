@@ -54,7 +54,7 @@ document.addEventListener("keyup", e => {
 
      
         function Check() {
-            window.location.href = "https://h5.swplayer.com/es/search?keyword=" + buscador.value;
+            window.location.href = "https://h5.onfilom.com/es/search?keyword=" + buscador.value;
        buscador.value = '';
     };
 

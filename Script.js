@@ -133,7 +133,7 @@ function Links(iframe) {
  Oculto.onclick = (event) => {
  if (event.target.tagName === 'IMG') {
     var NAMER = event.target.alt;
-       window.location.href = "https://h5.swplayer.com/es/search?keyword=" + NAMER;
+       window.location.href = "https://h5.onfilom.com/es/search?keyword=" + NAMER;
   }
 };
 
