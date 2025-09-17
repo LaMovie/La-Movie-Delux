@@ -87,9 +87,7 @@ function Links(iframe) {
         <!-- Musica -->
 
     var videos = ['https://5ce9406b73c33.streamlock.net/RSD/ngrp:livestream_all/playlist.m3u8', 
-'https://lamovie.github.io/BASS-NATION-ONLINE/', 
-'https://lamovie.github.io/BASS-NATION-ONLINE/',  'https://stream.4fun.tv:8888/hls/4f.m3u8', 'https://streamtv.mediasector.es/hls/activatv/index.m3u8', 'https://is.gd/7CaWXu', 'https://lamovie.github.io/BASS-NATION-ONLINE/', 'https://lamovie.github.io/BASS-NATION-ONLINE/', 
-'https://lamovie.github.io/BASS-NATION-ONLINE/',];
+'https://lamovie.github.io/BASS-NATION-ONLINE/', 'https://streamtv.mediasector.es/hls/activatv/index.m3u8', 'https://is.gd/7CaWXu', 'https://lamovie.github.io/BASS-NATION-ONLINE/', 'https://lamovie.github.io/BASS-NATION-ONLINE/',];
     var currentVideoIndex = 0;
 
     function adelantarVideo() {
@@ -139,6 +137,5 @@ function Links(iframe) {
 
 
 
-   
 
 
