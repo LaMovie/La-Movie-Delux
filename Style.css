@@ -241,7 +241,7 @@ header .menu{
   z-index: 9999;
   overflow: auto;
   position: fixed;
-  background: rgb(0,0,0,.8);
+  background: rgb(0,0,0,.9);
 }
 .Cerrar {
   width: 10%;
