@@ -26,23 +26,42 @@ prev.onclick = function(){
 let refreshInterval = setInterval(() => {
     next.click();
 }, 5000)
+
+
 function showSlider(){
-    // remove item active old
+    // 1. Remueve la clase 'active' de los elementos antiguos
     let itemActiveOld = document.querySelector('.slider .list .item.active');
     let thumbnailActiveOld = document.querySelector('.thumbnail .item.active');
-    itemActiveOld.classList.remove('active');
-    thumbnailActiveOld.classList.remove('active');
+    
+    if (itemActiveOld) {
+        itemActiveOld.classList.remove('active');
+    }
+    if (thumbnailActiveOld) {
+        thumbnailActiveOld.classList.remove('active');
+    }
 
-    // active new item
+    // 2. Activa el nuevo slide y la nueva miniatura
     items[itemActive].classList.add('active');
     thumbnails[itemActive].classList.add('active');
 
-    // clear auto time run slider
+    // 🌟 LÓGICA DE SINCRONIZACIÓN DE SRC (FUNCIÓN SOLICITADA) 🌟
+    // Obtener la URL de la imagen principal (la única fuente de verdad, dentro de .Div)
+    let mainImage = items[itemActive].querySelector('.Div img');
+    // Obtener la imagen de la miniatura activa (el destino)
+    let thumbnailImage = thumbnails[itemActive].querySelector('img');
+
+    // Copiar el src de la imagen principal a la imagen de la miniatura
+    if (mainImage && thumbnailImage) {
+        thumbnailImage.src = mainImage.src;
+    }
+   
+    // 3. Reinicia el contador para el avance automático
     clearInterval(refreshInterval);
     refreshInterval = setInterval(() => {
         next.click();
     }, 5000)
 }
+
 
 // click thumbnail
 thumbnails.forEach((thumbnail, index) => {
@@ -134,6 +153,9 @@ function Links(iframe) {
        window.location.href = "https://h5.onfilom.com/es/search?keyword=" + NAMER;
   }
 };
+
+
+     
 
 
 
