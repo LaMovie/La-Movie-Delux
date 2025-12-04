@@ -144,6 +144,29 @@ function Links(iframe) {
  });
 }); 
 
+  // --- IMG CON href ---
+
+var Div = document.querySelectorAll('.Div');
+
+Div.forEach(divElement => {
+    divElement.addEventListener('click', () => {
+        // 1. Busca el enlace (etiqueta <a>) dentro del div actual.
+        let linkElement = divElement.querySelector('a');
+
+   // 2. Verifica que el enlace existe y obtiene su URL (href).
+        if (linkElement && linkElement.href) {
+            let url = linkElement.href;
+            
+  // 3. Redirige a esa URL.
+    window.location.href = url;
+            
+  // Si quisieras abrirlo en una pestaña nueva, usarías:
+ // window.open(url, '_blank'); 
+        }
+    });
+});
+
+
 
         <!-- SWPLAYER -->
         
