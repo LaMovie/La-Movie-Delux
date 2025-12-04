@@ -427,6 +427,9 @@ a {
     height: 30vh;
     position: fixed;
     border-radius: 20px;
+	background: url(https://is.gd/HiIg3k);
+    background-size: cover;
+    background-position: center;
 }
 #Music {
     background: linear-gradient(to right, red, blue);
