@@ -171,9 +171,16 @@ Div.forEach(divElement => {
         <!-- SWPLAYER -->
         
  Oculto.onclick = (event) => {
- if (event.target.tagName === 'IMG') {
+  if (event.target.tagName === 'IMG') {
     var NAMER = event.target.alt;
-       window.location.href = "https://latino.solo-latino.com/es/search?keyword=" + NAMER;
+    
+    // Detectar si es móvil
+    var isMobile = /Mobi|Android|iPhone|iPad|iPod|BlackBerry|IEMobile|Opera Mini/i.test(navigator.userAgent);
+    
+    // Elegir dominio según dispositivo
+    var domain = isMobile ? 'https://latino.solo-latino.com/es/search?keyword=' : 'https://sololatino.net/?s=';
+    
+    window.location.href = domain + encodeURIComponent(NAMER);
   }
 };
 
