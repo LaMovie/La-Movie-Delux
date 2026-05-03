@@ -179,7 +179,7 @@ Div.forEach(divElement => {
     var isMobile = /Mobi|Android|iPhone|iPad|iPod|BlackBerry|IEMobile|Opera Mini/i.test(navigator.userAgent);
     
     // Elegir dominio según dispositivo
-    var domain = isMobile ? 'https://latino.solo-latino.com/es/search?keyword=' : 'https://sololatino.net/?s=';
+    var domain = isMobile ? 'https://latino.solo-latino.com/es/search?keyword=' : 'https://lamovie.github.io/SeeKee/PLATAFORMAS.html';
     
     window.location.href = domain + encodeURIComponent(NAMER);
   }
