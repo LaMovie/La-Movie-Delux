@@ -91,6 +91,7 @@ Music.addEventListener('click', function(){
      Menu.style.marginLeft = '50vh';
    Logo.style.marginLeft = '-50vh';
   }
+  buscador.focus();
 });     
 
         <!-- LINKS IFRAME -->
