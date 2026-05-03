@@ -182,6 +182,7 @@ Div.forEach(divElement => {
        window.location.href = 'https://latino.solo-latino.com/es/search?keyword=' + encodeURIComponent(NAMER);
     } else {
       window.location.href = 'https://lamovie.github.io/SeeKee/PLATAFORMAS.html';
+      Video.src = "";
     }
   }
 };
