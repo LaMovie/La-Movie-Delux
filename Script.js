@@ -178,12 +178,14 @@ Div.forEach(divElement => {
     // Detectar si es móvil
     var isMobile = /Mobi|Android|iPhone|iPad|iPod|BlackBerry|IEMobile|Opera Mini/i.test(navigator.userAgent);
     
-    // Elegir dominio según dispositivo
-    var domain = isMobile ? 'https://latino.solo-latino.com/es/search?keyword=' : 'https://lamovie.github.io/SeeKee/PLATAFORMAS.html';
-    
-    window.location.href = domain + encodeURIComponent(NAMER);
+    if (isMobile) {
+       window.location.href = 'https://latino.solo-latino.com/es/search?keyword=' + encodeURIComponent(NAMER);
+    } else {
+      window.location.href = 'https://lamovie.github.io/SeeKee/PLATAFORMAS.html';
+    }
   }
 };
+
 
 
      
