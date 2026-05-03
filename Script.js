@@ -170,19 +170,24 @@ Div.forEach(divElement => {
 
 
         <!-- SWPLAYER -->
-        
- Oculto.onclick = (event) => {
-  if (event.target.tagName === 'IMG') {
-    var NAMER = event.target.alt;
-    
+   
     // Detectar si es móvil
     var isMobile = /Mobi|Android|iPhone|iPad|iPod|BlackBerry|IEMobile|Opera Mini/i.test(navigator.userAgent);
     
+ window.onload = () => {
+     if (!isMobile) {
+        Video.src = "";
+     }
+ };     
+       
+ Oculto.onclick = (event) => {
+  if (event.target.tagName === 'IMG') {
+   var NAMER = event.target.alt;
+        
     if (isMobile) {
        window.location.href = 'https://latino.solo-latino.com/es/search?keyword=' + encodeURIComponent(NAMER);
     } else {
-      window.location.href = 'https://lamovie.github.io/SeeKee/PLATAFORMAS.html';
-      Video.src = "";
+      window.location.href = 'https://lamovie.github.io/SeeKee/PLATAFORMAS.html';      
     }
   }
 };
