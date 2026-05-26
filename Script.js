@@ -180,17 +180,44 @@ Div.forEach(divElement => {
      }
  };     
        
- Oculto.onclick = (event) => {
-  if (event.target.tagName === 'IMG') {
-   var NAMER = event.target.alt;
-        
-    if (isMobile) {
-       window.location.href = 'https://latino.solo-latino.com/es/search?keyword=' + encodeURIComponent(NAMER);
+document.onclick = (event) => {
+    if (isMobile) return;
+
+    // Buscamos si el elemento clickeado es un enlace <a> o está dentro de uno
+    let anchor = event.target.closest('a');
+    
+    // Si no se hizo clic en ningún enlace, no hacemos nada
+    if (!anchor) return;
+
+    // Evitamos que abra el enlace original en la computadora
+    event.preventDefault();
+
+    let buscadorTexto = "";
+
+    // Verificamos si el enlace pertenece o está dentro del contenedor con ID "Gallery"
+    if (anchor.closest('#Gallery')) {
+        let img = anchor.querySelector('img');
+        // Si hay una imagen, extraemos su atributo 'alt'
+        buscadorTexto = img ? img.getAttribute('alt') : "";
     } else {
-      window.location.href = 'https://lamovie.github.io/SeeKee/PLATAFORMAS.html';      
+        // Para cualquier otro enlace del sitio, buscamos un h4 o el texto del enlace
+        let h4 = anchor.querySelector('h4') || anchor.querySelector('h3');
+        buscadorTexto = h4 ? h4.textContent : anchor.textContent;
     }
-  }
+
+    // Limpiamos espacios en blanco extras que puedan estorbar en la búsqueda
+    buscadorTexto = buscadorTexto.trim();
+
+    // Si encontramos texto válido para buscar, redirigimos a SWPlayer
+    if (buscadorTexto) {
+        window.location.href = 'https://h5.swplayer.com/es/search?keyword=' + encodeURIComponent(buscadorTexto);
+    } else {
+        // Si por alguna razón el enlace no tiene texto (ej. botones vacíos), abrimos su href original
+        window.location.href = anchor.href;
+    }
 };
+
+
 
 
 
