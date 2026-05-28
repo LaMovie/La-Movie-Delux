@@ -1,0 +1,1438 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>🍿La Movie🍿</title>
+    
+<style> 
+a {
+    text-decoration: none;
+}
+@import url('https://fonts.googleapis.com/css2?family=Poppins:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&display=swap');
+body {
+    font-family: Poppins;
+    margin: 0;
+    background: #000;
+    background-size: cover;
+    color: #eee;  
+}
+svg{
+    width: 25px;
+}
+.Fondo {
+    scale: 1.2;
+    top: 8vh;
+    left: -5vh;
+    opacity: .6;
+    width: 100%;
+    z-index: -1;
+    position: absolute;
+}
+header {
+    width: 1200px;
+    max-width: 100%;
+    margin: auto;
+    display: grid;
+    grid-template-columns: 50px 1fr 50px;
+    grid-template-rows: 50px;
+    justify-content: center;
+    align-items: center;    
+    z-index: 8850;
+}
+header .logo {
+    top: -83vh;
+    left: -78vh;
+    scale: 10%;
+    font-weight: bold;
+    position: fixed;
+    animation: Logo 1s linear infinite alternate;
+    z-index: 8850;
+}
+header .menu {
+    scale: 110%;
+    padding: 0;
+    margin: 0;
+    list-style: none;
+    display: flex;
+    justify-content: center;
+    gap: 20px;
+    left: 20vh;
+    position: fixed;
+    font-weight: 500;
+    z-index: 8850;
+    border-radius: 20px;
+    background: rgb(0,0,0, .5);
+}
+/* css slider */
+.slider{
+    height: 100vh;
+    margin-top: -50px;
+    position: relative;
+    z-index: 3333;
+}
+.slider .list .item{
+    position: absolute;
+    inset: 0 0 0 0;
+    overflow: hidden;
+    opacity: 0;
+    transition: .5s;
+}
+.slider .list .item img{
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+}
+.slider .list .item::after{
+    content: '';
+    width: 100%;
+    height: 100%;
+    position: absolute;
+    left: 0;
+    bottom: 0;
+    background-image: linear-gradient(
+        to top, #000 40%, transparent
+    );
+}
+.Div {
+    margin-left: -10vh;
+    width: 120%;
+    height: 20vh;
+    scale: 70%;
+    display: flex;
+    flex-direction: row;    
+    justify-content: center;
+    transform: translateY(30px);
+    filter: blur(20px);
+    opacity: 0;
+    animation: showContent .5s .7s ease-in-out 1 forwards;
+    animation-duration: 1.3s;
+    animation-delay: 1s;
+} 
+.Div img {
+    scale: .7;
+    flex-grow: 1;  
+    flex-basis: 100px;
+    border-radius: 20px;
+    transform: translateY(30px);
+    filter: blur(20px);
+    opacity: 0;
+    animation: showContent .5s .7s ease-in-out 1 forwards;
+    animation-duration: 1.3s;
+    animation-delay: 1s;
+  &:hover {
+      scale: .8;
+  }
+}
+.slider .list .item .content{
+    position: absolute;
+    left: 10%;
+    top: 20%;
+    width: 500px;
+    max-width: 80%;
+    z-index: 1;
+}
+.slider .list .item .content p:nth-child(1){
+    text-transform: uppercase;
+    letter-spacing: 10px;
+}
+.slider .list .item .content h3{
+    font-size: 40px;
+    margin: 0;
+}
+.slider .list .item.active{
+    opacity: 1;
+    z-index: 10;
+}
+@keyframes showContent {
+    to{
+        transform: translateY(0);
+        filter: blur(0);
+        opacity: 1;
+    }
+}
+.slider .list .item.active p:nth-child(1),
+.slider .list .item.active h3,
+.slider .list .item.active p:nth-child(3){
+    transform: translateY(30px);
+    filter: blur(20px);
+    opacity: 0;
+    animation: showContent .5s .7s ease-in-out 1 forwards;
+}
+.slider .list .item.active h3{
+    animation-delay: 1s;
+}
+.slider .list .item.active p:nth-child(3){
+    animation-duration: 1.3s;
+}
+.arrows{
+    position: absolute;
+    top: 30%;
+    right: 50px;
+    z-index: 100;
+}
+.arrows button{
+    background-color: #eee5;
+    border: none;
+    font-family: monospace;
+    width: 40px;
+    height: 40px;
+    border-radius: 5px;
+    font-size: x-large;
+    color: #eee;
+    transition: .5s;
+}
+.arrows button:hover{
+    background-color: #eee;
+    color: black;
+}
+.thumbnail{
+    position: absolute;
+    bottom: 50px;
+    z-index: 11;
+    display: flex;
+    gap: 10px;
+    width: 100%;
+    height: 250px;
+    padding: 0 50px;
+    box-sizing: border-box;
+    overflow: auto;
+    justify-content: center;
+}
+.thumbnail::-webkit-scrollbar{
+    
+}
+.thumbnail .item{
+    width: 150px;
+    height: 220px;
+    filter: brightness(.5);
+    transition: .5s;
+    flex-shrink: 0;
+}
+.thumbnail .item img{
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    border-radius: 10px;
+    transform: translateY(30px);
+    filter: blur(20px);
+    opacity: 0;
+    animation: showContent .5s .7s ease-in-out 1 forwards;
+    animation-duration: 1.3s;
+    animation-delay: 1s;
+}
+.thumbnail .item.active{
+    filter: brightness(1.5);
+}
+.thumbnail .item .content{
+    position: absolute;
+    inset: auto 10px 10px 10px;
+}
+@media screen and (max-width: 678px) {
+.thumbnail{
+    justify-content: start;
+}
+.slider .list .item .content h3{
+    font-size: 50px;
+    color: blue;
+  &:hover {
+      color: #4f9;
+  }
+}
+.arrows{
+    top: 10%;
+ }
+}
+#Nota {
+  top: 0;
+  left: 0;
+  width: 90%;  
+  height: 100%;
+  display: none;
+  z-index: 9999;
+  overflow: auto;
+  position: fixed;
+  background: rgb(0,0,0,.9);
+}
+.Cerrar {
+  width: 5%;
+  scale: 70%;
+  height: 10vh;
+  opacity: .9;
+  float: right;
+  left: - 5vh;
+  z-index: 9999;
+  font-size: 20px;
+  font-weight: bold;
+  cursor: pointer;
+  background: gold; 
+  border-radius: 50%;
+  text-content: center;
+ &:hover {
+     color: red;
+     scale: 101%;
+ }
+}
+@keyframes In {
+    0% {opacity: 0;}
+    100% {opacity: 1;}
+}
+@keyframes Fin {
+    0% {transform: translate(0, 0vh); background: transparent; opacity: 1;}
+    99% {transform: translate(0, 5vh); background: transparent;}
+    100% {display: none; background: transparent; opacity: 0;}
+}
+@keyframes Desliz {
+    0% {opacity: 0; transform: translate(0, -5vh);}
+    100% {opacity: 1; transform: translate(0, 0);}
+}
+@keyframes Logo {
+    from {scale: 10%;}
+    to {scale: 9%;}
+}
+#Search {
+    width: 80%;
+    border-radius: 50px;
+    position: fixed;
+    left: 45vh;
+    z-index: 9999;
+    background: rgb(0,0,0, .5);
+}
+#Search:hover {
+    color: blue;
+}
+#Aux {
+    margin: -3vh 7vh;
+    display: none;
+    z-index: 9999;
+    position: absolute;
+}
+@keyframes Vista {
+    0% {scale: .6;}
+   50% {scale: 1;}
+   100% {scale: .6;}
+}
+.Container {
+    gap: 20px;     
+    display: flex;
+    overflow-x: auto;
+    padding-left: 15px;
+    text-align: center;
+    flex-wrap: nowrap;
+    animation: Vista;
+    animation-timeline: view();
+ */ scroll-snap-type: x mandatory;\*
+    margin-bottom: 10px;
+}
+.Container img {
+    gap: 5px;
+    width: 120px;
+    height: 170px;
+    transition: .5s;
+    border-radius: 10px;
+    object-fit: cover;
+    scroll-snap-align: start;
+    background: rgb(255, 130, 0);
+  &:hover {
+     transform: perspective(200px)rotateY(45deg);
+     padding-left: 5%;
+     filter: saturate(150%);
+     scale: 120%;
+ }
+}
+.Container a {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    text-align: center;
+    width: 110px;
+    text-decoration: none;
+}
+
+.Container h4 {
+    font-size: 12px;
+    color: #ccc;
+    margin-top: 5px;
+}
+.Container img:hover + h4 {
+     color: #4f9; 
+}
+.Container:hover img:not(:hover){
+     filter: opacity(85%) saturate(80%); 
+}
+.Container::-webkit-scrollbar {
+    
+}
+.H3 {
+    text-align: left;
+    margin-left: 15px;
+    margin-top: 15px;
+    font-size: 12px;
+    font-weight: 600;
+    color: white;
+}
+.Otros {
+    text-align: center;
+    margin-left: 15px;
+    margin-top: 15px;
+    font-size: 18px;
+    font-weight: 600;
+    color: white;
+}
+h4 {
+    cursor: none; 
+    color: #aaa;  
+}
+footer{
+	background: #141414;
+	padding: 20px;
+	color: #fff;
+	text-align: center;
+}
+.Head {
+    color: #fff;
+  &:hover {
+      font-size: 20px;
+      color: #4f9;
+  }
+}
+.Gallery {
+    gap: 10px;
+    display: grid;
+    width: 90%; height: auto;
+    grid-template-columns: repeat(auto-fit,minmax(100px, 1fr));
+}
+.Otros img {    
+    cursor: none;
+    transition: .5s;
+    border-radius: 8px;
+    width: 17%; height: 17%;
+ &:hover {
+     scale: 120%;
+     border: 2px solid #4f9;
+     box-shadow: 0 0 30px #4f9;
+ }
+}
+.Otros:hover img:not(:hover) {
+    scale: .8;
+    filter: grayscale(1) saturate(80%);
+}
+#Blue {
+    text-align: center;
+    list-style: none;
+}
+#Blue li:hover {
+    scale: 1.2;
+}
+#Blue li a {
+    background: linear-gradient(to right, red, blue);
+    background-clip: text;
+    color: transparent;
+    border-radius: 40%;
+}
+a {
+    cursor: none;
+}
+.Video {
+    top: 7vh;
+    left: 5vh;
+    width: 85%;
+    height: 150vh;
+    position: fixed;
+    border-radius: 20px;
+    background: url(https://is.gd/HiIg3k);
+    background-size: cover;
+    background-position: center;
+}
+#Music {
+    background: linear-gradient(to right, red, blue);
+    color: transparent;
+    background-clip: text;  
+ &:hover {
+      scale: 120%;
+  }  
+}
+.Controls {
+      top: 40vh;
+      left: 15vh;
+      scale: 80%;
+      display: flex;
+      position: fixed;
+      justify-content: center; 
+}
+.Controls button {
+      margin: 0 5px;
+      opacity: .7;
+      border-radius: 50px;
+      background: gray;
+}
+*/ #Oculto {
+    display: none; \*
+}   
+</style>
+</head>
+<body>
+        <!-- header -->
+      <header>
+  <div id="Logo" class="logo"><a href="https://lamovievive.blogspot.com/?m=1"><img src="https://da.gd/BPXzU"/></a></div>
+   <ul id="Menu" class="menu">                  
+      <li id="Music">🎵</li>
+        </ul>
+        
+    <div id="Search">
+  <svg aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 20 20">
+  <path class="Path" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="m19 19-4-4m0-7A7 7 0 1 1 1 8a7 7 0 0 1 14 0Z"/>
+            </svg>
+              </div>
+            </header>
+   
+  <video poster="https://da.gd/Cglvx" autoplay muted loop class="Fondo" src="https://imagenuniversaltv.net:3771/live/iutvlive.m3u8" type="video/mp4"></video> 
+           
+    
+    <div open id="Nota">
+    <span class="Cerrar" onclick="Cerrar()">✖️</span>
+    <iframe class="Video" id="Video" src="https://lamovie.github.io/BASS-NATION-ONLINE/" frameborder="0" scrolling="true" allowfullscreen="true" allow="encrypted-media"></iframe>
+       <div class="Controls">
+ <button onclick="retrocederVideo()"><text style="color:black">⏮️ BACK</button>
+ <button onclick="adelantarVideo()"><text style="color:black">NEXT ⏭️</button>
+             </div>
+           </div>
+     
+     <div id="Aux"></div> 
+
+    <!-- slider -->
+
+    <div class="slider">
+        <!-- list Items -->
+        <div class="list">                   
+      <div class="item active">  
+  <div class="content">
+         <p>5 SEASONS</p>
+    <div class="Div"><img src="https://is.gd/5t9qwU"/><a href="https://latino.solo-latino.com/es/detail/drama/AUk2ZT5yzt1LVRajd5jCd-Stranger-Things-Season-1"><h3>STRANGER THINGS 5</h3></a></div>
+    <p class="P">
+      Stranger Things 5 es la batalla final contra Vecna, quien ha abierto múltiples portales en Hawkins, desatando el caos y una oscuridad mayor; el grupo de héroes, ahora más unido, lucha para encontrar y detenerlo antes de que cumpla su plan de usar a niños inocentes para sus objetivos.
+              </p>
+            </div>
+          </div>
+
+<div class="item">  
+  <div class="content">
+        <p>2026</p>
+    <div class="Div"><img src="https://is.gd/95lEon"/><a href="https://drive.google.com/file/d/1pWvuis59ElwxQU5ZXpkljQsnF9KwhtAk/view?usp=drivesdk"><h3>THEY WILL KILL YOU</h3></a></div>
+    <p class="P">
+    Un científico da vida a una criatura en un experimento monstruoso. Este acto de creación, destinado a desafiar a la muerte, desata una tragedia que lleva a la ruina tanto al creador como a su creación, que es rechazada por su apariencia.
+                   </p>     
+               </div>
+            </div>
+
+            
+<div class="item"> 
+  <div class="content">
+          <p>2026</p>
+    <div class="Div"><img src="https://is.gd/lsZfbM"><a href="https://drive.google.com/file/d/17yFvMC47tWYbfn94PIGxZBMDnyHIbFjV/view?usp=drivesdk"><h3>BODA SANGRIENTA 2</h3></a></div>
+    <p class="P">
+      Después de sobrevivir a un juego mortal, Grace y su hermana Faith ahora deben dejar atrás a cuatro familias rivales que compiten por un trono poderoso: el ganador se lo lleva todo.
+                     </p>
+                 </div>
+               </div>
+               
+                           
+<div class="item">  
+  <div class="content">
+        <p>2026</p>
+    <div class="Div"><img src="https://is.gd/JXZiH2"/><a href="https://drive.google.com/file/d/1vfwzJu3qzWx1x5rN0H3fEPnBPcc7MxAN/view?usp=drivesdk"><h3>LA POSESION DE LA MOMIA</h3></a></div>
+    <p class="P">
+      La familia Cannon, cuya hija pequeña desaparece en el desierto de Egipto. Ocho años después, la niña regresa tras ser encontrada en un sarcófago. Lo que promete ser un reencuentro se vuelve una pesadilla cuando descubren que está poseída por un mal ancestral.
+                   </p>
+               </div>
+            </div>
+
+
+<div class="item">  
+  <div class="content">
+      <p>4 SEASONS</p>
+  <div class="Div"><img src="https://is.gd/43SAV2"><a href="https://latino.solo-latino.com/es/detail/drama/v3HBgSbGMGBfDZO6EzXza-From-Season-1/1"><h3>FROM 4</h3></a></div>
+<p class="P">
+ Narra la pesadilla de un misterioso pueblo estadounidense que atrapa a todos los que entran, impidiéndoles salir. Sus habitantes intentan mantener una vida normal durante el día, pero al caer la noche deben protegerse de criaturas aterradoras que emergen del bosque.
+                    </p>
+               </div>
+            </div>
+
+<div class="item">  
+  <div class="content">
+         <p>2026</p>
+    <div class="Div"><img src="https://is.gd/gqOPmk"><a href="https://latino.solo-latino.com/es/detail/movie/126985-Whistle"><h3>WHISTLE</h3></a></div>
+    <p class="P">
+      "Whistle: El silbido del mal" (2026) es una película de terror dirigida por Corin Hardy que sigue a un grupo de estudiantes inadaptados que encuentran un antiguo silbato de la muerte azteca. Al tocarlo, el sonido invoca sus propias muertes futuras, convirtiéndolos en presas de sus destinos mortales mientras buscan detener la maldición. 
+                   </p>
+                </div>
+             </div>
+
+
+<div class="item"> 
+  <div class="content">
+         <p>1 SEASON</p>
+    <div class="Div"><img src="https://da.gd/9dsfgX"><a href="https://latino.solo-latino.com/es/detail/drama/Z7uSL6maWx7abC0eiw8LD-Agatha-All-Along[Audio-Latino]/1"><h3>AGATHA</h3></a></div>
+    <p class="P">
+      En la miniserie Agatha All Along, Agatha libera a su madre, Evanore Harkness, durante una prueba en la que debía comunicarse con los espíritus. Evanore intenta poseerla y casi la mata.
+                    </p>
+                </div>
+            </div>
+
+<div class="item"> 
+  <div class="content">
+           <p>2 SEASONS</p>
+    <div class="Div"><img src="https://is.gd/HRmDKw"><a href="https://latino.solo-latino.com/es/detail/drama/7YRzI2w0TytQs2HJ5kwc8-Mushoku-Tensei-Jobless-Reincarnation-Season-1-Part/1"><h3>MUSHOKU TENSEI</h3></a></div>
+    <p class="P">
+      Mushoku Tensei sigue a un japonés de 34 años, desempleado y arrepentido, que tras morir en un accidente, reencarna como un bebé en un mundo de fantasía con espada y magia
+                      </p>
+                  </div>
+               </div>
+
+<div class="item">
+  <div class="content">
+           <p>2025</p>
+    <div class="Div"><img src="https://is.gd/fmGJWg"><a href="https://latino.solo-latino.com/es/detail/movie/103321-Nobody-2"><h3>NOBODY 2</h3></a></div>
+    <p class="P">
+      El asesino adicto a su trabajo, Hutch Mansell, se lleva a su familia a unas vacaciones a la pequeña ciudad turística de Plummerville. 
+                     </p>
+                  </div>
+                </div>
+       
+       <div class="item">
+      <div class="content">
+            <p>1 SEASON</p>
+  <div class="Div"><img src="https://is.gd/hQp0J7"><a href="https://latino.solo-latino.com/es/detail/drama/TnGPAAqrTEHHepUKWTq8B-MobLand"><h3>TIERRA DE MAFIA</h3></a></div>
+<p class="P">
+ "MobLand" es una serie de 2025 que se desarrolla en Londres y cuenta la historia de dos familias criminales en guerra, los Harrigan y los Stevenson. La serie explora la lucha por el poder y la violencia que implica el control de las drogas y el crimen organizado.                      
+                    </p>
+                </div>
+            </div>    
+                  
+      <div class="item">
+      <div class="content">
+        <p>2026</p>
+  <div class="Div"><img src="https://da.gd/z94WM"><a href="https://latino.solo-latino.com/es/detail/movie/JonKAKpeSbz6qdgfwBmws-Scary-Movie-6"><h3>SCARY MOVIE 6</h3></a></div>
+<p class="P">
+     Scary Movie: Terroríficamente incorrecta es una alocada comedia que reúne al elenco original (incluyendo a Anna Faris y Regina Hall) y a los creadores de las primeras entregas, los hermanos Wayans.                   
+                    </p>
+                </div>
+            </div>   
+            
+       <div class="item">
+      <div class="content">
+           <p>2025</p>
+  <div class="Div"><img src="https://is.gd/jKel4W"><a href="https://latino.solo-latino.com/es/detail/movie/ggpHI2Ngkvyc2nbdxVDJ3-Ballerina-2025"><h3>Ballerina</h3></a></div>
+<p class="P">
+ Felicia es una niña que, tras perder a sus padres, vive en un orfanato en su Bretaña natal. Sólo tiene un sueño: convertirse en bailarina profesional.                     
+                    </p>
+                </div>
+            </div>
+            
+       <div class="item">
+        <div class="content">
+           <p>1 SEASON</p>
+ <div class="Div"><img src="https://bit.ly/4feldB5"><a href="https://latino.solo-latino.com/es/detail/drama/SDm5mw1mVh0HogkQJijvf-Avatar-The-Last-Airbender[Audio-Latino]/1"><h3>Avatar</h3></a></div>
+<p class="P">
+ Aang es el único capaz de controlar los cuatro elementos: agua, tierra, fuego y aire. Su misión como el próximo Avatar será aprender a controlar sus poderes para salvar un mundo en guerra, restableciendo el equilibrio que amenaza la aterradora Nación del Fuego.                 
+                    </p>
+                </div>
+            </div>
+            
+        <div class="item">
+        <div class="content">
+              <p>2025</p>
+ <div class="Div"><img src="https://is.gd/sk0xCm"><a href="https://latino.solo-latino.com/es/detail/movie/rrQXkwHIOEIbO7wTztI5Q-Heads-of-State"><h3>JEFES DE ESTADO</h3></a></div>
+<p class="P">
+ El Primer Ministro del Reino Unido y el Presidente de los Estados Unidos mantienen una rivalidad pública que pone en peligro la alianza de sus países.                       
+                    </p>
+                </div>
+            </div>
+            
+       <div class="item">
+       <div class="content">
+            <p>2025</p>
+    <div class="Div"><img src="https://is.gd/Wz12FW"/><a href="https://latino.solo-latino.com/es/detail/movie/C7SPw9n30wLvChA8kvSUA-Mission-Impossible---The-Final-Reckoning"><h3>MISIÓN IMPOSIBLE 8</h3></a></div>
+    <p class="P">
+      Hunt y su equipo se lanzan a una operación contrarreloj para encontrar a la Entidad, una inteligencia artificial sin escrúpulos con el potencial de destruir a la humanidad.
+                   </p>
+                </div>
+            </div>
+            
+       <div class="item">
+      <div class="content">
+            <p>2025</p>
+ <div class="Div"><img src="https://is.gd/QEYrrD"><a href="https://latino.solo-latino.com/es/detail/movie/UsNJzqxwgH0onKw3tlHJT-Final-Destination-Bloodlines"><h3>Destino Final 6</h3></a></div>
+<p class="P">
+ En Destino Final 6: Lazos de Sangre, Stefanie, una estudiante universitaria, es atormentada por pesadillas violentas recurrentes sobre un trágico accidente en una torre durante la década de 1960.                       
+                    </p>
+                </div>
+            </div>
+            
+        <div class="item">
+        <div class="content">
+            <p>2025</p>
+ <div class="Div"><img src="https://is.gd/mZs7UE"><a href="https://latino.solo-latino.com/es/detail/movie/6mJufDUpF0cXEK79ilaig-Black-Phone-2"><h3>BLACK PHONE 2</h3></a></div>
+<p class="P">
+    El mal trasciende a la muerte, y el teléfono negro vuelve a sonar cuando, para atormentar a Finn, el adolescente que lo mató, el Raptor.                    
+                    </p>
+                </div>
+            </div>  
+              
+         <div class="item">
+        <div class="content">
+           <p>4 SEASONS</p>
+ <div class="Div"><img src="https://da.gd/aFqLkg"><a href="https://latino.solo-latino.com/es/detail/drama/JTDICXsA2Eb7SZkKflqoN-The-Boys-Season-1/1"><h3>The Boys</h3></a></div>
+<p class="P">
+ The Boys es una serie de televisión de Amazon Prime Video que se desarrolla en un mundo en el que los superhéroes son reconocidos como héroes por el público, pero son en realidad arrogantes, egoístas y corruptos.                        
+                    </p>
+                </div>
+            </div>
+            
+       <div class="item">
+       <div class="content">
+         <p>2025</p>
+ <div class="Div"><img src="https://is.gd/L7SxnM"><a href="https://drive.google.com/file/d/1UztJfh94xU8CzM3ik5iO6WZa6V8PjuyF/view?usp=drivesdk"><h3>TOGETHER</h3></a></div>
+<p class="P">
+ Tras mudarse al campo en busca de una nueva vida, una pareja comienza a experimentar fenómenos sobrenaturales que no solo alteran su vínculo, sino también su percepción de la relación... y de sí mismos. 
+                    </p>
+                </div>
+            </div>   
+            
+         <div class="item">
+    <div class="content">
+            <p>9 SEASONS</p>
+    <div class="Div"><img src="https://da.gd/R0SPFh"><a href="https://lamovie.github.io/AIDA-TV/"><h3>AIDA</h3></a></div>
+ <p class="P">
+     Se trata de una serie de humor localizada en el imaginario Barrio madrileño de "Esperanza Sur", donde conviven unos personajes pintorescos y definidos cada uno con un defecto a corregir.
+                    </p>
+               </div>
+             </div>
+         <!-- MÁS -->              
+        </div>
+        <!-- button arrows -->
+        <div class="arrows">
+   <button id="prev"><</button>
+   <button id="next">></button>
+        </div>
+        
+ <hr style="height: 100vh"/>   
+      
+<h3 class="H3">🍿 TERROR 🍿</h3>
+      <div class="Container" onscroll="galleryImg()">
+      
+<a href="https://latino.solo-latino.com/es/detail/movie/126985-Whistle"><img class="N" src="https://is.gd/gqOPmk" alt="Título de película"><h4>WHISTLE</h4></a>
+
+<a href="https://drive.google.com/file/d/1pWvuis59ElwxQU5ZXpkljQsnF9KwhtAk/view?usp=drivesdk"><img class="N" src="https://is.gd/iFU35M" alt="Título de película"><h4>THEY WILL KILL YOU</h4></a>
+
+<a href="https://drive.google.com/file/d/17yFvMC47tWYbfn94PIGxZBMDnyHIbFjV/view?usp=drivesdk"><img class="N" src="https://is.gd/lsZfbM" alt="Titulo De Película"/><h4>BODA SANGRIENTA 2</h4></a>
+
+<a href="https://drive.google.com/file/d/1vfwzJu3qzWx1x5rN0H3fEPnBPcc7MxAN/view?usp=drivesdk"><img class="N" src="https://is.gd/JXZiH2" alt="Título de la prlicula"/><h4>LA POSESION DE LA MOMIA</h4></a>
+      
+<a href="https://latino.solo-latino.com/es/detail/movie/bmS6q2yKNaipavuUOSXYl-Frankenstein"><img class="N" src="https://is.gd/LDzy7u" alt="Título de película"><h4>FRANKESTEIN</h4></a>  
+
+<a href="https://drive.google.com/file/d/1u0fCfJkNA3Rw_HR2T0WtoZlKptXskPNb/view?usp=drivesdk"><img class="N" src="https://is.gd/OHXrL1" alt="Título de película"><h4>UNTIL DAWN</h4></a>  
+
+<a href="https://latino.solo-latino.com/es/detail/movie/ES2bt710owMqhlGaMAzdC-The-Conjuring-Last-Rites"><img class="N" src="https://is.gd/jdpngG" alt="Título de película"><h4>EL CONJURO 4</h4></a> 
+      
+<a href="https://latino.solo-latino.com/es/detail/movie/UsNJzqxwgH0onKw3tlHJT-Final-Destination-Bloodlines"><img class="N" src="https://is.gd/QEYrrD" alt="Título de película"><h4>DESTINO FINAL 6</h4></a>      
+
+<a href="https://latino.solo-latino.com/es/detail/movie/fOsW1RMkV5aSxw00NhGsx-Baghead"><img class="N" src="https://bit.ly/3WekaZh" alt="Título de película"><h4>BAGHEAD</h4></a>
+      			
+<a href="https://latino.solo-latino.com/es/detail/movie/87559-Abigail"><img class="N" src="https://da.gd/ZjJdQU" alt="Título de película"><h4>ABIGAIL</h4></a>
+
+<a href="https://latino.solo-latino.com/es/detail/movie/ZQPFlUx7o1elWI7DAcbnJ-Sinners"><img class="N" src="https://is.gd/MESfXH" alt="Título de película"><h4>SINNERS</h4></a>
+
+<a href="https://latino.solo-latino.com/es/detail/movie/ZpltnCffAqOMR5kKaU9ig-Salems-Lot"><img class="N" src="https://da.gd/lw0qH" alt="Título de película"><h4>SALEM'S LOT</h4></a>
+
+<a href="https://latino.solo-latino.com/es/detail/movie/pGZ3Umfgg5g77dseXEZid-Smile-2"><img class="N" src="https://da.gd/Cglvx" alt="Título de película"><h4>SMILE 2</h4></a>
+
+<a href="https://latino.solo-latino.com/es/detail/movie/jQmFXgXp1VoPDK5qHCRSj-The-Woman-in-the-Yard"><img class="N" src="https://is.gd/DPz4f5" alt="Título de película"><h4>LA MUJER EN LAS SOMBRAS</h4></a>
+	
+<a href="https://latino.solo-latino.com/es/detail/movie/6mJufDUpF0cXEK79ilaig-Black-Phone-2"><img class="N" src="https://is.gd/mZs7UE" alt="Titulo de pelicula"/><h4>BLACK PHONE 2</h4></a>
+									
+<a href="https://latino.solo-latino.com/es/detail/movie/t3L6qJQbPUT7CP27Vb6hF-The-First-Omen"	><img class="N" src="https://bit.ly/3zPaOf8" alt="Título de película"/><h4>EL PRIMER AMÉN</h4></a>
+
+<a href="https://latino.solo-latino.com/es/detail/movie/hPFISrTZvs8br50pamppW-Insidious-The-Red-Door"><img class="N" src="https://is.gd/4LWftO" alt="Título de película"><h4>INSIDIOUS</h4></a>
+				
+				<a href="https://latino.solo-latino.com/es/detail/movie/tFbvKQMDGTM2JATPHpyyj-A-Quiet-Place-Day-One"><img class="N" src="https://da.gd/Ew2hVV" alt="Título de película"><h4>A QUIET PLACE 3</h4></a>
+
+<a href="https://latino.solo-latino.com/es/detail/movie/tAwF9kfKwACM2GvvlKJBO-Heretic"><img class="N" src="https://da.gd/Trpapb" alt="Título de película"><h4>HERETIC</h4></a>
+
+<a href="https://latino.solo-latino.com/es/detail/movie/tMsjPALFMDVK1BaPOVNEe-The-Watchers"><img class="N" src="https://bit.ly/3xYe0EG" alt="Título de película"><h4>OBSERVADOS</h4></a>
+
+<a href="https://drive.google.com/file/d/10Hv-B3zOtGj85FUOXIo3FQFn9Ti_QkIr/view?usp=drivesdk"><img class="N" src="https://da.gd/wnkG3" alt="Título de la prlicula"/><h4>ALICE: Subservience</h4></a>
+
+<a href="https://drive.google.com/file/d/1UztJfh94xU8CzM3ik5iO6WZa6V8PjuyF/view?usp=drivesdk"><img class="N" src="https://is.gd/L7SxnM" alt="Título de la prlicula"/><h4>TOGETHER</h4></a>
+
+<a href="https://drive.google.com/file/d/1KXDO89HmDOjYf7Zmw83G54qW6nIiNcUM/view?usp=drivesdk"><img class="N" src="https://da.gd/LwF6" alt="Título de la prlicula"/><h4>PARPADEA DOS VECES</h4></a>
+
+<a href="https://latino.solo-latino.com/es/detail/movie/wqZEqOINGnaDYxufiPLx2-Late-Night-with-the-Devil"><img class="N" src="https://da.gd/dnbnH" alt="Título de la prlicula"/><h4>LATE NIGHT WITH THE DEVIL</h4></a>
+
+	<a href="https://latino.solo-latino.com/es/detail/movie/lz846hJTsWkU5BmUT4RjY-Thanksgiving"><img class="N" src="https://is.gd/RgnHea" alt="Título de la prlicula"/><h4>BLACK FRIDAY</h4></a>	
+	
+	<a href="https://latino.solo-latino.com/es/detail/movie/r6Zs70f7IGkjGwT3UbAqZ-Annabelle"><img class="N" src="https://is.gd/PeTX3R" alt="Título de la prlicula"/><h4>TERROR COMBO Vol 1</h4></a>
+					
+							<a href="https://lamovie.github.io/SeeKee/SeeKee.html"><img class="N" src="https://da.gd/nJlge"/>más</a>
+		       		</div>
+		       		
+
+<h3 class="H3">🍿 ACCIÓN 🍿</h3>              
+      <div class="Container" onscroll="galleryImg()">
+      
+<a href="https://latino.solo-latino.com/es/detail/movie/1LMfisdvu6VHe6P0D4enF-Havoc"><img class="N" src="https://is.gd/dmwlgf" alt="Titulo de pelicula"><h4>HAVOC</h4></a>
+
+<a href="https://latino.solo-latino.com/es/detail/movie/0KKxkWrixESNXZ7W0RiBu-Back-in-Action"><img class="N" src="https://is.gd/0UPbsG" alt="Título de película"><h4>DE VUELTA A LA ACCIÓN</h4></a>
+
+<a href="https://latino.solo-latino.com/es/detail/movie/ggpHI2Ngkvyc2nbdxVDJ3-Ballerina-2025"><img src="https://is.gd/jKel4W" alt="Titulo de la película"/><h4>BALLERINA</h4></a>
+
+<a href="https://latino.solo-latino.com/es/detail/movie/rrQXkwHIOEIbO7wTztI5Q-Heads-of-State"><img src="https://is.gd/sk0xCm" alt="Titulo de la película"/><h4>JEFES DE ESTADO</h4></a>
+
+<a href="https://latino.solo-latino.com/es/detail/movie/C7SPw9n30wLvChA8kvSUA-Mission-Impossible---The-Final-Reckoning"><img src="https://is.gd/Wz12FW" alt="Titulo de la película"/><h4>MISIÓN IMPOSIBLE 8</h4></a>
+
+<a href="https://drive.google.com/file/d/1nrGqoPR0FhL5kRN7GXjsdCImWN5kx0bT/view?usp=drivesdk"><img src="https://is.gd/XX9uzA" alt="Titulo de la película"/><h4>NOVOCAINE</h4></a>
+
+<a href="https://drive.google.com/file/d/1HLFGCKgev_X63xZHSBVIdaEGlg54k_6m/view?usp=drivesdk"><img class="N" src="https://is.gd/DtHjI1" alt="Título de película"><h4>RESCATE IMPLACABLE</h4></a>
+
+			<a href="https://latino.solo-latino.com/es/detail/movie/NTli95IqQYE2L8MoxWDX9-Lift"><img class="N" src="https://bit.ly/3Smf9g3" alt="Título de película"><h4>LIFT</h4></a>							
+
+<a href="https://latino.solo-latino.com/es/detail/movie/UAhSeDcf9YBhlWp1vgjWa-Jackpot%E2%80%8E"><img class="N" src="https://da.gd/RzLA8w" alt="Título de película"><h4>JACKPOT</h4></a>
+      
+<a href="https://latino.solo-latino.com/es/detail/movie/68448-Argylle"><img class="N" src="https://da.gd/LXZ9Bp" alt="Título de película"><h4>ARGYLLE</h4></a>										
+
+<a href="https://latino.solo-latino.com/es/detail/movie/88530-Flight-Risk"><img class="N" src="https://is.gd/UE70L4" alt="Título de película"><h4>AMENAZA EN EL AIRE</h4></a>		
+	
+		<a href="https://latino.solo-latino.com/es/detail/movie/tv6Cjj2FXKdUUhEainS0m-The-Beekeeper"><img class="N" src="https://da.gd/3kUdh" alt="Título de serie"><h4>SENTENCIA DE MUERTE</h4></a>
+		
+		<a href="https://latino.solo-latino.com/es/detail/movie/qld7XpH44MwNZT1mK8bTX-The-Killer"><img class="N" src="https://da.gd/hwLc2t" alt="Título de la prlicula"/><h4>THE KILLER</h4></a>
+
+<a href="https://drive.google.com/file/d/1DJLbYQdjGhw3rfhNxITsujKNiWrItzVO/view?usp=drivesdk"><img class="N" src="https://da.gd/Ftjzhb" alt="Título de la prlicula"/><h4>LA TRAMPA</h4></a>
+
+<a href="https://latino.solo-latino.com/es/detail/movie/IrdxBjUG2HSkaK2AJOODv-Bad-Boys-Ride-or-Die"><img class="N" src="https://da.gd/LcRa" alt="Título de la prlicula"/><h4>BADBOYS 4</h4></a>
+
+<a href="https://latino.solo-latino.com/es/detail/movie/pHO6pykCvPU4HQqX7dWz4-Captain-America-Brave-New-World"><img src="https://is.gd/txEnta" alt="Titulo de la película"/><h4>CAPITAN AMÉRICA</h4></a>
+	
+<a href="https://latino.solo-latino.com/es/detail/movie/YiF217RSbwUTIAaJUq8u3-Deadpool--Wolverine"	><img class="N" src="https://da.gd/3EfU" alt="Título de película"/><h4>DEADPOOL 3</h4></a>
+
+<a href="https://latino.solo-latino.com/es/detail/movie/41NKZYt6sYZxICUg4BVPg-Rebel-Moon-The-Scargiver"><img class="N" src="https://da.gd/Opae8" alt="Título de película"><h4>REBEL MOON 2</h4></a>
+											
+				<a href="https://lamovie.github.io/SeeKee/SeeKee.html"><img class="N" src="https://da.gd/nJlge"/>más</a>
+		       		</div>
+		       		
+
+<h3 class="H3">🍿 FICCIÓN 🍿</h3>
+      <div class="Container" onscroll="galleryImg()">
+
+<a href="https://latino.solo-latino.com/es/detail/movie/tqPlcxQoRuzAxKpldMt5o-Thunderbolts"><img src="https://is.gd/Azu9v1" alt="Titulo de la película"/><h4>THUNDERBOLTS</h4></a>
+
+<a href="https://latino.solo-latino.com/es/detail/movie/7q4J3O1a9zSoYoehLzJao-Mickey-17"><img src="https://is.gd/Y85MuO" alt="Titulo de la película"/><h4>MICKEY 17</h4></a>
+
+<a href="https://latino.solo-latino.com/es/detail/movie/nDq2Y9QlATcU3S4uJiSST-M3GAN-20"><img src="https://is.gd/emo9Q1" alt="Titulo de la película"/><h4>M3GAN 2.0</h4></a>
+
+<a href="https://latino.solo-latino.com/es/detail/movie/pHO6pykCvPU4HQqX7dWz4-Captain-America-Brave-New-World"><img src="https://is.gd/txEnta" alt="Titulo de la película"/><h4>CAPITAN AMÉRICA</h4></a>
+
+<a href="https://latino.solo-latino.com/es/detail/movie/qZRFYpWZnES38S9ZaQ38m-Red-One"><img class="N" src="https://da.gd/uUWRK" alt="Título de película"><h4>RED ONE</h4></a>
+
+	<a href="https://latino.solo-latino.com/es/detail/movie/YiF217RSbwUTIAaJUq8u3-Deadpool--Wolverine"	><img class="N" src="https://da.gd/3EfU" alt="Título de película"/><h4>DEADPOOL 3</h4></a>
+	
+	<a href="https://latino.solo-latino.com/es/detail/movie/gUFvYA2OzCgiX73cYUYsZ-Venom-The-Last-Dance"><img class="N" src="https://da.gd/8hxZng" alt="Título de película"><h4>VENOM 3</h4></a>
+	
+<a href="https://latino.solo-latino.com/es/detail/movie/BgE6DZuMwUrdKQK8roBWD-Atlas"><img class="N" src="https://bit.ly/3Y91CfF" alt="Título de película"><h4>ATLAS</h4></a>
+
+<a href="https://latino.solo-latino.com/es/detail/movie/41NKZYt6sYZxICUg4BVPg-Rebel-Moon-The-Scargiver"><img class="N" src="https://da.gd/Opae8" alt="Título de película"><h4>REBEL MOON 2</h4></a>
+	
+				<a href="https://u.pcloud.link/publink/show?code=XZgf6b0ZyFzTokBxspHlNRu2smI0KSW0pRAV"><img class="N" src="https://da.gd/XEXc" alt="Título de serie"><h4>DAMSEL</h4></a>		
+				
+								<a href="https://latino.solo-latino.com/es/detail/movie/5losFWBWLaFgPE7P8GGM1-Dune-Part-Two"><img class="N" src="https://da.gd/z4D5" alt="Título de serie"><h4>DUNE 2</h4></a>
+				
+					<a href="https://latino.solo-latino.com/es/detail/movie/r2C3s7qjuMCcX2aNXUXmi-Godzilla-vs-Kong"><img class="N" src="https://da.gd/Gr0SE" alt="Título de película"><h4>KONG & GODZILLA</h4></a>
+					
+<a href="https://latino.solo-latino.com/es/detail/movie/l1LjnSLdmvOnFK0nQEE5I-Avengers-Age-of-Ultron"><img class="N" src="https://da.gd/J0mV" alt="Título de la prlicula"/><h4>AVENGERS LA ERA DE ULTRON</h4></a>
+
+<a href="https://drive.google.com/file/d/1P6v-hetMpopMjz_SWeD7TKm9J7wve0Ct/view?usp=drivesdk"><img class="N" src="https://da.gd/USZ6j" alt="Título de la prlicula"/><h4>BEETLEJUICE 2</h4></a>
+
+<a href="https://latino.solo-latino.com/es/detail/movie/54363-Hellboy-The-Crooked-Man"><img class="N" src="https://da.gd/OFOdL" alt="Título de la prlicula"/><h4>HELLBOY 4</h4></a>
+
+<a href="https://latino.solo-latino.com/es/detail/movie/87753-Boy-Kills-World"><img class="N" src="https://bit.ly/3WaUoFn" alt="Título de película"><h4>CONTRA TODOS</h4></a>		
+
+<a href="https://latino.solo-latino.com/es/detail/movie/mCEcAUdlvEcL2h8mZ3gFp-Glass"><img class="N" src="https://is.gd/o7ZAKd" alt="Título de película"><h4>FRAGMENTADO 2</h4></a>		
+
+<a href="https://latino.solo-latino.com/es/detail/movie/h4nWM2DyxNm0qe7I9lLJi-Seventh-Son"><img class="N" src="https://is.gd/WEKmmC" alt="Título de la prlicula"/><h4>EL SEPTIMO HIJO</h4></a>
+	
+	<a href="https://latino.solo-latino.com/es/detail/movie/Sm4iKjSI9DVzPI7UGbcnD-Deadpool"><img class="N" src="https://is.gd/l0V1fR" alt="Título de la prlicula"/><h4>DEADPOOL COMBO</h4></a>
+	
+								<a href="https://lamovie.github.io/SeeKee/SeeKee.html"><img class="N" src="https://da.gd/nJlge"/>más</a>
+		       		</div>
+		       		
+
+<h3 class="H3">🍿 COMEDY 🍿</h3>
+      <div class="Container" onscroll="galleryImg()">
+      
+<a href="https://latino.solo-latino.com/es/detail/movie/rrQXkwHIOEIbO7wTztI5Q-Heads-of-State"><img src="https://is.gd/sk0xCm" alt="Titulo de la película"/><h4>JEFES DE ESTADO</h4></a>   
+
+<a href="https://latino.solo-latino.com/es/detail/movie/8pA6TQGFdomCRoUrz2mwf-The-Naked-Gun"><img class="N" src="https://is.gd/bzxzsT" alt="Título de película"><h4>Y DONDE ESTA EL POLICIA</h4></a>  
+
+<a href="https://latino.solo-latino.com/es/detail/movie/JonKAKpeSbz6qdgfwBmws-Scary-Movie-6"><img class="N" src="https://da.gd/z94WM" alt="Título de película"><h4>SCARY MOVIE 6</h4></a>   
+
+<a href="https://latino.solo-latino.com/es/detail/movie/88719-Die-Hart-The-Movie"><img class="N" src="https://bit.ly/3y7OD38" alt="Título de película"><h4>DIE HART 1</h4></a>
+						
+<a href="https://latino.solo-latino.com/es/detail/movie/88640-Vacation-Friends-2"><img class="N" src="https://is.gd/6ACwQa" alt="Título de película"><h4>AMIGOS PASAJEROS 2</h4></a>
+
+	<a href="https://latino.solo-latino.com/es/detail/movie/87767-Die-Hart-Die-Harter"><img class="N" src="https://bit.ly/3LBP74A" alt="Título de película"><h4>DIE HART 2</h4></a>
+	
+	<a href="https://latino.solo-latino.com/es/detail/movie/89782-Palm-Springs"><img class="N" src="https://is.gd/lFMX5a" alt="Título de película"><h4>PALM SPRINGS</h4></a>
+			
+<a href="https://latino.solo-latino.com/es/detail/movie/saLwxS8SFI6kZjx92Hjya-Neighbors"><img class="N" src="https://is.gd/8D7Amh" alt="Título de película"><h4>BUENOS VECINOS</h4></a>
+
+<a href="https://latino.solo-latino.com/es/detail/movie/UAhSeDcf9YBhlWp1vgjWa-Jackpot%E2%80%8E"><img class="N" src="https://da.gd/RzLA8w" alt="Título de película"><h4>JACKPOT</h4></a>
+
+<a href="https://latino.solo-latino.com/es/detail/movie/91680-Spanish-Affair"><img class="N" src="https://is.gd/ccah7Z" alt="Título de película"><h4>8 APELLIDOS MARROQUIES</h4></a>
+
+<a href="https://latino.solo-latino.com/es/detail/movie/87753-Boy-Kills-World"><img class="N" src="https://bit.ly/3WaUoFn" alt="Título de película"><h4>CONTRA TODOS</h4></a>		
+
+<a href="https://latino.solo-latino.com/es/detail/movie/YiF217RSbwUTIAaJUq8u3-Deadpool--Wolverine"	><img class="N" src="https://da.gd/3EfU" alt="Título de película"/><h4>DEADPOOL 3</h4></a>
+
+<a href="https://latino.solo-latino.com/es/detail/movie/95061-Central-Intelligence"><img class="N" src="https://is.gd/NZ21zm" alt="Título de película"><h4>UN ESPÍA Y MEDIO</h4></a>
+
+<a href="https://latino.solo-latino.com/es/detail/movie/diJuJXBWZvZObgnGemD0t-The-Thursday-Murder-Club"><img class="N" src="https://is.gd/MlF4yO" alt="Título de película"><h4>EL CLUB DEL CRIMEN DE LOS JUEVES</h4></a>
+	
+	<a href="https://latino.solo-latino.com/es/detail/movie/0KKxkWrixESNXZ7W0RiBu-Back-in-Action"><img class="N" src="https://is.gd/0UPbsG" alt="Título de película"><h4>DE VUELTA A LA ACCIÓN</h4></a>
+
+<a href="https://drive.google.com/file/d/1P6v-hetMpopMjz_SWeD7TKm9J7wve0Ct/view?usp=drivesdk"><img class="N" src="https://da.gd/USZ6j" alt="Título de la prlicula"/><h4>BEETLEJUICE 2</h4></a>
+
+<a href="https://latino.solo-latino.com/es/detail/movie/qZRFYpWZnES38S9ZaQ38m-Red-One"><img class="N" src="https://da.gd/uUWRK" alt="Título de película"><h4>RED ONE</h4></a>			
+								
+				<a href="https://latino.solo-latino.com/es/detail/movie/109124-Dream-Scenario"><img class="N" src="https://da.gd/dXBr" alt="Título de la prlicula"/><h4>EL HOMBRE DE LOS SUEÑOS</h4></a>
+
+<a href="https://latino.solo-latino.com/es/detail/movie/jI7JVnz4vzR9oMVTHFDpG-The-American-Society-of-Magical-Negroes"><img class="N" src="https://is.gd/Nmd3Yo" alt="Título de la prlicula"/><h4>SOCIEDAD SECRETA DE NEGROS</h4></a>
+
+<a href="https://drive.google.com/file/d/1CI1O3RKbDvXONw8JgADdo6sv8FlqbuOT/view?usp=drive_link"	><img class="A" src="https://da.gd/rKtPF"/><h4>SOUTH PARK 2024</h4></a>
+
+	<a href="https://lamovie.github.io/SeeKee/SeeKee.html"><img class="N" src="https://da.gd/nJlge"/>más</a>
+		       		</div>
+
+		       		
+		<h3 class="H3">🍿 SERIES 🍿</h3>
+	   			<div class="Container" onscroll="galleryImg()"> 
+
+<a href="https://latino.solo-latino.com/es/detail/drama/TnGPAAqrTEHHepUKWTq8B-MobLand"><img class="M" src="https://is.gd/hQp0J7" alt="Título de serie"><h4>TIERRA DE MAFIA</h4></a>
+
+<a href="https://latino.solo-latino.com/es/detail/drama/gr4KEGles5APNRZUB5y1T-Sandman-Season-2/1"><img class="M" src="https://is.gd/EqmLP2" alt="Título de serie"><h4>SANDMAN 2</h4></a>
+
+<a href="https://latino.solo-latino.com/es/detail/drama/Z7uSL6maWx7abC0eiw8LD-Agatha-All-Along[Audio-Latino]/1"><img class="M" src="https://da.gd/9dsfgX" alt="Título de serie"><h4>AGATHA EN TODAS PARTES</h4></a>
+
+<a href="https://latino.solo-latino.com/es/detail/drama/FVqzMPmIYwWY73zxsWbr8-Wednesday-Season-2/1"><img class="M" src="https://is.gd/llXbRD" alt="Título de serie"><h4>MERLINA ADDAMS 2</h4></a>
+				
+				<a href="https://latino.solo-latino.com/es/detail/drama/JTDICXsA2Eb7SZkKflqoN-The-Boys-Season-1/1"><img class="M" src="https://da.gd/aFqLkg" alt="Título de serie"><h4>THE BOYS</h4></a>
+				
+				<a href="https://latino.solo-latino.com/es/detail/drama/8z3uemUikxOOgvYqvp6Da-The-Wheel-of-Time-Season-1"><img class="M" src="https://is.gd/6RX0Im"/><h4>LA RUEDA DEL TIEMPO</h4></a>
+				
+				<a href="https://latino.solo-latino.com/es/detail/drama/v3HBgSbGMGBfDZO6EzXza-From-Season-1/1"><img class="M" src="https://da.gd/vUmqW"	 alt="Título de serie"/><h4>FROM</h4></a>
+				
+				<a href="https://latino.solo-latino.com/es/detail/drama/uBpjawT2lpTDIoarROlKm-WandaVision[Audio-Latino]/1"><img class="M" src="https://da.gd/rNmLbh" alt="Título de serie"><h4>WANDA-VISION</h4></a>
+				
+				<a href="https://latino.solo-latino.com/es/detail/drama/SDm5mw1mVh0HogkQJijvf-Avatar-The-Last-Airbender[Audio-Latino]/1"	><img class="M" src="https://bit.ly/4feldB5" alt="Título de serie"/><h4>AVATAR 2024</h4></a>
+				
+				<a href="https://latino.solo-latino.com/es/detail/drama/JICbdT00YNUyvwuKqt8K2-1899/1"><img class="M" src="https://da.gd/WUK4ra" alt="Título de serie"><h4>1899</h4></a>
+				
+			 <a href="https://latino.solo-latino.com/es/detail/drama/MTmsPViaqQHDm0qCskvmr-Doom-Patrol-Season-1[Audio-Latino]/1"><img class="M" src="https://da.gd/YNdxJH" alt="Título de serie"><h4>DOOM PATROL</h4></a>
+			 
+				<a href="https://latino.solo-latino.com/es/detail/drama/AUk2ZT5yzt1LVRajd5jCd-Stranger-Things-Season-1"><img class="M" src="https://is.gd/5t9qwU" alt="Título de serie"><h4>STRANGER THINGS</h4></a>
+				
+				<a href="https://latino.solo-latino.com/es/detail/drama/i0Pa4XTY6s5X0PA6olnP9-The-Umbrella-Academy-Season-1/1"><img class="M" src="https://da.gd/NegrG6" alt="Título de serie"><h4>THE UMBRELLA ACADEMY</h4></a>
+				
+<a href="https://latino.solo-latino.com/es/detail/drama/79n4BcdNCorpQEbNHcKwN-Squid-Game-Season-1"><img class="M" src="https://is.gd/NoTv41" alt="Título de serie"><h4>EL JUEGO DEL CALAMAR</h4></a>
+
+<a href="https://latino.solo-latino.com/es/detail/drama/5xgZQlQbyjxZ2ggDIlkUb-Salem-Season-1"><img class="M" src="https://is.gd/JkOoWS" alt="Título de serie"><h4>SALEM</h4></a>
+
+	<a href="https://latino.solo-latino.com/es/detail/drama/OLNIlsKNebYGWiIpKneXz-Penny-Dreadful-Season-1"><img class="M" src="https://da.gd/avkmR" alt="Título de serie"><h4>PENNY DREADFUL</h4></a>
+	
+	<a href="https://latino.solo-latino.com/es/detail/drama/09iln4XXuJhYL2fhhUBIo-Debris"><img class="M" src="https://da.gd/SncUG" alt="Título de serie"><h4>DEBRIS</h4></a>
+		
+<a href="https://latino.solo-latino.com/es/detail/drama/2UuTijrQv4N1eAetg3HSB-Berlin-and-the-Lady-with-an-Ermine-Season-2"><img class="M" src="https://da.gd/NdKgF5" alt="Título de serie"><h4>BERLIN</h4></a>
+	
+	<a href="https://lamovievive.blogspot.com/2024/05/feria.html"><img class="M" src="https://da.gd/T6x3" alt="Título de serie"><h4>FERIA</h4></a>
+	
+	<a href="https://latino.solo-latino.com/es/detail/drama/OQI1PJgZLOi0ZZ53NTLa7-The-Lord-of-the-Rings-The-Rings-of-Power-Season-1[/1"><img class="M" src="https://da.gd/Xa0Fzw" alt="Título de serie"><h4>ANILLOS DE PODER</h4></a>						
+			
+				<a href="https://latino.solo-latino.com/es/detail/drama/eZk3ptHxpvK4IAlHB1aIM-3-Body-Problem[Audio-Latino]/1"><img class="M" src="https://da.gd/TPZGl1" alt="Título de película"><h4>EL PROBLEMA DE LOS 3 CUERPOS</h4></a>
+				
+				<a href="https://latino.solo-latino.com/es/detail/drama/rWoSXIuAkuU8gESi9Bgfh-Citadel[Audio-Latino]"><img class="M" src="https://da.gd/4W2D"	/><h4>CITADEL</h4></a>
+	
+	<a href="https://latino.solo-latino.com/es/detail/drama/KsvViY0vkVWwvMkxxQ3Zh-Black-Mirror-Season-1/1"><img class="M" src="https://da.gd/wqQvWw" alt="Título de película"><h4>BLACK MIRROR</h4></a>					
+	
+	<a href="https://lamovie.github.io/SeeKee/SeeKee.html"><img class="M" src="https://da.gd/nJlge"/>más</a>
+				    </div>
+				    
+				    
+			<h3 class="H3">🍿 ANIMES 🍿</h3>
+				<div class="Container" onscroll="galleryImg()">
+
+	  <a href="https://latino.solo-latino.com/es/detail/drama/tHa42lElZ3P8PDRyZbtEo-Futurama-Season-1/1"><img class="A" src="https://da.gd/FrElSL" alt="Título de película"><h4>FUTURAMA</h4></a>
+	  
+	  
+				<a href="https://latino.solo-latino.com/es/detail/drama/AnsdlTrBOeCxjNVGEVtHa-Inside-Job-Season-1"><img class="A" src="https://da.gd/kQuEtQ" alt="Título de película"><h4>INSIDE JOB</h4></a>
+				
+				<a href="https://latino.solo-latino.com/es/detail/drama/kVCXgas7G8OebT6IBEQWq-One-Punch-Man/1"><img class="A" src="https://da.gd/pIasJ2" alt="Título de película"><h4>ONE PUNCH MAN</h4></a>
+				
+				<a href="https://latino.solo-latino.com/es/detail/drama/OFDa9VoaIcTId4fEz1pqr-Invincibleanime-Season-1[Audio-Latino]/1"><img class="A" src="https://da.gd/693i0X" alt="Título de serie"><h4>INVINCIBLE</h4></a>
+	
+	<a href="https://latino.solo-latino.com/es/detail/drama/7YRzI2w0TytQs2HJ5kwc8-Mushoku-Tensei-Jobless-Reincarnation-Season-1-Part/1"><img class="A" src="https://is.gd/HRmDKw" alt="Título de serie"><h4>MUSHOKU TENSEI</h4></a>
+				
+				<a href="https://latino.solo-latino.com/es/detail/drama/iyliADHaYf9BGghfU1Yos-Disenchantment-Season-1/1"><img class="A" src="https://da.gd/T43Sd" alt="Título de película"><h4>DESENCANTO</h4></a>
+				
+				<a href="https://latino.solo-latino.com/es/detail/drama/ytgtVvCScndO1K2uXTjjS-Mr-Pickles-Season-1/1"><img class="A" src="https://da.gd/JxCmHs" alt="Título de película"><h4>MR PICKLES</h4></a>
+				
+				<a href="https://latino.solo-latino.com/es/detail/drama/tNN9IaUvc8Xqek2jHt2Ek-Brickleberry-Season-1"><img class="A" src="https://da.gd/yKQ4B" alt="Título de película"><h4>BRICKLEBERRY</h4></a>
+				
+				<a href="https://latino.solo-latino.com/es/detail/drama/ojtM7nNOQmH6QG5FeJYiQ-Attack-on-Titan-Season-1"><img class="A" src="https://da.gd/sMysH" alt="Título de película"><h4>ATAQUE DE TITANES</h4></a>			
+				
+				<a href="https://latino.solo-latino.com/es/detail/drama/WDRfoZkhVVFzxidavYKqF-The-Boys-Presents-Diabolical[Audio-Latino]"><img class="A" src="https://da.gd/J6W0s1"	/><h4>BOYS DIABOLICAL</h4></a>
+				
+			<a href="https://latino.solo-latino.com/es/detail/drama/ihFw1ODYbl5WdGobz1Ll4-Love-Death--Robots-Season-1/1"><img class="A" src="https://da.gd/mTvqi9" alt="Título de película"><h4>LOVE DEATH AND ROBOT</h4></a>
+			
+			<a href="https://latino.solo-latino.com/es/detail/drama/VQRdS4ao3KyRBKDYFfrRo-Rick-and-Morty-Season-1/1"><img class="A" src="https://da.gd/3r9wX" alt="Título de película"><h4>RICK & MORTY</h4></a>
+			
+			<a href="https://latino.solo-latino.com/es/detail/drama/sAtCWN1DUhW82AUKvwBXs-Baki/1"><img class="A" src="https://da.gd/6nxCvW" alt="Título de película"><h4>BAKI</h4></a>
+			
+			<a href="https://latino.solo-latino.com/es/detail/drama/JmvmVU4RmBGaR52QyFrPp-South-Park-Season-1/1"	><img class="A" src="https://da.gd/rKtPF"/><h4>SOUTH PARK</h4></a>
+			
+		<a href="https://drive.google.com/file/d/1fFe-YuIwnaECIiDrY4CRQMYsRpKb-V5B/view?usp=drivesdk"	><img class="A" src="https://is.gd/6LNWhX"/><h4>MASAMEER JUNIOR</h4></a>
+			
+<a href="https://latino.solo-latino.com/es/detail/drama/OiQVrof1HTgQoUPbI4Vic-The-Midnight-Gospel[Audio-Latino]/1"	><img class="A" src="https://is.gd/lwo2Re"/><h4>THE MIDNIGHT GOSPEL</h4></a>
+			
+			<a href="https://latino.solo-latino.com/es/detail/movie/NojRFPmgLJbNNszB5Ps1E-Despicable-Me-4"><img class="N" src="https://is.gd/XsCAGA" alt="Título de la prlicula"/><h4>MI VILLANO FAVORITO 4</h4></a>
+			
+			<a href="https://lamovie.github.io/SeeKee/SeeKee.html"><img class="A" src="https://da.gd/nJlge"/>más</a>
+          </div><br/>
+          
+
+<h3 class="H3">🔥 FREE-TV 🔥</h3>
+				<div class="Container" onscroll="galleryImg()">
+				
+<a href="https://lamovie.github.io/CONTENIDO/X-TV.html"><img src="https://da.gd/I5tze"/><h4>📺DARK PLAY</h4></a>				
+
+<a href="https://lamovie.github.io/IPTV/"><img src="https://da.gd/wUxcE"/><h4>📺 IPTV</h4></a>			
+
+<a href="https://lamovie.github.io/Box-Tv/"><img hidden src="https://da.gd/4UX9HK"/><h4></h4></a>			
+
+<a href="https://lamovie.github.io/TV-ONLINE-FREE/PLUTO-TV.html"><img src="https://is.gd/NVvHMc"/><h4>📺 PLUTO-TV</h4></a>			
+
+
+<a href="https://lamovievive.blogspot.com/p/bassnation.html"><img src="https://da.gd/bNbRrR"/><h4>📺 BASS NATION</h4></a>			
+
+<a href="https://lamovie.github.io/YOUTUBE-VIDEOS/"><img src="https://da.gd/EJMGy"/><h4>📺 MUSIC</h4></a>	
+
+<a href="https://expusofia.blogspot.com/2021/07/teosofia.html"><img src="https://da.gd/gDW6pC"/><h4>📺 TEOSOFIA</h4></a>			
+
+<a href="https://lamovie.github.io/TV-ONLINE-FREE/TV-ONLINE.html"><img src="https://da.gd/jh1v5e"/><h4>📺 TV ONLINE</h4></a>			
+
+<a href="https://lamovie.github.io/PRE-ESTRENOS/"><img src="https://da.gd/W0k8wE"/><h4>📺 PRE-ESTRENOS</h4></a>	
+
+<a href="https://www.xvideos.com/video.imhedc7c5/madurita_kinky_se_folla_a_una_polla_negra_en_un_video_interracial"><img src="https://da.gd/coUylW"/><h4>📺 X-Tv</h4></a>	
+ 
+<a href="https://lamovie.github.io/TV-ONLINE-FREE/"><img class="A" src="https://da.gd/nJlge"/>más</a>
+				
+				    				</div>
+				    				
+ <h3 class="H3">📜DOCUMENTARY📜</h3>
+				<div class="Container" onscroll="galleryImg()">
+				
+<a href="https://lamovievive.blogspot.com/2025/05/911.html"><img src="https://is.gd/BLCtJr"/><h4>🏛️ 911</h4></a>			
+				
+<a href="https://drive.google.com/file/d/18-Gw04kF5JE6vBN0b2EKiQDKUstOQp8r/view?usp=drivesdk"><img src="https://is.gd/wb6UwO"/><h4>🌐 TIERRA PLANA</h4></a>				
+
+<a href="https://drive.google.com/drive/folders/15MLutjxyWnZE3sHNooKrGsEIuF90LmL3"><img src="https://da.gd/xPisS"/><h4>👾 CONSPIRACY</h4></a>			
+
+<a href="https://drive.google.com/drive/folders/1-6mwEqX9VCEBM8QwqZOXuh64DAzIRRRU"><img src="https://da.gd/gLQIk"/><h4>👻 ARCONTES</h4></a>			
+
+<a href="https://drive.google.com/drive/folders/1aLbOE3Ms0lSOBP0SATmv882kPTetCm8i"><img src="https://is.gd/ti6EPP"/><h4>🔯 369</h4></a>	
+
+<a href="https://drive.google.com/drive/folders/14xTgt4uU8s5Gv_EdoxENGe-76_yNgbDk"><img src="https://da.gd/AM5MF"/><h4>🗯️ HISTORY</h4></a>			
+
+<a href="https://drive.google.com/drive/folders/15YkA9Q3sxBoCgowqiDnZezcQ7o6mah_W"><img src="https://da.gd/QxXzr"/><h4>🕎 TEOSOFY</h4></a>			
+
+<a href="https://drive.google.com/drive/folders/1-2wE9ooOBIoXIVmYlWIyCp-ItBeFmuCr"><img src="https://da.gd/j3OWo6"/><h4>🎭 EXPUS</h4></a>	
+
+<a href="https://expusofia.blogspot.com/2021/07/teosofia.html"><img class="A" src="https://da.gd/nJlge"/>más</a>
+				
+				    				</div><br/>
+
+            <center> 
+<h3 class="Otros">🍿 OTROS 🍿</h3> 
+				<div id="Oculto" class="Container" onscroll="galleryImg()"> 
+
+<a href="https://latino.solo-latino.com/es/detail/drama/uf5jenYNRHVO6dKZpo3JY-Game-of-Thrones-Season-1/1"><img src="https://is.gd/g9JTwV" alt="JUEGO DE TRONOS"/>
+<h4>JUEGO DE TRONOS</h4></a>		
+
+<a href="https://latino.solo-latino.com/es/detail/movie/tT06q3HHM52YQFyLdL3ID-Borderlands"><img src="https://is.gd/6c6Yxi" alt="BORDERLANDS"/>
+<h4>BORDERLANDS</h4></a>
+
+<a href="https://latino.solo-latino.com/es/detail/movie/FXC1Hga5ZJbOyRFCQqf9r-Oz-the-Great-and-Powerful"><img src="https://is.gd/JyHF3F" alt="OZ: UN MUNDO DE FANTASIA"/>
+<h4>EL MAGO DE OZ</h4></a>
+
+<a href="https://latino.solo-latino.com/es/detail/movie/85443-Snow-White-and-the-Huntsman"><img src="https://is.gd/Ob0x0T" alt="BLANCA NIEVES Y EL CAZADOR"/>
+<h4>BLANCA NIEVES Y EL CAZADOR</h4></a>
+
+<a href="https://latino.solo-latino.com/es/detail/movie/XBGdIGVjA4k9YFoCsCccS-Pirates-of-the-Caribbean-Dead-Men-Tell-No-Tales"><img src="https://is.gd/qFMuk3" alt="PIRATAS DEL CARIBE 5"/>
+<h4>PIRATAS DEL CARIBE 5</h4></a>
+
+<a href="https://latino.solo-latino.com/es/detail/movie/71525-Van-Helsing"><img src="https://is.gd/X3mc7P" alt="VAN HELSING: el cazador de monstruos"/>
+<h4>VAN HELSING</h4></a>
+
+<a href="https://latino.solo-latino.com/es/detail/movie/nkwwnjeconjAz8HjmTep5-Captain-Marvel"><img src="https://is.gd/4QoGok" alt="CAPITANA MARVEL"/>
+<h4>CAPITANA MARVEL</h4></a>
+
+<a href="https://latino.solo-latino.com/es/detail/movie/69177-Captain-America-Civil-War"><img src="https://is.gd/53b179" alt="CAPITAN AMERICA CIVIL WAR"/>
+<h4>CAPITAN AMERICA CIVIL WAR</h4></a>
+
+<a href="https://latino.solo-latino.com/es/detail/movie/85593-Iron-Man-3"><img src="https://is.gd/L8X1Uk" alt="IRON MAN 3"/>
+<h4>IRON MAN 3</h4></a>
+
+<a href="https://latino.solo-latino.com/es/detail/drama/svFCzQ71Nnum8XEjWDMPQ-The-Stranger----[Audio-Latino]"><img src="https://is.gd/mg3T0B" alt="NO HABLES CON EXTRAÑOS"/>
+<h4>NO HABLES CON EXTRAÑOS</h4></a>
+
+<a href="https://latino.solo-latino.com/es/detail/movie/RTqRuq5EiUmkylDF6ZaT0-Dont-Move"><img src="https://is.gd/SheIp7" alt="NO TE MUEVAS"/>
+<h4>NO TE MUEVAS</h4></a>
+
+<a href="https://latino.solo-latino.com/es/detail/drama/wmYN3J8hhwugbQZjnwBNL-Ghosts-Season-1/1"><img src="https://is.gd/0Ed1l4" alt="GHOSTS"/>
+<h4>GHOSTS</h4></a>
+
+
+<a href="https://latino.solo-latino.com/es/detail/drama/tHa42lElZ3P8PDRyZbtEo-Futurama-Season-1/1"><img src="https://da.gd/FrElSL" alt="FUTURAMA"/><h4>FUTURAMA</h4></a>
+
+<a href="https://latino.solo-latino.com/es/detail/drama/w4T1wpuJxUu5b0bHfQnU5-Money-Heist-Season-1"><img src="https://is.gd/CWRq5y" alt="LA CASA DE PAPEL"/><h4>LA CASA DE PAPEL</h4></a>
+
+<a href="https://latino.solo-latino.com/es/detail/drama/QTUVOLeIYWjsO8Fv2PcxM-Family-Guy-Season-1"><img src="https://is.gd/kHXiIO" alt="FAMILY GUY"/><h4>FAMILY GUY</h4></a>
+
+<a href="https://latino.solo-latino.com/es/detail/drama/GGCScosEDKZxW5ejPWH9n-Naruto/1"><img src="https://is.gd/SUXJgs" alt="NARUTO"/>
+<h4>NARUTO</h4></a>
+
+<a href="https://latino.solo-latino.com/es/detail/drama/SC5e4d5u7ZQBPnkhz675G-Outlander-Season-1/1"><img src="https://is.gd/nUXyTj" alt="OUTLANDER"/>
+<h4>OUTLANDER</h4></a>
+
+<a href="https://latino.solo-latino.com/es/detail/drama/Gr410ksu2cfhFfQP75H9j-The-Walking-Dead-Season-1"><img src="https://is.gd/eYe6jJ" alt="THE WALKING DEAD"/>
+<h4>THE WALKING DEAD</h4></a>
+
+<a href="https://latino.solo-latino.com/es/detail/drama/MNxoJpARCrPHvVPu1ljH1-The-Simpsons-Season-1"><img src="https://is.gd/Rlbpk9" alt="LOS SIMPSONS"/>
+<h4>LOS SIMPSONS</h4></a>
+
+<a href="https://latino.solo-latino.com/es/detail/drama/MdpUkP2oMneAfFppRBkY4-One-Piece/1"><img src="https://is.gd/HqN5hw" alt="ONE PIECE"/>
+<h4>ONE PIECE</h4></a>
+
+<a href="https://latino.solo-latino.com/es/detail/drama/vXlxCYJWmRBYQh1JmASob-Vis-a-vis-Season-1"><img src="https://is.gd/SzVweD" alt="VIS A VIS"/>
+<h4>VIS A VIS</h4></a>
+
+<a href="https://latino.solo-latino.com/es/detail/drama/C1lUW7UsRxfbGSHuD2Vax-My-Hero-Academia"><img src="https://is.gd/12UNgg" alt="MY HERO ACADEMIA"/>
+<h4>MY HERO ACADEMIA</h4></a>
+
+<a href="https://latino.solo-latino.com/es/detail/drama/3TVD1tXGJbNUvPc0u3mP8-Vikings-Season-1/1"><img src="https://is.gd/PkjbWQ" alt="VIKINGOS"/>
+<h4>VIKINGOS</h4></a>
+
+<a href="https://latino.solo-latino.com/es/detail/drama/ddsgdunU4e2xi7R5NT3K4-Evil-Season-1/1"><img src="https://is.gd/ltY1qC" alt="EVIL"/>
+<h4>EVIL</h4></a>
+
+<a href="https://latino.solo-latino.com/es/detail/drama/pMI97TMrpPlol2d1OUTtm-Citadel-Season-2/1"><img src="https://da.gd/4W2D" alt="CITADEL 2"/>
+<h4>CITADEL 2</h4></a>
+
+
+<a href="https://lamovie.github.io/Scans/"><img class="A" src="https://da.gd/nJlge"/>más</a>
+				<br/>
+				    				</div>
+				    				
+				    							    				                
+       <div id="Gallery" class="Gallery">
+    <div class="Otros"><br/>
+
+        <a href="https://latino.solo-latino.com/es/detail/movie/z6MSXMyq4udEHPh9DnCPz-RIPD-2-Rise-of-the-Damned" target="WILLOW"><img class="image" src="https://da.gd/z23K" alt="R.I.P.D. Policia del mas alla 2"/></a>
+
+    <a href="https://latino.solo-latino.com/es/detail/movie/LiSC6AESoea7oM6XP7qgI-RIPD" target="WILLOW"><img class="image" src="https://da.gd/FSPEU" alt="R.I.P.D. Policia del mas alla 1"/></a>
+
+    <a href="https://latino.solo-latino.com/es/detail/movie/77917-Smile" target="WILLOW"><img class="image" src="https://da.gd/y5rgp" alt="SMILE"/></a>
+
+    <a href="https://latino.solo-latino.com/es/detail/drama/j5LWeaJpNFW159I98DsqD-Wednesday-Season-1" target="WILLOW"><img class="image" src="https://da.gd/7Jjxl" alt="MERLINA"/></a>
+
+     <a href="https://latino.solo-latino.com/es/detail/drama/k72wEZGTdP5IRxo26CAYg-Marianne" target="WILLOW"><img class="image" src="https://da.gd/sNTgA1" alt="MARIANNE"/></a>
+
+         <a href="https://latino.solo-latino.com/es/detail/drama/OQI1PJgZLOi0ZZ53NTLa7-The-Lord-of-the-Rings-The-Rings-of-Power-Season-1[/1" target="WILLOW"><img class="image" src="https://da.gd/XnZLMb" alt="ANILLOS DE PODER"/></a>
+
+     <a href="https://latino.solo-latino.com/es/detail/movie/vXbF8GTWbuJBxU8z3qRjs-Vacation-Friends" target="WILLOW"><img class="image" src="https://da.gd/UVvy9" alt="AMIGOS PASAJEROS"/></a>
+
+    <a href="https://drive.google.com/file/d/1U-zBTivbIV4TniRoKnFMfCVz5MUJ-GXc/view?usp=drive_link" target="WILLOW"><img class="image" src="https://da.gd/5hg4" alt="THE GRAY MAN"/></a>
+
+     <a href="https://latino.solo-latino.com/es/detail/movie/fHZNawHxHTiHhqR7Pu0Dx-The-Kings-Man" target="WILLOW"><img class="image" src="https://da.gd/i6id" alt="KINGSMAN 3"/></a>
+
+       <a href="https://latino.solo-latino.com/es/detail/movie/tx1yOD5qkHb7NeqJu1I7z-Prey-for-the-Devil" target="WILLOW"><img class="image" src="https://da.gd/6Ci1K" alt="LA LUZ DEL DIABLO"/></a>
+
+       <a href="https://latino.solo-latino.com/es/detail/movie/8oZOEWY7X1HpXMNUgXLko-Gods-Crooked-Lines" target="WILLOW"><img class="image" src="https://da.gd/Hts9wf" alt="LOS RENGLONES TORCIDOS DE DIOS"/></a>
+
+       <a href="https://latino.solo-latino.com/es/detail/movie/kr2JNn8tlqsKtACrjnLgj-M3GAN" target="WILLOW"><img class="image" src="https://da.gd/ukULX" alt="M3GAN"/></a>
+
+        <a href="https://latino.solo-latino.com/es/detail/drama/UZcMb3qb7WjqGTCup0oyf-Guillermo-del-Toros-Cabinet-of-Curiosities/1" target="WILLOW"><img class="image" src="https://da.gd/0MnTfN" alt="EL GABINETE DE LAS CURIOSIDADES"/></a>
+
+       <a href="https://latino.solo-latino.com/es/detail/movie/89119-Hansel--Gretel-Witch-Hunters" target="WILLOW"><img class="image" src="https://da.gd/nAt95d" alt="HANSEL & GRETEL"/></a>
+
+        <a href="https://latino.solo-latino.com/es/detail/drama/SlWUHQiPiLsd80YDnA34K-His-Dark-Materials-Season-1/1" target="WILLOW"><img class="image" src="https://da.gd/rU21yP" alt="HIS DARK MATERIALS"/></a>             
+           </div>
+       </div><br/><br/> 
+           </center>
+<hr style="height:50px; border:0"/>	         
+         
+       <div id="Blue">          
+          <li><a class="baa" href="http://expusofia.blogspot.com">🕎 BLOG DE TEOSOFIA 🕎</a></li><br/>                  
+	                 
+	                 <li><a class="baa" href="https://is.gd/QvFaXy">🔥 LA MOVIE APP 🔥</a></li><br/>                    	                  
+	                                	                  
+	                 <li> <a class="baa" href="https://lamovievive.blogspot.com/p/cloud-music.html">☁️ CLOUD MUSIC ☁️</a></li><br/>                             
+	                  
+	                 <li><a class="baa" href="https://drive.google.com/drive/folders/1EPT6hXn2l69bqh3cH6OOsrWVB0vULw22">📱 APPS 📱</a></li><br/>                  
+                  
+	                    <li><a class="baa" href="https://lamovie.github.io/TV-ONLINE-FREE/">📺 MY TV ONLINE 📺</a></li><br/>
+	                    
+<li><a id="Wa" class="baa" href="https://cine-chat-live.base44.app">👉🏾 SUGERENCIAS 👈🏾</a></li>  	                
+	        </div> <br/><br/>     
+
+<footer>
+		<p>© LA MOVIE DE JOE•</p>
+</footer>   		
+		
+ 
+ <script src="Script2.js"></script>
+ 
+<script>
+  var ENLACE = document.querySelectorAll('.Container a, .Gallery a');
+   
+  ENLACE.forEach(item => { 
+    item.onclick = (event) => {
+      event.preventDefault();
+        var URL = item.href;
+    setTimeout(() => {
+        window.location.href = URL;
+    }, 1000);
+   }
+});
+</script>
+<script>
+let items = document.querySelectorAll('.slider .list .item');
+let next = document.getElementById('next');
+let prev = document.getElementById('prev');
+let thumbnails = document.querySelectorAll('.thumbnail .item');
+
+// config param
+let countItem = items.length;
+let itemActive = 0;
+// event next click
+next.onclick = function(){
+    itemActive = itemActive + 1;
+    if(itemActive >= countItem){
+        itemActive = 0;
+    }
+    showSlider();
+}
+//event prev click
+prev.onclick = function(){
+    itemActive = itemActive - 1;
+    if(itemActive < 0){
+        itemActive = countItem - 1;
+    }
+    showSlider();
+}
+// auto run slider
+let refreshInterval = setInterval(() => {
+    next.click();
+}, 5000)
+
+
+function showSlider(){
+    // 1. Remueve la clase 'active' de los elementos antiguos
+    let itemActiveOld = document.querySelector('.slider .list .item.active');
+    let thumbnailActiveOld = document.querySelector('.thumbnail .item.active');
+    
+    if (itemActiveOld) {
+        itemActiveOld.classList.remove('active');
+    }
+    if (thumbnailActiveOld) {
+        thumbnailActiveOld.classList.remove('active');
+    }
+
+    // 2. Activa el nuevo slide y la nueva miniatura
+    items[itemActive].classList.add('active');
+    thumbnails[itemActive].classList.add('active');
+
+    // 🌟 LÓGICA DE SINCRONIZACIÓN DE SRC (FUNCIÓN SOLICITADA) 🌟
+    // Obtener la URL de la imagen principal (la única fuente de verdad, dentro de .Div)
+    let mainImage = items[itemActive].querySelector('.Div img');
+    // Obtener la imagen de la miniatura activa (el destino)
+    let thumbnailImage = thumbnails[itemActive].querySelector('img');
+
+    // Copiar el src de la imagen principal a la imagen de la miniatura
+    if (mainImage && thumbnailImage) {
+        thumbnailImage.src = mainImage.src;
+    }
+   
+    // 3. Reinicia el contador para el avance automático
+    clearInterval(refreshInterval);
+    refreshInterval = setInterval(() => {
+        next.click();
+    }, 5000)
+}
+
+
+// click thumbnail
+thumbnails.forEach((thumbnail, index) => {
+    thumbnail.addEventListener('click', () => {
+        itemActive = index;
+        showSlider();
+    })
+})
+
+Music.addEventListener('click', function(){
+   Nota.style.display = "block";
+ Nota.style.animation = 'In .8s linear forwards';
+});
+      function Cerrar(){
+    Nota.style.animation = 'Fin .8s linear forwards';
+}
+
+         <!-- BUSCADOR -->
+
+   Search.addEventListener('click', function() {
+  if(Aux.style.display == 'block') {
+     Aux.style.display = 'none';
+     Menu.style.marginLeft = '0vh';
+   Logo.style.marginLeft = '0vh';     
+  } else {
+     Aux.style.display = 'block';
+     Menu.style.marginLeft = '50vh';
+   Logo.style.marginLeft = '-50vh';
+  }
+  buscador.focus();
+});     
+
+        <!-- LINKS IFRAME -->
+
+function Links(iframe) {
+    var iframeDocument = iframe.contentDocument || iframe.contentWindow.document;
+    var links = iframeDocument.getElementsByTagName('a');
+
+    for (let i = 0; i < links.length; i++) {
+        links[i].setAttribute('target', '_blank');
+ }
+}
+        <!-- Musica -->
+
+    var videos = ['https://lamovie.github.io/BASS-NATION-ONLINE/', 
+'https://lamovie.github.io/BASS-NATION-ONLINE/', 'https://streamtv.mediasector.es/hls/activatv/index.m3u8', 'https://is.gd/7CaWXu', 'https://lamovie.github.io/BASS-NATION-ONLINE/',];
+    var currentVideoIndex = 0;
+
+    function adelantarVideo() {
+      currentVideoIndex++;
+      if (currentVideoIndex >= videos.length) {
+        currentVideoIndex = 0;
+}
+      cambiarVideo();
+}
+    function retrocederVideo() {
+      currentVideoIndex--;
+      if (currentVideoIndex < 0) {
+        currentVideoIndex = videos.length - 1;
+}
+      cambiarVideo();
+}
+    function cambiarVideo() {
+      Video.src = videos[currentVideoIndex];
+      Video.load();
+      Video.play();
+}
+
+
+
+  var P = document.querySelectorAll('.P');
+  var T = document.querySelectorAll('.thumbnail');
+    
+ 
+  P.forEach(p => p.onclick = () => {
+  p.style.color = '#4f9';
+  T.forEach(img => img.style.opacity = '.2');
+  T.forEach(t => t.onclick = () => {
+  p.style.color = '#fff';
+  T.forEach(img => img.style.opacity = '1');
+ });
+}); 
+
+  // --- IMG CON href ---
+
+var Div = document.querySelectorAll('.Div');
+
+Div.forEach(divElement => {
+    divElement.addEventListener('click', () => {
+        // 1. Busca el enlace (etiqueta <a>) dentro del div actual.
+        let linkElement = divElement.querySelector('a');
+
+   // 2. Verifica que el enlace existe y obtiene su URL (href).
+        if (linkElement && linkElement.href) {
+            let url = linkElement.href;
+            
+  // 3. Redirige a esa URL.
+    window.location.href = url;
+            
+  // Si quisieras abrirlo en una pestaña nueva, usarías:
+ // window.open(url, '_blank'); 
+        }
+    });
+});
+
+
+
+        <!-- SWPLAYER -->
+   
+    // Detectar si es móvil
+    var isMobile = /Mobi|Android|iPhone|iPad|iPod|BlackBerry|IEMobile|Opera Mini/i.test(navigator.userAgent);
+    
+ window.onload = () => {
+     if (!isMobile) {
+        Video.src = "";
+     }
+ };     
+       
+document.onclick = (event) => {
+    if (isMobile) return;
+
+    // Buscamos si el elemento clickeado es un enlace <a> o está dentro de uno
+    let anchor = event.target.closest('a');
+    
+    // Si no se hizo clic en ningún enlace, no hacemos nada
+    if (!anchor) return;
+
+    // Evitamos que abra el enlace original en la computadora
+    event.preventDefault();
+
+    let buscadorTexto = "";
+
+    // Verificamos si el enlace pertenece o está dentro del contenedor con ID "Gallery"
+    if (anchor.closest('#Gallery')) {
+        let img = anchor.querySelector('img');
+        // Si hay una imagen, extraemos su atributo 'alt'
+        buscadorTexto = img ? img.getAttribute('alt') : "";
+    } else {
+        // Para cualquier otro enlace del sitio, buscamos un h4 o el texto del enlace
+        let h4 = anchor.querySelector('h4') || anchor.querySelector('h3');
+        buscadorTexto = h4 ? h4.textContent : anchor.textContent;
+    }
+
+    // Limpiamos espacios en blanco extras que puedan estorbar en la búsqueda
+    buscadorTexto = buscadorTexto.trim();
+
+    // Si encontramos texto válido para buscar, redirigimos a SWPlayer
+    if (buscadorTexto) {
+        window.location.href = 'https://h5.swplayer.com/es/search?keyword=' + encodeURIComponent(buscadorTexto);
+    } else {
+        // Si por alguna razón el enlace no tiene texto (ej. botones vacíos), abrimos su href original
+        window.location.href = anchor.href;
+    }
+};
+</script>
+</body>
+</html>
+
+
