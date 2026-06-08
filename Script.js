@@ -218,6 +218,19 @@ document.onclick = (event) => {
 };
 
 
+var ENLACE = document.querySelectorAll('.Container a, .Gallery a');
+   
+  ENLACE.forEach(item => { 
+    item.onclick = (event) => {
+      event.preventDefault();
+        var URL = item.href;
+    setTimeout(() => {
+        window.location.href = URL;
+    }, 1000);
+   }
+});
+
+
 
 
 
