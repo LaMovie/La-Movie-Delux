@@ -1,3 +1,6 @@
+.swal2-container {
+    z-index: 999999 !important;
+}
 a {
     text-decoration: none;
 }
@@ -345,7 +348,7 @@ header .menu{
     margin-top: 5px;
 }
 .Container img:hover + h4 {
-     color: #4f9;
+     color: #4f9; 
 }
 .Container:hover img:not(:hover){
      filter: opacity(85%) saturate(80%); 
