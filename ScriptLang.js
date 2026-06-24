@@ -333,9 +333,7 @@ fetch('https://ipapi.co/json/')
     } else if (country === 'AR') {
    alert('⚠️SE LE NEGÓ EL ACCESO A ARG 🇦🇷 A ESTE CONTENIDO, COMUNICARSE CON EL CREADOR SI QUIERE.⚠️');
   window.location.href = 'https://sync-stream-chat-app.base44.app';
-    } else {
- window.location.href = '+LA-MOVIE+.html';
-    }
+    } 
   })
   .catch(error => {
     console.error("Error al detectar la ubicación:");
