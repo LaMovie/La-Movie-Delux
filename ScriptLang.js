@@ -107,7 +107,7 @@ function Links(iframe) {
         <!-- Musica -->
 
     var videos = ['https://lamovie.github.io/BASS-NATION-ONLINE/', 
-'https://lamovie.github.io/BASS-NATION-ONLINE/', 'https://streamtv.mediasector.es/hls/activatv/index.m3u8', 'https://is.gd/7CaWXu', 'https://lamovie.github.io/BASS-NATION-ONLINE/',];
+'https://lamovie.github.io/BASS-NATION-ONLINE/',];
     var currentVideoIndex = 0;
 
     function adelantarVideo() {
@@ -233,6 +233,92 @@ var ENLACE = document.querySelectorAll('.Container a, .Gallery a');
 
 
 
+
+document.addEventListener("keyup", e => {
+
+  
+  // Manejo del Enter
+  if (e.key === "Enter") {
+     buscador.value = "";
+           Check();
+    }
+});
+
+     
+        function Check() {
+   var isMobile = /Mobi|Android|iPhone|iPad|iPod|BlackBerry|IEMobile|Opera Mini/i.test(navigator.userAgent);
+   
+    
+    // Elegir dominio según dispositivo
+    var domain = isMobile ? 'https://latino.solo-latino.com/es/search?keyword=' : 'https://h5.swplayer.com/es/search?keyword=';
+    
+    window.location.href = domain + buscador.value;
+       buscador.value = '';
+    };
+
+       // SEARCH CLICK
+    Search.onclick = () => {
+    if (buscador.value !== '') {
+            Check();
+      } 
+   };
+     
+
+         <!-- HTML -->
+         
+ var HTML =
+  `
+<style>
+@import url('https://fonts.googleapis.com/css2?family=Poppins:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&display=swap');
+section {
+    width: 55%;
+    height: 7vh;
+    display: flex;
+    position: fixed;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+}
+input {    
+    color: #fff;  
+    width: 90%;
+    padding: 10px;
+    outline: none;
+    z-index: 9999;
+    font-weight: bold;
+    border-radius: 20px;
+    background: linear-gradient(to right, blue, blue, white);
+    border: 2px solid #aaa;    
+}
+</style>
+
+<style>
+:root {
+  --bg: #110921;
+  --purple: #3720b4;
+  --green: #5ff8c2;
+  --font: 'Roboto Mono', sans-serif;
+}
+h1 {
+  font-size: 3vw;
+}
+</style>
+</head>
+<body>
+<section id="contenedor-main">
+    <div>
+        <input type="text" name="buscador" id="buscador" placeholder="Buscar...">
+           <br/><br/>
+     <ul id="Lista"></ul>
+    
+           </div>
+</section>
+`;
+
+     Aux.innerHTML = HTML;        
+
+
+
 fetch('https://ipapi.co/json/')
   .then(response => response.json())
   .then(data => {
@@ -247,12 +333,17 @@ fetch('https://ipapi.co/json/')
     } else if (country === 'AR') {
    alert('⚠️SE LE NEGÓ EL ACCESO A ARG 🇦🇷 A ESTE CONTENIDO, COMUNICARSE CON EL CREADOR SI QUIERE.⚠️');
   window.location.href = 'https://sync-stream-chat-app.base44.app';
-    } 
+    } else {
+ window.location.href = '+LA-MOVIE+.html';
+    }
   })
   .catch(error => {
     console.error("Error al detectar la ubicación:");
-});  
-     
+});    
+ 
+
+
+          
 
 
 
