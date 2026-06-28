@@ -21,19 +21,21 @@ svg{
     z-index: -1;
     position: absolute;
 }
-header {
-    width: 1200px;
-    max-width: 90%;
-    margin: auto;
+header {    
+    width: 100%;
+    margin: 6vh 0;
     display: grid;
     grid-template-columns: 50px 1fr 50px;
     grid-template-rows: 50px;
     justify-content: center;
     align-items: center;    
     z-index: 8850;
+    background: #000;
+    position: fixed;
+    padding: 2vh;
 }
 header .logo {
-    top: -83vh;
+    top: -82vh;
     left: -78vh;
     scale: 10%;
     font-weight: bold;

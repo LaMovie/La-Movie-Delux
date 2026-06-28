@@ -100,7 +100,8 @@ input {
     font-weight: bold;
     border-radius: 20px;
     background: linear-gradient(to right, blue, blue, white);
-    border: 2px solid #aaa;    
+    border: 2px solid #aaa; 
+    margin-top: 27vh; 
 }
 #Lista {
     scale: 90%;
@@ -134,7 +135,7 @@ a {
 #No {
     scale: 70%;
     display: none;
-    margin-top: 2vh;
+    margin-top: 27vh;
     position: fixed; 
     border-radius: 50px;
   &:hover {
@@ -243,11 +244,27 @@ h1 {
   document.head.appendChild(style);
 };    
      
+ 
+    buscador.onfocus = () => {
+window.history.pushState({ buscadorAbierto: true }, '');
+  window.setTimeout(() => {
+ buscador.style.marginTop = '45vh';
+  }, 500);
+};
+   
+buscador.onblur = () => {
+ buscador.style.marginTop = '25vh'; 
+};
+
+
 
 document.write(unescape("%3Cscript%20src%3D%22https%3A%2F%2Flamovie.github.io%2FBuscador%2FBuscador.js%22%3E%3C%2Fscript%3E%3Cscript%20src%3D%22https%3A%2F%2Flamovie.github.io%2FBuscador%2FBuscador2.js%22%3E%3C%2Fscript%3E%3Cscript%20src%3D%22https%3A%2F%2Flamovie.github.io%2FBuscador%2FBuscador3.js%22%3E%3C%2Fscript%3E"));
 
   
- // https://bit.ly/3y2BVCO  
+ // https://bit.ly/3y2BVCO 
+  
+ 
+
 
 
      
