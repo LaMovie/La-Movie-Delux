@@ -250,10 +250,12 @@ window.history.pushState({ buscadorAbierto: true }, '');
   window.setTimeout(() => {
  buscador.style.marginTop = '45vh';
   }, 500);
+  Logo.style.display = 'none';
 };
    
 buscador.onblur = () => {
- buscador.style.marginTop = '25vh'; 
+ buscador.style.marginTop = '25vh';
+ Logo.style.display = 'block'; 
 };
 
 
