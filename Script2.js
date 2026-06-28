@@ -254,7 +254,7 @@ window.history.pushState({ buscadorAbierto: true }, '');
 };
    
 buscador.onblur = () => {
- buscador.style.marginTop = '25vh';
+ // buscador.style.marginTop = '25vh';
  Logo.style.display = 'block'; 
 };
 
