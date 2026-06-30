@@ -85,7 +85,7 @@ Music.addEventListener('click', function(){
   if(Aux.style.display == 'block') {
      Aux.style.display = 'none';
      Menu.style.marginLeft = '0vh';
-   Logo.style.marginLeft = '0vh';     
+   Logo.style.marginLeft = '0vh';    
   } else {
      Aux.style.display = 'block';
      Menu.style.marginLeft = '50vh';
@@ -107,7 +107,7 @@ function Links(iframe) {
         <!-- Musica -->
 
     var videos = ['https://lamovie.github.io/BASS-NATION-ONLINE/', 
-'https://lamovie.github.io/BASS-NATION-ONLINE/', 'https://streamtv.mediasector.es/hls/activatv/index.m3u8', 'https://is.gd/7CaWXu', 'https://lamovie.github.io/BASS-NATION-ONLINE/',];
+'https://lamovie.github.io/BASS-NATION-ONLINE/'];
     var currentVideoIndex = 0;
 
     function adelantarVideo() {

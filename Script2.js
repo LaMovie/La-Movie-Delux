@@ -246,7 +246,6 @@ h1 {
      
  
     buscador.onfocus = () => {
-window.history.pushState({ buscadorAbierto: true }, '');
   window.setTimeout(() => {
  buscador.style.marginTop = '45vh';
   }, 500);
