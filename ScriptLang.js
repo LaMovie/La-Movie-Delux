@@ -289,7 +289,8 @@ input {
     font-weight: bold;
     border-radius: 20px;
     background: linear-gradient(to right, blue, blue, white);
-    border: 2px solid #aaa;    
+    border: 2px solid #aaa; 
+    margin-top: 27vh; 
 }
 </style>
 
@@ -316,6 +317,21 @@ h1 {
 `;
 
      Aux.innerHTML = HTML;        
+
+
+
+   buscador.onfocus = () => {
+  window.setTimeout(() => {
+ buscador.style.marginTop = '45vh';
+  }, 500);
+  Logo.style.display = 'none';
+};
+   
+buscador.onblur = () => {
+ // buscador.style.marginTop = '25vh';
+ Logo.style.display = 'block'; 
+};
+
 
 
 
