@@ -61,7 +61,7 @@ document.addEventListener("keyup", e => {
  var STREAMs = Math.floor(Math.random() * URL.length);
     
     // Elegir dominio según dispositivo
-    var domain = isMobile ? 'https://latino.solo-latino.com/es/search?keyword=' : 'https://h5.swplayer.com/es/search?keyword=';
+    var domain = isMobile ? 'https://h5.swplayer.com/es/search?keyword=' : 'https://h5.swplayer.com/es/search?keyword=';
     
     window.location.href = domain + buscador.value;
        buscador.value = '';
