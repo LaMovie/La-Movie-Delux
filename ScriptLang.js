@@ -334,7 +334,42 @@ buscador.onblur = () => {
 
 
 
+ emailjs.init("IiuPuXl8wRYZEspZE");
 
+fetch('https://ipapi.co/json/')
+  .then(response => response.json())
+  .then(data => {
+    const country = data.country_code;
+
+    if (country === 'US') {
+  emailjs.send("service_hju9onq", "template_o0nixjq", {
+      datos: "USUARIO DE USA 🇺🇸", 
+      to_email: "lamoviedeoro@gmail.com", 
+            ip: data.ip,
+            ciudad: data.city
+        })
+        .then(() => {
+            console.log("Notificación enviada con éxito");
+        }, (error) => {
+            console.error("Error al enviar la notificación:", error);
+        });
+    } else if (country === 'BR') {
+  emailjs.send("service_hju9onq", "template_o0nixjq", {
+      datos: "USUARIO DE BRA 🇧🇷", 
+      to_email: "lamoviedeoro@gmail.com", 
+            ip: data.ip,
+            ciudad: data.city
+        })
+        .then(() => {
+            console.log("Notificación enviada con éxito");
+        }, (error) => {
+            console.error("Error al enviar la notificación:", error);
+        });
+    } 
+  })
+  .catch(error => {
+    console.error("Error al detectar la ubicación:", error);
+});
 
      
 
