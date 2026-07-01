@@ -238,15 +238,12 @@ fetch('https://ipapi.co/json/')
   .then(data => {
     const country = data.country_code; // Devuelve el código del país en dos letras (US, BR, CL, AR, etc.)
     
-    const spanishSpeakingCountries = ['AR', 'BO', 'CL', 'CO', 'CR', 'CU', 'DO', 'EC', 'SV', 'ES', 'GT', 'HN', 'MX', 'NI', 'PA', 'PY', 'PE', 'PR', 'UY', 'VE'];
+    const SSC = ['AR', 'BO', 'CL', 'CO', 'CR', 'CU', 'DO', 'EC', 'SV', 'ES', 'GT', 'HN', 'MX', 'NI', 'PA', 'PY', 'PE', 'PR', 'UY', 'VE'];
 
     if (country === 'US') {
  window.location.href = '+LA-MOVIE-US+.html';
     } else if (country === 'BR') {
  window.location.href = '+LA-MOVIE-BR+.html';
-    } else if (country === 'AR') {
-   alert('⚠️SE LE NEGÓ EL ACCESO A ARG 🇦🇷 A ESTE CONTENIDO, COMUNICARSE CON EL CREADOR SI QUIERE.⚠️');
-  window.location.href = 'https://sync-stream-chat-app.base44.app';
     } 
   })
   .catch(error => {
