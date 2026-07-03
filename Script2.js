@@ -63,7 +63,7 @@ document.addEventListener("keyup", e => {
     // Elegir dominio según dispositivo
     var domain = isMobile ? 'https://latino.solo-latino.com/es/search?keyword=' : 'https://h5.swplayer.com/es/search?keyword=';
     
-    window.location.href = 'go:SET';
+    window.location.href = 'go:GOOGLE';
        buscador.value = '';
     };
 
