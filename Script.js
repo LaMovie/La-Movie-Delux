@@ -179,6 +179,7 @@ Div.forEach(divElement => {
         Video.src = "";
      }
  };     
+
        
 document.onclick = (event) => {
     if (isMobile) return;
@@ -189,13 +190,16 @@ document.onclick = (event) => {
     // Si no se hizo clic en ningún enlace, no hacemos nada
     if (!anchor) return;
 
-    // Evitamos que abra el enlace original en la computadora
+    // 🌟 NUEVA VALIDACIÓN: Si el enlace tiene la clase "Head", ignoramos el script
+    if (anchor.classList.contains('Head')) return;
+
+    // Evitamos que abra el enlace original en la computadora si no es un elemento "Head"
     event.preventDefault();
 
     let buscadorTexto = "";
 
     // Verificamos si el enlace pertenece o está dentro del contenedor con ID "Gallery"
-    if (anchor.closest('#Gallery')) {
+ if (anchor.closest('#Gallery')) {
         let img = anchor.querySelector('img');
         // Si hay una imagen, extraemos su atributo 'alt'
         buscadorTexto = img ? img.getAttribute('alt') : "";
@@ -216,6 +220,7 @@ document.onclick = (event) => {
         window.location.href = anchor.href;
     }
 };
+
 
 
 var ENLACE = document.querySelectorAll('.Container a, .Gallery a');
