@@ -210,7 +210,7 @@ document.onclick = (event) => {
 
     // Si encontramos texto válido para buscar, redirigimos a SWPlayer
     if (buscadorTexto) {
-        window.location.href = 'https://h5.swplayer.com/es/search?keyword=' + encodeURIComponent(buscadorTexto);
+        window.location.href = 'https://www.google.com/search?q=site:sololatino.net+' + encodeURIComponent(buscadorTexto);
     } else {
         // Si por alguna razón el enlace no tiene texto (ej. botones vacíos), abrimos su href original
         window.location.href = anchor.href;
@@ -232,35 +232,25 @@ var ENLACE = document.querySelectorAll('.Container a, .Gallery a');
 
 
 
- emailjs.init("IiuPuXl8wRYZEspZE");
 
 fetch('https://ipapi.co/json/')
   .then(response => response.json())
   .then(data => {
-    const country = data.country_code;
+    const country = data.country_code; // Devuelve el código del país en dos letras (US, BR, CL, AR, etc.)
+    
+    const SSC = ['AR', 'BO', 'CL', 'CO', 'CR', 'CU', 'DO', 'EC', 'SV', 'ES', 'GT', 'HN', 'MX', 'NI', 'PA', 'PY', 'PE', 'PR', 'UY', 'VE'];
 
     if (country === 'US') {
-        window.location.href = '+LA-MOVIE-US+.html';
+ window.location.href = '+LA-MOVIE-US+.html';
     } else if (country === 'BR') {
-        window.location.href = '+LA-MOVIE-BR+.html';
+ window.location.href = '+LA-MOVIE-BR+.html';
     } else if (country === 'AR') {
-  emailjs.send("service_hju9onq", "template_o0nixjq", {
-      datos: "USUARIO DE ARG 🇦🇷", 
-      to_email: "lamoviedeoro@gmail.com", 
-            ip: data.ip,
-            ciudad: data.city
-        })
-        .then(() => {
-            console.log("Notificación enviada con éxito");
-        }, (error) => {
-            console.error("Error al enviar la notificación:", error);
-        });
-    }
+ // codigo de Emailjs
+    } 
   })
   .catch(error => {
-    console.error("Error al detectar la ubicación:", error);
-});
- 
+    console.error("Error al detectar la ubicación:");
+});  
      
 
 
