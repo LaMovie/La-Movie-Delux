@@ -57,7 +57,7 @@ document.addEventListener("keyup", e => {
    var isMobile = /Mobi|Android|iPhone|iPad|iPod|BlackBerry|IEMobile|Opera Mini/i.test(navigator.userAgent);   
     
     // Elegir dominio según dispositivo
-    var domain = isMobile ? 'go:SET' : 'https://www.google.com/search?q=site:sololatino.net+' + buscador.value;
+    var domain = isMobile ? 'go:GOOGLE' : 'https://www.google.com/search?q=site:sololatino.net+' + buscador.value;
     
     
     window.location.href = domain;
