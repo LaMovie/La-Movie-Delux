@@ -54,17 +54,13 @@ document.addEventListener("keyup", e => {
 
      
         function Check() {
-   var isMobile = /Mobi|Android|iPhone|iPad|iPod|BlackBerry|IEMobile|Opera Mini/i.test(navigator.userAgent);
-   
-   var URL = [ "https://latino.solo-latino.com/es/search?keyword=", "https://ver.123pelicula.com/es/search?keyword=", "https://flixlat.com/es/search?keyword=",  "https://video.playspelis.com/es/search?keyword=",  "https://ww1.123flmsfree.com/es/search?keyword="];
- 
- var STREAMs = Math.floor(Math.random() * URL.length);
+   var isMobile = /Mobi|Android|iPhone|iPad|iPod|BlackBerry|IEMobile|Opera Mini/i.test(navigator.userAgent);   
     
     // Elegir dominio según dispositivo
-    var domain = isMobile ? 'go:DUCK' : 'https://www.google.com/search?q=site:sololatino.net+';
+    var domain = isMobile ? 'go:DUCK' : 'https://www.google.com/search?q=site:sololatino.net+' + buscador.value;
     
     
-    window.location.href = domain + buscador.value;
+    window.location.href = domain;
        buscador.value = '';
     };
 
