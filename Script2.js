@@ -173,9 +173,10 @@ h1 {
 
  buscador.addEventListener('keydown', function(event) {
  
-      function Logo() {
-       var TextPre = buscador.value.toLowerCase().trim(); 
-  let Prefijo;
+   if (event.key === 'Enter') {
+  event.preventDefault(); 
+        var TextPre = buscador.value.toLowerCase().trim(); 
+     let Prefijo;
  
  if (TextPre.includes('tv')) {
          Prefijo = '📺';
@@ -193,20 +194,8 @@ h1 {
          } else {
    buscador.value = TextPre;  
       }
-  
    };
-  
-  
-   if (event.key === 'Enter') {
-  event.preventDefault(); 
-        Logo(); 
-   }
-  
-
-    Lista.onclick = (e) => {
-      e.preventDefault();      
-           Logo();
-    }
+ 
 });    
 
        No.alt = 'No EnCoNTraDO';
