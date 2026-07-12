@@ -172,9 +172,9 @@ h1 {
      Aux.innerHTML = HTML;
 
  buscador.addEventListener('keydown', function(event) {
-   if (event.key === 'Enter') { 
-                event.preventDefault(); 
-  var TextPre = buscador.value.toLowerCase().trim(); 
+ 
+      function Logo() {
+       var TextPre = buscador.value.toLowerCase().trim(); 
   let Prefijo;
  
  if (TextPre.includes('tv')) {
@@ -184,18 +184,31 @@ h1 {
      } else {
          Prefijo = '🍿';
      }   
-   
-var isMobile = /Mobi|Android|iPhone|iPad|iPod|BlackBerry|IEMobile|Opera Mini/i.test(navigator.userAgent);  
-
-       if (isMobile) {
+ 
+  var isMobile = /Mobi|Android|iPhone|iPad|iPod|BlackBerry|IEMobile|Opera Mini/i.test(navigator.userAgent);  
+    
+     if (isMobile) {
  var Texto = Prefijo + TextPre;       
    buscador.value = Texto; 
          } else {
    buscador.value = TextPre;  
+      }
+  
+   };
+  
+  
+   if (event.key === 'Enter') {
+  event.preventDefault(); 
+        Logo(); 
    }
-   
-  }
+  
+
+    Lista.onclick = (e) => {
+      e.preventDefault();      
+           Logo();
+    }
 });    
+
        No.alt = 'No EnCoNTraDO';
       No.style.color = '#fff';   
 
