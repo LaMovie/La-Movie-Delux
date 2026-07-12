@@ -31,25 +31,36 @@ document.addEventListener("keyup", e => {
     No.style.display = foundMatch ? "none" : "block";
   }
 
-  // Manejo del Enter
+
+    // Manejo del Enter corregido para títulos con emoji 
   if (e.key === "Enter") {
+    e.preventDefault(); 
+
     var Int = e.target.value.toLowerCase().trim();
     var incluyeÑ = Int.includes("ñ");
     var inputValue = Tildes(Int.replace(/\s+/g, ' '), incluyeÑ);
 
-    var matchedItem = [...document.querySelectorAll(".Data")].find(
-      item => Tildes(item.textContent.toLowerCase(), incluyeÑ) === inputValue
-    );
+    // Buscamos coincidencia exacta eliminando el '🍿' del inicio del título de la app para comparar el texto limpio
+    var matchedItem = [...document.querySelectorAll(".Data")].find(item => {
+      // Limpiamos el texto del elemento quitándole el emoji de palomitas del inicio y los espacios sobrantes
+      let textoItemLimpio = item.textContent.replace('🍿', '').toLowerCase().trim();
+      return Tildes(textoItemLimpio, incluyeÑ) === inputValue;
+    });
 
     if (matchedItem) {
+      // SI EXISTE EN LA APP: Redirige directo usando el enlace del elemento
       window.location.href = matchedItem.href;
       buscador.value = '';
     } else {
+      // NO EXISTE EN LA APP (Modo PC / Búsqueda externa):
       Lista.style.display = 'none';
       No.style.display = "none";
-           Check();
+            
+      // Ejecutamos la redirección externa con el valor ya ajustado
+          Check();
     }
   }
+
 });
 
      
@@ -167,28 +178,7 @@ h1 {
 
      Aux.innerHTML = HTML;
 
- buscador.addEventListener('keydown', function(event) {
  
-   if (event.key === 'Enter') {
-  event.preventDefault(); 
-        var TextPre = buscador.value.toLowerCase().trim(); 
-     let Prefijo;
- 
- if (TextPre.includes('tv')) {
-         Prefijo = '📺';
-     } else if(TextPre.includes('sofia')){
-         Prefijo = '⚙️';
-     } else {
-         Prefijo = '🍿';
-     }   
- 
-   var Texto = Prefijo + TextPre;       
-   buscador.value = Texto; 
-         
-   };
-   
-});    
-
        No.alt = 'No EnCoNTraDO';
       No.style.color = '#fff';   
 
