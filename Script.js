@@ -190,8 +190,8 @@ document.onclick = (event) => {
     // Si no se hizo clic en ningún enlace, no hacemos nada
     if (!anchor) return;
 
-    // 🌟 NUEVA VALIDACIÓN: Si el enlace tiene la clase "Head", ignoramos el script
-    if (anchor.classList.contains('Head')) return; 
+    // 🌟 NUEVA VALIDACIÓN: Si el enlace tiene la clase "Head" o "Data", ignoramos el script
+    if (anchor.classList.contains('Head' || "Data")) return; 
 
     // Evitamos que abra el enlace original en la computadora si no es un elemento "Head"
     event.preventDefault();
@@ -212,7 +212,7 @@ document.onclick = (event) => {
     // Limpiamos espacios en blanco extras que puedan estorbar en la búsqueda
     buscadorTexto = buscadorTexto.trim();
 
-    // Si encontramos texto válido para buscar, redirigimos a SWPlayer
+    // Si encontramos texto válido para buscar, redirigimos a sololatino.net
     if (buscadorTexto) {
         window.location.href = 'https://www.google.com/search?q=site:sololatino.net+' + encodeURIComponent(buscadorTexto);
     } else {
