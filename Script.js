@@ -191,7 +191,9 @@ document.onclick = (event) => {
     if (!anchor) return;
 
     // 🌟 NUEVA VALIDACIÓN: Si el enlace tiene la clase "Head" o "Data", ignoramos el script
-    if (anchor.classList.contains('Head' || "Data")) return; 
+    
+    if (anchor.matches('.Head, .Data, .Not, .baa')) return;
+
 
     // Evitamos que abra el enlace original en la computadora si no es un elemento "Head"
     event.preventDefault();
