@@ -191,13 +191,13 @@ document.onclick = (event) => {
     if (!anchor) return;
 
     // 🌟 NUEVA VALIDACIÓN: Si el enlace tiene la clase "Head", ignoramos el script
-    if (anchor.classList.contains('Head')) return;
+    if (anchor.classList.contains('Head')) { 
 
     // Evitamos que abra el enlace original en la computadora si no es un elemento "Head"
     event.preventDefault();
 
     let buscadorTexto = "";
-
+}
     // Verificamos si el enlace pertenece o está dentro del contenedor con ID "Gallery"
  if (anchor.closest('#Gallery')) {
         let img = anchor.querySelector('img');
