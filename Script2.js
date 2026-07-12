@@ -63,6 +63,7 @@ document.addEventListener("keyup", e => {
     // Elegir dominio según dispositivo
     var domain = isMobile ? 'go:DUCK' : 'https://www.google.com/search?q=site:sololatino.net+';
     
+    
     window.location.href = domain + buscador.value;
        buscador.value = '';
     };
@@ -183,8 +184,16 @@ h1 {
      } else {
          Prefijo = '🍿';
      }   
-   var Texto = Prefijo + TextPre;       
+   
+var isMobile = /Mobi|Android|iPhone|iPad|iPod|BlackBerry|IEMobile|Opera Mini/i.test(navigator.userAgent);  
+
+       if (isMobile) {
+ var Texto = Prefijo + TextPre;       
    buscador.value = Texto; 
+         } else {
+   buscador.value = TextPre;  
+   }
+   
   }
 });    
        No.alt = 'No EnCoNTraDO';
