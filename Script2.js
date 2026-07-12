@@ -195,7 +195,7 @@ h1 {
    buscador.value = TextPre;  
       }
    };
- 
+  
 });    
 
        No.alt = 'No EnCoNTraDO';
