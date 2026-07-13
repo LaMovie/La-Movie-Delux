@@ -107,8 +107,9 @@ input {
     z-index: 9999;
     font-weight: bold;
     border-radius: 20px;
-    background: linear-gradient(to right, blue, blue, white);
-    border: 2px solid #aaa; 
+    background: url(https://da.gd/DvIU1); 
+    /* linear-gradient(to right, blue, blue, white) */
+    border: 2px solid blue; 
     margin-top: 27vh; 
 }
 #Lista {
