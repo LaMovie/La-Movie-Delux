@@ -107,8 +107,7 @@ input {
     z-index: 9999;
     font-weight: bold;
     border-radius: 20px;
-    background: url(https://da.gd/DvIU1); 
-    /* linear-gradient(to right, blue, blue, white) */
+    background: url(3.gif); 
     border: 2px solid blue; 
     margin-top: 27vh; 
 }
