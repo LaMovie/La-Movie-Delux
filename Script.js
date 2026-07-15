@@ -223,6 +223,14 @@ document.onclick = (event) => {
     }
 };
 
+   DownMusic.onclick = (e) => {
+       e.preventDefault();
+   var isMobile = /Mobi|Android|iPhone|iPad|iPod|BlackBerry|IEMobile|Opera Mini/i.test(navigator.userAgent);
+    if (!isMobile) {
+        window.location.href = 'https://lamovie.github.io/MUSIC-CLOUD';
+    }
+  };
+
 
 
 var ENLACE = document.querySelectorAll('.Container a, .Gallery a');
