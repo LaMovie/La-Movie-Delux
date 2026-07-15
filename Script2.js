@@ -117,7 +117,7 @@ input {
 );
 animation: rgbMove 8s linear infinite;
 background-size: 600% 600%;
-    border: none; 
+    border: .8px solid blue; 
     box-shadow:
         0 0 20px rgba(0,255,255,.35),
         0 10px 30px rgba(0,0,0,.5);
