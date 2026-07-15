@@ -229,7 +229,7 @@ document.onclick = (event) => {
     if (!isMobile) {
         window.location.href = 'https://lamovie.github.io/MUSIC-CLOUD';
     } else {
-        window.location.href = 'go: DOWN-MUSIC';
+        window.location.href = 'go:DOWN-MUSIC';
     }
   };
 
