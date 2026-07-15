@@ -32,7 +32,7 @@ document.addEventListener("keyup", e => {
   }
 
 
-    // Manejo del Enter corregido para títulos con emoji 
+  // Manejo del Enter corregido para títulos con emoji 
   if (e.key === "Enter") {
     e.preventDefault(); 
 
@@ -40,47 +40,72 @@ document.addEventListener("keyup", e => {
     var incluyeÑ = Int.includes("ñ");
     var inputValue = Tildes(Int.replace(/\s+/g, ' '), incluyeÑ);
 
-    // Buscamos coincidencia exacta eliminando el '🍿' del inicio del título de la app para comparar el texto limpio
+    // Buscamos coincidencia exacta eliminando el '🍿' del inicio del título para comparar el texto limpio
     var matchedItem = [...document.querySelectorAll(".Data")].find(item => {
-      // Limpiamos el texto del elemento quitándole el emoji de palomitas del inicio y los espacios sobrantes
       let textoItemLimpio = item.textContent.replace('🍿', '').toLowerCase().trim();
       return Tildes(textoItemLimpio, incluyeÑ) === inputValue;
     });
 
     if (matchedItem) {
-      // SI EXISTE EN LA APP: Redirige directo usando el enlace del elemento
-      window.location.href = matchedItem.href;
+      // DETECTAR PC
+      var isMobile = /Mobi|Android|iPhone|iPad|iPod|BlackBerry|IEMobile|Opera Mini/i.test(navigator.userAgent);
+      
+      // Si está en PC y la URL contiene "latino.com"
+      if (!isMobile && matchedItem.href.includes("latino.com")) {
+        let textoBusqueda = matchedItem.textContent.replace('🍿', '').trim();
+        window.location.href = "https://www.google.com/search?q=site:sololatino.net+" + encodeURIComponent(textoBusqueda);
+      } else {
+        // Comportamiento normal (Móvil o URL sin "latino.com")
+        window.location.href = matchedItem.href;
+      }
       buscador.value = '';
     } else {
       // NO EXISTE EN LA APP (Modo PC / Búsqueda externa):
       Lista.style.display = 'none';
       No.style.display = "none";
-            
-      // Ejecutamos la redirección externa con el valor ya ajustado
-          Check();
+      Check();
     }
   }
-
 });
 
-     
-        function Check() {
-   var isMobile = /Mobi|Android|iPhone|iPad|iPod|BlackBerry|IEMobile|Opera Mini/i.test(navigator.userAgent);   
-    
-    // Elegir dominio según dispositivo
-    var domain = isMobile ? 'go:GOOGLE' : 'https://www.google.com/search?q=site:sololatino.net+' + buscador.value;
-    
-    
-    window.location.href = domain;
-       buscador.value = '';
-    };
 
-       // SEARCH CLICK
-    Search.onclick = () => {
-    if (buscador.value !== '') {
-            Check();
-      } 
-   };
+     // MAMEJO DE CLICK 
+document.addEventListener("click", e => {
+  // Verificamos si el elemento clickeado (o su ancestro más cercano) es un ".Data"
+  const item = e.target.closest(".Data");
+  
+  if (item) {
+    var isMobile = /Mobi|Android|iPhone|iPad|iPod|BlackBerry|IEMobile|Opera Mini/i.test(navigator.userAgent);
+    
+   
+    if (!isMobile && item.href.includes("latino.com")) {
+      e.preventDefault(); 
+      // Limpiamos el emoji para la búsqueda
+      let textoBusqueda = item.textContent.replace('🍿', '').trim();
+      
+      window.location.href = "https://www.google.com/search?q=site:sololatino.net+" + encodeURIComponent(textoBusqueda);
+      buscador.value = '';
+    }
+  }
+});
+
+
+function Check() {
+  var isMobile = /Mobi|Android|iPhone|iPad|iPod|BlackBerry|IEMobile|Opera Mini/i.test(navigator.userAgent);   
+  
+     var domain = isMobile ? 'go:GOOGLE' : 'https://www.google.com/search?q=site:sololatino.net+' + encodeURIComponent(buscador.value);
+  
+  window.location.href = domain;
+  buscador.value = '';
+};
+
+      // SEARCH CLICK
+Search.onclick = () => {
+  if (buscador.value !== '') {
+    Check();
+  } 
+};
+
      
 
 
