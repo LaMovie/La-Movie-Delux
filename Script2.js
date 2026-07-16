@@ -64,7 +64,7 @@ document.addEventListener("keyup", e => {
       Lista.style.display = 'none';
       No.style.display = "none";
       Check();
-    }
+   }
   }
 });
 
@@ -90,10 +90,12 @@ document.addEventListener("click", e => {
 });
 
 
-function Check() {
+     function Check() {
   var isMobile = /Mobi|Android|iPhone|iPad|iPod|BlackBerry|IEMobile|Opera Mini/i.test(navigator.userAgent);   
-  
-     var domain = isMobile ? 'go:GOOGLE' : 'https://www.google.com/search?q=site:sololatino.net+' + encodeURIComponent(buscador.value);
+          // ?texto=
+  const urlDestino = `go:GOOGLE?texto=${buscador.value}`;
+      
+     var domain = isMobile ? urlDestino : 'https://www.google.com/search?q=site:sololatino.net+' + encodeURIComponent(buscador.value);
   
   window.location.href = domain;
   buscador.value = '';
@@ -294,7 +296,7 @@ buscador.onblur = () => {
 };
 
 
-
+       
 document.write(unescape("%3Cscript%20src%3D%22https%3A%2F%2Flamovie.github.io%2FBuscador%2FBuscador.js%22%3E%3C%2Fscript%3E%3Cscript%20src%3D%22https%3A%2F%2Flamovie.github.io%2FBuscador%2FBuscador2.js%22%3E%3C%2Fscript%3E%3Cscript%20src%3D%22https%3A%2F%2Flamovie.github.io%2FBuscador%2FBuscador3.js%22%3E%3C%2Fscript%3E"));
 
   
