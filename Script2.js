@@ -93,15 +93,14 @@ document.addEventListener("click", e => {
      function Check() {
   var isMobile = /Mobi|Android|iPhone|iPad|iPod|BlackBerry|IEMobile|Opera Mini/i.test(navigator.userAgent);   
   
-  if (isMobile) {
-    localStorage.setItem('textoBuscado', buscador.value);
-    window.location.href = 'go:GOOGLE'; 
-  } else {
-    window.location.href = 'https://www.google.com/search?q=site:sololatino.net+' + encodeURIComponent(buscador.value);
-  }  
-      buscador.value = '';
+          // ?texto=
+  const urlDestino = `${'GOOGLE.html'}?texto=${buscador.value}`;
+      
+     var domain = isMobile ? urlDestino : 'https://www.google.com/search?q=site:sololatino.net+' + encodeURIComponent(buscador.value);
+  
+  window.location.href = domain;
+  buscador.value = '';
 };
-
 
       // SEARCH CLICK
 Search.onclick = () => {
