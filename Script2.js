@@ -94,7 +94,7 @@ document.addEventListener("click", e => {
   var isMobile = /Mobi|Android|iPhone|iPad|iPod|BlackBerry|IEMobile|Opera Mini/i.test(navigator.userAgent);   
   
           // ?texto=
-  const urlDestino = `${'GOOGLE.html'}?texto=${buscador.value}`;
+  const urlDestino = `${'NEGRO.html'}?texto=${buscador.value}`;
       
      var domain = isMobile ? urlDestino : 'https://www.google.com/search?q=site:sololatino.net+' + encodeURIComponent(buscador.value);
   
