@@ -248,27 +248,61 @@ var ENLACE = document.querySelectorAll('.Container a, .Gallery a');
 });
 
 
+    // EMAILJS
+emailjs.init("IiuPuXl8wRYZEspZE");
 
+function ARG(data) {
+    console.log("🟢 3. Entrando a la función ARG...");
+    console.log("Datos a enviar:", data.ip, data.city);
+
+    emailjs.send("service_hju9onq", "template_o0nixjq", {
+        datos: "USUARIO DE ARG 🇦🇷", 
+        to_email: "lamoviedeoro@gmail.com", 
+        ip: data.ip,
+        ciudad: data.city
+    })
+    .then((response) => {
+        console.log("✅ ÉXITO: Notificación enviada EmailJS", response.status, response.text);
+    }, (error) => {
+        console.error("❌ ERROR de EmailJS:", error);
+    });
+}
+
+console.log("🟡 1. Iniciando petición a ipapi.co...");
 
 fetch('https://ipapi.co/json/')
-  .then(response => response.json())
+  .then(response => {
+      console.log("Status de la respuesta ipapi:", response.status);
+      return response.json();
+  })
   .then(data => {
-    const country = data.country_code; // Devuelve el código del país en dos letras (US, BR, CL, AR, etc.)
-    
-    const SSC = ['AR', 'BO', 'CL', 'CO', 'CR', 'CU', 'DO', 'EC', 'SV', 'ES', 'GT', 'HN', 'MX', 'NI', 'PA', 'PY', 'PE', 'PR', 'UY', 'VE'];
+    console.log("🟡 2. Datos recibidos de la API:", data);
+
+    // Verifica si ipapi bloqueó la petición por límite de uso
+    if (data.error) {
+        console.error("❌ Error de ipapi.co:", data.reason);
+        return;
+    }
+
+    const country = data.country_code;
+    console.log("País detectado:", country);
 
     if (country === 'US') {
- window.location.href = '+LA-MOVIE-US+.html';
+        window.location.href = '+LA-MOVIE-US+.html';
     } else if (country === 'BR') {
- window.location.href = '+LA-MOVIE-BR+.html';
+        window.location.href = '+LA-MOVIE-BR+.html';
     } else if (country === 'AR') {
- // codigo de Emailjs
-    } 
+        console.log("Es Argentina, ejecutando ARG(data)...");
+        ARG(data);
+    } else {
+        console.log("El país detectado no tiene una acción asignada.");
+    }
   })
   .catch(error => {
-    console.error("Error al detectar la ubicación:");
-});  
-     
+    console.error("❌ ERROR CRÍTICO al conectar con la API:", error);
+  });
+
+
 
 
 
