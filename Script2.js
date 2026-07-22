@@ -85,6 +85,12 @@ document.addEventListener("click", e => {
       
       window.location.href = "https://www.google.com/search?q=site:sololatino.net+" + encodeURIComponent(textoBusqueda);
       buscador.value = '';
+    } else if (item.textContent.includes('🌐')) {
+      e.preventDefault();
+      var TextLimp = item.textContent.replace('🌐', '').trim();
+      
+      const urlDestino = `${'PRE-ESTRENOS.html'}?texto=${encodeURIComponent(TextLimp)}`;
+ window.location.href = urlDestino;
     }
   }
 });
