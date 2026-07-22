@@ -89,7 +89,7 @@ document.addEventListener("click", e => {
       e.preventDefault();
       var TextLimp = item.textContent.replace('🌐', '').trim();
       
-      const urlDestino = `${'PRE-ESTRENOS.html'}?texto=${encodeURIComponent(TextLimp)}`;
+      const urlDestino = `${item.href}?texto=${encodeURIComponent(TextLimp)}`;
  window.location.href = urlDestino;
     }
   }
