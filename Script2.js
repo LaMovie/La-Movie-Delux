@@ -61,6 +61,10 @@ if (e.key === "Enter") {
       const urlDestino = `${matchedItem.href}?texto=${encodeURIComponent(TextLimp)}`;
  window.location.href = urlDestino;
     
+    } else if (matchedItem.href.includes('dropbox.com')) {
+         var URL = matchedItem.href.replace('www.dropbox.com', 'dl.dropboxusercontent.com'); 
+  window.location.href = URL;
+     
     } else {
        window.location.href = matchedItem.href;
     }
@@ -99,6 +103,11 @@ document.addEventListener("click", e => {
       
       const urlDestino = `${item.href}?texto=${encodeURIComponent(TextLimp)}`;
  window.location.href = urlDestino;
+    } else if (item.href.includes('dropbox.com')) {
+      e.preventDefault();   
+         var URL = item.href.replace('www.dropbox.com', 'dl.dropboxusercontent.com'); 
+  window.location.href = URL;
+     
     }
   }
 });
