@@ -32,84 +32,96 @@ document.addEventListener("keyup", e => {
   }
 
 
-   // MANEJO DEL ENTER 
-if (e.key === "Enter") {
-  e.preventDefault(); 
+     // FUNCIÓN CENTRALIZADA
+function procesarEnlace(matchedItem) {
+  if (!matchedItem) return;
 
-  var Int = e.target.value.toLowerCase().trim();
-  var incluyeÑ = Int.includes("ñ");
-  var inputValue = Tildes(Int.replace(/\s+/g, ' '), incluyeÑ);
+  var ENLACE = matchedItem.getAttribute("href") || matchedItem.href;
+  var NN = matchedItem.textContent;
+  
+  var isMobile = /Mobi|Android|iPhone|iPad|iPod|BlackBerry|IEMobile|Opera Mini/i.test(navigator.userAgent);
+  var tituloLimpio = NN.replace(/🍿|🌐|📺|⚙️/g, '').trim();
 
-  // Limpiamos AMBOS emojis (🍿 y 🌐) 
-  var matchedItem = [...document.querySelectorAll(".Data")].find(item => {
-    let textoItemLimpio = item.textContent.replace(/🍿|🌐/g, '').toLowerCase().trim();
-    return Tildes(textoItemLimpio, incluyeÑ) === inputValue;
-  });
-
-
-      if (matchedItem) {
-        var isMobile = /Mobi|Android|iPhone|iPad|iPod|BlackBerry|IEMobile|Opera Mini/i.test(navigator.userAgent);
-    
-    if (!isMobile && matchedItem.href.includes("latino.com")) {
-      // 1. Caso PC + latino.com
-      let textoBusqueda = matchedItem.textContent.replace('🍿', '').trim();
-      window.location.href = "https://www.google.com/search?q=site:sololatino.net+" + encodeURIComponent(textoBusqueda);
-    
-    } else if (matchedItem.textContent.includes('🌐')) {
-      // 2. Caso con emoji 🌐 (Redirección con parámetro ?texto=)
-      var TextLimp = matchedItem.textContent.replace('🌐', '').trim();
-      const urlDestino = `${matchedItem.href}?texto=${encodeURIComponent(TextLimp)}`;
- window.location.href = urlDestino;
-    
-    } else if (matchedItem.href.includes('dropbox.com')) {
-         var URL = matchedItem.href.replace('www.dropbox.com', 'dl.dropboxusercontent.com'); 
-  window.location.href = URL;
-     
+  if (ENLACE.includes("file") || ENLACE.includes("www.dropbox.com") || ENLACE.includes("play.vidyard")) {
+    window.location.href = `PLAY.html?titulo=${encodeURIComponent(tituloLimpio)}&url=${encodeURIComponent(ENLACE)}`;
+  } else {
+    if (!isMobile && ENLACE.includes("latino.solo")) {
+      window.location.href = "https://www.google.com/search?q=site:sololatino.net+" + encodeURIComponent(tituloLimpio);
+    } else if (NN.includes('🌐')) {
+      window.location.href = `${ENLACE}?texto=${encodeURIComponent(tituloLimpio)}`;
     } else {
-       window.location.href = matchedItem.href;
+      window.location.href = ENLACE;
+    }
+  }
+  
+  var buscadorInput = document.getElementById("buscador");
+  if (buscadorInput) {
+    buscadorInput.value = '';
+  }
+}
+
+
+     // MANEJO REAL DEL ENTER 
+document.addEventListener("keydown", function(event) {
+  if (event.target.matches("#buscador") && event.key === "Enter") {
+    event.preventDefault();
+    
+    var In = event.target.value.toLowerCase().trim();
+    if (In === "") return;
+
+    // Función interna para limpiar tildes idéntica a la tuya
+    function Tildes(texto, preservarÑ = false) {
+      let limpio = texto.normalize("NFD").replace(/[\u0300-\u036f]/g, "").toLowerCase();
+      if (!preservarÑ) {
+        limpio = limpio.replace(/ñ/g, "n");
+      }
+      return limpio;
     }
 
-    buscador.value = '';
-
-  } else {
-    // NO EXISTE EN LA APP (Modo PC / Búsqueda externa)
-    Lista.style.display = 'none';
-    No.style.display = "none";
-    Check();
-   }
+    var incluyeÑ = In.includes("ñ");
+    var InputLimpiado = Tildes(In.replace(/\s+/g, ' '), incluyeÑ);
+    
+    var matchedItem = null;
+    
+    // Usamos ".Data" para buscar exactamente en la misma lista que tu filtro visual
+    var elementosData = document.querySelectorAll(".Data"); 
+    
+    for (var i = 0; i < elementosData.length; i++) {
+      var textoItem = Tildes(elementosData[i].textContent.toLowerCase(), incluyeÑ);
+      
+      if (textoItem.includes(InputLimpiado)) {
+        // Extraemos el enlace <a> que está dentro de este elemento .Data
+        matchedItem = elementosData[i].tagName.toLowerCase() === 'a' ? elementosData[i] : elementosData[i].querySelector("a");
+        if (matchedItem) {
+          break; 
+        }
+      }
+    }
+    
+    if (matchedItem) {
+      procesarEnlace(matchedItem);
+    } else {
+      if (typeof Check === "function") {
+        Check();
+      }
+    }
   }
 });
 
 
-     // MAMEJO DE CLICK 
-document.addEventListener("click", e => {
-  // Verificamos si el elemento clickeado (o su ancestro más cercano) es un ".Data"
-  const item = e.target.closest(".Data");
+
+     // MANEJO DEL CLICK 
+document.addEventListener("click", function(event) {
+  var matchedItem = event.target.closest("a"); 
   
-  if (item) {
-    var isMobile = /Mobi|Android|iPhone|iPad|iPod|BlackBerry|IEMobile|Opera Mini/i.test(navigator.userAgent);
-    
-   
-    if (!isMobile && item.href.includes("latino.com")) {
-      e.preventDefault(); 
-      // Limpiamos el emoji para la búsqueda
-      let textoBusqueda = item.textContent.replace('🍿', '').trim();
-      
-      window.location.href = "https://www.google.com/search?q=site:sololatino.net+" + encodeURIComponent(textoBusqueda);
-      buscador.value = '';
-    } else if (item.textContent.includes('🌐')) {
-      e.preventDefault();
-      var TextLimp = item.textContent.replace('🌐', '').trim();
-      
-      const urlDestino = `${item.href}?texto=${encodeURIComponent(TextLimp)}`;
- window.location.href = urlDestino;
-    } else if (item.href.includes('dropbox.com')) {
-      e.preventDefault();   
-         var URL = item.href.replace('www.dropbox.com', 'dl.dropboxusercontent.com'); 
-  window.location.href = URL;
-     
+  if (matchedItem) {
+    var href = matchedItem.getAttribute("href");
+    if (href && href !== "#") {
+      event.preventDefault();
+      procesarEnlace(matchedItem);
     }
-  }
+   }
+ });
 });
 
 
@@ -321,8 +333,18 @@ buscador.onblur = () => {
 
 
        
-document.write(unescape("%3Cscript%20src%3D%22https%3A%2F%2Flamovie.github.io%2FBuscador%2FBuscador.js%22%3E%3C%2Fscript%3E%3Cscript%20src%3D%22https%3A%2F%2Flamovie.github.io%2FBuscador%2FBuscador2.js%22%3E%3C%2Fscript%3E%3Cscript%20src%3D%22https%3A%2F%2Flamovie.github.io%2FBuscador%2FBuscador3.js%22%3E%3C%2Fscript%3E"));
+      // BUSCADORES
+      const S = [
+  "https://lamovie.github.io/Buscador/Buscador.js",
+  "https://lamovie.github.io/Buscador/Buscador2.js",
+  "https://lamovie.github.io/Buscador/Buscador3.js"
+];
 
+  S.forEach(src => {
+  const scripts = document.createElement("script");
+  scripts.src = src;
+  document.body.appendChild(scripts);
+});
   
  // https://bit.ly/3y2BVCO 
   

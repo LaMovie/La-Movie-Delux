@@ -1,0 +1,287 @@
+<!DOCTYPE html>
+<html>
+<head>
+     <meta charset="UTF-8"/>
+     <meta name="viewport" content="width=device-width"/>
+     <link href="https://fonts.googleapis.com/css2?family=Luckiest+Guy&display=swap" rel="stylesheet"/>
+<style>
+body {
+    background: #000;
+}
+#Emoj {   
+    text-align: center;
+    color: #ccc;        
+    position: relative;
+    left: 18vh;
+    top: -40px;
+    font-weight: bold;
+    font-size: 13px;
+    font-family: comic sans;
+    background: linear-gradient(135deg, #262626 50%, #b2166f 100%);
+    border-radius:50px;
+    opacity: 0.5;
+    scale: 80%;
+    box-shadow: 0px 0px 30px #000000;
+    font-family: Luckiest Guy, cursive;
+    -webkit-text-stroke: .1px #003;
+    text-shadow: 0px .1px 0 #001;
+}
+.span {
+    color: #f49536;
+}
+.date {
+    color: #b3b3b3;
+}
+.dato{ 
+    margin-top: 2vh;
+    opacity: .9;
+    position: relative;
+    font-family: Luckiest Guy, cursive;
+    -webkit-text-stroke: .1px #003;
+    text-shadow: 0px .1px 0 #001;
+}
+.space {
+    width: 80%;
+    color: #ccc;
+    opacity :0.3;
+    font-family: Luckiest Guy, cursive;
+    -webkit-text-stroke: .1px #003;
+    text-shadow: 0px .1px 0 #001;
+}
+#inv:hover {
+    opacity: 0;
+}
+#Lista { 
+  color: #ccc; 
+  list-style: none;
+  padding: 0;
+  text-align: center;
+  margin-bottom: 10px;
+  font-weight: bold;
+}
+
+#Lista li {
+  margin-bottom: 10px;
+  font-weight: bold; 
+  background: linear-gradient(135deg, black, #b5167f, black);
+  display: block;
+  padding: 10px;
+  border-radius: 50px;
+  box-shadow: 0 01em rgba(0,0,0,0.2);             
+  transition: 1s;
+}
+ul li:nth-child(odd):hover {
+    padding-left: 20%;
+    transform: perspective(500px)rotateY(55deg);            
+}
+ul li:nth-child(even):hover {
+    padding-right: 20%;
+    transform: perspective(500px) rotateY(-55deg);            
+} 
+#Aux {
+    color: #aaa;
+    width: 100%;
+    margin-top: 5vh;
+}
+#Aux img {
+    float: left;
+}
+.I {
+    background: url(https://is.gd/qqG2hZ);
+    background-size: cover;
+    height: 250px;
+    border-radius: 10px;
+}
+a {
+    color: #000;
+    cursor: none;
+    text-decoration: none;
+}
+.M {
+    color: #ccc;
+}
+#No {
+    width: 15%;
+    opacity: .4;
+}
+</style>
+</head>
+<body>     
+        
+           <center>
+ <iframe class="I" id="I" src="" style="width:100%; aspect-ration:6/19" frameborder="0" allowfullscreen="true" allow="encrypted-media" allow="autoplay" name="WILLOW"></iframe>
+
+      <B id="Emoj">°PLAY°</B>          
+ 
+        <div class="dato">        
+    <b><span class="span">La</span></b> 
+<span class="date">Movie</span><br />
+      <b><span class="span">Titulo:</span></b> 
+      <span id="T" class="date">Play</span><br />
+          </div>      
+                        
+              <br/>
+       <div id="Aux"></div> 
+              <br/>
+        <div class="space">
+     <h1>°LA MOVIE PROPERTY°</h1>
+                </div> 
+              </center>  
+           
+ <audio id="AA" src="https://ia601709.us.archive.org/5/items/bass-city-nany-reggae-music/PANTALLA%20EN%20NEGRO.mp3"></audio>
+ 
+
+<script>
+<!-- Detectar cuando entra o sale de fullscreen -->
+document.addEventListener('fullscreenchange', function() {
+  if (document.fullscreenElement) {
+    <!-- Si estamos en pantalla completa, bloquear orientación horizontal -->
+    if (screen.orientation && screen.orientation.lock) {
+      screen.orientation.lock('landscape');
+    }
+  } else {
+    <!-- Si salimos de pantalla completa, volver a orientación vertical -->
+    if (screen.orientation && screen.orientation.lock) {
+      screen.orientation.lock('portrait');
+    }
+  }
+});
+
+document.addEventListener('click', function(){
+     Emoj.style.zIndex = "-1";    
+});
+</script>   
+<script>
+    window.onload = () => {
+     if (window.innerWidth > window.innerHeight) {
+    Emoj.style.marginLeft = '100vh';
+  } else {
+    Emoj.style.marginLeft = '0vh';
+  }
+ }
+</script>
+<script>
+var API_KEY = "e29e6334";
+var tituloPredeterminado = T.textContent;
+
+  <!-- Traducción con Google -->
+async function traducir(texto) {
+  try {
+    var res = await fetch(`https://translate.googleapis.com/translate_a/single?client=gtx&sl=en&tl=es&dt=t&q=${encodeURIComponent(texto)}`);
+    var data = await res.json();
+    return data[0][0][0]; // Texto traducido
+  } catch (error) {
+    console.error("Error al traducir:", error);
+    return texto; // Si falla, muestra el original
+  }
+}
+
+    <!-- OMDB API LÓGICA -->
+window.addEventListener('DOMContentLoaded', async () => {
+  const params = new URLSearchParams(window.location.search);
+  var urlCapt = params.get('url');
+  var tituloCapt = params.get('titulo');
+  
+  var tituloPredeterminado = tituloCapt; 
+
+  // 1. Mostrar el título solo en el ID "T"
+  if (tituloCapt) {
+    var ElementoT = document.getElementById('T');
+    if (ElementoT) ElementoT.textContent = tituloCapt;
+  }
+
+  // 2. Lógica del Iframe y Audio
+  if (urlCapt) {
+    var URL_FINAL = urlCapt;
+    var esArchivoDrive = false; 
+
+    if (urlCapt.includes('file')) {
+      URL_FINAL = urlCapt.split('view')[0] + 'preview';
+      esArchivoDrive = true; 
+    } else if (urlCapt.includes('www.dropbox.com')) {
+      URL_FINAL = urlCapt.replace('www.dropbox.com', 'dl.dropboxusercontent.com');
+    } else if (urlCapt.includes('play.vidyard')) {
+      URL_FINAL = urlCapt; 
+    }
+
+    var iframe = document.getElementById('I');
+    if (iframe) {
+      iframe.src = URL_FINAL;
+    }
+    
+    if (esArchivoDrive) {
+      var audio = document.getElementById('AA');
+      if (audio) {
+        audio.play().catch(e => console.log("Audio bloqueado", e));
+      }
+    }
+  }
+
+  // 3. Integración de OMDb API
+  if (tituloPredeterminado) {
+    var Aux = document.getElementById("Aux");
+    try {
+      var response = await fetch("https://www.omdbapi.com/?t=" + encodeURIComponent(tituloPredeterminado) + "&apikey=" + API_KEY);
+      var data = await response.json();
+
+      if (data.Response === "False") {
+        if (typeof S !== 'undefined') S.style.display = "block";
+        return;
+      }
+
+      var titulo = await traducir(data.Title);
+      var sinopsis = await traducir(data.Plot);
+      var genero = await traducir(data.Genre);
+      var director = await traducir(data.Director);
+      var poster = data.Poster !== "N/A" ? data.Poster : "";
+
+      Aux.innerHTML = `
+        <div class="result-section">
+          <img src="${poster}" alt="${titulo}" style="width: 20%; border-radius: 16px">
+          <div class="result-title">${titulo} (${data.Year})</div>
+          <p><strong>🎬 Género:</strong> ${genero}</p>
+          <p><strong>🎥 Director:</strong> ${director}</p>
+          <p><strong>📝 Sinopsis:</strong> ${sinopsis}</p>
+        </div>
+      `;
+    } catch (error) {
+      console.error("Error API OMDb:", error);
+      if (Aux) Aux.innerHTML = "<img id='No' src='https://bit.ly/3y2BVCO'/><br/>";
+    }
+  }
+});
+</script>
+           <!-- texto -->
+<script>
+window.addEventListener('DOMContentLoaded', () => {
+      const params = new URLSearchParams(window.location.search);
+           var textCapt = params.get('texto');
+  
+        if (textCapt) {
+     var enlaces = document.querySelectorAll('#Lista li a');     
+    
+    enlaces.forEach(a => {
+        if (a.textContent.trim().toLowerCase() === textCapt.trim().toLowerCase()) {
+        T.textContent = textCapt;
+      }
+    });
+  }
+});
+
+          // BUSCADORES
+      const S = [
+  "https://lamovie.github.io/Buscador/Buscador.js",
+  "https://lamovie.github.io/Buscador/Buscador2.js",
+  "https://lamovie.github.io/Buscador/Buscador3.js"
+];
+
+  S.forEach(src => {
+  const scripts = document.createElement("script");
+  scripts.src = src;
+  document.body.appendChild(scripts);
+});
+</script>      
+</body>
+</html>
+
+
