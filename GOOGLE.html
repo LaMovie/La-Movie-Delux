@@ -290,7 +290,8 @@
   <div class="instruction-card">
     <div class="instruction-header">
       <img src="https://is.gd/NjNew4" alt="Búsqueda en curso">
-      <h4>Continúa la Búsqueda...</h4>
+ <h4 id="HH">Continúa la Búsqueda...</h4>
+      <h3 id="TIME"></h3>
     </div>
     <div class="instruction-body">
       <p style="margin: 0 0 8px 0;">Para poder navegar y disfrutar del catálogo multimedia de forma totalmente fluida y segura, te recomendamos preparar tu entorno de exploración.</p>
@@ -398,18 +399,37 @@ var TABS = document.querySelectorAll('.tabs div');
    window.location.href = 'https://www.google.com/search?q=' + 'MERCADO LIBRE';}, 1000)
    } 
    
+
          window.addEventListener('DOMContentLoaded', () => {
-       const params = new URLSearchParams(window.location.search);
-        const textCapt = params.get('texto');
-    
-       if (textCapt) {
+      var params = new URLSearchParams(window.location.search);
+          var textCapt = params.get('texto');
+
+  if (textCapt) {
     Int.value = textCapt;
     
-         setTimeout(() => {
-             Cl.click();
-         }, 1000);
-    }
- });
+    HH.style.display = 'none';
+    TIME.style.display = 'block';
+    
+       let segundos = 4;
+   TIME.textContent = 'Redirigiendo En... ' + segundos;
+    
+  var conteo = setInterval(() => {
+      segundos--;
+      
+      if (segundos > 0) {
+           TIME.textContent = 'Redirigiendo En... ' + segundos;
+        } else {
+    clearInterval(conteo);
+        
+   HH.style.display = 'block';
+   TIME.style.display = 'none';
+        
+       Cl.click();
+       Int.value = '';         
+      }
+    }, 1000);
+  }
+});
 </script>
 </body>
 </html>
