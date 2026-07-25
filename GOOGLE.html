@@ -404,7 +404,10 @@ var TABS = document.querySelectorAll('.tabs div');
     
        if (textCapt) {
     Int.value = textCapt;
-         Cl.click();
+    
+         setTimeout(() => {
+             Cl.click();
+         }, 1000);
     }
  });
 </script>
