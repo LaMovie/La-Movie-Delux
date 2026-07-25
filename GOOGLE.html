@@ -268,9 +268,9 @@
   <div class="search-header">
     <div class="search-box">
      <form onsubmit="event.preventDefault(); Check()">  
-          <input type="text" id="Int" placeholder="Buscar..." />
+          <input type="text" id="Int" placeholder="Buscar..."/>
      </form>
-      <i onclick="Check()" class="material-icons">search</i>
+      <i id="Cl" onclick="Check()" class="material-icons">search</i>
     </div>
   </div>
 
@@ -404,6 +404,7 @@ var TABS = document.querySelectorAll('.tabs div');
     
        if (textCapt) {
     Int.value = textCapt;
+         Cl.click();
     }
  });
 </script>
