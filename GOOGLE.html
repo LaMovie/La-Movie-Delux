@@ -3,7 +3,7 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>🔴 GOOGLE SEARCH 🔴</title>
+  <title>🌐 GOOGLE SEARCH 🌐</title>
   <link rel="stylesheet" href="https://fonts.googleapis.com/icon?family=Material+Icons"/>
 <style>
   @import url('https://fonts.googleapis.com/css2?family=Roboto:wght@400;500;700&display=swap');
@@ -321,12 +321,32 @@
   </div>
 </div>
 
-<!-- SCRIPTS DE CONTROL -->
+   <!-- SCRIPTS DE CONTROL -->
 <script>  
-    function Check() {  
-     window.location.href = "https://www.google.com/search?q=site:sololatino.net+" + Int.value;
-          Int.value = "";
-    };  
+        // Función maestra que fuerza el menú de aplicaciones de Android
+  function abrirFuera(urlDestino) {
+      // Le quitamos el https:// a la URL para armar el Intent
+      var urlSinProtocolo = urlDestino.replace("https://", "");
+      
+      // Armamos el esquema Intent nativo
+      var intentURL = "intent://" + urlSinProtocolo + "#Intent;scheme=https;action=android.intent.action.VIEW;end;";
+      
+      window.location.href = intentURL;
+    }
+
+    // Tu función Check ahora usa la redirección forzada
+    function Check() {
+      if(Int.value.trim() === "") return;
+      
+      // Es vital codificar el texto para que los espacios no rompan el Intent
+      var busqueda = encodeURIComponent("site:sololatino.net " + Int.value);
+      var linkGoogle = "https://www.google.com/search?q=" + busqueda;
+      
+      abrirFuera(linkGoogle);
+      Int.value = "";
+    }
+        
+     
     Int.onclick = () => {
       Acceder.style.opacity = '0';
     }
@@ -378,7 +398,7 @@ var TABS = document.querySelectorAll('.tabs div');
    window.location.href = 'https://www.google.com/search?q=' + 'MERCADO LIBRE';}, 1000)
    } 
    
-           window.addEventListener('DOMContentLoaded', () => {
+         window.addEventListener('DOMContentLoaded', () => {
        const params = new URLSearchParams(window.location.search);
         const textCapt = params.get('texto');
     
