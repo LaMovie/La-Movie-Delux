@@ -131,7 +131,7 @@ document.addEventListener("click", function(event) {
           // ?texto=
   const urlDestino = `${'GOOGLE.html'}?texto=${buscador.value}`;
       
-     var domain = isMobile ? 'go:GOOGLE' : 'https://www.google.com/search?q=site:sololatino.net+' + encodeURIComponent(buscador.value);
+     var domain = isMobile ? urlDestino : 'https://www.google.com/search?q=site:sololatino.net+' + encodeURIComponent(buscador.value);
   
   window.location.href = domain;
   buscador.value = '';
