@@ -42,7 +42,9 @@ function procesarEnlace(matchedItem) {
   var isMobile = /Mobi|Android|iPhone|iPad|iPod|BlackBerry|IEMobile|Opera Mini/i.test(navigator.userAgent);
   var tituloLimpio = NN.replace(/🍿|🌐|📺|⚙️/g, '').trim();
 
-  if (ENLACE.includes("file") || ENLACE.includes("www.dropbox.com") || ENLACE.includes("play.vidyard")) {
+ var CADENA = ['file', 'www.dropbox.com', 'play.vidyard', 'okpeliz.com'];
+ 
+  if (ENLACE.includes(CADENA)) {
     window.location.href = `PLAY.html?titulo=${encodeURIComponent(tituloLimpio)}&url=${encodeURIComponent(ENLACE)}`;
   } else {
     if (!isMobile && ENLACE.includes("latino.solo")) {
