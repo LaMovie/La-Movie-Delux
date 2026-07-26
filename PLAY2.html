@@ -28,7 +28,7 @@ body {
     text-shadow: 0px .1px 0 #001;
 }
 .span {
-    color: #f19;
+    color: #f49536;
 }
 .date {
     color: #b3b3b3;
@@ -68,77 +68,14 @@ body {
     width: 15%;
     opacity: .4;
 }
-#X {
-    width: 10vh;
-    border-radius: 50%;
-    position: fixed;
-    left: 40vh;
-    top: 0vh;
-    opacity: .6;
-    transition: 1s ease; 
-    filter: saturate(200%);
-}
-
-/* =========================================================
-   NUEVA ANIMACIÓN ÉPICA PARA EL LOGO "X"
-   "Explosión de Energía y Desvanecimiento Cuántico"
-   ========================================================= */
-@keyframes X {
-  0% {
-    top: 0vh; left: 40vh;
-    scale: 0.6;
-    opacity: 0.6;
-    filter: saturate(200%) blur(0px);
-    box-shadow: 0 0 10px rgba(255, 0, 153, 0.5); /* Resplandor rosado inicial */
-    pointer-events: auto; /* Se puede interactuar al inicio */
-  }
-  10% {
-    top: 0vh; left: 40vh;
-    scale: 0.8; /* Pequeño encogimiento antes del salto */
-    opacity: 1; /* Parpadea a opacidad total */
-    filter: saturate(300%) blur(2px); /* Más saturación y ligero desenfoque */
-    box-shadow: 0 0 50px rgba(255, 0, 153, 1); /* Brillo intenso de energía */
-  }
-
-  /* FASE 2 (10-30%): La Gran Explosión (0.2s-0.6s) */
-  20% {
-    top: 0vh; left: 40vh;
-    scale: 2.5; /* Comienza la expansión dramática */
-    opacity: 0.9;
-    filter: saturate(200%) blur(8px) drop-shadow(0 0 10px white); /* Desenfoque de explosión y rastro blanco */
-    box-shadow: 0 0 100px rgba(255, 0, 153, 1); /* Resplandor masivo */
-  }
-  30% {
-    top: 0vh; left: 40vh;
-    scale: 10; /* La onda de choque se expande completamente */
-    opacity: 0; /* Se vuelve transparente */
-    filter: blur(20px); /* Desenfoque extremo de las partículas remanentes */
-    box-shadow: 0 0 200px rgba(255, 0, 153, 0); /* La onda se disipa */
-    pointer-events: none; /* Asegura que no se pueda interactuar */
-  }
-
-  /* FASE 3 (30-100%): Limpieza y Dispersión Cuántica (0.6s-2s) */
-  /* Durante esta fase, el logo está invisible y no bloquea clics, pero
-     se mueve completamente fuera de la vista para limpieza */
-  100% {
-    top: -100vh; left: 100vw; /* Se mueve a una esquina lejana fuera de la pantalla */
-    scale: 0.1; /* Se encoge al mínimo absoluto */
-    opacity: 0; /* Permanece invisible */
-    z-index: -100; /* Asegura que esté detrás de todo */
-    pointer-events: none;
-  }
-}
-/* ========================================================= */
 </style>
 </head>
 <body>     
         
            <center>
-      <img id="X" src="https://da.gd/BPXzU"/>
-      
  <iframe class="I" id="I" src="" style="width:100%; aspect-ration:6/19" frameborder="0" allowfullscreen="true" allow="encrypted-media" allow="autoplay" name="WILLOW"></iframe>
 
-  <!-- <B id="Emoj">°PLAY°</B> -->         
+      <B id="Emoj">°PLAY°</B>          
  
         <div class="dato">        
     <b><span class="span">La</span></b> 
@@ -175,18 +112,15 @@ document.addEventListener('fullscreenchange', function() {
 });
 
 document.addEventListener('click', function(){
-     X.style.zIndex = "-1";    
+     Emoj.style.zIndex = "-1";    
 });
-
-
-  X.style.animation = 'X 2.5s linear 10s forwards running'; 
 </script>   
 <script>
     window.onload = () => {
      if (window.innerWidth > window.innerHeight) {
-    X.style.marginLeft = '100vh';
+    Emoj.style.marginLeft = '100vh';
   } else {
-    X.style.marginLeft = '0vh';
+    Emoj.style.marginLeft = '0vh';
   }
  }
 </script>
@@ -283,4 +217,5 @@ window.addEventListener('DOMContentLoaded', async () => {
 </script>
 </body>
 </html>
+
 
