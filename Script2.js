@@ -19,8 +19,8 @@ document.addEventListener("keyup", e => {
     Lista.style.display = Input === '' ? "none" : "block";
 
     Data.forEach(item => {
-      let itemText = Tildes(item.textContent.toLowerCase(), incluyeÑ);
-      if (itemText.includes(Input)) {
+      let itemText = Tildes(item.textContent.toLowerCase().trim(), incluyeÑ);
+   if (itemText.includes(Input)) {
         item.classList.remove("filtro");
         foundMatch = true;
       } else {
@@ -85,13 +85,17 @@ document.addEventListener("keydown", function(event) {
     
     var matchedItem = null;
     
-    // Usamos ".Data" para buscar exactamente en la misma lista que tu filtro visual
     var elementosData = document.querySelectorAll(".Data"); 
     
-    for (var i = 0; i < elementosData.length; i++) {
-      var textoItem = Tildes(elementosData[i].textContent.toLowerCase(), incluyeÑ);
+        for (var i = 0; i < elementosData.length; i++) {
       
-      if (textoItem.includes(InputLimpiado)) {
+       var textoCrudo = elementosData[i].textContent;
+      
+       var textoSinEmojis = textoCrudo.replace(/🍿|🌐|📺|⚙️/g, '').trim();
+      
+      var textoItem = Tildes(textoSinEmojis.toLowerCase(), incluyeÑ);
+      
+ if (textoItem === InputLimpiado) { 
         // Extraemos el enlace <a> que está dentro de este elemento .Data
         matchedItem = elementosData[i].tagName.toLowerCase() === 'a' ? elementosData[i] : elementosData[i].querySelector("a");
         if (matchedItem) {
@@ -99,6 +103,7 @@ document.addEventListener("keydown", function(event) {
         }
       }
     }
+
     
     if (matchedItem) {
       procesarEnlace(matchedItem);
