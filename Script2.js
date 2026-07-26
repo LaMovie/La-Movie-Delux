@@ -44,7 +44,7 @@ function procesarEnlace(matchedItem) {
 
  var CADENA = ['file', 'www.dropbox.com', 'play.vidyard', 'okpeliz.com'];
  
-  if (ENLACE.includes(CADENA)) {
+  if (CADENA.some(dominio => ENLACE.includes(dominio))) {
     window.location.href = `PLAY.html?titulo=${encodeURIComponent(tituloLimpio)}&url=${encodeURIComponent(ENLACE)}`;
   } else {
     if (!isMobile && ENLACE.includes("latino.solo")) {
