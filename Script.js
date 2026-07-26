@@ -287,16 +287,10 @@ fetch('https://ipapi.co/json/')
     const country = data.country_code;
     console.log("País detectado:", country);
 
-    if (country === 'US') {
-        window.location.href = '+LA-MOVIE-US+.html';
-    } else if (country === 'BR') {
-        window.location.href = '+LA-MOVIE-BR+.html';
-    } else if (country === 'AR') {
+    if (country === 'AR') {
         console.log("Es Argentina, ejecutando ARG(data)...");
         ARG(data);
-    } else {
-        console.log("El país detectado no tiene una acción asignada.");
-    }
+    } 
   })
   .catch(error => {
     console.error("❌ ERROR CRÍTICO al conectar con la API:", error);
