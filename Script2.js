@@ -146,6 +146,13 @@ Search.onclick = () => {
 
      
 
+   function openMovie(titulo, urlArchivo) {
+  const urlDestino = `PLAY.html?titulo=${encodeURIComponent(titulo)}&url=${encodeURIComponent(urlArchivo)}`;
+   
+  window.location.href = urlDestino;
+}
+
+
 
          <!-- HTML -->
          
