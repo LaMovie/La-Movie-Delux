@@ -635,10 +635,10 @@ function enviarReporte() {
     .then(response => response.json())
     .then(data => {
         if (data.success === "true" || data.success === true) {
-            alert("¡Muchas gracias! Tu reporte ha sido enviado con éxito.");
+            alert("¡Muchas Gracias! Tu Reporte Ha Sido Enviado Con Éxito.");
             cerrarModalReporte();
         } else {
-            alert("Atención de FormSubmit: " + (data.message || "Verifica tu bandeja de entrada para activar el servicio."));
+            alert("🛠️...🛠️");
         }
     })
     .catch(error => {
