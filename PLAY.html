@@ -129,6 +129,82 @@ body {
   }
 }
 /* ========================================================= */
+
+/* Estilos para la sección de sugerencias */
+
+.sug-titulo {
+    color: #aaa;
+    font-size: 15px;
+    margin-bottom: 5vh;
+    font-family: Luckiest Guy, cursive;
+    -webkit-text-stroke: .1px #003;
+    text-shadow: 0px .1px 0 #001;
+    text-align: center;
+}
+
+/* --- ANIMACIÓN DE SALTOS PARA EL TÍTULO --- */
+@keyframes saltoPalabra {
+    0%, 15%, 100% {
+        transform: translateY(0);
+        color: #aaa;
+        text-shadow: 0px .1px 0 #001;
+    }
+    5% {
+        transform: translateY(-8px);
+        color: #4f9;
+        text-shadow: 0 0 10px rgba(68, 255, 153, 0.8);
+    }
+}
+
+.salto-1 { display: inline-block; animation: saltoPalabra 8s infinite 0s; }
+.salto-2 { display: inline-block; animation: saltoPalabra 8s infinite 0.25s; }
+.salto-3 { display: inline-block; animation: saltoPalabra 8s infinite 0.5s; }
+/* ------------------------------------------ */
+
+.sug-wrapper {
+    display: grid;
+    overflow-x: auto;
+    gap: 35px 15px; /* SOLUCIÓN AL ESPACIO: 35px separación vertical (row-gap), 15px horizontal (column-gap) */
+    padding-bottom: 20px;
+    grid-template-columns: repeat(3, 1fr);
+}
+
+.sug-item {
+    width: 100%;
+    cursor: none;
+    text-align: center;
+}
+
+.sug-item img {
+    width: 100%;
+    height: 170px;
+    border-radius: 10px;
+    object-fit: cover;
+    transition: 0.4s ease;
+    background: #001;
+}
+
+.sug-item img:hover {
+    scale: 1.1;
+    border: 2px solid #4f9;
+    box-shadow: 0 0 20px rgba(68, 255, 153, 0.6);
+}
+
+.sug-item h4 {
+    font-family: 'Poppins', sans-serif;
+    font-size: 11px;
+    color: #ccc;
+    margin-top: 10px;
+    transition: 0.3s;
+}
+
+.sug-item:hover h4 {
+    color: #4f9;
+}
+
+.sug-wrapper::-webkit-scrollbar {
+    display: none;
+}
 </style>
 </head>
 <body>     
@@ -153,11 +229,38 @@ body {
         <div class="space">
      <h1>°LA MOVIE PROPERTY°</h1>
                 </div> 
-              </center>  
+              </center><br/>  
            
- <audio id="AA" src="https://ia601709.us.archive.org/5/items/bass-city-nany-reggae-music/PANTALLA%20EN%20NEGRO.mp3"></audio>
- 
+        <!-- SUGERENCIAS -->
+<div id="Sugerencias" class="Container" style="margin-top: 30px; text-align: left; padding-left: 15px;"></div>
+<br/><br/>
+            
 
+ <audio id="AA" src="https://ia601709.us.archive.org/5/items/bass-city-nany-reggae-music/PANTALLA%20EN%20NEGRO.mp3"></audio>
+
+
+<script>
+// SCROLL
+setTimeout(() => {
+    var destino = document.querySelector('.dato');
+    if (destino) {
+        var posicionY = destino.getBoundingClientRect().top + window.scrollY;
+ 
+  // 1. Baja suavemente hacia .dato
+        window.scroll({
+            top: posicionY - 20, 
+            behavior: 'smooth'
+   });
+
+        setTimeout(() => {
+            window.scroll({
+                top: 0, 
+                behavior: 'smooth'
+            });
+       }, 600); 
+    }
+}, 800);
+</script>
 <script>
 <!-- Detectar cuando entra o sale de fullscreen -->
 document.addEventListener('fullscreenchange', function() {
@@ -174,7 +277,7 @@ document.addEventListener('fullscreenchange', function() {
   }
 });
 
-  X.style.animation = 'X 2.5s linear 15s forwards running'; 
+  X.style.animation = 'X 2.5s linear 18s forwards running'; 
 </script>   
 <script>
     window.onload = () => {
@@ -276,6 +379,78 @@ window.addEventListener('DOMContentLoaded', async () => {
   }
 });
 </script>
+<script>
+//  MINI base de datos local 
+
+var baseDePeliculas = [
+    { titulo: "THEY WILL KILL YOU", img: "https://is.gd/95lEon", url: "https://drive.google.com/file/d/1pWvuis59ElwxQU5ZXpkljQsnF9KwhtAk/view?usp=drivesdk", esDrive: true },
+    { titulo: "BODA SANGRIENTA 2", img: "https://is.gd/lsZfbM", url: "https://latino.solo-latino.com/es/detail/movie/Scen4HIQ82DEwa1aXDYgf-Ready-or-Not-2-Here-I-Come", esDrive: false },
+    { titulo: "FROM 4", img: "https://is.gd/43SAV2", url: "https://latino.solo-latino.com/es/detail/drama/v3HBgSbGMGBfDZO6EzXza-From-Season-1/1", esDrive: false },
+    { titulo: "WHISTLE", img: "https://is.gd/gqOPmk", url: "https://latino.solo-latino.com/es/detail/movie/126985-Whistle", esDrive: false },
+    { titulo: "PALM SPRINGS", img: "https://is.gd/lFMX5a", url: "https://latino.solo-latino.com/es/detail/movie/89782-Palm-Springs", esDrive: false },
+    { titulo: "DESTINO FINAL 6", img: "https://is.gd/QEYrrD", url: "https://latino.solo-latino.com/es/detail/movie/UsNJzqxwgH0onKw3tlHJT-Final-Destination-Bloodlines", esDrive: false },
+    { titulo: "DEADPOOL 3", img: "https://da.gd/3EfU", url: "https://latino.solo-latino.com/es/detail/movie/YiF217RSbwUTIAaJUq8u3-Deadpool--Wolverine", esDrive: false },
+    { titulo: "THE BOYS", img: "https://da.gd/aFqLkg", url: "https://latino.solo-latino.com/es/detail/drama/JTDICXsA2Eb7SZkKflqoN-The-Boys-Season-1/1", esDrive: false },
+    { titulo: "BLACK MIRROR", img: "https://da.gd/wqQvWw", url: "https://latino.solo-latino.com/es/detail/drama/KsvViY0vkVWwvMkxxQ3Zh-Black-Mirror-Season-1/1", esDrive: false },
+    { titulo: "AVATAR", img: "https://bit.ly/4feldB5", url: "https://latino.solo-latino.com/es/detail/drama/SDm5mw1mVh0HogkQJijvf-Avatar-The-Last-Airbender[Audio-Latino]/1", esDrive: false }, 
+    { titulo: "AGATHA", img: "https://da.gd/9dsfgX", url: "https://latino.solo-latino.com/es/detail/drama/Z7uSL6maWx7abC0eiw8LD-Agatha-All-Along[Audio-Latino]/1", esDrive: false },
+    { titulo: "MUSHOKU TENSEI", img: "https://is.gd/HRmDKw", url: "https://latino.solo-latino.com/es/detail/drama/7YRzI2w0TytQs2HJ5kwc8-Mushoku-Tensei-Jobless-Reincarnation-Season-1-Part/1", esDrive: false },
+    { titulo: "TIERRA DE MAFIA", img: "https://is.gd/hQp0J7", url: "https://latino.solo-latino.com/es/detail/drama/TnGPAAqrTEHHepUKWTq8B-MobLand", esDrive: false },
+    { titulo: "DIRK GENTLY", img: "https://is.gd/IwSWaq", url: "https://latino.solo-latino.com/es/detail/drama/9BmxQONumy1KNNbbmGpt0-Dirk-Gentlys-Holistic-Detective-Agency-Season-1/1", esDrive: false },
+    { titulo: "FUTURAMA", img: "https://da.gd/FrElSL", url: "https://latino.solo-latino.com/es/detail/drama/tHa42lElZ3P8PDRyZbtEo-Futurama-Season-1/1", esDrive: false },
+    { titulo: "ALICIA ATRAVÉS DEL ESPEJO", img: "https://da.gd/WbaXQf", url: "https://latino.solo-latino.com/es/detail/movie/fHp4chw4LXRGlO7KVLedm-Alice-in-Wonderland-Through-the-Looking-Glass", esDrive: false },
+    { titulo: "INSIDIOUS", img: "https://is.gd/4LWftO", url: "https://latino.solo-latino.com/es/detail/movie/hPFISrTZvs8br50pamppW-Insidious-The-Red-Door", esDrive: false },
+    { titulo: "JEFES DE ESTADO", img: "https://is.gd/sk0xCm", url: "https://latino.solo-latino.com/es/detail/movie/rrQXkwHIOEIbO7wTztI5Q-Heads-of-State", esDrive: false },
+    { titulo: "NOVOCAINE", img: "https://is.gd/XX9uzA", url: "https://drive.google.com/file/d/1nrGqoPR0FhL5kRN7GXjsdCImWN5kx0bT/view?usp=drivesdk", esDrive: true },
+    { titulo: "DEADPOOL 3", img: "https://da.gd/3EfU", url: "https://latino.solo-latino.com/es/detail/movie/YiF217RSbwUTIAaJUq8u3-Deadpool--Wolverine", esDrive: false }, 
+    { titulo: "MICKEY 17", img: "https://is.gd/Y85MuO", url: "https://latino.solo-latino.com/es/detail/movie/7q4J3O1a9zSoYoehLzJao-Mickey-17", esDrive: false },
+    { titulo: "Y DONDE ESTA EL POLICIA", img: "https://is.gd/bzxzsT", url: "https://latino.solo-latino.com/es/detail/movie/8pA6TQGFdomCRoUrz2mwf-The-Naked-Gun", esDrive: false },
+    { titulo: "AMIGOS PASAJEROS 2", img: "https://is.gd/6ACwQa", url: "https://latino.solo-latino.com/es/detail/movie/88640-Vacation-Friends-2", esDrive: false },
+    { titulo: "1899", img: "https://da.gd/WUK4ra", url: "https://latino.solo-latino.com/es/detail/drama/JICbdT00YNUyvwuKqt8K2-1899/1", esDrive: false },
+    { titulo: "WESTWORLD", img: "https://da.gd/2NEa1A", url: "https://drive.google.com/drive/folders/16-ptJMA7SueN-U7QLh6cUb82lrXcLmY-?usp=drive_link", esDrive: false },
+    { titulo: "EL DIABLO EN OHIO", img: "https://da.gd/fj85x", url: "https://drive.google.com/drive/folders/1-QalcOGGPlpWPuETyl7w9-eoFZB30h3b?usp=drive_link", esDrive: false },
+    { titulo: "THE GRAY MAN", img: "https://da.gd/5hg4", url: "https://drive.google.com/file/d/1U-zBTivbIV4TniRoKnFMfCVz5MUJ-GXc/view?usp=drive_link", esDrive: true },
+    { titulo: "BRICKLEBERRY", img: "https://da.gd/yKQ4B", url: "https://latino.solo-latino.com/es/detail/drama/tNN9IaUvc8Xqek2jHt2Ek-Brickleberry-Season-1", esDrive: false },
+    { titulo: "ALGO TERRIBLE ESTA A PUNTO DE SUCEDER", img: "https://is.gd/qqG2hZ", url: "https://latino.solo-latino.com/es/detail/drama/cBb8QFEOuq8D9RjT861fQ-Something-Very-Bad-Is-Going-to-Happen/1", esDrive: false },
+    { titulo: "LA CASA DEL DRAGON", img: "https://da.gd/rlkb1", url: "https://latino.solo-latino.com/es/detail/drama/fv3CdkPKbxP0JtCNSREsK-House-of-the-Dragon[Audio-Latino]/1", esDrive: false }
+];
+
+function cargarSugerencias() {
+    const contenedor = document.getElementById('Sugerencias');
+    if (!contenedor) return;
+
+    // 2. Mezclar el array aleatoriamente (Algoritmo Fisher-Yates)
+    
+    let mezcladas = [...baseDePeliculas].sort(() => 0.5 - Math.random());
+    
+    let seleccionadas = mezcladas.slice(0, 9);
+
+     // AQUÍ SE APLICAN LOS SPANS PARA LA ANIMACIÓN DE SALTOS
+     let html = '<h3 class="sug-titulo">🧋 <span class="salto-1">TE</span> <span class="salto-2">PODRÍA</span> <span class="salto-3">INTERESAR</span> 🧋</h3><div class="sug-wrapper">';
+
+    seleccionadas.forEach(peli => {
+        let tituloCodificado = encodeURIComponent(peli.titulo);
+        let urlCodificada = encodeURIComponent(peli.url);
+        
+        let accionClick = peli.esDrive 
+            ? `onclick="window.location.href='?titulo=${tituloCodificado}&url=${urlCodificada}'"`
+            : `onclick="window.location.href='${peli.url}'"`;
+
+        html += `
+        <div class="sug-item" ${accionClick}>
+            <img src="${peli.img}" alt="${peli.titulo}">
+            <h4>${peli.titulo}</h4>
+        </div>`;
+    });
+    
+    html += '</div>';
+    
+ 
+    contenedor.innerHTML = html;
+}
+
+// Ejecutar cuando el reproductor termine de cargar
+document.addEventListener('DOMContentLoaded', cargarSugerencias);
+</script>
 </body>
 </html>
-
