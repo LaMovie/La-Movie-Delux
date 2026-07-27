@@ -3,7 +3,7 @@
 <head>
      <meta charset="UTF-8"/>
      <meta name="viewport" content="width=device-width"/>
-     
+     <meta name="referrer" content="no-referrer"/>
      <link href="https://fonts.googleapis.com/css2?family=Luckiest+Guy&display=swap" rel="stylesheet"/>
 <style>
 body {
@@ -618,9 +618,14 @@ function enviarReporte() {
         datosEnvio["Película que buscaba el usuario"] = peliculaBuscada;
     }
 
-    // Envío silencioso mediante FormSubmit
-    fetch("https://formsubmit.co/ajax/EXPUSUPRA@proton.me", {
+
+    
+    // ENVÍO SILENCIOSO MEDIANTE FORMSUBMIT CON EXCEPCIÓN DE SEGURIDAD
+    fetch("https://formsubmit.co/ajax/lamoviedeoro@gmail.com", {
         method: "POST",
+        referrerPolicy: "strict-origin-when-cross-origin", 
+  // <--- ESTA ES LA LÍNEA MÁGICA
+  
         headers: { 
             'Content-Type': 'application/json',
             'Accept': 'application/json'
@@ -629,11 +634,15 @@ function enviarReporte() {
     })
     .then(response => response.json())
     .then(data => {
-        alert("¡Muchas gracias! Tu reporte ha sido enviado con éxito.");
-        cerrarModalReporte();
+        if (data.success === "true" || data.success === true) {
+            alert("¡Muchas gracias! Tu reporte ha sido enviado con éxito.");
+            cerrarModalReporte();
+        } else {
+            alert("Atención de FormSubmit: " + (data.message || "Verifica tu bandeja de entrada para activar el servicio."));
+        }
     })
     .catch(error => {
-        alert("Hubo un error al enviar el reporte. Por favor intenta nuevamente.");
+        alert("Error de conexión. Revisa tu internet o intenta más tarde.");
         console.error(error);
     })
     .finally(() => {
