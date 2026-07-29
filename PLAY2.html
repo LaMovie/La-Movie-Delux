@@ -152,6 +152,7 @@ footer {
     color: #fff;	   
    	padding: 15px;
    	height: 8vh;
+   	opacity: .9;
    	display: grid;
    	overview-y: auto;
    	margin-top: 20px;
@@ -280,6 +281,67 @@ footer {
     background: rgba(255, 255, 255, 0.1);
     border-radius: 10px;
 }
+
+/* Estilo para el botón del tráiler */
+
+.btn-trailer {
+    width: 30%;
+    height: 3vh;
+    opacity: .8;
+    background: #e50914; 
+    color: white;
+    border: none;
+    padding: 8px 16px;
+    border-radius: 20px;
+    font-weight: bold;
+    cursor: none;
+    margin-bottom: -20vh;
+    display: inline-flex;
+    align-items: center;
+    box-shadow: 0 0 10px rgba(229, 9, 20, 0.5);
+}
+.btn-trailer:hover {
+    background: #ff1c28;
+    box-shadow: 0 0 15px rgba(229, 9, 20, 0.8);
+}
+#trailerModal {
+    display: none;
+    position: fixed;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    width: 80%;
+    max-width: 600px;
+    background: #000;
+    border: 2px solid #333;
+    border-radius: 15px;
+    z-index: 9999; 
+    box-shadow: 0 0 20px rgba(0,0,0,0.9);
+    padding: 10px;
+}
+#trailerModal .cerrar-modal {
+    color: #fff;
+    background: transparent;
+    border: none;
+    font-size: 20px;
+    cursor: pointer;
+    float: right;
+    margin-bottom: 10px;
+}
+.video-container {
+    position: relative;
+    padding-bottom: 56.25%; 
+    height: 0;
+    overflow: hidden;
+    border-radius: 10px;
+}
+.video-container iframe {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+}
 </style>
 </head>
 <body>     
@@ -295,6 +357,14 @@ footer {
       <b><span class="span">Titulo:</span></b> 
       <span id="T" class="date">Play</span><br />
           </div>      
+
+
+<div id="trailerModal">
+    <button class="cerrar-modal" onclick="cerrarTrailer()">❌</button>
+    <div class="video-container">
+        <iframe id="iframeTrailer" src="" frameborder="0" allow="autoplay; encrypted-media" allowfullscreen></iframe>
+    </div>
+</div>
                         
               <br/>
        <div id="Aux"></div> 
@@ -407,7 +477,7 @@ document.addEventListener('click', function(){
  }
 </script>
 <script>
-       // ⚠️ ATENCIÓN
+        // ⚠️ ATENCIÓN
 var API_KEY = "2c0b94c5ec729e2cc59b8be6ad7b2159"; 
 var tituloPredeterminado = T.textContent;
 
@@ -425,7 +495,7 @@ window.addEventListener('DOMContentLoaded', async () => {
     if (ElementoT) ElementoT.textContent = tituloCapt;
   }
 
-  // Lógica del Iframe y Audio
+  // Lógica del Iframe y Audio (¡Intacta!)
   if (urlCapt) {
     var URL_FINAL = urlCapt;
     var esArchivoDrive = false; 
@@ -452,60 +522,83 @@ window.addEventListener('DOMContentLoaded', async () => {
     }
   }
 
-  // INTEGRACIÓN DE TMDB API (Sin necesidad de traducir)
+  // 📜 INTEGRACIÓN DE TMDB API CON TRÁILER
   if (tituloPredeterminado) {
     var Aux = document.getElementById("Aux");
     try {
-      // Buscar la película por título en español
       var searchUrl = "https://api.themoviedb.org/3/search/movie?api_key=" + API_KEY + "&query=" + encodeURIComponent(tituloPredeterminado) + "&language=es-ES";
       var response = await fetch(searchUrl);
       var data = await response.json();
 
       if (data.results && data.results.length > 0) {
-        var peli = data.results[0]; // Tomamos el primer resultado que coincide
+        var peli = data.results[0]; 
         var movieId = peli.id;
 
-        // Pedir los detalles avanzados (para sacar el Director y Géneros)
-        var detailUrl = "https://api.themoviedb.org/3/movie/" + movieId + "?api_key=" + API_KEY + "&language=es-ES&append_to_response=credits";
+        // AQUÍ PEDIMOS LOS VIDEOS Y EL IDIOMA (prioridad español, luego inglés)
+        var detailUrl = "https://api.themoviedb.org/3/movie/" + movieId + "?api_key=" + API_KEY + "&language=es-ES&append_to_response=credits,videos&include_video_language=es,en";
         var detailRes = await fetch(detailUrl);
         var detailData = await detailRes.json();
 
-    // Extraer y limpiar los datos
         var titulo = detailData.title;
         var año = detailData.release_date ? detailData.release_date.split('-')[0] : "N/A";
         var sinopsis = detailData.overview || "No hay sinopsis disponible.";
         
-        // Unir los géneros por comas
         var genero = detailData.genres && detailData.genres.length > 0 
             ? detailData.genres.map(g => g.name).join(", ") 
             : "Desconocido";
         
-        // Buscar al director dentro de la lista del equipo técnico (crew)
         var directorObj = detailData.credits.crew.find(miembro => miembro.job === "Director");
         var director = directorObj ? directorObj.name : "Desconocido";
         
-        // Armar la URL oficial del póster de TMDb
         var poster = detailData.poster_path ? "https://image.tmdb.org/t/p/w500" + detailData.poster_path : "";
 
-        // Inyectar el HTML con las variables actualizadas
+   
+     // BUSCAR TRÁILER OFICIAL
+        var trailer = detailData.videos && detailData.videos.results ? detailData.videos.results.find(v => v.type === "Trailer" && v.site === "YouTube") : null;
+        var trailerKey = trailer ? trailer.key : null;
+
+        // CREAR BOTÓN SI HAY TRÁILER (Ahora en versión miniatura)
+        var botonTrailerHTML = trailerKey 
+            ? `<button class="btn-trailer" style="padding: 3px 10px; font-size: 11px; margin: 0 0 0 10px; box-shadow: none;" onclick="abrirTrailer('${trailerKey}')">▶Tráiler</button>` 
+            : '';
+
+        // INYECTAR HTML (Botón integrado en la misma línea del Director)
         Aux.innerHTML = `
           <div class="result-section">
-            <img src="${poster}" alt="${titulo}" style="width: 20%; border-radius: 16px">
-            <div class="result-title">${titulo} (${año})</div>
-            <p><strong>🎬 Género:</strong> ${genero}</p>
-            <p><strong>🎥 Director:</strong> ${director}</p>
-            <div id="S">
-                <p><strong>📝 Sinopsis:</strong> ${sinopsis}</p>
+            <img src="${poster}" alt="${titulo}" style="width: 25%; border-radius: 12px; margin-right: 15px; margin-bottom: 5px;">
+            <div class="result-title" style="font-size: 1.1rem; font-weight: bold; margin-bottom: 5px;">${titulo} (${año})</div>
+            <p style="margin: 5px 0; font-size: 0.95rem;"><strong>🎬 Género:</strong> ${genero}</p>
+            <p style="margin: 5px 0; font-size: 0.95rem; display: flex; align-items: center;"><strong>🎥 Director:</strong> ${director} ${botonTrailerHTML}</p><br/><br/>
+            <div id="S" style="margin-top: 10px;">
+                <p style="margin: 0;"><strong>📝 Sinopsis:</strong> ${sinopsis}</p>
             </div>
           </div>
-  `;
-     } 
+        `;
+      }
      
     } catch (error) {
       console.error("Error API TMDb:", error);      
     }
   }
 });
+
+    // FUNCIONES DEL MODAL PARA EL TRÁILER (Sin afectar el botón 'Atrás')
+window.abrirTrailer = function(youtubeKey) {
+    var modal = document.getElementById("trailerModal");
+    var contenedorVideo = document.querySelector(".video-container");
+   
+    contenedorVideo.innerHTML = `<iframe id="iframeTrailer" src="https://www.yout-ube.com/embed/${youtubeKey}?autoplay=1" frameborder="0" allow="autoplay; encrypted-media" allowfullscreen></iframe>`;
+    
+    modal.style.display = "block";
+};
+
+window.cerrarTrailer = function() {
+    var modal = document.getElementById("trailerModal");
+    var contenedorVideo = document.querySelector(".video-container");
+    
+    modal.style.display = "none";
+    contenedorVideo.innerHTML = ""; 
+};
 </script>
 <script>
 //  MINI base de datos local 
