@@ -264,6 +264,22 @@ footer {
     background: #ff4d4d;
     color: #fff;
 }
+#S {
+    height: 15vh;  
+    overflow-y: auto;
+    padding-right: 10px; 
+}
+#S::-webkit-scrollbar {
+    width: 6px;
+}
+#S::-webkit-scrollbar-thumb {
+    background: #f49536; 
+    border-radius: 10px;
+}
+#S::-webkit-scrollbar-track {
+    background: rgba(255, 255, 255, 0.1);
+    border-radius: 10px;
+}
 </style>
 </head>
 <body>     
@@ -391,22 +407,11 @@ document.addEventListener('click', function(){
  }
 </script>
 <script>
-var API_KEY = "e29e6334";
+       // ⚠️ ATENCIÓN
+var API_KEY = "2c0b94c5ec729e2cc59b8be6ad7b2159"; 
 var tituloPredeterminado = T.textContent;
 
-  <!-- Traducción con Google -->
-async function traducir(texto) {
-  try {
-    var res = await fetch(`https://translate.googleapis.com/translate_a/single?client=gtx&sl=en&tl=es&dt=t&q=${encodeURIComponent(texto)}`);
-    var data = await res.json();
-    return data[0][0][0]; // Texto traducido
-  } catch (error) {
-    console.error("Error al traducir:", error);
-    return texto; // Si falla, muestra el original
-  }
-}
-
-    <!-- OMDB API LÓGICA -->
+// 1. LÓGICA DEL REPRODUCTOR (IFRAME) Y TMDB API
 window.addEventListener('DOMContentLoaded', async () => {
   const params = new URLSearchParams(window.location.search);
   var urlCapt = params.get('url');
@@ -414,13 +419,13 @@ window.addEventListener('DOMContentLoaded', async () => {
   
   var tituloPredeterminado = tituloCapt; 
 
-  // 1. Mostrar el título solo en el ID "T"
+  // Mostrar el título solo en el ID "T"
   if (tituloCapt) {
     var ElementoT = document.getElementById('T');
     if (ElementoT) ElementoT.textContent = tituloCapt;
   }
 
-  // 2. Lógica del Iframe y Audio
+  // Lógica del Iframe y Audio
   if (urlCapt) {
     var URL_FINAL = urlCapt;
     var esArchivoDrive = false; 
@@ -447,36 +452,57 @@ window.addEventListener('DOMContentLoaded', async () => {
     }
   }
 
-  // 3. Integración de OMDb API
+  // INTEGRACIÓN DE TMDB API (Sin necesidad de traducir)
   if (tituloPredeterminado) {
     var Aux = document.getElementById("Aux");
     try {
-      var response = await fetch("https://www.omdbapi.com/?t=" + encodeURIComponent(tituloPredeterminado) + "&apikey=" + API_KEY);
+      // Buscar la película por título en español
+      var searchUrl = "https://api.themoviedb.org/3/search/movie?api_key=" + API_KEY + "&query=" + encodeURIComponent(tituloPredeterminado) + "&language=es-ES";
+      var response = await fetch(searchUrl);
       var data = await response.json();
 
-      if (data.Response === "False") {
-        if (typeof S !== 'undefined') S.style.display = "block";
-        return;
-      }
+      if (data.results && data.results.length > 0) {
+        var peli = data.results[0]; // Tomamos el primer resultado que coincide
+        var movieId = peli.id;
 
-      var titulo = await traducir(data.Title);
-      var sinopsis = await traducir(data.Plot);
-      var genero = await traducir(data.Genre);
-      var director = await traducir(data.Director);
-      var poster = data.Poster !== "N/A" ? data.Poster : "";
+        // Pedir los detalles avanzados (para sacar el Director y Géneros)
+        var detailUrl = "https://api.themoviedb.org/3/movie/" + movieId + "?api_key=" + API_KEY + "&language=es-ES&append_to_response=credits";
+        var detailRes = await fetch(detailUrl);
+        var detailData = await detailRes.json();
 
-      Aux.innerHTML = `
-        <div class="result-section">
-          <img src="${poster}" alt="${titulo}" style="width: 20%; border-radius: 16px">
-          <div class="result-title">${titulo} (${data.Year})</div>
-          <p><strong>🎬 Género:</strong> ${genero}</p>
-          <p><strong>🎥 Director:</strong> ${director}</p>
-          <p><strong>📝 Sinopsis:</strong> ${sinopsis}</p>
-        </div>
-      `;
+    // Extraer y limpiar los datos
+        var titulo = detailData.title;
+        var año = detailData.release_date ? detailData.release_date.split('-')[0] : "N/A";
+        var sinopsis = detailData.overview || "No hay sinopsis disponible.";
+        
+        // Unir los géneros por comas
+        var genero = detailData.genres && detailData.genres.length > 0 
+            ? detailData.genres.map(g => g.name).join(", ") 
+            : "Desconocido";
+        
+        // Buscar al director dentro de la lista del equipo técnico (crew)
+        var directorObj = detailData.credits.crew.find(miembro => miembro.job === "Director");
+        var director = directorObj ? directorObj.name : "Desconocido";
+        
+        // Armar la URL oficial del póster de TMDb
+        var poster = detailData.poster_path ? "https://image.tmdb.org/t/p/w500" + detailData.poster_path : "";
+
+        // Inyectar el HTML con las variables actualizadas
+        Aux.innerHTML = `
+          <div class="result-section">
+            <img src="${poster}" alt="${titulo}" style="width: 20%; border-radius: 16px">
+            <div class="result-title">${titulo} (${año})</div>
+            <p><strong>🎬 Género:</strong> ${genero}</p>
+            <p><strong>🎥 Director:</strong> ${director}</p>
+            <div id="S">
+                <p><strong>📝 Sinopsis:</strong> ${sinopsis}</p>
+            </div>
+          </div>
+  `;
+     } 
+     
     } catch (error) {
-      console.error("Error API OMDb:", error);
-      if (Aux) Aux.innerHTML = "<img id='No' src='https://bit.ly/3y2BVCO'/><br/>";
+      console.error("Error API TMDb:", error);      
     }
   }
 });
