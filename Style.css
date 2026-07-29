@@ -43,7 +43,7 @@ header .logo {
     animation: Logo 1s linear infinite alternate;
     z-index: 8850;
 }
-header .menu{
+header .menu {
     scale: 110%;
     padding: 0;
     margin: 0;
@@ -375,10 +375,11 @@ h4 {
     cursor: none; 
     color: #aaa;  
 }
-footer{
+footer {
 	background: #141414;
 	padding: 20px;
 	color: #fff;
+	opacity: .9;
 	text-align: center;
 }
 .Head {
@@ -461,7 +462,6 @@ a {
 */ #Oculto {
     display: none; \*
 }
-
 
 
 
