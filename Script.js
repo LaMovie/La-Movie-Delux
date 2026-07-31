@@ -223,15 +223,14 @@ document.onclick = (event) => {
     }
 };
 
-   DownMusic.onclick = (e) => {
-       e.preventDefault();
-   var isMobile = /Mobi|Android|iPhone|iPad|iPod|BlackBerry|IEMobile|Opera Mini/i.test(navigator.userAgent);
-    if (!isMobile) {
-        window.location.href = 'https://lamovie.github.io/MUSIC-CLOUD';
-    } else {
-        window.location.href = 'go:DOWN-MUSIC';
-    }
+
+  var DOWN = document.querySelectorAll('.Down');
+  
+  DOWN.forEach(dow => {
+    dow.onclick = (e) => {
+       e.preventDefault();           abrirFuera(https://is.gd/QvFaXy);
   };
+});
 
 
 
