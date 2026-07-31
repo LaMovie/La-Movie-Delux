@@ -228,7 +228,7 @@ document.onclick = (event) => {
   
   DOWN.forEach(dow => {
     dow.onclick = (e) => {
-       e.preventDefault();           abrirFuera(https://is.gd/QvFaXy);
+       e.preventDefault();           abrirFuera('https://sync-stream-chat-app.base44.app');
   };
 });
 
