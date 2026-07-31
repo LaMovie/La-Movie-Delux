@@ -424,6 +424,8 @@ footer {
             
             
  <audio id="AA" src="https://ia601709.us.archive.org/5/items/bass-city-nany-reggae-music/PANTALLA%20EN%20NEGRO.mp3"></audio>
+
+<script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
  
 <script>
 // SCROLL
@@ -754,7 +756,10 @@ function enviarReporte() {
     .then(response => response.json())
     .then(data => {
         if (data.success === "true" || data.success === true) {
-            alert("¡Muchas Gracias! Tu Reporte Ha Sido Enviado Con Éxito.");
+            Swal.fire({
+    title: '📜"¡Muchas Gracias! Tu Reporte Ha Sido Enviado Con Éxito."📜',  
+    icon: 'info'
+ }); 
             cerrarModalReporte();
         } else {
             alert("🛠️...🛠️");
