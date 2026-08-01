@@ -307,7 +307,11 @@ function abrirFuera(urlDestino) {
 
 
        // PRECAUTION MOBILE 
-     TV.onclick = () => {
+ var XTV = document.querySelectorAll('#TV, .XTv');     
+       
+     XTV.forEach(x => {
+         x.onclick = (e) => {
+      e.preventDefault();   
          Swal.fire({
     title: '⚠️Usar Un Bloqueador De Anuncios⚠️', 
     html: '<a id="A" href="https://play.google.com/store/apps/details?id=com.hsv.freeadblockerbrowser" target="_blank">🔴 FreeAddBlockerBrowser 🔴</a>', 
@@ -319,8 +323,9 @@ function abrirFuera(urlDestino) {
      if (result.isConfirmed) {
          abrirFuera('https://lamovie.github.io/CONTENIDO/X-TV.html');            
         }
-   });
-}
+      });  
+    }
+ });
 
 
 
