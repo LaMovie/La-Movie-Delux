@@ -28,10 +28,10 @@ body {
     text-shadow: 0px .1px 0 #001;
 }
 .span {
-    color: #f49536;
+    color: #7F05FF;
 }
 .date {
-    color: #b3b3b3;
+    color: #b3bab3;
 }
 .dato{ 
     margin-top: 2vh;
@@ -274,7 +274,7 @@ footer {
     width: 6px;
 }
 #S::-webkit-scrollbar-thumb {
-    background: #f49536; 
+    background: #7F05FF; 
     border-radius: 10px;
 }
 #S::-webkit-scrollbar-track {
@@ -567,10 +567,10 @@ window.addEventListener('DOMContentLoaded', async () => {
         // INYECTAR HTML (Botón integrado en la misma línea del Director)
         Aux.innerHTML = `
           <div class="result-section">
-            <img src="${poster}" alt="${titulo}" style="width: 25%; border-radius: 12px; margin-right: 15px; margin-bottom: 5px;">
+            <img src="${poster}" alt="${titulo}" style="width: 25%; height: 15vh; border-radius: 12px; margin-right: 15px; margin-bottom: 5px;">
             <div class="result-title" style="font-size: 1.1rem; font-weight: bold; margin-bottom: 5px;">${titulo} (${año})</div>
             <p style="margin: 5px 0; font-size: 0.95rem;"><strong>🎬 Género:</strong> ${genero}</p>
-            <p style="margin: 5px 0; font-size: 0.95rem; display: flex; align-items: center;"><strong>🎥 Director:</strong> ${director} ${botonTrailerHTML}</p><br/><br/>
+            <p style="margin: 5px 0; font-size: 0.95rem; display: flex; align-items: center;"><strong>🎥 Director:</strong> ${director} ${botonTrailerHTML}</p><br/>
             <div id="S" style="margin-top: 10px;">
                 <p style="margin: 0;"><strong>📝 Sinopsis:</strong> ${sinopsis}</p>
             </div>
