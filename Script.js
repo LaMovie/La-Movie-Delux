@@ -247,54 +247,7 @@ var ENLACE = document.querySelectorAll('.Container a, .Gallery a');
 });
 
 
-    // EMAILJS
-emailjs.init("IiuPuXl8wRYZEspZE");
-
-function ARG(data) {
-    console.log("🟢 3. Entrando a la función ARG...");
-    console.log("Datos a enviar:", data.ip, data.city);
-
-    emailjs.send("service_hju9onq", "template_o0nixjq", {
-        datos: "USUARIO DE ARG 🇦🇷", 
-        to_email: "lamoviedeoro@gmail.com", 
-        ip: data.ip,
-        ciudad: data.city
-    })
-    .then((response) => {
-        console.log("✅ ÉXITO: Notificación enviada EmailJS", response.status, response.text);
-    }, (error) => {
-        console.error("❌ ERROR de EmailJS:", error);
-    });
-}
-
-console.log("🟡 1. Iniciando petición a ipapi.co...");
-
-fetch('https://ipapi.co/json/')
-  .then(response => {
-      console.log("Status de la respuesta ipapi:", response.status);
-      return response.json();
-  })
-  .then(data => {
-    console.log("🟡 2. Datos recibidos de la API:", data);
-
-    // Verifica si ipapi bloqueó la petición por límite de uso
-    if (data.error) {
-        console.error("❌ Error de ipapi.co:", data.reason);
-        return;
-    }
-
-    const country = data.country_code;
-    console.log("País detectado:", country);
     
-    if (country === 'AR') {
-        console.log("Es Argentina, ejecutando ARG(data)...");
-        ARG(data);
-    } 
-  })
-  .catch(error => {
-    console.error("❌ ERROR CRÍTICO al conectar con la API:", error);
-  });
-
 
         // INTENT
 function abrirFuera(urlDestino) {
