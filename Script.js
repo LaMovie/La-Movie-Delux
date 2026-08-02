@@ -28,7 +28,7 @@ let refreshInterval = setInterval(() => {
 }, 5000)
 
 
-function showSlider(){
+     function showSlider(){
     // 1. Remueve la clase 'active' de los elementos antiguos
     let itemActiveOld = document.querySelector('.slider .list .item.active');
     let thumbnailActiveOld = document.querySelector('.thumbnail .item.active');
@@ -44,23 +44,37 @@ function showSlider(){
     items[itemActive].classList.add('active');
     thumbnails[itemActive].classList.add('active');
 
-    // 🌟 LÓGICA DE SINCRONIZACIÓN DE SRC (FUNCIÓN SOLICITADA) 🌟
-    // Obtener la URL de la imagen principal (la única fuente de verdad, dentro de .Div)
+    // 🌟 LÓGICA DE SINCRONIZACIÓN DE SRC
     let mainImage = items[itemActive].querySelector('.Div img');
-    // Obtener la imagen de la miniatura activa (el destino)
     let thumbnailImage = thumbnails[itemActive].querySelector('img');
 
-    // Copiar el src de la imagen principal a la imagen de la miniatura
     if (mainImage && thumbnailImage) {
         thumbnailImage.src = mainImage.src;
     }
    
+    // 🌟 DESPLAZAMIENTO 100% HORIZONTAL (SIN SALTO VERTICAL) 🌟
+    let thumbnailContainer = document.querySelector('.thumbnail');
+    let targetItem = thumbnails[itemActive];
+
+    if (thumbnailContainer && targetItem) {
+        // Calcula la posición para centrar el ítem activo en el carrusel
+        let scrollPos = targetItem.offsetLeft - (thumbnailContainer.clientWidth / 2) + (targetItem.clientWidth / 2);
+        
+        // Mueve SOLO el scroll horizontal del contenedor, sin afectar la página
+        thumbnailContainer.scrollTo({
+            left: scrollPos,
+            behavior: 'smooth'
+        });
+    }
+
     // 3. Reinicia el contador para el avance automático
     clearInterval(refreshInterval);
     refreshInterval = setInterval(() => {
         next.click();
     }, 5000)
 }
+
+
 
 
 // click thumbnail
