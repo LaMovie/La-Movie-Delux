@@ -48,8 +48,8 @@ let refreshInterval = setInterval(() => {
     let mainImage = items[itemActive].querySelector('.Div img');
     let thumbnailImage = thumbnails[itemActive].querySelector('img');
 
-    if (mainImage && thumbnailImage) {
-        thumbnailImage.src = mainImage.src;
+ if (mainImage && thumbnailImage) {
+ mainImage.src = thumbnailImage.src;
     }
    
     // 🌟 DESPLAZAMIENTO 100% HORIZONTAL (SIN SALTO VERTICAL) 🌟
