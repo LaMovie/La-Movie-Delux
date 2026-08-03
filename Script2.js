@@ -64,7 +64,7 @@ function procesarEnlace(matchedItem) {
   var isMobile = /Mobi|Android|iPhone|iPad|iPod|BlackBerry|IEMobile|Opera Mini/i.test(navigator.userAgent);
   var tituloLimpio = NN.replace(/🍿|🌐|📺|⚙️/g, '').trim();
 
- var CADENA = ['file', 'www.dropbox.com', 'play.vidyard', 'okpeliz.com'];
+ var CADENA = ['google.com/file', 'www.dropbox.com', 'play.vidyard', 'okpeliz.com'];
  
   if (CADENA.some(dominio => ENLACE.includes(dominio))) {
     window.location.href = `PLAY.html?titulo=${encodeURIComponent(tituloLimpio)}&url=${encodeURIComponent(ENLACE)}`;
