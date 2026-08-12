@@ -326,22 +326,18 @@
 <script>  
         // Función maestra que fuerza el menú de aplicaciones de Android
   function abrirFuera(urlDestino) {
-      // Le quitamos el https:// a la URL para armar el Intent
-      var urlSinProtocolo = urlDestino.replace("https://", "");
+     var urlSinProtocolo = urlDestino.replace("https://", "");
       
-      // Armamos el esquema Intent nativo
       var intentURL = "intent://" + urlSinProtocolo + "#Intent;scheme=https;action=android.intent.action.VIEW;end;";
       
-      window.location.href = intentURL;
+ window.location.href = intentURL;
     }
 
-    // Tu función Check ahora usa la redirección forzada
     function Check() {
       if(Int.value.trim() === "") return;
       
-      // Es vital codificar el texto para que los espacios no rompan el Intent
       var busqueda = encodeURIComponent("site:sololatino.net " + Int.value);
-      var linkGoogle = "https://www.google.com/search?q=" + busqueda;
+      var linkGoogle = "https://sololatino.net/buscar?q=" + busqueda;
       
       abrirFuera(linkGoogle);
       Int.value = "";
