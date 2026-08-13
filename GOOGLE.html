@@ -332,11 +332,12 @@
       
  window.location.href = intentURL;
     }
-
+ 
     function Check() {
       if(Int.value.trim() === "") return;
-       
-      var linkGoogle = "https://sololatino.net/buscar?q=" + Int.value;
+      
+      var busqueda = encodeURIComponent("site:sololatino.net " + Int.value);
+      var linkGoogle = "https://www.google.com/search?q=" + busqueda;
       
       abrirFuera(linkGoogle);
       Int.value = "";
