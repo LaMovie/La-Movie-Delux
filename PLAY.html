@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html>
+<html lang="es">
 <head>
      <meta charset="UTF-8"/>
      <meta name="viewport" content="width=device-width"/>
@@ -7,8 +7,131 @@
      <link href="https://fonts.googleapis.com/css2?family=Luckiest+Guy&display=swap" rel="stylesheet"/>
 <style>
 body {
+    margin: 0;
+    padding-top: 14vh; 
     background: #000;
 }
+header {    
+    width: 100%;
+    top: 0; /* Ancla la cabecera arriba */
+    left: 0;
+    display: flex;
+    justify-content: start;
+    align-items: center;    
+    z-index: 8850;
+    background: #000;
+    position: fixed;
+    padding: 2vh;
+    gap: 2.5vh;
+    box-sizing: border-box; /* Evita que el padding desborde el ancho */
+}
+input {    
+    color: #fff;  
+    width: 50%;
+    display: none;
+    padding: 10px;
+    outline: none;    
+    text-align: left;
+    font-weight: bold;
+    border-radius: 20px;
+    background: linear-gradient(
+    270deg,
+    #ff00cc,
+    #8a2be2,
+    #00bf33,
+    #038,
+    purple
+);
+animation: rgbMove 8s linear infinite;
+background-size: 600% 600%;
+    border: .8px solid blue; 
+    box-shadow:
+        0 0 20px rgba(0,255,255,.35),
+        0 10px 30px rgba(0,0,0,.5);
+
+    transition:.35s;    
+}
+@keyframes rgbMove {
+    0%{background-position:0% 50%;}
+    50%{background-position:100% 50%;}
+    100%{background-position:0% 50%;}
+}
+#MG {
+    width: 18%;
+    opacity: .8;
+    filter: hue-rotate(350deg);
+}
+#Search {
+    color: blue;
+    opacity: .5;
+    width: 3.5vh;
+    border-radius: 50px;    
+    margin-left: auto; 
+    z-index: 9999;
+    background: rgb(0,0,0, .5);
+  &:hover {
+      color: #079;
+  }
+}
+#HH {
+    color: gray;
+    opacity: .5;
+    margin-left: 8vh;
+    font-family: Luckiest Guy, cursive;
+    -webkit-text-stroke: .5px #000;    
+}
+#Lista {
+    display: none;
+    list-style: none;
+    padding: 0;
+    margin-top: 10vh; 
+    width: 90%;
+    max-height: 50vh;
+    overflow-y: auto;
+    background: #111;
+    position: fixed;
+    z-index: 9999;
+    border-radius: 10px;
+    box-shadow: 0 5px 15px rgba(0,0,0,0.8);
+}
+.Data {
+    color: #fff;
+    font-weight: bold;
+    -webkit-text-stroke: .3px #ff00ff;    
+    text-shadow: 0px 0px 10px blue, 0px 0px 20px #fff;    
+    text-decoration: none;
+    display: block;
+    padding: 15px;
+    border-bottom: 1px solid #333;
+    font-family: 'Poppins', sans-serif;
+    text-align: left;
+  &:hover {
+      background: #222;
+      color: #4f9;
+  }
+}
+.filtro {
+    display: none;
+}
+a {
+    color: #fff;
+    text-decoration: none;
+  &:hover {
+     color: #4f9;
+     text-shadow: 0 0 10px red;
+ }
+}
+#No {
+    scale: 70%;
+    display: none;
+    margin-top: 27vh;
+    position: fixed; 
+    border-radius: 50px;
+  &:hover {
+      filter: hue-rotate(90deg);
+  }
+}
+
 .span {
     color: #f19;
 }
@@ -387,16 +510,29 @@ footer {
 </style>
 </head>
 <body>     
-        
+<header>
+  <img id="MG" src="https://da.gd/BPXzU"/>
+  <h3 id="HH">La Movie</h3>
+  <input id="buscador" placeholder="Buscar..."/>
+  <div id="Search">
+  <svg aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 20 20">
+  <path class="Path" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="m19 19-4-4m0-7A7 7 0 1 1 1 8a7 7 0 0 1 14 0Z"/>
+            </svg>
+              </div>
+</header>        
            <center>
+     <ul id="Lista"></ul>
+     
+<img id="No" src="https://is.gd/NjNew4"/>
+
       <img id="X" src="https://da.gd/BPXzU"/>
       
  <iframe class="I" id="I" src="" style="width:100%; aspect-ration:6/19" frameborder="0" allowfullscreen="true" allow="encrypted-media" allow="autoplay" name="WILLOW"></iframe>
 
  
         <div class="dato">        
-    <b><span class="span">La</span></b> 
-<span class="date">Movie</span><br />
+    <b><span class="span">Play</span></b> 
+<span class="date">Now</span><br />
       <b><span class="span">Titulo:</span></b> 
       <span id="T" class="date">Play</span><br />
           </div>      
@@ -814,6 +950,204 @@ function enviarReporte() {
         btnEnviar.disabled = false;
     });
 }
+</script>
+       <!-- BUSCADOR -->
+<script>
+   function construirLista() {
+var PELIS = [...Lista1, ...Lista2, ...Lista3];
+
+var lista = document.getElementById("Lista");
+  
+// Agrega los nuevos elementos dinámicamente
+    PELIS.forEach(item => {
+  
+  var li = document.createElement("li");
+  var a = document.createElement("a");
+
+  a.href = item.URL || item.url;
+  a.textContent = item.NAME || item.name;
+  a.classList.add("Data");
+
+  li.appendChild(a);
+  lista.appendChild(li);
+});
+}
+
+
+
+document.addEventListener("keyup", e => {
+
+  // TILDES
+  function Tildes(texto, preservarÑ = false) {
+    let limpio = texto.normalize("NFD").replace(/[\u0300-\u036f]/g, "").toLowerCase();
+    if (!preservarÑ) {
+      limpio = limpio.replace(/ñ/g, "n");
+    }
+    return limpio;
+  };
+
+  var In = e.target.value.toLowerCase().trim();
+  var incluyeÑ = In.includes("ñ");
+  var Data = document.querySelectorAll(".Data");
+  let foundMatch = false;
+  var Input = Tildes(In.replace(/\s+/g, ' '), incluyeÑ);
+
+  if (e.target.matches("#buscador")) {
+    Lista.style.display = Input === '' ? "none" : "block";
+
+    Data.forEach(item => {
+      let itemText = Tildes(item.textContent.toLowerCase().trim(), incluyeÑ);
+   if (itemText.includes(Input)) {
+        item.classList.remove("filtro");
+        foundMatch = true;
+      } else {
+        item.classList.add("filtro");
+      }
+    });
+
+    No.style.display = foundMatch ? "none" : "block";
+  }
+
+
+     // FUNCIÓN CENTRALIZADA
+function procesarEnlace(matchedItem) {
+  if (!matchedItem) return;
+
+  var ENLACE = matchedItem.getAttribute("href") || matchedItem.href;
+  var NN = matchedItem.textContent;
+  
+  var isMobile = /Mobi|Android|iPhone|iPad|iPod|BlackBerry|IEMobile|Opera Mini/i.test(navigator.userAgent);
+  var tituloLimpio = NN.replace(/🍿|🌐|📺|⚙️/g, '').trim();
+
+ var CADENA = ['google.com/file', 'www.dropbox.com', 'play.vidyard', 'okpeliz.com'];
+ 
+  if (CADENA.some(dominio => ENLACE.includes(dominio))) {
+    window.location.href = `PLAY.html?titulo=${encodeURIComponent(tituloLimpio)}&url=${encodeURIComponent(ENLACE)}`;
+  } else {
+    if (!isMobile && ENLACE.includes("latino.solo")) {
+      window.location.href = "https://www.google.com/search?q=site:sololatino.net+" + encodeURIComponent(tituloLimpio);
+    } else if (NN.includes('🌐')) {
+      window.location.href = `${ENLACE}?texto=${encodeURIComponent(tituloLimpio)}`;
+    } else {
+      window.location.href = ENLACE;
+    }
+  }
+  
+  var buscadorInput = document.getElementById("buscador");
+  if (buscadorInput) {
+    buscadorInput.value = '';
+  }
+}
+
+
+     // MANEJO REAL DEL ENTER 
+document.addEventListener("keydown", function(event) {
+  if (event.target.matches("#buscador") && event.key === "Enter") {
+    event.preventDefault();
+    
+    var In = event.target.value.toLowerCase().trim();
+    if (In === "") return;
+
+    // Función interna para limpiar tildes idéntica a la tuya
+    function Tildes(texto, preservarÑ = false) {
+      let limpio = texto.normalize("NFD").replace(/[\u0300-\u036f]/g, "").toLowerCase();
+      if (!preservarÑ) {
+        limpio = limpio.replace(/ñ/g, "n");
+      }
+      return limpio;
+    }
+
+    var incluyeÑ = In.includes("ñ");
+    var InputLimpiado = Tildes(In.replace(/\s+/g, ' '), incluyeÑ);
+    
+    var matchedItem = null;
+    
+    var elementosData = document.querySelectorAll(".Data"); 
+    
+        for (var i = 0; i < elementosData.length; i++) {
+      
+       var textoCrudo = elementosData[i].textContent;
+      
+       var textoSinEmojis = textoCrudo.replace(/🍿|🌐|📺|⚙️/g, '').trim();
+      
+      var textoItem = Tildes(textoSinEmojis.toLowerCase(), incluyeÑ);
+      
+ if (textoItem === InputLimpiado) { 
+        // Extraemos el enlace <a> que está dentro de este elemento .Data
+        matchedItem = elementosData[i].tagName.toLowerCase() === 'a' ? elementosData[i] : elementosData[i].querySelector("a");
+        if (matchedItem) {
+          break; 
+        }
+      }
+    }
+
+    
+    if (matchedItem) {
+      procesarEnlace(matchedItem);
+    } else {
+      if (typeof Check === "function") {
+        Check();
+      }
+    }
+  }
+});
+
+
+
+     // MANEJO DEL CLICK 
+document.addEventListener("click", function(event) {
+  var matchedItem = event.target.closest("a"); 
+  
+  if (matchedItem) {
+    var href = matchedItem.getAttribute("href");
+    if (href && href !== "#") {
+      event.preventDefault();
+      procesarEnlace(matchedItem);
+    }
+   }
+ });
+});
+
+
+     function Check() {
+  var isMobile = /Mobi|Android|iPhone|iPad|iPod|BlackBerry|IEMobile|Opera Mini/i.test(navigator.userAgent);   
+  
+          // ?texto=
+  const urlDestino = `${'GOOGLE.html'}?texto=${buscador.value}`;
+      
+     var domain = isMobile ? urlDestino : 'https://www.google.com/search?q=site:sololatino.net+' + encodeURIComponent(buscador.value);
+  
+  window.location.href = domain;
+  buscador.value = '';
+};
+
+      // SEARCH CLICK
+  Search.onclick = () => {
+    buscador.style.display = buscador.style.display === 'block' ? 'none' : 'block';
+    HH.style.display = buscador.style.display === 'block' ? 'none' : 'block';
+    buscador.focus();
+};
+
+      // BUSCADORES
+      const S = [
+  "https://lamovie.github.io/Buscador/Buscador.js",
+  "https://lamovie.github.io/Buscador/Buscador2.js",
+  "https://lamovie.github.io/Buscador/Buscador3.js"
+];
+
+  let scriptsCargados = 0;
+
+  S.forEach(src => {
+  const scripts = document.createElement("script");
+  scripts.src = src;
+  scripts.onload = () => {
+    scriptsCargados++;
+    if (scriptsCargados === S.length) {
+      construirLista();
+    }
+  };
+  document.body.appendChild(scripts);
+});
 </script>
 </body>
 </html>
