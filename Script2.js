@@ -170,7 +170,7 @@ function Check() {
 }
 
 // MANEJO DEL CLICK EN LA LUPA (#Search)
-   Search.onclick = () => {
+Search.onclick = () => {
     var valorInput = buscador.value.trim();
     if (valorInput !== "") {
         // Si hay texto escrito, ejecuta la búsqueda como si se presionara "Enter"
@@ -244,11 +244,11 @@ background-size: 600% 600%;
     display: none;
     list-style: none;
     padding: 0;
-    margin: 5vh -5vh; 
+    margin: 0vh -5vh; 
     width: 90%;
-    max-height: 60vh;
+    max-height: 65vh;
     overflow-y: auto;
-    background: #111;
+    background: #000;
     position: fixed;
     z-index: 9999;
     border-radius: 10px;
@@ -266,7 +266,7 @@ background-size: 600% 600%;
     font-family: 'Poppins', sans-serif;
     text-align: left;
   &:hover {
-      background: #222;
+      background: #111;
       color: #4f9;
   }
 }
