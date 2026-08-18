@@ -1,177 +1,188 @@
+var PELI  = ['file', 'movie', 'vidyard.com', 'dropbox', 'gallery=open'];
+var SERIE = ['folders', 'drama', 'publicfoldergrid'];
+
 function construirLista() {
-var PELIS = [...Lista1, ...Lista2, ...Lista3];
+    var PELIS = [...Lista1, ...Lista2, ...Lista3];
+    var lista = document.getElementById("Lista");
 
-var lista = document.getElementById("Lista");
-  
-// Agrega los nuevos elementos dinámicamente
     PELIS.forEach(item => {
-  
-  var li = document.createElement("li");
-  var a = document.createElement("a");
+        var li = document.createElement("li");
+        var a = document.createElement("a");
+        
+        var url = (item.URL || item.url || '');
+        var name = item.NAME || item.name || '';
+        var nombreMin = name.toLowerCase();
 
-  a.href = item.URL || item.url;
-  a.textContent = item.NAME || item.name;
-  a.classList.add("Data");
+        var tipo = 'Película'; 
 
-  li.appendChild(a);
-  lista.appendChild(li);
-});
+        if (nombreMin.includes('tv')) {
+            tipo = 'TV';
+        } else if (SERIE.some(keyword => url.includes(keyword))) {
+            tipo = 'Serie';
+        } else if (nombreMin.includes('🌐')) {
+            tipo = 'Copy';
+        }
+
+        a.href = item.URL || item.url;
+        // Envolvemos name en .titulo-txt para aislarlo en la búsqueda
+        a.innerHTML = `<span class="titulo-txt">${name}</span> <span style="font-size: 11px; color: #f19; font-weight: normal; margin-left: 8px;"><br/>(${tipo})</span>`;
+        a.classList.add("Data");
+
+        li.appendChild(a);
+        lista.appendChild(li);
+    });
 }
-
-
 
 document.addEventListener("keyup", e => {
+    function Tildes(texto, preservarÑ = false) {
+        let limpio = texto.normalize("NFD").replace(/[\u0300-\u036f]/g, "").toLowerCase();
+        if (!preservarÑ) {
+            limpio = limpio.replace(/ñ/g, "n");
+        }
+        return limpio;
+    };
 
-  // TILDES
-  function Tildes(texto, preservarÑ = false) {
-    let limpio = texto.normalize("NFD").replace(/[\u0300-\u036f]/g, "").toLowerCase();
-    if (!preservarÑ) {
-      limpio = limpio.replace(/ñ/g, "n");
+    var In = e.target.value.toLowerCase().trim();
+    var incluyeÑ = In.includes("ñ");
+    var Data = document.querySelectorAll(".Data");
+    let foundMatch = false;
+    var Input = Tildes(In.replace(/\s+/g, ' '), incluyeÑ);
+
+    if (e.target.matches("#buscador")) {
+        Lista.style.display = Input === '' ? "none" : "block";
+
+        Data.forEach(item => {
+            let elTitulo = item.querySelector(".titulo-txt") ? item.querySelector(".titulo-txt").textContent : item.textContent;
+            let itemText = Tildes(elTitulo.toLowerCase().trim(), incluyeÑ);
+
+            if (itemText.includes(Input)) {
+                item.classList.remove("filtro");
+                foundMatch = true;
+            } else {
+                item.classList.add("filtro");
+            }
+        });
+
+        No.style.display = foundMatch ? "none" : "block";
     }
-    return limpio;
-  };
+});
 
-  var In = e.target.value.toLowerCase().trim();
-  var incluyeÑ = In.includes("ñ");
-  var Data = document.querySelectorAll(".Data");
-  let foundMatch = false;
-  var Input = Tildes(In.replace(/\s+/g, ' '), incluyeÑ);
-
-  if (e.target.matches("#buscador")) {
-    Lista.style.display = Input === '' ? "none" : "block";
-
-    Data.forEach(item => {
-      let itemText = Tildes(item.textContent.toLowerCase().trim(), incluyeÑ);
-   if (itemText.includes(Input)) {
-        item.classList.remove("filtro");
-        foundMatch = true;
-      } else {
-        item.classList.add("filtro");
-      }
-    });
-
-    No.style.display = foundMatch ? "none" : "block";
-  }
-
-
-     // FUNCIÓN CENTRALIZADA
+// FUNCIÓN CENTRALIZADA PARA PROCESAR ENLACES
 function procesarEnlace(matchedItem) {
-  if (!matchedItem) return;
+    if (!matchedItem) return;
 
-  var ENLACE = matchedItem.getAttribute("href") || matchedItem.href;
-  var NN = matchedItem.textContent;
-  
-  var isMobile = /Mobi|Android|iPhone|iPad|iPod|BlackBerry|IEMobile|Opera Mini/i.test(navigator.userAgent);
-  var tituloLimpio = NN.replace(/🍿|🌐|📺|⚙️/g, '').trim();
+    var ENLACE = matchedItem.getAttribute("href") || matchedItem.href;
+    var spanTitulo = matchedItem.querySelector(".titulo-txt");
+    var NN = spanTitulo ? spanTitulo.textContent : matchedItem.textContent; // Toma solo el nombre, sin (Película)
+    
+    var isMobile = /Mobi|Android|iPhone|iPad|iPod|BlackBerry|IEMobile|Opera Mini/i.test(navigator.userAgent);
+    var tituloLimpio = NN.replace(/🍿|🌐|📺|⚙️/g, '').trim();
 
- var CADENA = ['google.com/file', 'www.dropbox.com', 'play.vidyard', 'okpeliz.com'];
- 
-  if (CADENA.some(dominio => ENLACE.includes(dominio))) {
-    window.location.href = `PLAY.html?titulo=${encodeURIComponent(tituloLimpio)}&url=${encodeURIComponent(ENLACE)}`;
-  } else {
-    if (!isMobile && ENLACE.includes("latino.solo")) {
-      window.location.href = "https://www.google.com/search?q=site:sololatino.net+" + encodeURIComponent(tituloLimpio);
-    } else if (NN.includes('🌐')) {
-      window.location.href = `${ENLACE}?texto=${encodeURIComponent(tituloLimpio)}`;
+    var CADENA = ['google.com/file', 'www.dropbox.com', 'play.vidyard', 'okpeliz.com'];
+    
+    if (CADENA.some(dominio => ENLACE.includes(dominio))) {
+        window.location.href = `PLAY.html?titulo=${encodeURIComponent(tituloLimpio)}&url=${encodeURIComponent(ENLACE)}`;
     } else {
-      window.location.href = ENLACE;
+        if (!isMobile && ENLACE.includes("latino.solo")) {
+            window.location.href = "https://www.google.com/search?q=site:sololatino.net+" + encodeURIComponent(tituloLimpio);
+        } else if (NN.includes('🌐')) {
+            window.location.href = `${ENLACE}?texto=${encodeURIComponent(tituloLimpio)}`;
+        } else {
+            window.location.href = ENLACE;
+        }
     }
-  }
-  
-  var buscadorInput = document.getElementById("buscador");
-  if (buscadorInput) {
-    buscadorInput.value = '';
-  }
+    
+    var buscadorInput = document.getElementById("buscador");
+    if (buscadorInput) {
+        buscadorInput.value = '';
+    }
 }
 
-
-     // MANEJO REAL DEL ENTER 
-document.addEventListener("keydown", function(event) {
-  if (event.target.matches("#buscador") && event.key === "Enter") {
-    event.preventDefault();
-    
-    var In = event.target.value.toLowerCase().trim();
+// NUEVA FUNCIÓN PARA EJECUTAR LA BÚSQUEDA (COMPARTIDA POR ENTER Y LUPA)
+function ejecutarBusqueda(valorInput) {
+    var In = valorInput.toLowerCase().trim();
     if (In === "") return;
 
-    // Función interna para limpiar tildes idéntica a la tuya
     function Tildes(texto, preservarÑ = false) {
-      let limpio = texto.normalize("NFD").replace(/[\u0300-\u036f]/g, "").toLowerCase();
-      if (!preservarÑ) {
-        limpio = limpio.replace(/ñ/g, "n");
-      }
-      return limpio;
+        let limpio = texto.normalize("NFD").replace(/[\u0300-\u036f]/g, "").toLowerCase();
+        if (!preservarÑ) {
+            limpio = limpio.replace(/ñ/g, "n");
+        }
+        return limpio;
     }
 
     var incluyeÑ = In.includes("ñ");
     var InputLimpiado = Tildes(In.replace(/\s+/g, ' '), incluyeÑ);
-    
     var matchedItem = null;
-    
-    var elementosData = document.querySelectorAll(".Data"); 
-    
-        for (var i = 0; i < elementosData.length; i++) {
-      
-       var textoCrudo = elementosData[i].textContent;
-      
-       var textoSinEmojis = textoCrudo.replace(/🍿|🌐|📺|⚙️/g, '').trim();
-      
-      var textoItem = Tildes(textoSinEmojis.toLowerCase(), incluyeÑ);
-      
- if (textoItem === InputLimpiado) { 
-        // Extraemos el enlace <a> que está dentro de este elemento .Data
-        matchedItem = elementosData[i].tagName.toLowerCase() === 'a' ? elementosData[i] : elementosData[i].querySelector("a");
-        if (matchedItem) {
-          break; 
+    var elementosData = document.querySelectorAll(".Data");
+
+    for (var i = 0; i < elementosData.length; i++) {
+        // Corrección: Leer solo el span con la clase .titulo-txt para que el match sea exacto
+        var spanTitulo = elementosData[i].querySelector(".titulo-txt");
+        var textoCrudo = spanTitulo ? spanTitulo.textContent : elementosData[i].textContent;
+
+        var textoSinEmojis = textoCrudo.replace(/🍿|🌐|📺|⚙️/g, '').trim();
+        var textoItem = Tildes(textoSinEmojis.toLowerCase(), incluyeÑ);
+
+        if (textoItem === InputLimpiado) { 
+            matchedItem = elementosData[i].tagName.toLowerCase() === 'a' ? elementosData[i] : elementosData[i].querySelector("a") || elementosData[i];
+            break; 
         }
-      }
     }
 
-    
     if (matchedItem) {
-      procesarEnlace(matchedItem);
+        procesarEnlace(matchedItem);
     } else {
-      if (typeof Check === "function") {
-        Check();
-      }
+        if (typeof Check === "function") {
+            Check();
+        }
     }
-  }
+}
+
+// MANEJO REAL DEL ENTER 
+document.addEventListener("keydown", function(event) {
+    if (event.target.matches("#buscador") && event.key === "Enter") {
+        event.preventDefault();
+        ejecutarBusqueda(event.target.value);
+    }
 });
 
-
-
-     // MANEJO DEL CLICK 
+// MANEJO DEL CLICK 
 document.addEventListener("click", function(event) {
-  var matchedItem = event.target.closest("a"); 
-  
-  if (matchedItem) {
-    var href = matchedItem.getAttribute("href");
-    if (href && href !== "#") {
-      event.preventDefault();
-      procesarEnlace(matchedItem);
+    var matchedItem = event.target.closest("a"); 
+    
+    if (matchedItem && matchedItem.classList.contains("Data")) {
+        var href = matchedItem.getAttribute("href");
+        if (href && href !== "#") {
+            event.preventDefault();
+            procesarEnlace(matchedItem);
+        }
     }
-   }
- });
 });
 
+function Check() {
+    var isMobile = /Mobi|Android|iPhone|iPad|iPod|BlackBerry|IEMobile|Opera Mini/i.test(navigator.userAgent);   
+    const urlDestino = `${'GOOGLE.html'}?texto=${buscador.value}`;
+    var domain = isMobile ? urlDestino : 'https://www.google.com/search?q=site:sololatino.net+' + encodeURIComponent(buscador.value);
+    
+    window.location.href = domain;
+    buscador.value = '';
+}
 
-     function Check() {
-  var isMobile = /Mobi|Android|iPhone|iPad|iPod|BlackBerry|IEMobile|Opera Mini/i.test(navigator.userAgent);   
-  
-          // ?texto=
-  const urlDestino = `${'GOOGLE.html'}?texto=${buscador.value}`;
-      
-     var domain = isMobile ? urlDestino : 'https://www.google.com/search?q=site:sololatino.net+' + encodeURIComponent(buscador.value);
-  
-  window.location.href = domain;
-  buscador.value = '';
+// MANEJO DEL CLICK EN LA LUPA (#Search)
+   Search.onclick = () => {
+    var valorInput = buscador.value.trim();
+    if (valorInput !== "") {
+        // Si hay texto escrito, ejecuta la búsqueda como si se presionara "Enter"
+        ejecutarBusqueda(valorInput);
+    } else {
+        // Si no hay texto, hace el toggle (muestra/oculta el input)
+        buscador.style.display = buscador.style.display === 'block' ? 'none' : 'block';
+        HH.style.display = buscador.style.display === 'block' ? 'none' : 'block';
+        buscador.focus();
+    }
 };
 
-      // SEARCH CLICK
-Search.onclick = () => {
-  if (buscador.value !== '') {
-    Check();
-  } 
-};
 
      
 
@@ -230,28 +241,39 @@ background-size: 600% 600%;
     100%{background-position:0% 50%;}
 }
 #Lista {
-    scale: 90%;
-    left: -3vh;
-    position: fixed;
     display: none;
-    font-size: 30px;
-    margin-top: 20px;
     list-style: none;
-    font-weight: 600;
-    color: #fff;
-    text-align: center;
-    background: #000;
-    height: 60vh;
-    overflow: scroll;
-    border-radius: 20px;
+    padding: 0;
+    margin: 5vh -5vh; 
+    width: 90%;
+    max-height: 60vh;
+    overflow-y: auto;
+    background: #111;
+    position: fixed;
+    z-index: 9999;
+    border-radius: 10px;
+    box-shadow: 0 5px 15px rgba(0,0,0,0.8);
 }
-li {
-    margin: 5px 0;
+.Data {
+    color: #fff;
+    font-weight: bold;
+    font-size: 18px;
+    -webkit-text-stroke: .3px #ff00ff;        
+    text-decoration: none;
+    display: block;
+    padding: 15px;
+    border-bottom: 1px solid #333;
+    font-family: 'Poppins', sans-serif;
+    text-align: left;
+  &:hover {
+      background: #222;
+      color: #4f9;
+  }
 }
 .filtro {
     display: none;
 }
-a {
+#Lista a {
     color: #fff;
   &:hover {
      color: #4f9;

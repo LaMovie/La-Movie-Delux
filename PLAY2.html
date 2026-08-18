@@ -930,11 +930,13 @@ function construirLista() {
             tipo = 'TV';
         } else if (SERIE.some(keyword => url.includes(keyword))) {
             tipo = 'Serie';
+        } else if (nombreMin.includes('🌐')) {
+            tipo = 'Copy';
         }
 
         a.href = item.URL || item.url;
         // Envolvemos name en .titulo-txt para aislarlo en la búsqueda
-        a.innerHTML = `<span class="titulo-txt">${name}</span> <span style="font-size: 11px; color: violet; font-weight: normal; margin-left: 8px;"><br/>(${tipo})</span>`;
+        a.innerHTML = `<span class="titulo-txt">${name}</span> <span style="font-size: 11px; color: #f19; font-weight: normal; margin-left: 8px;"><br/>(${tipo})</span>`;
         a.classList.add("Data");
 
         li.appendChild(a);
