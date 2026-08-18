@@ -169,17 +169,30 @@ function Check() {
     buscador.value = '';
 }
 
+
 // MANEJO DEL CLICK EN LA LUPA (#Search)
-Search.onclick = () => {
+    Search.onclick = (e) => {
+       e.preventDefault(); 
+    
     var valorInput = buscador.value.trim();
+    
     if (valorInput !== "") {
-        // Si hay texto escrito, ejecuta la búsqueda como si se presionara "Enter"
         ejecutarBusqueda(valorInput);
-    } else {
-        // Si no hay texto, hace el toggle (muestra/oculta el input)
-        buscador.style.display = buscador.style.display === 'block' ? 'none' : 'block';
-        HH.style.display = buscador.style.display === 'block' ? 'none' : 'block';
-        buscador.focus();
+         } else {
+   if (buscador.style.display === 'block') {
+            // Ocultar
+  buscador.style.display = 'none';
+   if (typeof HH !== 'undefined') HH.style.display = 'block';   
+      buscador.blur(); // Asegura que el teclado se cierre     
+        } else {
+            // Mostrar
+ buscador.style.display = 'block';
+  if (typeof HH !== 'undefined') HH.style.display = 'none';   
+            
+            // TRUCO CLAVE: Fuerza al DOM a renderizar el display:block inmediatamente
+   void buscador.offsetHeight; 
+           buscador.focus();
+        }
     }
 };
 
@@ -384,7 +397,7 @@ h1 {
   Logo.style.display = 'none';
 };
    
-buscador.onblur = () => {
+   buscador.onblur = () => {
  // buscador.style.marginTop = '25vh';
  Logo.style.display = 'block'; 
 };
