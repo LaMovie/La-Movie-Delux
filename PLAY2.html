@@ -124,7 +124,7 @@ a {
 #No {
     scale: 70%;
     display: none;
-    margin-top: 27vh;
+    margin-top: 5vh;
     position: fixed; 
     border-radius: 50px;
   &:hover {
@@ -186,10 +186,6 @@ a {
     background-position: center;
     height: 250px;
     border-radius: 10px;
-}
-#No {
-    width: 15%;
-    opacity: .4;
 }
 /* ========================================================= */
 
@@ -1087,6 +1083,10 @@ document.addEventListener("click", function(event) {
     HH.style.display = buscador.style.display === 'block' ? 'none' : 'block';
     buscador.focus();
 };
+
+  No.onclick = () => {
+      Check();
+  }
 
       // BUSCADORES
       const S = [
