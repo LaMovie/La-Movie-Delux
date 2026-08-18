@@ -909,31 +909,43 @@ function enviarReporte() {
 </script>
         <!-- BUSCADOR -->
 <script>
+   var PELI  = ['file', 'movie', 'vidyard.com', 'dropbox', 'gallery=open'];
+var SERIE = ['folders', 'drama', 'publicfoldergrid'];
+
    function construirLista() {
-var PELIS = [...Lista1, ...Lista2, ...Lista3];
+  var PELIS = [...Lista1, ...Lista2, ...Lista3];
+  var lista = document.getElementById("Lista");
 
-var lista = document.getElementById("Lista");
-  
-// Agrega los nuevos elementos dinámicamente
-    PELIS.forEach(item => {
-  
-  var li = document.createElement("li");
-  var a = document.createElement("a");
+  PELIS.forEach(item => {
+    var li = document.createElement("li");
+    var a = document.createElement("a");
+    
+    var url = (item.URL || item.url || '');
+    var name = item.NAME || item.name || '';
+    var nombreMin = name.toLowerCase();
 
-  a.href = item.URL || item.url;
-  a.textContent = item.NAME || item.name;
-  a.classList.add("Data");
+    var tipo = 'Película'; 
 
-  li.appendChild(a);
-  lista.appendChild(li);
-});
+  if (nombreMin.includes('tv')) {
+        tipo = 'TV';
+    } else if (SERIE.some(keyword => url.includes(keyword))) {
+      tipo = 'Serie';
+    }
+
+    a.href = item.URL || item.url;
+    // Envolvemos name en .titulo-txt para aislarlo en la búsqueda
+    a.innerHTML = `<span class="titulo-txt">${name}</span> <span style="font-size: 11px; color: violet; font-weight: normal; margin-left: 8px;"><br/>(${tipo})</span>`;
+    a.classList.add("Data");
+
+    li.appendChild(a);
+    lista.appendChild(li);
+  });
 }
 
 
 
 document.addEventListener("keyup", e => {
 
-  // TILDES
   function Tildes(texto, preservarÑ = false) {
     let limpio = texto.normalize("NFD").replace(/[\u0300-\u036f]/g, "").toLowerCase();
     if (!preservarÑ) {
@@ -952,8 +964,11 @@ document.addEventListener("keyup", e => {
     Lista.style.display = Input === '' ? "none" : "block";
 
     Data.forEach(item => {
-      let itemText = Tildes(item.textContent.toLowerCase().trim(), incluyeÑ);
-   if (itemText.includes(Input)) {
+      // Lee únicamente el nombre real, ignorando la etiqueta de (Película/Serie)
+      let elTitulo = item.querySelector(".titulo-txt") ? item.querySelector(".titulo-txt").textContent : item.textContent;
+      let itemText = Tildes(elTitulo.toLowerCase().trim(), incluyeÑ);
+
+  if (itemText.includes(Input)) {
         item.classList.remove("filtro");
         foundMatch = true;
       } else {
@@ -964,6 +979,7 @@ document.addEventListener("keyup", e => {
     No.style.display = foundMatch ? "none" : "block";
   }
 
+  
 
      // FUNCIÓN CENTRALIZADA
 function procesarEnlace(matchedItem) {
@@ -978,7 +994,7 @@ function procesarEnlace(matchedItem) {
  var CADENA = ['google.com/file', 'www.dropbox.com', 'play.vidyard', 'okpeliz.com'];
  
   if (CADENA.some(dominio => ENLACE.includes(dominio))) {
-    window.location.href = `PLAY2.html?titulo=${encodeURIComponent(tituloLimpio)}&url=${encodeURIComponent(ENLACE)}`;
+    window.location.href = `PLAY.html?titulo=${encodeURIComponent(tituloLimpio)}&url=${encodeURIComponent(ENLACE)}`;
   } else {
     if (!isMobile && ENLACE.includes("latino.solo")) {
       window.location.href = "https://www.google.com/search?q=site:sololatino.net+" + encodeURIComponent(tituloLimpio);
@@ -1003,8 +1019,7 @@ document.addEventListener("keydown", function(event) {
     
     var In = event.target.value.toLowerCase().trim();
     if (In === "") return;
-
-    // Función interna para limpiar tildes idéntica a la tuya
+    
     function Tildes(texto, preservarÑ = false) {
       let limpio = texto.normalize("NFD").replace(/[\u0300-\u036f]/g, "").toLowerCase();
       if (!preservarÑ) {
