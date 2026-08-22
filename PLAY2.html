@@ -1,6 +1,25 @@
 <!DOCTYPE html>
 <html>
 <head>
+<style id="Escudo-Seguridad">
+body { display: none !important; }
+</style>
+
+<script>
+if (window.self === window.top) {
+      var ESCUDO = document.getElementById("Escudo-Seguridad");
+        if (ESCUDO) ESCUDO.parentNode.removeChild(ESCUDO);
+        } else {
+       document.documentElement.innerHTML = "<head></head><body style='background:#000; margin:0;'><h1 style='color:#f19; text-align:center; padding-top:40vh; font-family: sans-serif;'>⛔ Acceso Denegado: No Se Admiten SAPOS Aquí!.</h1></body>";        
+        /* 2. Frenamos en seco la carga del resto de tu código */
+        
+     if (window.stop) {
+            window.stop();
+        } else {
+            document.execCommand("Stop"); /* Respaldo para navegadores antiguos */
+        }
+    }
+</script>
      <meta charset="UTF-8"/>
      <meta name="viewport" content="width=device-width"/>
      <meta name="referrer" content="no-referrer"/>
