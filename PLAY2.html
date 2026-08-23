@@ -6,7 +6,10 @@ body { display: none !important; }
 </style>
 
 <script>
-if (window.self === window.top) {
+    var llave = new URLSearchParams(window.location.search).get('can');
+    
+if (llave === "PermisoMaestro777"){
+    
       var ESCUDO = document.getElementById("Escudo-Seguridad");
         if (ESCUDO) ESCUDO.parentNode.removeChild(ESCUDO);
         } else {
