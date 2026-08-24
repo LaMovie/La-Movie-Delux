@@ -6,10 +6,7 @@ body { display: none !important; }
 </style>
 
 <script>
-    var llave = new URLSearchParams(window.location.search).get('can');
-    
-if (llave === "PermisoMaestro777"){
-    
+ if (window.self === window.top) {
       var ESCUDO = document.getElementById("Escudo-Seguridad");
         if (ESCUDO) ESCUDO.parentNode.removeChild(ESCUDO);
         } else {
@@ -810,7 +807,7 @@ function cargarSugerencias() {
         let urlCodificada = encodeURIComponent(peli.url);
         
         let accionClick = peli.esDrive 
-            ? `onclick="window.location.href='?can=PermisoMaestro777&titulo=${tituloCodificado}&url=${urlCodificada}'"`
+            ? `onclick="window.location.href='?titulo=${tituloCodificado}&url=${urlCodificada}'"`
             : `onclick="window.location.href='${peli.url}'"`;
 
         html += `
@@ -1014,7 +1011,7 @@ function procesarEnlace(matchedItem) {
     var CADENA = ['google.com/file', 'www.dropbox.com', 'play.vidyard', 'okpeliz.com'];
     
     if (CADENA.some(dominio => ENLACE.includes(dominio))) {
-        window.location.href = `PLAY2.html?can=PermisoMaestro777&titulo=${encodeURIComponent(tituloLimpio)}&url=${encodeURIComponent(ENLACE)}`;
+        window.location.href = `PLAY2.html?titulo=${encodeURIComponent(tituloLimpio)}&url=${encodeURIComponent(ENLACE)}`;
     } else {
         if (!isMobile && ENLACE.includes("latino.solo")) {
             window.location.href = "https://www.google.com/search?q=site:sololatino.net+" + encodeURIComponent(tituloLimpio);

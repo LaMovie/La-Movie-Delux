@@ -81,7 +81,7 @@ function procesarEnlace(matchedItem) {
     var CADENA = ['google.com/file', 'www.dropbox.com', 'play.vidyard', 'okpeliz.com'];
     
     if (CADENA.some(dominio => ENLACE.includes(dominio))) {
-        window.location.href = `PLAY.html?can=PermisoMaestro777&titulo=${encodeURIComponent(tituloLimpio)}&url=${encodeURIComponent(ENLACE)}`;
+        window.location.href = `PLAY.html?titulo=${encodeURIComponent(tituloLimpio)}&url=${encodeURIComponent(ENLACE)}`;
     } else {
         if (!isMobile && ENLACE.includes("latino.solo")) {
             window.location.href = "https://www.google.com/search?q=site:sololatino.net+" + encodeURIComponent(tituloLimpio);
@@ -200,7 +200,7 @@ function Check() {
      
 
    function openMovie(titulo, urlArchivo) {
-  const urlDestino = `PLAY2.html?can=PermisoMaestro777&titulo=${encodeURIComponent(titulo)}&url=${encodeURIComponent(urlArchivo)}`;
+  const urlDestino = `PLAY2.html?titulo=${encodeURIComponent(titulo)}&url=${encodeURIComponent(urlArchivo)}`;
    
   window.location.href = urlDestino;
 }
