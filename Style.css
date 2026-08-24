@@ -284,10 +284,10 @@ header .menu {
     to {scale: 9%;}
 }
 #Search {
-    width: 80%;
+    width: 50px; 
     border-radius: 50px;
     position: fixed;
-    left: 45vh;
+    right: 20px; /* Siempre a 20 pixeles del borde derecho, sin importar si es PC o móvil */
     z-index: 9999;
     background: rgb(0,0,0, .5);
 }
