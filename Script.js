@@ -159,8 +159,8 @@ function Links(iframe) {
  });
 }); 
 
+ 
   // --- IMG CON href ---
-
 var Div = document.querySelectorAll('.Div');
 
 Div.forEach(divElement => {
@@ -168,18 +168,25 @@ Div.forEach(divElement => {
         // 1. Busca el enlace (etiqueta <a>) dentro del div actual.
         let linkElement = divElement.querySelector('a');
 
-   // 2. Verifica que el enlace existe y obtiene su URL (href).
+        // 2. Verifica que el enlace existe y obtiene su URL (href).
         if (linkElement && linkElement.href) {
-            let url = linkElement.href;
+     // Guardamos la URL original
+   let url = linkElement.href; 
             
-  // 3. Redirige a esa URL.
-    window.location.href = url;
+     // 3. Detectamos si es un dispositivo móvil
+            var isMobile = /Mobi|Android|iPhone|iPad|iPod|BlackBerry|IEMobile|Opera Mini/i.test(navigator.userAgent);
             
-  // Si quisieras abrirlo en una pestaña nueva, usarías:
- // window.open(url, '_blank'); 
+            if (isMobile) {
+ // En móviles, va a la URL normal adquirida
+     window.location.href = url;
+            } else {
+     url = url.replace('latino.solo-latino', 'h5.swplayer'); 
+   window.location.href = url;
+            }
         }
     });
 });
+
 
 
 
@@ -204,36 +211,16 @@ document.onclick = (event) => {
     // Si no se hizo clic en ningún enlace, no hacemos nada
     if (!anchor) return;
 
-    // 🌟 NUEVA VALIDACIÓN: Si el enlace tiene la clase "Head" o "Data", ignoramos el script
-    
-     if (anchor.matches('.Head, .Data, .Not, .baa')) return;
-
-
-    // Evitamos que abra el enlace original en la computadora si no es un elemento "Head"
+       // Evitamos que abra el enlace original en la computadora si no es un elemento "Head"
     event.preventDefault();
 
-    let buscadorTexto = "";
-
-    // Verificamos si el enlace pertenece o está dentro del contenedor con ID "Gallery"
- if (anchor.closest('#Gallery')) {
-        let img = anchor.querySelector('img');
-        // Si hay una imagen, extraemos su atributo 'alt'
-        buscadorTexto = img ? img.getAttribute('alt') : "";
-    } else {
-        // Para cualquier otro enlace del sitio, buscamos un h4 o el texto del enlace
-        let h4 = anchor.querySelector('h4') || anchor.querySelector('h3');
-        buscadorTexto = h4 ? h4.textContent : anchor.textContent;
-    }
-
-    // Limpiamos espacios en blanco extras que puedan estorbar en la búsqueda
-    buscadorTexto = buscadorTexto.trim();
-
-    // Si encontramos texto válido para buscar, redirigimos a sololatino.net
-    if (buscadorTexto) {
-        window.location.href = 'https://sololatino.net/buscar?q=' + encodeURIComponent(buscadorTexto);
-    } else {
+    
+    if (anchor) {
+     var URLs = anchor.href.replace('latino.solo-latino', 'h5.swplayer');   
+  window.location.href = URLs;
+       } else {
         // Si por alguna razón el enlace no tiene texto (ej. botones vacíos), abrimos su href original
-        window.location.href = anchor.href;
+ window.location.href = anchor.href;
     }
 };
 
