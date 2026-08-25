@@ -1043,11 +1043,11 @@ function procesarEnlace(matchedItem) {
         window.location.href = `PLAY2.html?titulo=${encodeURIComponent(tituloLimpio)}&url=${encodeURIComponent(ENLACE)}`;
     } else {
         if (!isMobile && ENLACE.includes("latino.solo")) {
-            window.location.href = "https://www.google.com/search?q=site:sololatino.net+" + encodeURIComponent(tituloLimpio);
+            window.location.href = "https://sololatino.net/buscar?q=" + encodeURIComponent(tituloLimpio);
         } else if (NN.includes('🌐')) {
             window.location.href = `${ENLACE}?texto=${encodeURIComponent(tituloLimpio)}`;
         } else {
-            window.location.href = ENLACE;
+   window.location.href = ENLACE;
         }
     }
     
@@ -1119,7 +1119,7 @@ document.addEventListener("click", function(event) {
     }
 });
 
-function Check() {
+       function Check() {
     var isMobile = /Mobi|Android|iPhone|iPad|iPod|BlackBerry|IEMobile|Opera Mini/i.test(navigator.userAgent);   
     const urlDestino = `${'GOOGLE.html'}?texto=${buscador.value}`;
     var domain = isMobile ? urlDestino : 'https://www.google.com/search?q=site:sololatino.net+' + encodeURIComponent(buscador.value);
