@@ -87,7 +87,7 @@ function procesarEnlace(matchedItem) {
      var ENLACE = ENLACE.replace('latino.solo-latino', 'h5.swplayer');   
     window.location.href = ENLACE;
         } else if (NN.includes('🌐')) {
-            window.location.href = `${ENLACE}?texto=${encodeURIComponent(tituloLimpio)}`;
+     abrirFuera(`${ENLACE}?texto=${encodeURIComponent(tituloLimpio)}`);
         } else {
    window.location.href = ENLACE;
         }
