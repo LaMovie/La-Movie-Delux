@@ -833,7 +833,8 @@ var baseDePeliculas = [
             }
         } else { 
             if (!peli.esDrive) {
-                accionClick = `onclick="window.location.href='https://sololatino.net/buscar?q=${peli.titulo}'"`;
+    var ENLACE = peli.url.replace('latino.solo-latino', 'h5.swplayer');          
+                accionClick = `onclick="window.location.href='${ENLACE}'"`;
             } else {
                accionClick = `onclick="window.location.href='?titulo=${tituloCodificado}&url=${urlCodificada}'"`;
             }
@@ -1043,7 +1044,8 @@ function procesarEnlace(matchedItem) {
         window.location.href = `PLAY2.html?titulo=${encodeURIComponent(tituloLimpio)}&url=${encodeURIComponent(ENLACE)}`;
     } else {
         if (!isMobile && ENLACE.includes("latino.solo")) {
-            window.location.href = "https://sololatino.net/buscar?q=" + encodeURIComponent(tituloLimpio);
+      var ENLACE = ENLACE.replace('latino.solo-latino', 'h5.swplayer');
+   window.location.href = ENLACE;
         } else if (NN.includes('🌐')) {
             window.location.href = `${ENLACE}?texto=${encodeURIComponent(tituloLimpio)}`;
         } else {
