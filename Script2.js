@@ -84,7 +84,7 @@ function procesarEnlace(matchedItem) {
         window.location.href = `PLAY.html?titulo=${encodeURIComponent(tituloLimpio)}&url=${encodeURIComponent(ENLACE)}`;
     } else {
         if (!isMobile && ENLACE.includes("latino.solo")) {
-            window.location.href = "https://www.google.com/search?q=site:sololatino.net+" + encodeURIComponent(tituloLimpio);
+            window.location.href = "https://sololatino.net/buscar?q=" + encodeURIComponent(tituloLimpio);
         } else if (NN.includes('🌐')) {
             window.location.href = `${ENLACE}?texto=${encodeURIComponent(tituloLimpio)}`;
         } else {
@@ -167,7 +167,7 @@ function Check() {
     
     window.location.href = domain;
     buscador.value = '';
-}
+} 
 
 
 // MANEJO DEL CLICK EN LA LUPA (#Search)
