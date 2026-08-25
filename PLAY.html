@@ -834,7 +834,7 @@ var baseDePeliculas = [
     { titulo: "INSIDIOUS", img: "https://is.gd/4LWftO", url: "https://latino.solo-latino.com/es/detail/movie/hPFISrTZvs8br50pamppW-Insidious-The-Red-Door", esDrive: false },
     { titulo: "JEFES DE ESTADO", img: "https://is.gd/sk0xCm", url: "https://latino.solo-latino.com/es/detail/movie/rrQXkwHIOEIbO7wTztI5Q-Heads-of-State", esDrive: false },
     { titulo: "NOVOCAINE", img: "https://is.gd/XX9uzA", url: "https://drive.google.com/file/d/1nrGqoPR0FhL5kRN7GXjsdCImWN5kx0bT/view?usp=drivesdk", esDrive: true },
-    { titulo: "DEADPOOL COMBO", img: "https://da.gd/3EfU", url: "https://latino.solo-latino.com/es/detail/movie/Sm4iKjSI9DVzPI7UGbcnD-Deadpool", esDrive: false }, 
+    { titulo: "DEADPOOL", img: "https://da.gd/3EfU", url: "https://latino.solo-latino.com/es/detail/movie/Sm4iKjSI9DVzPI7UGbcnD-Deadpool", esDrive: false }, 
     { titulo: "MICKEY 17", img: "https://is.gd/Y85MuO", url: "https://latino.solo-latino.com/es/detail/movie/7q4J3O1a9zSoYoehLzJao-Mickey-17", esDrive: false },
     { titulo: "Y DONDE ESTA EL POLICIA", img: "https://is.gd/bzxzsT", url: "https://latino.solo-latino.com/es/detail/movie/8pA6TQGFdomCRoUrz2mwf-The-Naked-Gun", esDrive: false },
     { titulo: "AMIGOS PASAJEROS 2", img: "https://is.gd/6ACwQa", url: "https://latino.solo-latino.com/es/detail/movie/88640-Vacation-Friends-2", esDrive: false },
@@ -847,37 +847,49 @@ var baseDePeliculas = [
     { titulo: "LA CASA DEL DRAGON", img: "https://da.gd/rlkb1", url: "https://latino.solo-latino.com/es/detail/drama/fv3CdkPKbxP0JtCNSREsK-House-of-the-Dragon[Audio-Latino]/1", esDrive: false }
 ];
 
-function cargarSugerencias() {
+
+  function cargarSugerencias() {
     const contenedor = document.getElementById('Sugerencias');
     if (!contenedor) return;
 
-    // 2. Mezclar el array aleatoriamente (Algoritmo Fisher-Yates)
-    
+    // 2. Mezclar el array aleatoriamente
     let mezcladas = [...baseDePeliculas].sort(() => 0.5 - Math.random());
-    
     let seleccionadas = mezcladas.slice(0, 6);
 
-     // AQUÍ SE APLICAN LOS SPANS PARA LA ANIMACIÓN DE SALTOS
-     let html = '<h3 class="sug-titulo">🧋 <span class="salto-1">TE</span> <span class="salto-2">PODRÍA</span> <span class="salto-3">INTERESAR</span> 🧋</h3><div class="sug-wrapper">';
+    // AQUÍ SE APLICAN LOS SPANS PARA LA ANIMACIÓN DE SALTOS
+    let html = '<h3 class="sug-titulo">🧋 <span class="salto-1">TE</span> <span class="salto-2">PODRÍA</span> <span class="salto-3">INTERESAR</span> 🧋</h3><div class="sug-wrapper">';
 
     seleccionadas.forEach(peli => {
         let tituloCodificado = encodeURIComponent(peli.titulo);
         let urlCodificada = encodeURIComponent(peli.url);
         
-        let accionClick = peli.esDrive 
-            ? `onclick="window.location.href='?titulo=${tituloCodificado}&url=${urlCodificada}'"`
-            : `onclick="window.location.href='${peli.url}'"`;
+        var isMobile = /Mobi|Android|iPhone|iPad|iPod|BlackBerry|IEMobile|Opera Mini/i.test(navigator.userAgent);
+        let accionClick = "";
+
+        if (isMobile) {
+            if (peli.esDrive) {
+                accionClick = `onclick="window.location.href='?titulo=${tituloCodificado}&url=${urlCodificada}'"`;
+            } else {
+                accionClick = `onclick="window.location.href='${peli.url}'"`;           
+            }
+        } else { 
+            if (!peli.esDrive) {
+                accionClick = `onclick="window.location.href='https://sololatino.net/buscar?q=${peli.titulo}'"`;
+            } else {
+               accionClick = `onclick="window.location.href='?titulo=${tituloCodificado}&url=${urlCodificada}'"`;
+            }
+        }
 
         html += `
         <div class="sug-item" ${accionClick}>
             <img src="${peli.img}" alt="${peli.titulo}">
             <h4>${peli.titulo}</h4>
         </div>`;
-    });
-    
+    }); 
+
     html += '</div>';
-    
- 
+
+
     contenedor.innerHTML = html;
 }
 
