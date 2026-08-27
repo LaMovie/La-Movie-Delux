@@ -409,7 +409,7 @@ h1 {
        
       // BUSCADORES
       const S = [
-  "Buscador.js",
+  "https://lamovie.github.io/Buscador/Buscador.js",
   "https://lamovie.github.io/Buscador/Buscador2.js",
   "https://lamovie.github.io/Buscador/Buscador3.js"
 ];
