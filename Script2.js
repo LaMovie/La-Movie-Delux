@@ -77,7 +77,7 @@ function procesarEnlace(matchedItem) {
     
     var isMobile = /Mobi|Android|iPhone|iPad|iPod|BlackBerry|IEMobile|Opera Mini/i.test(navigator.userAgent);
     
-    var tituloLimpio = NN.replace(/🍿|🌐|📺|⚙️/g, '').trim();
+    var tituloLimpio = NN.replace(/🍿|🌐|📺|⚙️|🧋/g, '').trim();
 
     var CADENA = ['google.com/file', 'www.dropbox.com', 'play.vidyard', 'okpeliz.com'];
     
@@ -127,7 +127,7 @@ function ejecutarBusqueda(valorInput) {
         var spanTitulo = elementosData[i].querySelector(".titulo-txt");
         var textoCrudo = spanTitulo ? spanTitulo.textContent : elementosData[i].textContent;
 
-        var textoSinEmojis = textoCrudo.replace(/🍿|🌐|📺|⚙️/g, '').trim();
+        var textoSinEmojis = textoCrudo.replace(/🍿|🌐|📺|⚙️|🧋/g, '').trim();
         var textoItem = Tildes(textoSinEmojis.toLowerCase(), incluyeÑ);
 
         if (textoItem === InputLimpiado) { 
@@ -414,7 +414,7 @@ h1 {
       const S = [
   "https://lamovie.github.io/Buscador/Buscador.js",
   "https://lamovie.github.io/Buscador/Buscador2.js",
-  "https://lamovie.github.io/Buscador/Buscador3.js"
+  "Buscador3.js"
 ];
 
   let scriptsCargados = 0;

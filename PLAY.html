@@ -730,7 +730,8 @@ var API_KEY = "2c0b94c5ec729e2cc59b8be6ad7b2159";
 // 1. OBTENER PARÁMETROS GLOBALES
 const params = new URLSearchParams(window.location.search);
 var urlCapt = params.get('url');
-var tituloCapt = params.get('titulo');
+var N = params.get('titulo');
+var tituloCapt = '🧋' + N;
 
 // 2. LÓGICA PRINCIPAL INTEGRADA AL CARGAR EL DOM
 window.addEventListener('DOMContentLoaded', async () => {
@@ -769,7 +770,7 @@ window.addEventListener('DOMContentLoaded', async () => {
     const S = [
         "https://lamovie.github.io/Buscador/Buscador.js",
         "https://lamovie.github.io/Buscador/Buscador2.js",
-        "https://lamovie.github.io/Buscador/Buscador3.js"
+        "Buscador3.js"
     ];
     
     let scriptsCargados = 0;
