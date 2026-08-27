@@ -66,6 +66,13 @@ body {
     F.src = URL; 
     T.textContent = TITULO;
   }    
+  
+    var isMobile = /Mobi|Android|iPhone|iPad|iPod|BlackBerry|IEMobile|Opera Mini/i.test(navigator.userAgent);
+    
+       if (!isMobile) {
+ var TITULO = TITULO.replace('🍿', '')         
+      window.location.href = `https://www.google.com/search?q=site:sololatino.net+${TITULO}`;
+    };
 </script>
 </body>
 </html>
