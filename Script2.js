@@ -414,7 +414,7 @@ h1 {
       const S = [
   "https://lamovie.github.io/Buscador/Buscador.js",
   "https://lamovie.github.io/Buscador/Buscador2.js",
-  "Buscador3.js"
+  "https://lamovie.github.io/Buscador/Buscador3.js"
 ];
 
   let scriptsCargados = 0;
