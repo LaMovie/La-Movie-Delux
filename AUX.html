@@ -19,7 +19,6 @@ document.documentElement.innerHTML = "<head></head><body style='background:#000;
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>SEARCH?q=</title>
-   <link rel="stylesheet" href="style.css"/>
    <link href="https://fonts.googleapis.com/css2?family=Luckiest+Guy&display=swap" rel="stylesheet"/>
 <style>
 body {     
@@ -29,9 +28,9 @@ body {
     color: gray;    
     width: 100%;
     height: 20vh;
-    z-index: 9999;  
+    z-index: 9999;    
     position: fixed;
-    background: #000;   
+    background: #000; 
     display: flex;
     align-items: center;
     justify-content: center;
@@ -39,48 +38,102 @@ body {
     -webkit-text-stroke: .1px #003;
     text-shadow: 0px .1px 0 #001;  
 }
-#T {
+.Div span {
     opacity: .6;
 }
 #F {
     width: 100%;
-    height: 58vh;  
+    height: 58vh;
     margin-top: 10vh;
     aspect-ratio: 6/19;
     border-radius: 20px;
     border: none;
 }
+
+#Caja {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    gap: 10px;        /* Espacio entre botones */
+    width: 100%;
+    position: fixed;
+    bottom: 20px;     /* Lo pega en la parte de abajo de la pantalla */
+    z-index: 9999;
+    overflow-x: auto; /* Permite deslizar si hay muchos capítulos */
+    padding: 10px;
+}
+
+.Btn {
+    background: blue; 
+    color: white;
+    padding: 10px 15px;
+    border-radius: 10px;
+    text-decoration: none;
+    font-family: sans-serif;
+    font-weight: bold;
+    cursor: pointer;
+}
+.Btn:hover {
+    background: #4f9;
+    color: #000;
+    box-shadow: 0 0 10px rgba(68, 255, 153, 0.8);
+}
 </style>
 </head>
 <body>
+<!-- Dentro de tu <body>, así queda el centro de tu HTML -->
 <center>
-<div class="Div"><h3 id="T">La Movie Aux</h3></div>
-     <iframe id="F" src="" frameborder="1" allowfullscreen="true" allow="encrypted-media" allow="autoplay" scrolling="no" sandbox="allow-scripts allow-same-origin"></iframe>  
-            
+    <div class="Div"><span id="T">La Movie Aux</span></div>
+    <iframe id="F" src="" frameborder="1" allowfullscreen="true" allow="encrypted-media" allow="autoplay" scrolling="no" sandbox="allow-scripts allow-same-origin"></iframe>  
 </center>
+
+<!-- Aquí creamos la caja vacía para los capítulos -->
+     <div id="Caja"></div>
+
+<!-- Primero cargas la lista, luego tu script -->
+<script src="Buscador3.js"></script>
 <script>
-     var params = new URLSearchParams(window.location.search);
- var TITULO = params.get('titulo');
-   var URL = params.get('url');
+       var params = new URLSearchParams(window.location.search);
+var TITULO = params.get('titulo');
+var URL = params.get('url');
    
-         if (TITULO && URL) {
+  if (TITULO && URL) {
+     // 1. Ponemos la URL y el Título principal
     F.src = URL; 
     T.textContent = TITULO;
-  }    
-  
-    var isMobile = /Mobi|Android|iPhone|iPad|iPod|BlackBerry|IEMobile|Opera Mini/i.test(navigator.userAgent);
-    
-       if (!isMobile) {
- var TITULO = TITULO.replace('🍿', '')         
-      window.location.href = `https://www.google.com/search?q=site:sololatino.net+${TITULO}`;
-    };       
+
+    // 2. Buscamos la serie en Lista3 (soporta NAME o name)
+    var serie = Lista3.find(item => (item.NAME || item.name) === TITULO);
+
+    // 3. Si la serie existe y tiene el subarray CAPS, creamos los botones
+    if (serie && serie.CAPS) {
+  serie.CAPS.forEach(capitulo => {
+            var boton = document.createElement('a');
+ boton.textContent = capitulo.cap;
+    boton.className = 'Btn';
+            
+            // Al hacer clic, cambiamos el video del iframe sin recargar la página
+   boton.onclick = function() {
+    F.src = capitulo.link;
+            };
+            
+     Caja.appendChild(boton);
+        });
+    }
+}
+     
+     var isMobile = /Mobi|Android|iPhone|iPad|iPod|BlackBerry|IEMobile|Opera Mini/i.test(navigator.userAgent);
+
+      if (!isMobile) {
+    var TITULO_LIMPIO = TITULO.replace('🍿', '');   
+             
+    window.location.href = `https://www.google.com/search?q=site:sololatino.net+${TITULO_LIMPIO}`;
+}
 </script>
 </body>
 </html>
 
- 
-
-
+ <!-- https://pelisflix1.pics/pelicula/la-noche-del-demonio-estan-entre-nosotros/ -->
 
 
 

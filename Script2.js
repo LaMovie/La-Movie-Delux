@@ -76,6 +76,7 @@ function procesarEnlace(matchedItem) {
     var NN = spanTitulo ? spanTitulo.textContent : matchedItem.textContent; // Toma solo el nombre, sin (Película)
     
     var isMobile = /Mobi|Android|iPhone|iPad|iPod|BlackBerry|IEMobile|Opera Mini/i.test(navigator.userAgent);
+    
     var tituloLimpio = NN.replace(/🍿|🌐|📺|⚙️/g, '').trim();
 
     var CADENA = ['google.com/file', 'www.dropbox.com', 'play.vidyard', 'okpeliz.com'];
@@ -88,6 +89,8 @@ function procesarEnlace(matchedItem) {
     window.location.href = ENLACE;
         } else if (NN.includes('🌐')) {
      abrirFuera(`${ENLACE}?texto=${encodeURIComponent(tituloLimpio)}`);
+        } else if (NN.includes('🧋')) {
+  window.location.href = `PLAY.html?titulo=${NN}&url=${ENLACE}`;          
         } else if (ENLACE.includes('pelisflix')) {
   window.location.href = `AUX.html?titulo=${NN}&url=${ENLACE}`;          
         } else {
