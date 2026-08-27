@@ -88,6 +88,8 @@ function procesarEnlace(matchedItem) {
     window.location.href = ENLACE;
         } else if (NN.includes('🌐')) {
      abrirFuera(`${ENLACE}?texto=${encodeURIComponent(tituloLimpio)}`);
+        } else if (ENLACE.includes('pelisflix')) {
+  window.location.href = `AUX.html?titulo=${NN}&url=${ENLACE}`;          
         } else {
    window.location.href = ENLACE;
         }
@@ -407,7 +409,7 @@ h1 {
        
       // BUSCADORES
       const S = [
-  "https://lamovie.github.io/Buscador/Buscador.js",
+  "Buscador.js",
   "https://lamovie.github.io/Buscador/Buscador2.js",
   "https://lamovie.github.io/Buscador/Buscador3.js"
 ];
