@@ -50,30 +50,13 @@ body {
     border-radius: 20px;
     border: none;
 }
-#FULL {     
-    width: 20%;
-    color: #000;   
-    opacity: 0.5;
-    padding: 1px;
-    font-size: 10px; 
-    background: gray;
-    font-weight: bold;       
-    border-radius: 50px;
-    border: none;
-    transition: 0.3s;
-}
-#FULL:hover {
-    color: #fff;
-    background: blue;
-}
 </style>
 </head>
 <body>
 <center>
 <div class="Div"><h3 id="T">La Movie Aux</h3></div>
      <iframe id="F" src="" frameborder="1" allowfullscreen="true" allow="encrypted-media" allow="autoplay" scrolling="no" sandbox="allow-scripts allow-same-origin"></iframe>  
-     <button id="FULL">Pantalla Completa</button>
-       
+            
 </center>
 <script>
      var params = new URLSearchParams(window.location.search);
@@ -90,35 +73,7 @@ body {
        if (!isMobile) {
  var TITULO = TITULO.replace('🍿', '')         
       window.location.href = `https://www.google.com/search?q=site:sololatino.net+${TITULO}`;
-    };
-    
-     
-       // FULLSCREEN       
-  var iframe = document.getElementById('F');
-  
-    FULL.onclick = () => {
-        if (iframe.requestFullscreen) {
-            iframe.requestFullscreen();
-        } else if (iframe.mozRequestFullScreen) {
-            iframe.mozRequestFullScreen();
-        } else if (iframe.webkitRequestFullscreen) {
-            iframe.webkitRequestFullscreen();
-        } else if (iframe.msRequestFullscreen) {
-            iframe.msRequestFullscreen();
-        }
-    };
-
-    document.addEventListener('fullscreenchange', function() {
-        if (document.fullscreenElement) {
-            if (screen.orientation && screen.orientation.lock) {
-                screen.orientation.lock('landscape').catch(()=>{});
-            }
-        } else {
-            if (screen.orientation && screen.orientation.lock) {
-                screen.orientation.lock('portrait').catch(()=>{});
-            }
-        }
-    });
+    };       
 </script>
 </body>
 </html>
