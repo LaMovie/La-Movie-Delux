@@ -161,31 +161,29 @@ function Links(iframe) {
 
  
   // --- IMG CON href ---
-var Div = document.querySelectorAll('.Div');
+    var Div = document.querySelectorAll('.Div');
 
 Div.forEach(divElement => {
-    divElement.addEventListener('click', () => {
-        // 1. Busca el enlace (etiqueta <a>) dentro del div actual.
+    divElement.addEventListener('click', (event) => { // 🔴 Agregar event aquí
         let linkElement = divElement.querySelector('a');
 
-        // 2. Verifica que el enlace existe y obtiene su URL (href).
         if (linkElement && linkElement.href) {
-     // Guardamos la URL original
-   let url = linkElement.href; 
-            
-     // 3. Detectamos si es un dispositivo móvil
+            event.preventDefault(); // 🔴 Evita que el navegador lance el enlace original
+            event.stopPropagation(); // 🔴 Evita que el document.onclick interfiera
+
+            let url = linkElement.href; 
             var isMobile = /Mobi|Android|iPhone|iPad|iPod|BlackBerry|IEMobile|Opera Mini/i.test(navigator.userAgent);
             
             if (isMobile) {
- // En móviles, va a la URL normal adquirida
-     window.location.href = url;
+      window.location.href = url;
             } else {
-     url = url.replace('latino.solo-latino', 'h5.swplayer'); 
+                url = url.replace('latino.solo-latino', 'h5.swplayer'); 
    window.location.href = url;
             }
         }
     });
 });
+
 
 
 
@@ -237,14 +235,23 @@ document.onclick = (event) => {
 
 var ENLACE = document.querySelectorAll('.Container a, .Gallery a');
    
-  ENLACE.forEach(item => { 
+ENLACE.forEach(item => { 
     item.onclick = (event) => {
-      event.preventDefault();
+        event.preventDefault();
+        event.stopPropagation(); // 🔴 Detiene el conflicto con el evento global
+        
+        var isMobile = /Mobi|Android|iPhone|iPad|iPod|BlackBerry|IEMobile|Opera Mini/i.test(navigator.userAgent);
         var URL = item.href;
-    setTimeout(() => {
-        window.location.href = URL;
-    }, 1000);
-   }
+        
+        // 🔴 Aplica el reemplazo para PC antes del setTimeout
+        if (!isMobile && URL.includes("latino.solo")) {
+            URL = URL.replace('latino.solo-latino', 'h5.swplayer');
+        }
+
+        setTimeout(() => {
+            window.location.href = URL;
+        }, 1000);
+    }
 });
 
 
