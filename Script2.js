@@ -17,7 +17,7 @@ function construirLista() {
 
         if (nombreMin.includes('tv')) {
             tipo = 'TV';
-        } else if (SERIE.some(keyword => url.includes(keyword))) {
+        } else if (name.includes('🧋') || SERIE.some(keyword => url.includes(keyword))) {
             tipo = 'Serie';
         } else if (nombreMin.includes('🌐')) {
             tipo = 'Copy';
