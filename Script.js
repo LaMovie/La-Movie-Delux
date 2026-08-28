@@ -192,59 +192,72 @@ Div.forEach(divElement => {
 
         <!-- SWPLAYER -->
    
-    // Detectar si es móvil
-    var isMobile = /Mobi|Android|iPhone|iPad|iPod|BlackBerry|IEMobile|Opera Mini/i.test(navigator.userAgent);
-    
- window.onload = () => {
-     if (!isMobile) {
+    // Detectar dispositivo
+var isMobile = /Mobi|Android|iPhone|iPad|iPod|BlackBerry|IEMobile|Opera Mini/i.test(navigator.userAgent);
+
+// Restablecer reproductor en PC al cargar
+window.addEventListener('DOMContentLoaded', () => {
+    if (!isMobile && typeof Video !== 'undefined') {
         Video.src = "";
-     }
- };     
-
-       
-document.onclick = (event) => {
-    if (isMobile) return;
-
-    // Buscamos si el elemento clickeado es un enlace <a> o está dentro de uno
-    let anchor = event.target.closest('a');
-    
-    // Si no se hizo clic en ningún enlace, no hacemos nada
-    if (!anchor) return;
-
-       // Evitamos que abra el enlace original en la computadora si no es un elemento "Head"
-    event.preventDefault();
-
-    
-    if (anchor) {
-     var URLs = anchor.href.replace('latino.solo-latino', 'h5.swplayer');   
-  window.location.href = URLs;
-       } else {
-        // Si por alguna razón el enlace no tiene texto (ej. botones vacíos), abrimos su href original
- window.location.href = anchor.href;
     }
-};
-
-
-  var DOWN = document.querySelectorAll('.Down');
-  
-  DOWN.forEach(dow => {
-    dow.onclick = (e) => {
-       e.preventDefault();           abrirFuera('https://is.gd/QvFaXy');
-  };
 });
 
+// INTERCEPTOR GLOBAL INTELIGENTE (Solo actúa si es un enlace de reproducción en PC)
+document.addEventListener('click', (event) => {
+    if (isMobile) return;
 
+    let anchor = event.target.closest('a');
+    if (!anchor) return;
 
-var ENLACE = document.querySelectorAll('.Container a, .Gallery a');
-   
-  ENLACE.forEach(item => { 
-    item.onclick = (event) => {
-      event.preventDefault();
+    // Ignorar enlaces especiales, descargas, menús o elementos con eventos propios
+    if (
+        anchor.classList.contains('Down') || 
+        anchor.classList.contains('Not') || 
+        anchor.classList.contains('Head') ||
+        anchor.closest('#Menu') ||
+        anchor.getAttribute('href')?.startsWith('go:')
+    ) {
+        return; // Deja que sus propios manejadores procesen la acción
+    }
+
+    let rawUrl = anchor.getAttribute('href') || anchor.href;
+
+    // Solo transformar si contiene el dominio objetivo
+    if (rawUrl && rawUrl.includes('latino.solo-latino')) {
+        event.preventDefault();
+        event.stopPropagation();
+        var transformedURL = rawUrl.replace('latino.solo-latino', 'h5.swplayer');
+        window.location.href = transformedURL;
+    }
+}, true); // UseCapture en true para evaluar antes de que interfieran otros scripts
+
+// Manejo de clicks en .Div (Slider)
+Div.forEach(divElement => {
+    divElement.addEventListener('click', (e) => {
+        let linkElement = divElement.querySelector('a');
+        if (linkElement && linkElement.href) {
+            e.preventDefault();
+            let url = linkElement.href;
+            if (!isMobile && url.includes('latino.solo-latino')) {
+                url = url.replace('latino.solo-latino', 'h5.swplayer');
+            }
+            window.location.href = url;
+        }
+    });
+});
+
+// Enlaces con retardo visual en tarjetas
+ENLACE.forEach(item => { 
+    item.addEventListener('click', (event) => {
         var URL = item.href;
-    setTimeout(() => {
-        window.location.href = URL;
-    }, 1000);
-   }
+        // Si es un enlace normal de película en PC, no aplicar setTimeout para no colisionar
+        if (!isMobile && URL.includes('latino.solo-latino')) return;
+
+        event.preventDefault();
+        setTimeout(() => {
+            window.location.href = URL;
+        }, 300); // Reducido a 300ms para mejor respuesta
+    });
 });
 
 
