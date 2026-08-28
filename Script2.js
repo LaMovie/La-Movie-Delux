@@ -89,8 +89,6 @@ function procesarEnlace(matchedItem) {
     window.location.href = ENLACE;
         } else if (NN.includes('🌐')) {
      abrirFuera(`${ENLACE}?texto=${encodeURIComponent(tituloLimpio)}`);
-        } else if (NN.includes('🧋')) {
-  window.location.href = `PLAY.html?titulo=${NN}&url=${ENLACE}`;          
         } else if (ENLACE.includes('pelisflix')) {
   window.location.href = `AUX.html?titulo=${NN}&url=${ENLACE}`;          
         } else {
