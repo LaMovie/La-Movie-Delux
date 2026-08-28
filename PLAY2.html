@@ -497,6 +497,41 @@ footer {
     width: 100%;
     height: 100%;
 }
+=========================================================
+   CAJA DE CAPÍTULOS
+   ========================================================= */
+#Caja {
+    display: flex;
+    justify-content: start;
+    align-items: center;
+    gap: 10px;        
+    width: 90%;
+    margin: 15px auto;
+    overflow-x: auto; 
+    padding: 10px 0;
+}
+#Caja::-webkit-scrollbar {
+    display: none; /* Oculta la barra scroll de la caja */
+}
+.Btn {
+    background: blue;
+    color: white;
+    padding: 8px 15px;
+    border-radius: 10px;
+    text-decoration: none;
+    font-family: sans-serif;
+    font-weight: bold;
+    font-size: 13px;
+    cursor: none;
+    opacity: .9;
+    white-space: nowrap; /* Evita que el texto salte de línea */
+    transition: 0.3s;
+}
+.Btn:hover {
+    background: #4f9;
+    color: #000;
+    box-shadow: 0 0 10px rgba(68, 255, 153, 0.8);
+}
 </style>
 </head>
 <body>     
@@ -517,7 +552,9 @@ footer {
 
  <iframe class="I" id="I" src="" frameborder="0" allowfullscreen="true" allow="encrypted-media" allow="autoplay" name="WILLOW"></iframe>
 
-      <B id="Emoj">°PLAY°</B>          
+      <B id="Emoj">°PLAY°</B> 
+      
+      <div id="Caja"></div>         
  
         <div class="dato">        
     <b><span class="span">Play</span></b> 
@@ -649,108 +686,187 @@ document.addEventListener('click', function(){
 <script>
         // ⚠️ ATENCIÓN
 var API_KEY = "2c0b94c5ec729e2cc59b8be6ad7b2159"; 
-var tituloPredeterminado = T.textContent;
 
-// 1. LÓGICA DEL REPRODUCTOR (IFRAME) Y TMDB API
-window.addEventListener('DOMContentLoaded', async () => {
-  const params = new URLSearchParams(window.location.search);
-  var urlCapt = params.get('url');
-  var tituloCapt = params.get('titulo');
-  
-  var tituloPredeterminado = tituloCapt; 
+// 1. OBTENER PARÁMETROS GLOBALES
+const params = new URLSearchParams(window.location.search);
+var urlCapt = params.get('url');
+var N = params.get('titulo');
 
-  // Mostrar el título solo en el ID "T"
-  if (tituloCapt) {
-    var ElementoT = document.getElementById('T');
-    if (ElementoT) ElementoT.textContent = tituloCapt;
-  }
-
-  // Lógica del Iframe y Audio (¡Intacta!)
-  if (urlCapt) {
-    var URL_FINAL = urlCapt;
-    var esArchivoDrive = false; 
-
-    if (urlCapt.includes('file')) {
-      URL_FINAL = urlCapt.split('view')[0] + 'preview';
-      esArchivoDrive = true; 
-    } else if (urlCapt.includes('www.dropbox.com')) {
-      URL_FINAL = urlCapt.replace('www.dropbox.com', 'dl.dropboxusercontent.com');
-    } else if (urlCapt.includes('play.vidyard')) {
-      URL_FINAL = urlCapt; 
-    }
-
-    var iframe = document.getElementById('I');
-    if (iframe) {
-      iframe.src = URL_FINAL;
-    }
+   var tituloCapt = N; 
     
-    if (esArchivoDrive) {
-      var audio = document.getElementById('AA');
-      if (audio) {
-        audio.play().catch(e => console.log("Audio bloqueado", e));
-      }
+   if (urlCapt && urlCapt.includes('dropbox')) {
+    tituloCapt = '🧋' + N;
+}
+
+ 
+
+// 2. LÓGICA PRINCIPAL INTEGRADA AL CARGAR EL DOM
+window.addEventListener('DOMContentLoaded', async () => {
+    
+    // A. Mostrar Título Inmediatamente
+    if (tituloCapt) {
+        var ElementoT = document.getElementById('T');
+        if (ElementoT) ElementoT.textContent = tituloCapt;
     }
-  }
 
-  // 📜 INTEGRACIÓN DE TMDB API CON TRÁILER
-  if (tituloPredeterminado) {
-    var Aux = document.getElementById("Aux");
-    try {
-      var searchUrl = "https://api.themoviedb.org/3/search/movie?api_key=" + API_KEY + "&query=" + encodeURIComponent(tituloPredeterminado) + "&language=es-ES";
-      var response = await fetch(searchUrl);
-      var data = await response.json();
+    // B. Asignar iframe inicial sin conflicto (Protege Drive)
+    
+       if (urlCapt) {
+     var URL_FINAL = urlCapt;
+     var esArchivoDrive = false; 
 
-      if (data.results && data.results.length > 0) {
-        var peli = data.results[0]; 
-        var movieId = peli.id;
+        if (urlCapt.includes('file')) {
+            URL_FINAL = urlCapt.split('view')[0] + 'preview';
+          esArchivoDrive = true; 
+        } else if (urlCapt.includes('www.dropbox.com')) {
+            URL_FINAL = urlCapt.replace('www.dropbox.com', 'dl.dropboxusercontent.com');
+        } else if (urlCapt.includes('play.vidyard')) {
+      URL_FINAL = urlCapt; 
+   }
 
-        // AQUÍ PEDIMOS LOS VIDEOS Y EL IDIOMA (prioridad español, luego inglés)
-        var detailUrl = "https://api.themoviedb.org/3/movie/" + movieId + "?api_key=" + API_KEY + "&language=es-ES&append_to_response=credits,videos&include_video_language=es,en";
-        var detailRes = await fetch(detailUrl);
-        var detailData = await detailRes.json();
-
-        var titulo = detailData.title;
-        var año = detailData.release_date ? detailData.release_date.split('-')[0] : "N/A";
-        var sinopsis = detailData.overview || "No hay sinopsis disponible.";
+       
+     I.src = URL_FINAL;
         
-        var genero = detailData.genres && detailData.genres.length > 0 
-            ? detailData.genres.map(g => g.name).join(", ") 
-            : "Desconocido";
-        
-        var directorObj = detailData.credits.crew.find(miembro => miembro.job === "Director");
-        var director = directorObj ? directorObj.name : "Desconocido";
-        
-        var poster = detailData.poster_path ? "https://image.tmdb.org/t/p/w500" + detailData.poster_path : "";
+        if (esArchivoDrive) {
+            var audio = document.getElementById('AA');
+            if (audio) audio.play().catch(e => console.log("Audio bloqueado", e));
+        }
+    }
 
+    // 🔑 CARGAR SCRIPTS DE BUSCADOR Y CAPÍTULOS
+    const S = [
+        "https://lamovie.github.io/Buscador/Buscador.js",
+        "https://lamovie.github.io/Buscador/Buscador2.js",
+        "https://lamovie.github.io/Buscador/Buscador3.js"
+    ];
+    
+    let scriptsCargados = 0;
+    
+    S.forEach(src => {
+        const script = document.createElement("script");
+        script.src = src;
+        script.onload = () => {
+            scriptsCargados++;
+            
+if (scriptsCargados === S.length) {
+                
+   // 1. Ejecutar buscador general
+             try {
+                    if (typeof construirLista === 'function') construirLista(); 
+                } catch(e) { console.error("Error al construir buscador", e); }
+
+    // 2. Extraer y dibujar Capítulos de manera segura
+    
+    if (tituloCapt && urlCapt) {
+           var Caja = document.getElementById('Caja');
+    var listaBusqueda = [];
+                    
+    // Bloque seguro para evitar "ReferenceError" si Lista3 tarda
+            try {
+    if (typeof Lista3 !== 'undefined') {
+       listaBusqueda = Lista3;
+       
+   } else if (typeof window.Lista3 !== 'undefined') {
+                            listaBusqueda = window.Lista3;
+       }
+          } catch(e) { console.log("Esperando lista..."); }
+                    
+      var serie = listaBusqueda.find(item => (item.NAME || item.name) === tituloCapt);
+
+if (serie && serie.CAPS && Caja) {
+      Caja.innerHTML = ''; 
+        // Limpiar caja
+   var btnsCaps = [];
+
+                        serie.CAPS.forEach(capitulo => {
+    var boton = document.createElement('a');
+ boton.textContent = capitulo.cap;
+   boton.className = 'Btn';
+                            
+     boton.onclick = () => {
+          I.src = capitulo.link.replace('www.dropbox.com', 'dl.dropboxusercontent.com');
+                                
+    btnsCaps.forEach(other => {
+  other.style.background = 'blue';
+  other.style.color = 'white';
+  other.style.boxShadow = 'none';
+ });
+  
+  boton.style.background = '#4f9';
+  boton.style.color = '#000';
+  boton.style.boxShadow = '0 0 10px rgba(68, 255, 153, 0.8)';
+ };
+                            
+     Caja.appendChild(boton);
+        btnsCaps.push(boton);
+     });
+   }
+ }
+
+   // 💻 REDIRECCIÓN PC 
    
-     // BUSCAR TRÁILER OFICIAL
-        var trailer = detailData.videos && detailData.videos.results ? detailData.videos.results.find(v => v.type === "Trailer" && v.site === "YouTube") : null;
-        var trailerKey = trailer ? trailer.key : null;
-
-        // CREAR BOTÓN SI HAY TRÁILER (Ahora en versión miniatura)
-        var botonTrailerHTML = trailerKey 
-            ? `<button class="btn-trailer" style="padding: 3px 10px; font-size: 11px; margin: 0 0 0 10px; box-shadow: none;" onclick="abrirTrailer('${trailerKey}')">▶Tráiler</button>` 
-            : '';
-
-        // INYECTAR HTML (Botón integrado en la misma línea del Director)
-        Aux.innerHTML = `
-          <div class="result-section">
-            <img src="${poster}" alt="${titulo}" style="width: 23%; height: 13vh; border-radius: 12px; margin-right: 15px; margin-bottom: 5px;">
-            <div class="result-title" style="font-size: 1.1rem; font-weight: bold; margin-bottom: 5px;">${titulo} (${año})</div>
-            <p style="margin: 5px 0; font-size: 0.95rem;"><strong>🎬 Género:</strong> ${genero}</p>
-            <p style="margin: 5px 0; font-size: 0.95rem; display: flex; align-items: center;"><strong>🎥 Director:</strong> ${director} ${botonTrailerHTML}</p><br/>
-            <div id="S" style="margin-top: 10px;">
-                <p style="margin: 0;"><strong>📝 Sinopsis:</strong> ${sinopsis}</p>
-            </div>
-          </div>
-        `;
-      }
+        var isMobile = /Mobi|Android|iPhone|iPad|iPod|BlackBerry|IEMobile|Opera Mini/i.test(navigator.userAgent);
+  if (!isMobile && tituloCapt) {
+      var TITULO_LIMPIO = tituloCapt.replace('🍿', '');   
      
-    } catch (error) {
-      console.error("Error API TMDb:", error);      
+     window.location.href = `https://www.google.com/search?q=site:sololatino.net+${TITULO_LIMPIO}`;
+                }
+            }
+        };
+        // Agregamos al head para evitar errores si el body aún lee contenido
+        document.head.appendChild(script); 
+  });
+
+
+
+    // 📜 TMDB API Y TRÁILER (Se ejecuta en paralelo)
+    if (tituloCapt) {
+        var Aux = document.getElementById("Aux");
+        try {
+            var searchUrl = "https://api.themoviedb.org/3/search/movie?api_key=" + API_KEY + "&query=" + encodeURIComponent(N) + "&language=es-ES";
+
+            var response = await fetch(searchUrl);
+            var data = await response.json();
+
+            if (data.results && data.results.length > 0) {
+                var peli = data.results[0]; 
+                var movieId = peli.id;
+                var detailUrl = "https://api.themoviedb.org/3/movie/" + movieId + "?api_key=" + API_KEY + "&language=es-ES&append_to_response=credits,videos&include_video_language=es,en";
+                var detailRes = await fetch(detailUrl);
+                var detailData = await detailRes.json();
+
+                var titulo = detailData.title;
+                var año = detailData.release_date ? detailData.release_date.split('-')[0] : "N/A";
+                var sinopsis = detailData.overview || "No hay sinopsis disponible.";
+                var genero = detailData.genres && detailData.genres.length > 0 ? detailData.genres.map(g => g.name).join(", ") : "Desconocido";
+                var directorObj = detailData.credits.crew.find(miembro => miembro.job === "Director");
+                var director = directorObj ? directorObj.name : "Desconocido";
+                var poster = detailData.poster_path ? "https://image.tmdb.org/t/p/w500" + detailData.poster_path : "";
+
+                var trailer = detailData.videos && detailData.videos.results ? detailData.videos.results.find(v => v.type === "Trailer" && v.site === "YouTube") : null;
+                var trailerKey = trailer ? trailer.key : null;
+
+                var botonTrailerHTML = trailerKey ? `<button class="btn-trailer" style="padding: 3px 10px; font-size: 11px; margin: 0 0 0 10px; box-shadow: none;" onclick="abrirTrailer('${trailerKey}')">▶Tráiler</button>` : '';
+
+                Aux.innerHTML = `
+                  <div class="result-section">
+                    <img src="${poster}" alt="${titulo}" style="width: 23%; height: 13vh; border-radius: 12px; margin-right: 15px; margin-bottom: 5px;">
+                    <div class="result-title" style="font-size: 1.1rem; font-weight: bold; margin-bottom: 5px;">${titulo} (${año})</div>
+                    <p style="margin: 5px 0; font-size: 0.95rem;"><strong>🎬 Género:</strong> ${genero}</p>
+                    <p style="margin: 5px 0; font-size: 0.95rem; display: flex; align-items: center;"><strong>🎥 Director:</strong> ${director} ${botonTrailerHTML}</p><br/>
+                    <div id="S" style="margin-top: 10px;">
+                        <p style="margin: 0;"><strong>📝 Sinopsis:</strong> ${sinopsis}</p>
+                    </div>
+                  </div>
+                `;
+            }
+        } catch (error) {
+            console.error("Error API TMDb:", error);      
+        }
     }
-  }
 });
+
+
 
     // FUNCIONES DEL MODAL PARA EL TRÁILER (Sin afectar el botón 'Atrás')
 window.abrirTrailer = function(youtubeKey) {
@@ -1036,7 +1152,7 @@ function procesarEnlace(matchedItem) {
     var NN = spanTitulo ? spanTitulo.textContent : matchedItem.textContent; // Toma solo el nombre, sin (Película)
     
     var isMobile = /Mobi|Android|iPhone|iPad|iPod|BlackBerry|IEMobile|Opera Mini/i.test(navigator.userAgent);
-    var tituloLimpio = NN.replace(/🍿|🌐|📺|⚙️/g, '').trim();
+    var tituloLimpio = NN.replace(/🍿|🌐|📺|⚙️|🧋/g, '').trim();
 
     var CADENA = ['google.com/file', 'www.dropbox.com', 'play.vidyard', 'okpeliz.com'];
     
@@ -1084,7 +1200,7 @@ function ejecutarBusqueda(valorInput) {
         var spanTitulo = elementosData[i].querySelector(".titulo-txt");
         var textoCrudo = spanTitulo ? spanTitulo.textContent : elementosData[i].textContent;
 
-        var textoSinEmojis = textoCrudo.replace(/🍿|🌐|📺|⚙️/g, '').trim();
+        var textoSinEmojis = textoCrudo.replace(/🍿|🌐|📺|⚙️|🧋/g, '').trim();
         var textoItem = Tildes(textoSinEmojis.toLowerCase(), incluyeÑ);
 
         if (textoItem === InputLimpiado) { 
@@ -1159,28 +1275,6 @@ function abrirFuera(urlDestino) {
       
  window.location.href = intentURL;
     }
-        
-        
-        // BUSCADORES
-const S = [
-    "https://lamovie.github.io/Buscador/Buscador.js",
-    "https://lamovie.github.io/Buscador/Buscador2.js",
-    "https://lamovie.github.io/Buscador/Buscador3.js"
-];
-
-let scriptsCargados = 0;
-
-S.forEach(src => {
-    const scripts = document.createElement("script");
-    scripts.src = src;
-    scripts.onload = () => {
-        scriptsCargados++;
-        if (scriptsCargados === S.length) {
-            construirLista();
-        }
-    };
-    document.body.appendChild(scripts);
-});
 </script>
 </body>
 </html>
