@@ -151,30 +151,27 @@ document.addEventListener("keydown", function(event) {
     }
 });
 
-
-     // MANEJO DEL CLICK 
+// MANEJO DEL CLICK 
 document.addEventListener("click", function(event) {
     var matchedItem = event.target.closest("a"); 
     
     if (matchedItem && matchedItem.classList.contains("Data")) {
         var href = matchedItem.getAttribute("href");
         if (href && href !== "#") {
-     event.preventDefault();
-            event.stopImmediatePropagation(); // 🔴 Evita que se dispare el document.onclick secundario
+            event.preventDefault();
             procesarEnlace(matchedItem);
         }
     }
 });
 
-
-       function Check() {
+function Check() {
     var isMobile = /Mobi|Android|iPhone|iPad|iPod|BlackBerry|IEMobile|Opera Mini/i.test(navigator.userAgent);   
-    const urlDestino = `GOOGLE.html?texto=${encodeURIComponent(buscador.value)}`;
+    const urlDestino = `${'GOOGLE.html'}?texto=${buscador.value}`;
+    var domain = isMobile ? urlDestino : 'https://www.google.com/search?q=site:sololatino.net+' + encodeURIComponent(buscador.value);
     
-    // Redirige a tu vista interna GOOGLE.html sin desviar a google.com
- window.location.href = urlDestino;
+    window.location.href = domain;
     buscador.value = '';
-}
+} 
 
 
 // MANEJO DEL CLICK EN LA LUPA (#Search)
@@ -409,7 +406,7 @@ h1 {
  Logo.style.display = 'block'; 
 };
 
-   
+
        
       // BUSCADORES
       const S = [

@@ -161,23 +161,26 @@ function Links(iframe) {
 
  
   // --- IMG CON href ---
-    var Div = document.querySelectorAll('.Div');
+var Div = document.querySelectorAll('.Div');
 
 Div.forEach(divElement => {
-    divElement.addEventListener('click', (event) => { // 🔴 Agregar event aquí
+    divElement.addEventListener('click', () => {
+        // 1. Busca el enlace (etiqueta <a>) dentro del div actual.
         let linkElement = divElement.querySelector('a');
 
+        // 2. Verifica que el enlace existe y obtiene su URL (href).
         if (linkElement && linkElement.href) {
-            event.preventDefault(); // 🔴 Evita que el navegador lance el enlace original
-            event.stopPropagation(); // 🔴 Evita que el document.onclick interfiera
-
-            let url = linkElement.href; 
+     // Guardamos la URL original
+   let url = linkElement.href; 
+            
+     // 3. Detectamos si es un dispositivo móvil
             var isMobile = /Mobi|Android|iPhone|iPad|iPod|BlackBerry|IEMobile|Opera Mini/i.test(navigator.userAgent);
             
             if (isMobile) {
-      window.location.href = url;
+ // En móviles, va a la URL normal adquirida
+     window.location.href = url;
             } else {
-                url = url.replace('latino.solo-latino', 'h5.swplayer'); 
+     url = url.replace('latino.solo-latino', 'h5.swplayer'); 
    window.location.href = url;
             }
         }
@@ -187,76 +190,78 @@ Div.forEach(divElement => {
 
 
 
-
         <!-- SWPLAYER -->
    
-   // Detectar si es móvil
+    // Detectar dispositivo
 var isMobile = /Mobi|Android|iPhone|iPad|iPod|BlackBerry|IEMobile|Opera Mini/i.test(navigator.userAgent);
 
-window.onload = () => {
+// Restablecer reproductor en PC al cargar
+window.addEventListener('DOMContentLoaded', () => {
     if (!isMobile && typeof Video !== 'undefined') {
         Video.src = "";
     }
-};     
+});
 
-// --- 1. MANEJO GLOBAL DE CLICS EN PC (SOLO INTERVIENE SI ES "latino.solo") ---
+// INTERCEPTOR GLOBAL INTELIGENTE (Solo actúa si es un enlace de reproducción en PC)
 document.addEventListener('click', (event) => {
     if (isMobile) return;
 
     let anchor = event.target.closest('a');
-    
-    // Si el clic fue en un <div onclick="..."> u otro objeto sin <a>, se ejecuta su función nativa normalmente
     if (!anchor) return;
 
-    // Ignorar enlaces especiales con eventos propios
-    if (anchor.classList.contains('Down') || anchor.classList.contains('XTV') || anchor.classList.contains('Not')) return;
+    // Ignorar enlaces especiales, descargas, menús o elementos con eventos propios
+    if (
+        anchor.classList.contains('Down') || 
+        anchor.classList.contains('Not') || 
+        anchor.classList.contains('Head') ||
+        anchor.closest('#Menu') ||
+        anchor.getAttribute('href')?.startsWith('go:')
+    ) {
+        return; // Deja que sus propios manejadores procesen la acción
+    }
 
-    let url = anchor.href;
+    let rawUrl = anchor.getAttribute('href') || anchor.href;
 
-    // Solo intercepta y reemplaza si el enlace va hacia latino.solo-latino
-    if (url && url.includes('latino.solo-latino')) {
-        event.preventDefault();
-        let newUrl = url.replace('latino.solo-latino', 'h5.swplayer');
-   window.location.href = newUrl;
- }
-    // Si es un enlace normal (PLAY2.html, Drive, etc.), el navegador navega a su URL original sin bloqueos
-});
-
-// --- 2. MANEJO DE TARJETAS DE CONTENEDOR (.Div) ---
-    var Div = document.querySelectorAll('.Div');
-Div.forEach(divElement => {
-    divElement.addEventListener('click', (event) => {
-        let linkElement = divElement.querySelector('a');
-
-        // Si el contenedor usa un onclick directo (ej. openMovie) y no un <a>, no interfiere
-        if (!linkElement || !linkElement.href) return;
-
-        let url = linkElement.href;
-        if (!isMobile && url.includes('latino.solo-latino')) {
+    // Solo transformar si contiene el dominio objetivo
+    if (rawUrl && rawUrl.includes('latino.solo-latino')) {
         event.preventDefault();
         event.stopPropagation();
-        window.location.href = url.replace('latino.solo-latino', 'h5.swplayer');
+        var transformedURL = rawUrl.replace('latino.solo-latino', 'h5.swplayer');
+        window.location.href = transformedURL;
+    }
+}, true); // UseCapture en true para evaluar antes de que interfieran otros scripts
+
+// Manejo de clicks en .Div (Slider)
+Div.forEach(divElement => {
+    divElement.addEventListener('click', (e) => {
+        let linkElement = divElement.querySelector('a');
+        if (linkElement && linkElement.href) {
+            e.preventDefault();
+            let url = linkElement.href;
+            if (!isMobile && url.includes('latino.solo-latino')) {
+                url = url.replace('latino.solo-latino', 'h5.swplayer');
+            }
+            window.location.href = url;
         }
     });
 });
 
-// --- 3. MANEJO DE CONTENEDORES DE GALERÍA Y SECCIONES ---
-    var ENLACE = document.querySelectorAll('.Container a, .Gallery a');
+// Enlaces con retardo visual en tarjetas
 ENLACE.forEach(item => { 
-    item.onclick = (event) => {
+    item.addEventListener('click', (event) => {
         var URL = item.href;
-        if (!isMobile && URL && URL.includes("latino.solo-latino")) {
+        // Si es un enlace normal de película en PC, no aplicar setTimeout para no colisionar
+        if (!isMobile && URL.includes('latino.solo-latino')) return;
+
         event.preventDefault();
-        event.stopPropagation();
-            URL = URL.replace('latino.solo-latino', 'h5.swplayer');
-            setTimeout(() => {
-                window.location.href = URL;
-            }, 300);
-        }
-    };
+        setTimeout(() => {
+            window.location.href = URL;
+        }, 300); // Reducido a 300ms para mejor respuesta
+    });
 });
 
-           
+
+    
 
         // INTENT
 function abrirFuera(urlDestino) {
