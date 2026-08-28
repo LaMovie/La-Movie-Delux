@@ -169,12 +169,12 @@ document.addEventListener("click", function(event) {
 
        function Check() {
     var isMobile = /Mobi|Android|iPhone|iPad|iPod|BlackBerry|IEMobile|Opera Mini/i.test(navigator.userAgent);   
-    const urlDestino = `${'GOOGLE.html'}?texto=${buscador.value}`;
-    var domain = isMobile ? urlDestino : 'https://www.google.com/search?q=site:sololatino.net+' + encodeURIComponent(buscador.value);
+    const urlDestino = `GOOGLE.html?texto=${encodeURIComponent(buscador.value)}`;
     
-    window.location.href = domain;
+    // Redirige a tu vista interna GOOGLE.html sin desviar a google.com
+ window.location.href = urlDestino;
     buscador.value = '';
-} 
+}
 
 
 // MANEJO DEL CLICK EN LA LUPA (#Search)
@@ -409,7 +409,7 @@ h1 {
  Logo.style.display = 'block'; 
 };
 
-
+   
        
       // BUSCADORES
       const S = [

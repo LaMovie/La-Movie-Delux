@@ -190,72 +190,73 @@ Div.forEach(divElement => {
 
         <!-- SWPLAYER -->
    
-    // Detectar si es móvil
-    var isMobile = /Mobi|Android|iPhone|iPad|iPod|BlackBerry|IEMobile|Opera Mini/i.test(navigator.userAgent);
-    
- window.onload = () => {
-     if (!isMobile) {
-        Video.src = "";
-     }
- };     
+   // Detectar si es móvil
+var isMobile = /Mobi|Android|iPhone|iPad|iPod|BlackBerry|IEMobile|Opera Mini/i.test(navigator.userAgent);
 
-       
-document.onclick = (event) => {
+window.onload = () => {
+    if (!isMobile && typeof Video !== 'undefined') {
+        Video.src = "";
+    }
+};     
+
+// --- 1. MANEJO GLOBAL DE CLICS EN PC (SOLO INTERVIENE SI ES "latino.solo") ---
+document.addEventListener('click', (event) => {
     if (isMobile) return;
 
-    // Buscamos si el elemento clickeado es un enlace <a> o está dentro de uno
     let anchor = event.target.closest('a');
     
-    // Si no se hizo clic en ningún enlace, no hacemos nada
+    // Si el clic fue en un <div onclick="..."> u otro objeto sin <a>, se ejecuta su función nativa normalmente
     if (!anchor) return;
 
-       // Evitamos que abra el enlace original en la computadora si no es un elemento "Head"
-    event.preventDefault();
+    // Ignorar enlaces especiales con eventos propios
+    if (anchor.classList.contains('Down') || anchor.classList.contains('XTV') || anchor.classList.contains('Not')) return;
 
-    
-    if (anchor) {
-     var URLs = anchor.href.replace('latino.solo-latino', 'h5.swplayer');   
-  window.location.href = URLs;
-       } else {
-        // Si por alguna razón el enlace no tiene texto (ej. botones vacíos), abrimos su href original
- window.location.href = anchor.href;
-    }
-};
+    let url = anchor.href;
 
-
-  var DOWN = document.querySelectorAll('.Down');
-  
-  DOWN.forEach(dow => {
-    dow.onclick = (e) => {
-       e.preventDefault();           abrirFuera('https://is.gd/QvFaXy');
-  };
+    // Solo intercepta y reemplaza si el enlace va hacia latino.solo-latino
+    if (url && url.includes('latino.solo-latino')) {
+        event.preventDefault();
+        let newUrl = url.replace('latino.solo-latino', 'h5.swplayer');
+   window.location.href = newUrl;
+ }
+    // Si es un enlace normal (PLAY2.html, Drive, etc.), el navegador navega a su URL original sin bloqueos
 });
 
+// --- 2. MANEJO DE TARJETAS DE CONTENEDOR (.Div) ---
+    var Div = document.querySelectorAll('.Div');
+Div.forEach(divElement => {
+    divElement.addEventListener('click', (event) => {
+        let linkElement = divElement.querySelector('a');
 
+        // Si el contenedor usa un onclick directo (ej. openMovie) y no un <a>, no interfiere
+        if (!linkElement || !linkElement.href) return;
 
-var ENLACE = document.querySelectorAll('.Container a, .Gallery a');
-   
+        let url = linkElement.href;
+        if (!isMobile && url.includes('latino.solo-latino')) {
+        event.preventDefault();
+        event.stopPropagation();
+        window.location.href = url.replace('latino.solo-latino', 'h5.swplayer');
+        }
+    });
+});
+
+// --- 3. MANEJO DE CONTENEDORES DE GALERÍA Y SECCIONES ---
+    var ENLACE = document.querySelectorAll('.Container a, .Gallery a');
 ENLACE.forEach(item => { 
     item.onclick = (event) => {
-        event.preventDefault();
-        event.stopPropagation(); // 🔴 Detiene el conflicto con el evento global
-        
-        var isMobile = /Mobi|Android|iPhone|iPad|iPod|BlackBerry|IEMobile|Opera Mini/i.test(navigator.userAgent);
         var URL = item.href;
-        
-        // 🔴 Aplica el reemplazo para PC antes del setTimeout
-        if (!isMobile && URL.includes("latino.solo")) {
+        if (!isMobile && URL && URL.includes("latino.solo-latino")) {
+        event.preventDefault();
+        event.stopPropagation();
             URL = URL.replace('latino.solo-latino', 'h5.swplayer');
+            setTimeout(() => {
+                window.location.href = URL;
+            }, 300);
         }
-
-        setTimeout(() => {
-            window.location.href = URL;
-        }, 1000);
-    }
+    };
 });
 
-
-    
+           
 
         // INTENT
 function abrirFuera(urlDestino) {
