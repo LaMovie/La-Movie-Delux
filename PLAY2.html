@@ -930,7 +930,16 @@ var baseDePeliculas = [
 
     // 2. Mezclar el array aleatoriamente
     let mezcladas = [...baseDePeliculas].sort(() => 0.5 - Math.random());
-    let seleccionadas = mezcladas.slice(0, 6);
+    
+    var isMobile = /Mobi|Android|iPhone|iPad|iPod|BlackBerry|IEMobile|Opera Mini/i.test(navigator.userAgent);
+    
+   let seleccionadas; 
+    
+    if (!isMobile) {
+         seleccionadas = mezcladas.slice(0, 5);
+    } else {
+         seleccionadas = mezcladas.slice(0, 6);
+    } 
 
     // AQUÍ SE APLICAN LOS SPANS PARA LA ANIMACIÓN DE SALTOS
     let html = '<h3 class="sug-titulo">🧋 <span class="salto-1">TE</span> <span class="salto-2">PODRÍA</span> <span class="salto-3">INTERESAR</span> 🧋</h3><div class="sug-wrapper">';
@@ -939,7 +948,7 @@ var baseDePeliculas = [
         let tituloCodificado = encodeURIComponent(peli.titulo);
         let urlCodificada = encodeURIComponent(peli.url);
         
-        var isMobile = /Mobi|Android|iPhone|iPad|iPod|BlackBerry|IEMobile|Opera Mini/i.test(navigator.userAgent);
+        
         let accionClick = "";
 
         if (isMobile) {
