@@ -21,6 +21,8 @@ function construirLista() {
             tipo = 'Serie';
         } else if (nombreMin.includes('🌐')) {
             tipo = 'Copy';
+        } else if (url.includes('pelisflix')) {
+            tipo = 'Aux';
         }
 
         a.href = item.URL || item.url;
