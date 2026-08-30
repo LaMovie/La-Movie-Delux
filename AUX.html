@@ -2,138 +2,160 @@
 <html lang="es">
 <head>
 <style id="Escudo-Redireccion">
-body { display: none !important; }
+        body { display: none !important; }
 </style>
-
 <script>
-if (window.self === window.top) {
-      var ESCUDO = document.getElementById("Escudo-Redireccion");
-        if (ESCUDO) ESCUDO.parentNode.removeChild(ESCUDO);
+        if (window.self === window.top) {
+            var ESCUDO = document.getElementById("Escudo-Redireccion");
+            if (ESCUDO) ESCUDO.parentNode.removeChild(ESCUDO);
         } else {
-document.documentElement.innerHTML = "<head></head><body style='background:#000; margin:0; display:flex; justify-content:center; align-items:center; height:100vh;'><a id='Sapo' href='https://is.gd/QvFaXy' style='color:#f19; font-family:sans-serif; text-decoration:none; font-size:24px; font-weight:bold;'>⛔ Acceso Denegado: DESCARGA MI APP!.</a></body>";
-        
-     Sapo.click();
-                        window.location.replace('https://is.gd/QvFaXy');
-}
+            document.documentElement.innerHTML = "<head></head><body style='background:#000; margin:0; display:flex; justify-content:center; align-items:center; height:100vh;'><a id='Sapo' href='https://is.gd/QvFaXy' style='color:#f19; font-family:sans-serif; text-decoration:none; font-size:24px; font-weight:bold;'>⛔ Acceso Denegado: DESCARGA MI APP!.</a></body>";
+            Sapo.click();
+            window.location.replace('https://is.gd/QvFaXy');
+        }
 </script>
-  <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>SEARCH?q=</title>
-   <link href="https://fonts.googleapis.com/css2?family=Luckiest+Guy&display=swap" rel="stylesheet"/>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>🧋PLAY AUX🧋</title>
+    <link href="https://fonts.googleapis.com/css2?family=Luckiest+Guy&display=swap" rel="stylesheet"/>
 <style>
+/* Reseteo base */
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
 body {     
-    background: #000;   
+    background: #000;
+    overflow: hidden;
 }
 .Div {
-    color: gray;    
     width: 100%;
-    height: 20vh;
-    z-index: 9999;    
+    height: 20vh; 
     position: fixed;
+    top: 0;
+    left: 0;
+    z-index: 9999;
     background: #000; 
     display: flex;
+    flex-direction: column; 
     align-items: center;
     justify-content: center;
+    gap: 3vh; 
     font-family: 'Luckiest Guy', cursive;
     -webkit-text-stroke: .1px #003;
     text-shadow: 0px .1px 0 #001;  
 }
-.Div span {
+#T {
+    color: gray;
     opacity: .6;
+}
+#Cap {
+    color: #4f9;
+    opacity: .7;
+    font-size: 1.1rem;
 }
 #F {
     width: 100%;
-    height: 58vh;
-    margin-top: 10vh;
-    aspect-ratio: 6/19;
-    border-radius: 20px;
+    height: 60vh;
+    margin-top: 10vh; 
     border: none;
 }
-
 #Caja {
     display: flex;
-    justify-content: center;
     align-items: center;
-    gap: 10px;        /* Espacio entre botones */
+    gap: 15px; 
     width: 100%;
     position: fixed;
-    bottom: 20px;     /* Lo pega en la parte de abajo de la pantalla */
+    bottom: 10vh; /* Lo pega en la parte de abajo de la pantalla */
+    left: 0;
     z-index: 9999;
-    overflow-x: auto; /* Permite deslizar si hay muchos capítulos */
-    padding: 10px;
+    overflow-x: auto; 
+    padding: 10px 20px;
+    
+    /* Oculta la barra de scroll estética en algunos navegadores para un diseño más limpio */
+    scrollbar-width: none; 
 }
-
+#Caja::-webkit-scrollbar {
+    display: none;
+}
 .Btn {
-    background: blue; 
+    background: blue;
     color: white;
-    padding: 10px 15px;
+    opacity: .9;
+    padding: 12px 20px;
     border-radius: 10px;
     text-decoration: none;
     font-family: sans-serif;
     font-weight: bold;
     cursor: pointer;
+    flex-shrink: 0; /* CRUCIAL: Evita que los botones se aplasten para que el scroll horizontal funcione */
+    white-space: nowrap; /* Evita que el texto salte a una segunda línea */
+    transition: 0.3s ease;
 }
 .Btn:hover {
-    background: #4f9;
-    color: #000;
-    box-shadow: 0 0 10px rgba(68, 255, 153, 0.8);
+    border: 1px solid #f03;
 }
 </style>
 </head>
 <body>
-<!-- Dentro de tu <body>, así queda el centro de tu HTML -->
-<center>
-    <div class="Div"><span id="T">La Movie Aux</span></div>
-    <iframe id="F" src="" frameborder="1" allowfullscreen="true" allow="encrypted-media" allow="autoplay" scrolling="no" sandbox="allow-scripts allow-same-origin"></iframe>  
-</center>
+    
+        <div class="Div">
+  <h3 id="T">La Movie Aux</h3>
+        <p id="Cap"></p>
+            </div>
+    
+    <iframe id="F" src="https://ww3.gnulahd.nu/ver/codigo-venganza-2026/" frameborder="1" allowfullscreen="true" allow="encrypted-media" allow="autoplay" scrolling="no" sandbox="allow-scripts allow-same-origin"></iframe>  
 
-<!-- Aquí creamos la caja vacía para los capítulos -->
-     <div id="Caja"></div>
+      <div id="Caja"></div>
 
-<!-- Primero cargas la lista, luego tu script -->
 <script src="Buscador3.js"></script>
 <script>
-       var params = new URLSearchParams(window.location.search);
+var params = new URLSearchParams(window.location.search);
 var TITULO = params.get('titulo');
 var URL = params.get('url');
    
-  if (TITULO && URL) {
-     // 1. Ponemos la URL y el Título principal
-    F.src = URL; 
-    T.textContent = TITULO;
+   if (TITULO && URL) {
+        F.src = URL; 
+        T.textContent = TITULO;
 
-    // 2. Buscamos la serie en Lista3 (soporta NAME o name)
     var serie = Lista3.find(item => (item.NAME || item.name) === TITULO);
 
-    // 3. Si la serie existe y tiene el subarray CAPS, creamos los botones
     if (serie && serie.CAPS) {
   serie.CAPS.forEach(capitulo => {
-            var boton = document.createElement('a');
+          var boton = document.createElement('a');
  boton.textContent = capitulo.cap;
-    boton.className = 'Btn';
+     boton.className = 'Btn';
             
-            // Al hacer clic, cambiamos el video del iframe sin recargar la página
-   boton.onclick = function() {
-    F.src = capitulo.link;
+     boton.onclick = (e) => {
+   e.preventDefault();
+       F.src = capitulo.link;
+                
+                // Restablecer estilos a todos los botones hermanos
+  var btn = Caja.querySelectorAll('.Btn');
+    
+   btn.label = btn.forEach(b => {
+      b.style.color = 'white';
+      b.style.background = 'blue';
+  });
+
+       // Aplicar estilo al botón seleccionado
+  boton.style.color = '#000';
+  boton.style.background = '#4f9';
+  Cap.textContent = capitulo.cap;
             };
             
-     Caja.appendChild(boton);
-        });
-    }
+        Caja.appendChild(boton);
+     });
+   }
 }
-     
+
      var isMobile = /Mobi|Android|iPhone|iPad|iPod|BlackBerry|IEMobile|Opera Mini/i.test(navigator.userAgent);
 
-      if (!isMobile) {
-    var TITULO_LIMPIO = TITULO.replace('🍿', '');   
-             
-    window.location.href = `https://www.google.com/search?q=site:sololatino.net+${TITULO_LIMPIO}`;
+        if (!isMobile) {
+    var TITULO = TITULO ? TITULO.replace('🍿', '') : '';     
+    window.location.href = `https://www.google.com/search?q=site:sololatino.net+${TITULO}`;
 }
 </script>
 </body>
 </html>
-
- <!-- https://pelisflix1.pics/pelicula/la-noche-del-demonio-estan-entre-nosotros/ -->
-
-
-
