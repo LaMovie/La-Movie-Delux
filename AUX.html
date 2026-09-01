@@ -121,13 +121,20 @@ var URL = params.get('url');
 
     var serie = Lista3.find(item => (item.NAME || item.name) === TITULO);
 
+   
     if (serie && serie.CAPS) {
-  serie.CAPS.forEach(capitulo => {
+ 
+  serie.CAPS.forEach((capitulo, index) => {
           var boton = document.createElement('a');
  boton.textContent = capitulo.cap;
  Cap.textContent = '1x01';
      boton.className = 'Btn';
-            
+       
+     if (index === 0) {
+  boton.style.color = '#000';
+  boton.style.background = '#4f9';
+     }     
+   
      boton.onclick = (e) => {
    e.preventDefault();
        F.src = capitulo.link;
