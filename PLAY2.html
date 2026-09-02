@@ -1094,7 +1094,7 @@ function enviarReporte() {
 </script>
         <!-- BUSCADOR -->
 <script>
-var PELI  = ['file', 'movie', 'vidyard.com', 'dropbox', 'gallery=open'];
+var PELI  = ['file', 'movie', 'vidyard.com', 'dropbox', 'gallery=open', '.mp4'];
 var SERIE = ['folders', 'drama', 'publicfoldergrid'];
 
 function construirLista() {
@@ -1176,7 +1176,7 @@ function procesarEnlace(matchedItem) {
     var isMobile = /Mobi|Android|iPhone|iPad|iPod|BlackBerry|IEMobile|Opera Mini/i.test(navigator.userAgent);
     var tituloLimpio = NN.replace(/🍿|🌐|📺|⚙️|🧋/g, '').trim();
 
-    var CADENA = ['google.com/file', 'www.dropbox.com', 'play.vidyard', 'okpeliz.com'];
+    var CADENA = ['google.com/file', 'www.dropbox.com', 'play.vidyard', 'okpeliz.com', '.mp4'];
     
     if (CADENA.some(dominio => ENLACE.includes(dominio))) {
         window.location.href = `PLAY2.html?titulo=${encodeURIComponent(tituloLimpio)}&url=${encodeURIComponent(ENLACE)}`;
