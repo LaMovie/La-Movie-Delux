@@ -81,10 +81,10 @@ function procesarEnlace(matchedItem) {
     
     var tituloLimpio = NN.replace(/🍿|🌐|📺|⚙️|🧋/g, '').trim();
 
-    var CADENA = ['google.com/file', 'www.dropbox.com', 'play.vidyard', 'okpeliz.com'];
+    var CADENA = ['google.com/file', 'www.dropbox.com', 'play.vidyard', 'okpeliz.com', '.mp4'];
     
     if (CADENA.some(dominio => ENLACE.includes(dominio))) {
-        window.location.href = `PLAY.html?titulo=${encodeURIComponent(tituloLimpio)}&url=${encodeURIComponent(ENLACE)}`;
+        window.location.href = `PLAY.html?titulo=${tituloLimpio}&url=${ENLACE}`;
    
     } else {
         if (!isMobile && ENLACE.includes("latino.solo")) {
