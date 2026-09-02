@@ -1,4 +1,4 @@
-var PELI  = ['file', 'movie', 'vidyard.com', 'dropbox', 'gallery=open'];
+var PELI  = ['file', 'movie', 'vidyard.com', 'dropbox', 'gallery=open', '.mp4'];
 var SERIE = ['folders', 'drama', 'publicfoldergrid'];
 
 function construirLista() {
@@ -85,7 +85,6 @@ function procesarEnlace(matchedItem) {
     
     if (CADENA.some(dominio => ENLACE.includes(dominio))) {
         window.location.href = `PLAY.html?titulo=${encodeURIComponent(tituloLimpio)}&url=${encodeURIComponent(ENLACE)}`;
-   
     } else {
         if (!isMobile && ENLACE.includes("latino.solo")) {
      var ENLACE = ENLACE.replace('latino.solo-latino', 'h5.swplayer');   
@@ -94,8 +93,6 @@ function procesarEnlace(matchedItem) {
      window.location.href = `${ENLACE}?texto=${encodeURIComponent(tituloLimpio)}`;
         } else if (ENLACE.includes('pelisflix')) {
   window.location.href = `AUX.html?titulo=${NN}&url=${ENLACE}`;          
-        } else if (ENLACE.includes('.mp4')) {
-     window.location.href = `PLAY.html?titulo=${encodeURIComponent(tituloLimpio)}&url=${encodeURIComponent(ENLACE)}`;
         } else {
    window.location.href = ENLACE;
         }
