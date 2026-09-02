@@ -84,7 +84,7 @@ function procesarEnlace(matchedItem) {
     var CADENA = ['google.com/file', 'www.dropbox.com', 'play.vidyard', 'okpeliz.com', '.mp4'];
     
     if (CADENA.some(dominio => ENLACE.includes(dominio))) {
-        window.location.href = `PLAY.html?titulo=${tituloLimpio}&url=${ENLACE}`;
+        window.location.href = `PLAY.html?titulo=${encodeURIComponent(tituloLimpio)}&url=${encodeURIComponent(ENLACE)}`;
    
     } else {
         if (!isMobile && ENLACE.includes("latino.solo")) {
@@ -94,6 +94,8 @@ function procesarEnlace(matchedItem) {
      window.location.href = `${ENLACE}?texto=${encodeURIComponent(tituloLimpio)}`;
         } else if (ENLACE.includes('pelisflix')) {
   window.location.href = `AUX.html?titulo=${NN}&url=${ENLACE}`;          
+        } else if (ENLACE.includes('.mp4')) {
+     window.location.href = `PLAY.html?titulo=${encodeURIComponent(tituloLimpio)}&url=${encodeURIComponent(ENLACE)}`;
         } else {
    window.location.href = ENLACE;
         }
