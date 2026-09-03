@@ -178,7 +178,7 @@ Div.forEach(divElement => {
             
             if (isMobile) {
  // En móviles, va a la URL normal adquirida
-     window.location.href = url;
+     window.location.href = `PLAY.html?titulo=${encodeURIComponent(tituloLimpio)}&url=${encodeURIComponent(ENLACE)}`;
             } else {
      url = url.replace('latino.solo-latino', 'h5.swplayer'); 
    window.location.href = url;
@@ -259,9 +259,6 @@ ENLACE.forEach(item => {
         }, 300); // Reducido a 300ms para mejor respuesta
     });
 });
-
-
-    
 
         
 
