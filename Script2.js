@@ -85,10 +85,7 @@ function procesarEnlace(matchedItem) {
     
     if (CADENA.some(dominio => ENLACE.includes(dominio))) {
         window.location.href = `PLAY.html?titulo=${encodeURIComponent(tituloLimpio)}&url=${encodeURIComponent(ENLACE)}`;
-    } else if (isMobile && ENLACE.includes('mp4')) {
-   window.location.href = ENLACE;
-        
-    } else if (!isMobile && ENLACE.includes('mp4')) {
+    } else if (ENLACE.includes('mp4')) {
   window.location.href = `PLAY.html?titulo=${encodeURIComponent(tituloLimpio)}&url=${encodeURIComponent(ENLACE)}`;        
     } else {
         if (!isMobile && ENLACE.includes("latino.solo")) {
