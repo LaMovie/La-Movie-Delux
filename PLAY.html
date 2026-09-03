@@ -1219,10 +1219,15 @@ function procesarEnlace(matchedItem) {
     
     var tituloLimpio = NN.replace(/🍿|🌐|📺|⚙️|🧋/g, '').trim();
 
-    var CADENA = ['google.com/file', 'www.dropbox.com', 'play.vidyard', 'okpeliz.com', '.mp4'];
+    var CADENA = ['google.com/file', 'www.dropbox.com', 'play.vidyard', 'okpeliz.com'];
     
     if (CADENA.some(dominio => ENLACE.includes(dominio))) {
         window.location.href = `PLAY.html?titulo=${encodeURIComponent(tituloLimpio)}&url=${encodeURIComponent(ENLACE)}`;
+    } else if (isMobile && ENLACE.includes('mp4')) {
+   window.location.href = ENLACE;
+        
+    } else if (!isMobile && ENLACE.includes('mp4')) {
+  window.location.href = `PLAY.html?titulo=${encodeURIComponent(tituloLimpio)}&url=${encodeURIComponent(ENLACE)}`;        
     } else {
         if (!isMobile && ENLACE.includes("latino.solo")) {
      var ENLACE = ENLACE.replace('latino.solo-latino', 'h5.swplayer');
