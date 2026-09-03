@@ -83,13 +83,13 @@ function procesarEnlace(matchedItem) {
 
     var CADENA = ['google.com/file', 'www.dropbox.com', 'play.vidyard', 'okpeliz.com', '.mp4'];
     
-    if (CADENA.some(dominio => ENLACE.includes(dominio))) {
+    if (!isMobile && CADENA.some(dominio => ENLACE.includes(dominio))) {
         window.location.href = `PLAY.html?titulo=${encodeURIComponent(tituloLimpio)}&url=${encodeURIComponent(ENLACE)}`;
-    
-    if (isMobile && ENLACE.includes('.mp4')) {
-   window.location.href = ENLACE;
-  }    
-        
+      else if (isMobile && CADENA.some(dominio => ENLACE.includes(dominio))) {
+  
+  if (ENLACE.includes('.mp4')) {
+      window.location.href = ENLACE;
+  }  
     } 
   
   } else {     
