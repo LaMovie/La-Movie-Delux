@@ -178,7 +178,7 @@ Div.forEach(divElement => {
             
             if (isMobile) {
  // En móviles, va a la URL normal adquirida
-     window.location.href = `PLAY.html?titulo=${encodeURIComponent(tituloLimpio)}&url=${encodeURIComponent(ENLACE)}`;
+     window.location.href = url;
             } else {
      url = url.replace('latino.solo-latino', 'h5.swplayer'); 
    window.location.href = url;
@@ -260,7 +260,17 @@ ENLACE.forEach(item => {
     });
 });
 
-        
+
+    
+
+        // INTENT
+function abrirFuera(urlDestino) {
+     var urlSinProtocolo = urlDestino.replace("https://", "");
+      
+      var intentURL = "intent://" + urlSinProtocolo + "#Intent;scheme=https;action=android.intent.action.VIEW;end;";
+      
+ window.location.href = intentURL;
+    }
 
 
        // PRECAUTION MOBILE 
