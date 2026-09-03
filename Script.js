@@ -263,14 +263,7 @@ ENLACE.forEach(item => {
 
     
 
-        // INTENT
-function abrirFuera(urlDestino) {
-     var urlSinProtocolo = urlDestino.replace("https://", "");
-      
-      var intentURL = "intent://" + urlSinProtocolo + "#Intent;scheme=https;action=android.intent.action.VIEW;end;";
-      
- window.location.href = intentURL;
-    }
+        
 
 
        // PRECAUTION MOBILE 
