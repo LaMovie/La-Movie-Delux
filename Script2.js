@@ -85,7 +85,7 @@ function procesarEnlace(matchedItem) {
     
     if (!isMobile && CADENA.some(dominio => ENLACE.includes(dominio))) {
         window.location.href = `PLAY.html?titulo=${encodeURIComponent(tituloLimpio)}&url=${encodeURIComponent(ENLACE)}`;
-      else if (isMobile && CADENA.some(dominio => ENLACE.includes(dominio))) {
+     } else if (isMobile && CADENA.some(dominio => ENLACE.includes(dominio))) {
   
   if (ENLACE.includes('.mp4')) {
       window.location.href = ENLACE;
