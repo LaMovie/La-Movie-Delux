@@ -90,10 +90,7 @@ function procesarEnlace(matchedItem) {
   if (ENLACE.includes('.mp4')) {
       window.location.href = ENLACE;
   }  
-    } 
-  
-  } else {     
-        if (!isMobile && ENLACE.includes("latino.solo")) {
+    } else if (!isMobile && ENLACE.includes("latino.solo")) {
      var ENLACE = ENLACE.replace('latino.solo-latino', 'h5.swplayer');   
     window.location.href = ENLACE;
         } else if (NN.includes('🌐')) {
@@ -103,7 +100,7 @@ function procesarEnlace(matchedItem) {
         } else {
    window.location.href = ENLACE;
         }
-    }
+    
     
     var buscadorInput = document.getElementById("buscador");
     if (buscadorInput) {
