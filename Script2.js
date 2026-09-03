@@ -83,11 +83,15 @@ function procesarEnlace(matchedItem) {
 
     var CADENA = ['google.com/file', 'www.dropbox.com', 'play.vidyard', 'okpeliz.com', '.mp4'];
     
-    if (!isMobile && CADENA.some(dominio => ENLACE.includes(dominio))) {
+    if (CADENA.some(dominio => ENLACE.includes(dominio))) {
         window.location.href = `PLAY.html?titulo=${encodeURIComponent(tituloLimpio)}&url=${encodeURIComponent(ENLACE)}`;
-    } else if (isMobile && CADENA.some(dominio => ENLACE.includes(dominio))) {
+    
+    if (isMobile && ENLACE.includes('.mp4')) {
+   window.location.href = ENLACE;
+  }    
+        
+    } 
   
-  window.location.href = ENLACE;
   } else {     
         if (!isMobile && ENLACE.includes("latino.solo")) {
      var ENLACE = ENLACE.replace('latino.solo-latino', 'h5.swplayer');   
