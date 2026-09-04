@@ -113,11 +113,9 @@ body {
 <script>
 var params = new URLSearchParams(window.location.search);
 var TITULO = params.get('titulo');
-var URL = params.get('url');
    
-   if (TITULO && URL) {
-        F.src = URL; 
-        T.textContent = TITULO;
+         if (TITULO) {
+    T.textContent = TITULO;
 
     var serie = Lista3.find(item => (item.NAME || item.name) === TITULO);
 
@@ -133,6 +131,7 @@ var URL = params.get('url');
      if (index === 0) {
   boton.style.color = '#000';
   boton.style.background = '#4f9';
+      F.src = capitulo.link;
      }     
    
      boton.onclick = (e) => {
