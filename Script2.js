@@ -216,7 +216,7 @@ function Check() {
      
 
    function openMovie(titulo, urlArchivo) {
-  const urlDestino = `PLAY2.html?titulo=${encodeURIComponent(titulo)}&url=${encodeURIComponent(urlArchivo)}`;
+  const urlDestino = `PLAY2.html?titulo=${encodeURIComponent(titulo)}`;
    
   window.location.href = urlDestino;
 }

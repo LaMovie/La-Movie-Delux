@@ -631,7 +631,7 @@ footer {
  <audio id="AA" src="https://archive.org/download/bass-city-nany-reggae-music/PANTALLA%20EN%20NEGRO.mp3"></audio>
 
 <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
- 
+
 <script>
 // SCROLL
 setTimeout(() => {
@@ -670,70 +670,36 @@ document.addEventListener('fullscreenchange', function() {
   }
 });
 
-document.addEventListener('click', function(){
-     Emoj.style.zIndex = "-1";    
-});
+  X.style.animation = 'X 2.5s linear 18s forwards running'; 
 </script>   
 <script>
     window.onload = () => {
      if (window.innerWidth > window.innerHeight) {
-    Emoj.style.marginLeft = '100vh';
+    X.style.marginLeft = '100vh';
   } else {
-    Emoj.style.marginLeft = '0vh';
+    X.style.marginLeft = '0vh';
   }
  }
 </script>
 <script>
         // ⚠️ ATENCIÓN
-var API_KEY = "2c0b94c5ec729e2cc59b8be6ad7b2159"; 
+const API_KEY = "2c0b94c5ec729e2cc59b8be6ad7b2159"; 
 
-// 1. OBTENER PARÁMETROS GLOBALES
-const params = new URLSearchParams(window.location.search);
-var urlCapt = params.get('url');
-var N = params.get('titulo');
+    var params = new URLSearchParams(window.location.search);
+     var TITULO = params.get('titulo'); 
+     var URL_PARAM = params.get('url'); 
 
-   var tituloCapt = N; 
-    
-   if (urlCapt && urlCapt.includes('dropbox')) {
-    tituloCapt = '🧋' + N;
-}
-
- 
-
-// 2. LÓGICA PRINCIPAL INTEGRADA AL CARGAR EL DOM
-window.addEventListener('DOMContentLoaded', async () => {
-    
-    // A. Mostrar Título Inmediatamente
-    if (tituloCapt) {
-        var ElementoT = document.getElementById('T');
-        if (ElementoT) ElementoT.textContent = tituloCapt;
-    }
-
-    // B. Asignar iframe inicial sin conflicto (Protege Drive)
-    
-       if (urlCapt) {
-     var URL_FINAL = urlCapt;
-     var esArchivoDrive = false; 
-
-        if (urlCapt.includes('file')) {
-            URL_FINAL = urlCapt.split('view')[0] + 'preview';
-          esArchivoDrive = true; 
-        } else if (urlCapt.includes('www.dropbox.com')) {
-            URL_FINAL = urlCapt.replace('www.dropbox.com', 'dl.dropboxusercontent.com');
-        } else if (urlCapt.includes('play.vidyard')) {
-      URL_FINAL = urlCapt; 
-   }
-
-       
-     I.src = URL_FINAL;
+window.addEventListener('DOMContentLoaded', () => {
+    // A. Mostrar Título y cargar TMDB inmediatamente
+    if (TITULO) {
+         let tituloLimpio = TITULO.replace(/🍿|🌐|📺|⚙️|🧋/g, '').trim();
+        let ElementoT = document.getElementById('T');
+        if (ElementoT) ElementoT.textContent = TITULO;
         
-        if (esArchivoDrive) {
-            var audio = document.getElementById('AA');
-            if (audio) audio.play().catch(e => console.log("Audio bloqueado", e));
-        }
+        cargarTMDB(tituloLimpio); 
     }
 
-    // 🔑 CARGAR SCRIPTS DE BUSCADOR Y CAPÍTULOS
+    // B. CARGAR SCRIPTS DE BASES DE DATOS
     const S = [
         "https://lamovie.github.io/Buscador/Buscador.js",
         "https://lamovie.github.io/Buscador/Buscador2.js",
@@ -748,151 +714,168 @@ window.addEventListener('DOMContentLoaded', async () => {
         script.onload = () => {
             scriptsCargados++;
             
-if (scriptsCargados === S.length) {
+   if (scriptsCargados === S.length) {
+                if (typeof construirLista === 'function') construirLista(); 
                 
-   // 1. Ejecutar buscador general
-             try {
-                    if (typeof construirLista === 'function') construirLista(); 
-                } catch(e) { console.error("Error al construir buscador", e); }
-
-    // 2. Extraer y dibujar Capítulos de manera segura
-    
-    if (tituloCapt && urlCapt) {
-           var Caja = document.getElementById('Caja');
-    var listaBusqueda = [];
-                    
-    // Bloque seguro para evitar "ReferenceError" si Lista3 tarda
-            try {
-    if (typeof Lista3 !== 'undefined') {
-       listaBusqueda = Lista3;
-       
-   } else if (typeof window.Lista3 !== 'undefined') {
-                            listaBusqueda = window.Lista3;
-       }
-          } catch(e) { console.log("Esperando lista..."); }
-                    
-      var serie = listaBusqueda.find(item => (item.NAME || item.name) === tituloCapt);
-
-
-if (serie && serie.CAPS && Caja) {
-    Caja.innerHTML = ''; 
-    var btnsCaps = [];
-
-    // Agregamos 'index' para saber la posición del capítulo
-    
-    serie.CAPS.forEach((capitulo, index) => {
-        var boton = document.createElement('a');
- boton.textContent = capitulo.cap;
-        boton.className = 'Btn';
-
-        // CONDICIÓN: Si es el primer elemento (índice 0)
-        
-        if (index === 0) {
- boton.style.background = '#4f9';
- boton.style.color = '#000';
- boton.style.boxShadow = '0 0 10px rgba(68, 255, 153, 0.8)';
- }
-                            
-     boton.onclick = () => {
-            I.src = capitulo.link.replace('www.dropbox.com', 'dl.dropboxusercontent.com');
-                                
-  btnsCaps.forEach(other => {
-  other.style.background = 'blue';
-  other.style.color = 'white';
-  other.style.boxShadow = 'none';
-});
-  
- boton.style.background = '#4f9';
- boton.style.color = '#000';
- boton.style.boxShadow = '0 0 10px rgba(68, 255, 153, 0.8)';
-  };
-                            
-        Caja.appendChild(boton);
-        btnsCaps.push(boton);
-     });
-   }
- }
-
-   // 💻 REDIRECCIÓN PC 
-   
-        // var isMobile = /Mobi|Android|iPhone|iPad|iPod|BlackBerry|IEMobile|Opera Mini/i.test(navigator.userAgent);
-        
-  // if (!isMobile && tituloCapt) {
-      // var TITULO_LIMPIO = tituloCapt.replace('🍿', '');   
-     
-     // window.location.href = `https://www.google.com/search?q=site:sololatino.net+${TITULO_LIMPIO}`;}
-                
+    // LÓGICA A PRUEBA DE FALLOS:
+                if (URL_PARAM) {
+                    // Si viene la URL (ej. por un clic en Sugerencias), reproducela directo
+                    document.getElementById('I').src = formatearEnlace(URL_PARAM);
+                } else {
+                    // Si solo viene el título, lo busca en tu base de datos
+                    reproducirDesdeDB(TITULO);
+                }
             }
         };
-        // Agregamos al head para evitar errores si el body aún lee contenido
         document.head.appendChild(script); 
-  });
-
-
-
-    // 📜 TMDB API Y TRÁILER (Se ejecuta en paralelo)
-    if (tituloCapt) {
-        var Aux = document.getElementById("Aux");
-        try {
-            var searchUrl = "https://api.themoviedb.org/3/search/movie?api_key=" + API_KEY + "&query=" + encodeURIComponent(N) + "&language=es-ES";
-
-            var response = await fetch(searchUrl);
-            var data = await response.json();
-
-            if (data.results && data.results.length > 0) {
-                var peli = data.results[0]; 
-                var movieId = peli.id;
-                var detailUrl = "https://api.themoviedb.org/3/movie/" + movieId + "?api_key=" + API_KEY + "&language=es-ES&append_to_response=credits,videos&include_video_language=es,en";
-                var detailRes = await fetch(detailUrl);
-                var detailData = await detailRes.json();
-
-                var titulo = detailData.title;
-                var año = detailData.release_date ? detailData.release_date.split('-')[0] : "N/A";
-                var sinopsis = detailData.overview || "No hay sinopsis disponible.";
-                var genero = detailData.genres && detailData.genres.length > 0 ? detailData.genres.map(g => g.name).join(", ") : "Desconocido";
-                var directorObj = detailData.credits.crew.find(miembro => miembro.job === "Director");
-                var director = directorObj ? directorObj.name : "Desconocido";
-                var poster = detailData.poster_path ? "https://image.tmdb.org/t/p/w500" + detailData.poster_path : "";
-
-                var trailer = detailData.videos && detailData.videos.results ? detailData.videos.results.find(v => v.type === "Trailer" && v.site === "YouTube") : null;
-                var trailerKey = trailer ? trailer.key : null;
-
-                var botonTrailerHTML = trailerKey ? `<button class="btn-trailer" style="padding: 3px 10px; font-size: 11px; margin: 0 0 0 10px; box-shadow: none;" onclick="abrirTrailer('${trailerKey}')">▶Tráiler</button>` : '';
-
-                Aux.innerHTML = `
-                  <div class="result-section">
-                    <img src="${poster}" alt="${titulo}" style="width: 23%; height: 13vh; border-radius: 12px; margin-right: 15px; margin-bottom: 5px;">
-                    <div class="result-title" style="font-size: 1.1rem; font-weight: bold; margin-bottom: 5px;">${titulo} (${año})</div>
-                    <p style="margin: 5px 0; font-size: 0.95rem;"><strong>🎬 Género:</strong> ${genero}</p>
-                    <p style="margin: 5px 0; font-size: 0.95rem; display: flex; align-items: center;"><strong>🎥 Director:</strong> ${director} ${botonTrailerHTML}</p><br/>
-                    <div id="S" style="margin-top: 10px;">
-                        <p style="margin: 0;"><strong>📝 Sinopsis:</strong> ${sinopsis}</p>
-                    </div>
-                  </div>
-                `;
-            }
-        } catch (error) {
-            console.error("Error API TMDb:", error);      
-        }
-    }
+    });
 });
 
+// FUNCIÓN PARA BUSCAR Y REPRODUCIR (PELÍCULA O SERIE)
+function reproducirDesdeDB(tituloABuscar) {
+    if (!tituloABuscar) return;
+
+    let DB_COMPLETA = [];
+    if (typeof Lista1 !== 'undefined') DB_COMPLETA.push(...Lista1);
+    if (typeof Lista2 !== 'undefined') DB_COMPLETA.push(...Lista2);
+    if (typeof Lista3 !== 'undefined') DB_COMPLETA.push(...Lista3);
+
+    // ESTO FALTABA: Normalizar para que "Película 🍿" sea igual a "pelicula"
+    function normalizarTexto(texto) {
+        return texto.normalize("NFD").replace(/[\u0300-\u036f]/g, "").replace(/🍿|🌐|📺|⚙️|🧋/g, '').trim().toLowerCase();
+    }
+
+    let nombreBusqueda = normalizarTexto(tituloABuscar);
+
+    let itemEncontrado = DB_COMPLETA.find(item => {
+        let nombreDB = normalizarTexto(item.NAME || item.name || "");
+        return nombreDB === nombreBusqueda;
+    });
+
+    let Iframe = document.getElementById('I');
+    let Caja = document.getElementById('Caja');
+
+    if (!itemEncontrado) {
+        console.warn("No se encontró el título exacto en la base de datos local.");
+        return;
+    }
+
+    let urlExtraida = itemEncontrado.URL || itemEncontrado.url || "";
+
+    
+    // 📎 MANEJO DE CAPÍTULOS O PELÍCULA
+    if (itemEncontrado.CAPS && itemEncontrado.CAPS.length > 0) {
+        Caja.innerHTML = ''; 
+        let botones = [];
+
+        itemEncontrado.CAPS.forEach((capitulo, index) => {
+            let boton = document.createElement('a');
+            boton.textContent = capitulo.cap;
+            boton.className = 'Btn';
+
+            boton.onclick = () => {
+                Iframe.src = formatearEnlace(capitulo.link);
+                botones.forEach(b => {
+                    b.style.background = 'blue';
+                    b.style.color = 'white';
+                    b.style.boxShadow = 'none';
+                });
+                boton.style.background = '#4f9';
+                boton.style.color = '#000';
+                boton.style.boxShadow = '0 0 10px rgba(68, 255, 153, 0.8)';
+            };
+
+            Caja.appendChild(boton);
+            botones.push(boton);
+
+            // Auto-reproducir capítulo 1
+            if (index === 0) boton.onclick(); 
+        });
+    } else {
+        Caja.innerHTML = '';
+        Iframe.src = formatearEnlace(urlExtraida);
+    }
+}
+
+// FUNCIÓN PARA FORMATEAR ENLACES (Mantiene tu lógica de PC intacta)
+function formatearEnlace(enlace) {
+    if (!enlace) return "";
+    
+    var isMobile = /Mobi|Android|iPhone|iPad|iPod|BlackBerry|IEMobile|Opera Mini/i.test(navigator.userAgent);
+    
+  
+    // 💻 MODO PC
+    if (!isMobile && enlace.includes('latino.solo-latino')) {
+        enlace = enlace.replace('latino.solo-latino', 'h5.swplayer');
+    }
+
+    if (enlace.includes('file')) {
+        let audio = document.getElementById('AA');
+        if (audio) audio.play().catch(e => console.log("Audio bloqueado", e));
+        return enlace.split('view')[0] + 'preview';
+    }
+    if (enlace.includes('www.dropbox.com')) {
+        return enlace.replace('www.dropbox.com', 'dl.dropboxusercontent.com');
+    }
+    return enlace;
+}
 
 
-    // FUNCIONES DEL MODAL PARA EL TRÁILER (Sin afectar el botón 'Atrás')
+     // 📜 TMDB API
+async function cargarTMDB(N) {
+    var Aux = document.getElementById("Aux");
+    try {
+        var searchUrl = "https://api.themoviedb.org/3/search/movie?api_key=" + API_KEY + "&query=" + encodeURIComponent(N) + "&language=es-ES";
+        var response = await fetch(searchUrl);
+        var data = await response.json();
+
+        if (data.results && data.results.length > 0) {
+            var peli = data.results[0]; 
+            var movieId = peli.id;
+            var detailUrl = "https://api.themoviedb.org/3/movie/" + movieId + "?api_key=" + API_KEY + "&language=es-ES&append_to_response=credits,videos&include_video_language=es,en";
+            var detailRes = await fetch(detailUrl);
+            var detailData = await detailRes.json();
+
+            var titulo = detailData.title;
+            var año = detailData.release_date ? detailData.release_date.split('-')[0] : "N/A";
+            var sinopsis = detailData.overview || "No hay sinopsis disponible.";
+            var genero = detailData.genres && detailData.genres.length > 0 ? detailData.genres.map(g => g.name).join(", ") : "Desconocido";
+            var directorObj = detailData.credits.crew.find(miembro => miembro.job === "Director");
+            var director = directorObj ? directorObj.name : "Desconocido";
+            var poster = detailData.poster_path ? "https://image.tmdb.org/t/p/w500" + detailData.poster_path : "";
+
+            var trailer = detailData.videos && detailData.videos.results ? detailData.videos.results.find(v => v.type === "Trailer" && v.site === "YouTube") : null;
+            var trailerKey = trailer ? trailer.key : null;
+
+            var botonTrailerHTML = trailerKey ? `<button class="btn-trailer" style="padding: 3px 10px; font-size: 11px; margin: 0 0 0 10px; box-shadow: none;" onclick="abrirTrailer('${trailerKey}')">▶Tráiler</button>` : '';
+
+            Aux.innerHTML = `
+              <div class="result-section">
+                <img src="${poster}" alt="${titulo}" style="width: 23%; height: 13vh; border-radius: 12px; margin-right: 15px; margin-bottom: 5px;">
+                <div class="result-title" style="font-size: 1.1rem; font-weight: bold; margin-bottom: 5px;">${titulo} (${año})</div>
+                <p style="margin: 5px 0; font-size: 0.95rem;"><strong>🎬 Género:</strong> ${genero}</p>
+                <p style="margin: 5px 0; font-size: 0.95rem; display: flex; align-items: center;"><strong>🎥 Director:</strong> ${director} ${botonTrailerHTML}</p><br/>
+                <div id="S" style="margin-top: 10px;">
+                    <p style="margin: 0;"><strong>📝 Sinopsis:</strong> ${sinopsis}</p>
+                </div>
+              </div>
+            `;
+        }
+    } catch (error) {
+        console.error("Error API TMDb:", error);      
+    }
+}
+
 window.abrirTrailer = function(youtubeKey) {
     var modal = document.getElementById("trailerModal");
     var contenedorVideo = document.querySelector(".video-container");
-   
     contenedorVideo.innerHTML = `<iframe id="iframeTrailer" src="https://www.yout-ube.com/embed/${youtubeKey}?autoplay=1" frameborder="0" allow="autoplay; encrypted-media" allowfullscreen></iframe>`;
-    
     modal.style.display = "block";
 };
 
 window.cerrarTrailer = function() {
     var modal = document.getElementById("trailerModal");
     var contenedorVideo = document.querySelector(".video-container");
-    
     modal.style.display = "none";
     contenedorVideo.innerHTML = ""; 
 };
@@ -963,16 +946,16 @@ var baseDePeliculas = [
 
         if (isMobile) {
             if (peli.esDrive) {
-                accionClick = `onclick="window.location.href='?titulo=${tituloCodificado}&url=${urlCodificada}'"`;
+                accionClick = `onclick="window.location.href='?titulo=${tituloCodificado}'"`;
             } else {
                 accionClick = `onclick="window.location.href='${peli.url}'"`;           
             }
         } else { 
             if (!peli.esDrive) {
-    var ENLACE = peli.url.replace('latino.solo-latino', 'h5.swplayer');          
+  var ENLACE = peli.url.replace('latino.solo-latino', 'h5.swplayer');          
                 accionClick = `onclick="window.location.href='${ENLACE}'"`;
             } else {
-               accionClick = `onclick="window.location.href='?titulo=${tituloCodificado}&url=${urlCodificada}'"`;
+               accionClick = `onclick="window.location.href='?titulo=${tituloCodificado}'"`;
             }
         }
 
@@ -1056,9 +1039,9 @@ function enviarReporte() {
         datosEnvio["Película que buscaba el usuario"] = peliculaBuscada;
     }
 
-
+        
     
-    // ENVÍO SILENCIOSO MEDIANTE FORMSUBMIT CON EXCEPCIÓN DE SEGURIDAD
+     // ENVÍO SILENCIOSO MEDIANTE FORMSUBMIT CON EXCEPCIÓN DE SEGURIDAD
     fetch("https://formsubmit.co/ajax/lamoviedeoro@gmail.com", {
         method: "POST",
         referrerPolicy: "strict-origin-when-cross-origin", 
@@ -1076,7 +1059,7 @@ function enviarReporte() {
             Swal.fire({
     title: '📜"¡Muchas Gracias! Tu Reporte Ha Sido Enviado Con Éxito."📜',  
     icon: 'info'
- }); 
+ });   
             cerrarModalReporte();
         } else {
             alert("🛠️...🛠️");
@@ -1092,13 +1075,13 @@ function enviarReporte() {
     });
 }
 </script>
-        <!-- BUSCADOR -->
+       <!-- BUSCADOR -->
 <script>
 var PELI  = ['file', 'movie', 'vidyard.com', 'dropbox', 'gallery=open', '.mp4'];
 var SERIE = ['folders', 'drama', 'publicfoldergrid'];
 
 function construirLista() {
-    var PELIS = [...Lista1, ...Lista2, ...Lista3];
+    var PELIS = [...Lista1, ...Lista2, ...Lista3]; 
     var lista = document.getElementById("Lista");
 
     PELIS.forEach(item => {
@@ -1121,8 +1104,13 @@ function construirLista() {
             tipo = 'Aux';
         }
 
-        a.href = item.URL || item.url;
-        // Envolvemos name en .titulo-txt para aislarlo en la búsqueda
+ // OCULTAMOS LA URL REAL DEL HREF
+        a.href = "javascript:void(0);"; 
+        
+        // PASAMOS LAS VARIABLES AL DOM PARA LEERLAS DESPUÉS
+        a.dataset.tipo = tipo;
+        a.dataset.url = url;
+
         a.innerHTML = `<span class="titulo-txt">${name}</span> <span style="font-size: 11px; color: #f19; font-weight: normal; margin-left: 8px;"><br/>(${tipo})</span>`;
         a.classList.add("Data");
 
@@ -1130,6 +1118,7 @@ function construirLista() {
         lista.appendChild(li);
     });
 }
+
 
 document.addEventListener("keyup", e => {
     function Tildes(texto, preservarÑ = false) {
@@ -1169,32 +1158,32 @@ document.addEventListener("keyup", e => {
 function procesarEnlace(matchedItem) {
     if (!matchedItem) return;
 
-    var ENLACE = matchedItem.getAttribute("href") || matchedItem.href;
     var spanTitulo = matchedItem.querySelector(".titulo-txt");
-    var NN = spanTitulo ? spanTitulo.textContent : matchedItem.textContent; // Toma solo el nombre, sin (Película)
+    var NN = spanTitulo ? spanTitulo.textContent : matchedItem.textContent;
+    var tituloLimpio = NN.replace(/🍿|🌐|📺|⚙️|🧋/g, '').trim();
     
     var isMobile = /Mobi|Android|iPhone|iPad|iPod|BlackBerry|IEMobile|Opera Mini/i.test(navigator.userAgent);
-    var tituloLimpio = NN.replace(/🍿|🌐|📺|⚙️|🧋/g, '').trim();
-
-    var CADENA = ['google.com/file', 'www.dropbox.com', 'play.vidyard', 'okpeliz.com'];
     
-    if (CADENA.some(dominio => ENLACE.includes(dominio))) {
-        window.location.href = `PLAY2.html?titulo=${encodeURIComponent(tituloLimpio)}&url=${encodeURIComponent(ENLACE)}`;
-    } else if (isMobile && ENLACE.includes('mp4')) {
-   window.location.href = ENLACE;
-        
-    } else if (!isMobile && ENLACE.includes('mp4')) {
-  window.location.href = `PLAY2.html?titulo=${encodeURIComponent(tituloLimpio)}&url=${encodeURIComponent(ENLACE)}`;        
+    var EXE = ['movie', 'pcloud', 'share.vidyard'];
+    
+    // RECUPERAMOS EL 'tipo' Y 'url' OCULTOS EN EL ELEMENTO
+    var tipo = matchedItem.dataset.tipo;
+    var url = matchedItem.dataset.url;
+
+    // REDIRECCIÓN SIMPLIFICADA BASADA EN EL TIPO
+    if (tipo === 'Copy') {
+        window.location.href = `${url}?texto=${tituloLimpio}`;
+  } else if (tipo === 'Película' && !EXE.some(s => url.includes(s))) { 
+        window.location.href = `PLAY2.html?titulo=${encodeURIComponent(tituloLimpio)}`;
+    } else if (tipo === 'Aux') {
+        window.location.href = `AUX.html?titulo=${encodeURIComponent(tituloLimpio)}`;
+    } else if (NN.includes('🧋')) {
+        window.location.href = `PLAY2.html?titulo=${encodeURIComponent(NN)}`;
     } else {
-        if (!isMobile && ENLACE.includes("latino.solo")) {
-      var ENLACE = ENLACE.replace('latino.solo-latino', 'h5.swplayer');
-   window.location.href = ENLACE;
-        } else if (NN.includes('🌐')) {
-    window.location.href = `${ENLACE}?texto=${encodeURIComponent(tituloLimpio)}`;
-        } else if (ENLACE.includes('pelisflix')) {
-  window.location.href = `AUX.html?titulo=🍿${tituloLimpio}&url=${ENLACE}`;          
+        if (isMobile) {
+      window.location.href = url;
         } else {
-   window.location.href = ENLACE;
+   window.location.href = url.replace('latino.solo-latino', 'h5.swplayer');
         }
     }
     
@@ -1203,6 +1192,7 @@ function procesarEnlace(matchedItem) {
         buscadorInput.value = '';
     }
 }
+
 
 // NUEVA FUNCIÓN PARA EJECUTAR LA BÚSQUEDA (COMPARTIDA POR ENTER Y LUPA)
 function ejecutarBusqueda(valorInput) {
@@ -1245,7 +1235,7 @@ function ejecutarBusqueda(valorInput) {
     }
 }
 
-    // MANEJO REAL DEL ENTER 
+// MANEJO REAL DEL ENTER 
 document.addEventListener("keydown", function(event) {
     if (event.target.matches("#buscador") && event.key === "Enter") {
         event.preventDefault();
@@ -1253,16 +1243,14 @@ document.addEventListener("keydown", function(event) {
     }
 });
 
+     
      // MANEJO DEL CLICK 
 document.addEventListener("click", function(event) {
     var matchedItem = event.target.closest("a"); 
     
     if (matchedItem && matchedItem.classList.contains("Data")) {
-        var href = matchedItem.getAttribute("href");
-        if (href && href !== "#") {
-            event.preventDefault();
-            procesarEnlace(matchedItem);
-        }
+        event.preventDefault();
+        procesarEnlace(matchedItem);
     }
 });
 
@@ -1289,11 +1277,11 @@ Search.onclick = () => {
     }
 };
 
-     No.onclick = () => {
-          Check();
+    No.onclick = () => {
+         Check();
 }
 
-        
+       
           // INTENT
 function abrirFuera(urlDestino) {
      var urlSinProtocolo = urlDestino.replace("https://", "");
@@ -1301,11 +1289,7 @@ function abrirFuera(urlDestino) {
       var intentURL = "intent://" + urlSinProtocolo + "#Intent;scheme=https;action=android.intent.action.VIEW;end;";
       
  window.location.href = intentURL;
-    }
+}    
 </script>
 </body>
 </html>
-
-
-
-
