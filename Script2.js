@@ -97,7 +97,7 @@ function procesarEnlace(matchedItem) {
   } else if (tipo === 'Película' && !EXE.some(s => url.includes(s))) { 
         window.location.href = `PLAY.html?titulo=${encodeURIComponent(tituloLimpio)}`;
     } else if (tipo === 'Aux') {
-        window.location.href = `AUX.html?titulo=${encodeURIComponent(tituloLimpio)}`;
+        window.location.href = `AUX.html?titulo=${encodeURIComponent(NN)}`;
     } else if (NN.includes('🧋')) {
         window.location.href = `PLAY.html?titulo=${encodeURIComponent(NN)}`;
     } else {
