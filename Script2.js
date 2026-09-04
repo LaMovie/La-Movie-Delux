@@ -100,6 +100,8 @@ function procesarEnlace(matchedItem) {
         window.location.href = `AUX.html?titulo=${encodeURIComponent(NN)}`;
     } else if (NN.includes('🧋')) {
         window.location.href = `PLAY.html?titulo=${encodeURIComponent(NN)}`;
+    } else if (NN.includes('Tv')) {
+        window.location.href = `PLAY.html?titulo=${encodeURIComponent(NN)}`;
     } else {
         if (isMobile) {
       window.location.href = url;
