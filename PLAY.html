@@ -759,7 +759,7 @@ window.addEventListener('DOMContentLoaded', () => {
    if (scriptsCargados === S.length) {
                 if (typeof construirLista === 'function') construirLista(); 
                 
-                // LÓGICA A PRUEBA DE FALLOS:
+    // LÓGICA A PRUEBA DE FALLOS:
                 if (URL_PARAM) {
                     // Si viene la URL (ej. por un clic en Sugerencias), reproducela directo
                     document.getElementById('I').src = formatearEnlace(URL_PARAM);
@@ -1218,7 +1218,7 @@ function procesarEnlace(matchedItem) {
   } else if (tipo === 'Película' && !EXE.some(s => url.includes(s))) { 
         window.location.href = `PLAY.html?titulo=${encodeURIComponent(tituloLimpio)}`;
     } else if (tipo === 'Aux') {
-        window.location.href = `AUX.html?titulo=${encodeURIComponent(tituloLimpio)}`;
+        window.location.href = `AUX.html?titulo=${encodeURIComponent(NN)}`;
     } else if (NN.includes('🧋')) {
         window.location.href = `PLAY.html?titulo=${encodeURIComponent(NN)}`;
     } else {
