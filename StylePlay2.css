@@ -1,0 +1,548 @@
+body {
+    margin: 0 auto;
+    max-width: 800px;
+    padding-top: 14vh; 
+    background: #000;
+}
+header {    
+    width: 100%;
+    max-width: 800px; /* Alineamos la cabecera con el límite de tu body */
+    left: 50%; /* Estos dos pasos centran la cabecera fijada */
+    transform: translateX(-50%);
+    top: 0; 
+    display: flex;
+    justify-content: start;
+    align-items: center;    
+    z-index: 8850;
+    background: #000;
+    position: fixed;
+    padding: 2vh;
+    gap: 2.5vh;
+    box-sizing: border-box; 
+}
+#Search {
+    color: blue;
+    opacity: .5;
+    width: 35px; /* Cambiamos vh por px absolutos para evitar deformaciones */
+    height: 35px; /* Le damos altura igual para que sea un círculo perfecto */
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    border-radius: 50px;    
+    margin-left: auto; 
+    z-index: 9999;
+    background: rgb(0,0,0, .5);
+}
+#Search:hover {
+    color: #079;
+}
+input {    
+    color: #fff;  
+    width: 50%;
+    display: none;
+    padding: 10px;
+    outline: none;    
+    text-align: left;
+    font-weight: bold;
+    border-radius: 20px;
+    background: linear-gradient(
+    270deg,
+    #ff00cc,
+    #8a2be2,
+    #00bf33,
+    #038,
+    purple
+);
+animation: rgbMove 8s linear infinite;
+background-size: 600% 600%;
+    border: .8px solid blue; 
+    box-shadow:
+        0 0 20px rgba(0,255,255,.35),
+        0 10px 30px rgba(0,0,0,.5);
+
+    transition:.35s;    
+}
+@keyframes rgbMove {
+    0%{background-position:0% 50%;}
+    50%{background-position:100% 50%;}
+    100%{background-position:0% 50%;}
+}
+#MG {
+    width: 18%;
+    opacity: .8;
+    filter: hue-rotate(645deg);
+}
+#HH {
+    color: gray;
+    opacity: .5;
+    margin-left: 8vh;
+    font-family: Luckiest Guy, cursive;
+    -webkit-text-stroke: .5px #000;    
+}
+#Lista {
+    display: none;
+    list-style: none;
+    padding: 0;
+    margin-top: 10vh; 
+    width: 90%;
+    max-height: 50vh;
+    overflow-y: auto;
+    background: #000;
+    position: fixed;
+    z-index: 9999;
+    border-radius: 10px;
+    box-shadow: 0 5px 15px rgba(0,0,0,0.8);
+}
+.Data {
+    color: #fff;
+    font-weight: bold;
+    -webkit-text-stroke: .3px #ff00ff;    
+    text-shadow: 0px 0px 10px blue, 0px 0px 20px #fff;    
+    text-decoration: none;
+    display: block;
+    padding: 15px;
+    border-bottom: 1px solid #333;
+    font-family: 'Poppins', sans-serif;
+    text-align: left;
+  &:hover {
+      background: #111;
+      color: #4f9;
+  }
+}
+.filtro {
+    display: none;
+}
+#Lista a {
+    color: #fff;
+    text-decoration: none;
+  &:hover {
+     color: #4f9;
+     text-shadow: 0 0 10px red;
+ }
+}
+#No {
+    scale: 70%;
+    display: none;
+    margin-top: 5vh;
+    position: fixed; 
+    border-radius: 50px;
+  &:hover {
+      filter: hue-rotate(90deg);
+  }
+}
+.span {
+    color: #7F05FF;
+}
+.date {
+    color: #b3bab3;
+}
+.dato{ 
+    margin-top: 2vh;
+    opacity: .9;
+    position: relative;
+    font-family: Luckiest Guy, cursive;
+    -webkit-text-stroke: .1px #003;
+    text-shadow: 0px .1px 0 #001;
+}
+.space {
+    width: 80%;
+    color: #ccc;
+    opacity :0.3;
+    font-family: Luckiest Guy, cursive;
+    -webkit-text-stroke: .1px #003;
+    text-shadow: 0px .1px 0 #001;
+}
+#Aux {
+    color: #aaa;
+    width: 100%;
+    margin-top: 5vh;
+}
+#Aux img {
+    float: left;
+}
+.I {
+    background: url(https://is.gd/L4PVt2);
+    background-size: cover;
+    background-position: center;
+    width: 100%;
+    height: 35vh;
+    aspect-ratio: 16 / 9;
+    border-radius: 10px;
+}
+#X {
+    width: 10vh;
+    border-radius: 50%;
+    position: fixed;
+    left: 40vh;
+    top: 0vh;
+    opacity: .6;
+    transition: 1s ease; 
+    filter: saturate(200%);
+}
+
+/* =========================================================
+   NUEVA ANIMACIÓN ÉPICA PARA EL LOGO "X"
+   "Explosión de Energía y Desvanecimiento Cuántico"
+   ========================================================= */
+@keyframes X {
+  0% {
+    top: 0vh; left: 40vh;
+    scale: 0.6;
+    opacity: 0.6;
+    filter: saturate(200%) blur(0px);
+    box-shadow: 0 0 10px rgba(255, 0, 153, 0.5); /* Resplandor rosado inicial */
+    pointer-events: auto; /* Se puede interactuar al inicio */
+  }
+  10% {
+    top: 0vh; left: 40vh;
+    scale: 0.8; /* Pequeño encogimiento antes del salto */
+    opacity: 1; /* Parpadea a opacidad total */
+    filter: saturate(300%) blur(2px); /* Más saturación y ligero desenfoque */
+    box-shadow: 0 0 50px rgba(255, 0, 153, 1); /* Brillo intenso de energía */
+  }
+
+  /* FASE 2 (10-30%): La Gran Explosión (0.2s-0.6s) */
+  20% {
+    top: 0vh; left: 40vh;
+    scale: 2.5; /* Comienza la expansión dramática */
+    opacity: 0.9;
+    filter: saturate(200%) blur(8px) drop-shadow(0 0 10px white); /* Desenfoque de explosión y rastro blanco */
+    box-shadow: 0 0 100px rgba(255, 0, 153, 1); /* Resplandor masivo */
+  }
+  30% {
+    top: 0vh; left: 40vh;
+    scale: 10; /* La onda de choque se expande completamente */
+    opacity: 0; /* Se vuelve transparente */
+    filter: blur(20px); /* Desenfoque extremo de las partículas remanentes */
+    box-shadow: 0 0 200px rgba(255, 0, 153, 0); /* La onda se disipa */
+    pointer-events: none; /* Asegura que no se pueda interactuar */
+  }
+
+  /* FASE 3 (30-100%): Limpieza y Dispersión Cuántica (0.6s-2s) */
+  /* Durante esta fase, el logo está invisible y no bloquea clics, pero
+     se mueve completamente fuera de la vista para limpieza */
+  100% {
+    top: -100vh; left: 100vw; /* Se mueve a una esquina lejana fuera de la pantalla */
+    scale: 0.1; /* Se encoge al mínimo absoluto */
+    opacity: 0; /* Permanece invisible */
+    z-index: -100; /* Asegura que esté detrás de todo */
+    pointer-events: none;
+  }
+}
+/* ========================================================= */
+
+/* Estilos para la sección de sugerencias */
+
+.sug-titulo {
+    color: #aaa;
+    font-size: 15px;
+    margin-bottom: 5vh;
+    font-family: Luckiest Guy, cursive;
+    -webkit-text-stroke: .1px #003;
+    text-shadow: 0px .1px 0 #001;
+    text-align: center;
+}
+
+/* --- ANIMACIÓN DE SALTOS PARA EL TÍTULO --- */
+@keyframes saltoPalabra {
+    0%, 15%, 100% {
+        transform: translateY(0);
+        color: #aaa;
+        text-shadow: 0px .1px 0 #001;
+    }
+    5% {
+        transform: translateY(-8px);
+        color: #4f9;
+        text-shadow: 0 0 10px rgba(68, 255, 153, 0.8);
+    }
+}
+
+.salto-1 { display: inline-block; animation: saltoPalabra 6s infinite 0s; }
+.salto-2 { display: inline-block; animation: saltoPalabra 6s infinite 0.25s; }
+.salto-3 { display: inline-block; animation: saltoPalabra 6s infinite 0.5s; }
+/* ------------------------------------------ */
+
+.sug-wrapper {
+    display: grid;
+    overflow-x: auto;
+    gap: 35px 15px; /* Mantenemos tu espaciado original */
+    padding-bottom: 20px;
+    /* Aquí está la magia: */
+    grid-template-columns: repeat(auto-fit, minmax(130px, 1fr));
+}
+
+.sug-item {
+    width: 100%;
+    cursor: none;
+    text-align: center;
+}
+
+.sug-item img {
+    width: 90%;
+    height: 30vh;
+    border-radius: 10px;
+    object-fit: cover;
+    transition: 0.4s ease;
+    background: #001;
+}
+
+.sug-item img:hover {
+    scale: 105%;
+    border: 2px solid #4f9;
+    box-shadow: 0 0 20px rgba(68, 255, 153, 0.6);
+}
+
+.sug-item h4 {
+    font-family: 'Poppins', sans-serif;
+    font-size: 11px;
+    color: #ccc;
+    margin-top: 10px;
+    transition: 0.3s;
+}
+
+.sug-item:hover h4 {
+    color: #4f9;
+}
+
+.sug-wrapper::-webkit-scrollbar {
+    display: none;
+}
+
+/* ------------------------------------------ */
+
+footer {
+    color: #fff;	   
+   	padding: 15px;
+   	height: 8vh;
+   	opacity: .9;
+   	display: grid;
+   	overview-y: auto;
+   	margin-top: 20px;
+   	text-align: center;
+   	background: #141414;
+   	overflow-x: auto;
+	   text-align: center;	   
+	   justify-content: center;
+} 
+#P {
+    font-size: 15px;
+    margin-top: 0vh;
+}
+.btn-reportar {
+    margin-top: -1vh;
+    background-color: rgba(255, 255, 255, 0.1);
+    color: #ff4d4d;
+    border: 1px solid #ff4d4d;
+    padding: 8px 16px;
+    border-radius: 20px;
+    font-size: 0.9rem;
+    font-weight: bold;
+    cursor: none;
+    scale: 70%;    
+    transition: all 0.3s ease;
+}
+.btn-reportar:hover {
+    background-color: #ff4d4d;
+    color: #ffffff;
+}
+
+/* MODAL DE REPORTE */
+.modal-overlay-reporte {
+    display: none;
+    position: fixed;
+    top: 0; left: 0; width: 100%; height: 100%;
+    background: rgba(0, 0, 0, 0.8);
+    z-index: 3000;
+    justify-content: center;
+    align-items: center;
+    backdrop-filter: blur(5px);
+}
+.modal-reporte-content {
+    background: #1a1a1a;
+    color: #ffffff;
+    padding: 25px;
+    border-radius: 16px;
+    width: 90%;
+    max-width: 380px;
+    box-shadow: 0 10px 25px rgba(0, 0, 0, 0.5);
+    border: 1px solid #333;
+}
+.modal-reporte-content h3 {
+    margin-top: 0;
+    color: #ff4d4d;
+    text-align: center;
+    font-size: 1.2rem;
+}
+.pelicula-detectada {
+    background: #2a2a2a;
+    padding: 10px;
+    border-radius: 8px;
+    font-size: 0.9rem;
+    color: #ddd;
+    margin-bottom: 15px;
+    border-left: 4px solid #ff4d4d;
+}
+.campo-grupo {
+    margin-bottom: 15px;
+    text-align: left;
+}
+.campo-grupo label {
+    display: block;
+    font-size: 0.85rem;
+    margin-bottom: 5px;
+    color: #aaa;
+}
+.select-reporte, .input-reporte {
+    width: 100%;
+    padding: 10px;
+    background: #2a2a2a;
+    border: 1px solid #444;
+    color: #fff;
+    border-radius: 8px;
+    font-size: 0.95rem;
+    box-sizing: border-box;
+    outline: none;
+}
+.select-reporte:focus, .input-reporte:focus {
+    border-color: #ff4d4d;
+}
+.modal-reporte-botones {
+    display: flex;
+    gap: 10px;
+    margin-top: 20px;
+}
+.btn-modal-rep {
+    flex: 1;
+    padding: 10px;
+    border: none;
+    border-radius: 8px;
+    font-weight: bold;
+    cursor: pointer;
+}
+.btn-cancelar-rep {
+    background: #444;
+    color: #fff;
+}
+.btn-enviar-rep {
+    background: #ff4d4d;
+    color: #fff;
+}
+#S {
+    height: 15vh;  
+    overflow-y: auto;
+    padding-right: 10px; 
+}
+#S::-webkit-scrollbar {
+    width: 6px;
+}
+#S::-webkit-scrollbar-thumb {
+    background: #7F05FF; 
+    border-radius: 10px;
+}
+#S::-webkit-scrollbar-track {
+    background: rgba(255, 255, 255, 0.1);
+    border-radius: 10px;
+}
+
+/* Estilo para el botón del tráiler */
+
+.btn-trailer {
+    width: auto;
+    height: 3vh;
+    opacity: .8;
+    background: #e50914; 
+    color: white;
+    border: none;
+    padding: 8px 16px;
+    border-radius: 20px;
+    font-weight: bold;
+    cursor: none;
+    margin-bottom: -20vh;
+    display: inline-flex;
+    align-items: center;
+    box-shadow: 0 0 10px rgba(229, 9, 20, 0.5);
+}
+.btn-trailer:hover {
+    background: #ff1c28;
+    box-shadow: 0 0 15px rgba(229, 9, 20, 0.8);
+}
+#trailerModal {
+    display: none;
+    position: fixed;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    width: 80%;
+    max-width: 600px;
+    background: #000;
+    border: 2px solid #333;
+    border-radius: 15px;
+    z-index: 9999; 
+    box-shadow: 0 0 20px rgba(0,0,0,0.9);
+    padding: 10px;
+}
+#trailerModal .cerrar-modal {
+    color: #fff;
+    background: transparent;
+    border: none;
+    font-size: 20px;
+    cursor: pointer;
+    float: right;
+    margin-bottom: 10px;
+}
+.video-container {
+    position: relative;
+    padding-bottom: 56.25%; 
+    height: 0;
+    overflow: hidden;
+    border-radius: 10px;
+}
+.video-container iframe {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+}
+/* =========================================================
+   CAJA DE CAPÍTULOS
+   ========================================================= */
+#Caja {
+    display: flex;
+    justify-content: start;
+    align-items: center;
+    gap: 10px;        
+    width: 90%;
+    margin: 15px auto;
+    overflow-x: auto; 
+    padding: 10px 0;
+}
+#Caja::-webkit-scrollbar {
+    display: none; /* Oculta la barra scroll de la caja */
+}
+.Btn {
+    background: blue;
+    color: white;
+    padding: 8px 15px;
+    border-radius: 10px;
+    text-decoration: none;
+    font-family: sans-serif;
+    font-weight: bold;
+    font-size: 13px;
+    cursor: none;
+    opacity: .9;
+    white-space: nowrap; /* Evita que el texto salte de línea */
+    transition: 0.3s;
+}
+.Btn:hover {
+    background: #4f9;
+    color: #000;
+    box-shadow: 0 0 10px rgba(68, 255, 153, 0.8);
+}
+
+@media (min-width: 500px) {
+    .I {
+        height: auto; 
+        aspect-ratio: 16 / 9; 
+    }
+}
