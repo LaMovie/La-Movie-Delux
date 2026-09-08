@@ -484,7 +484,7 @@ function procesarEnlace(matchedItem) {
   } else if (tipo === 'Película' && !EXE.some(s => url.includes(s))) { 
         window.location.href = `?titulo=${encodeURIComponent(tituloLimpio)}`;
     } else if (tipo === 'Aux') {
-        window.location.href = `?titulo=${encodeURIComponent(NN)}`;
+        window.location.href = `AUX.html?titulo=${encodeURIComponent(NN)}`;
     } else if (NN.includes('🧋')) {
         window.location.href = `?titulo=${encodeURIComponent(NN)}`;
     } else if (NN.includes('Tv')) {
