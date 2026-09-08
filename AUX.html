@@ -121,7 +121,7 @@ var TITULO = params.get('titulo');
     T.textContent = TITULO;
 
     var serie = Lista3.find(item => (item.NAME || item.name) === TITULO);
-
+ 
    
     if (serie && serie.CAPS) {
  
@@ -157,7 +157,10 @@ var TITULO = params.get('titulo');
             
         Caja.appendChild(boton);
      });
-   }
+   } else if (serie) {
+ var url = serie.URL || serie.url;
+         F.src = url;
+  }
 }
 
      var isMobile = /Mobi|Android|iPhone|iPad|iPod|BlackBerry|IEMobile|Opera Mini/i.test(navigator.userAgent);
