@@ -536,8 +536,7 @@ footer {
     transition: 0.3s;
 }
 .Btn:hover {
-    background: #4f9;
-    color: #000;
+    border: 1px solid #4f9;
     box-shadow: 0 0 10px rgba(68, 255, 153, 0.8);
 }
 
