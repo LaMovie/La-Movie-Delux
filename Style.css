@@ -477,10 +477,10 @@ a {
 
 @media (min-width: 500px) {
   .Container::-webkit-scrollbar {
-    width: 4px;
+    width: 3px;
+    opacity: .5;
   }
   .Container::-webkit-scrollbar-thumb {
-    opacity: .5;
     background: #aaa; 
     border-radius: 10px;
   }
@@ -489,7 +489,8 @@ a {
     border-radius: 10px;
   }
   .thumbnail::-webkit-scrollbar {
-    width: 4px;
+    width: 3px;
+    opacity: .5;
   }
   .thumbnail::-webkit-scrollbar-thumb {
     background: #4f9; 
