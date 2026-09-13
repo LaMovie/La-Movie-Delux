@@ -473,16 +473,29 @@ a {
     50% {color: #4f3;}
     100% {color: red;}
 }
+  
 
 @media (min-width: 500px) {
   .Container::-webkit-scrollbar {
-    width: 6px;
+    width: 4px;
   }
   .Container::-webkit-scrollbar-thumb {
+    opacity: .5;
     background: #aaa; 
     border-radius: 10px;
   }
   .Container::-webkit-scrollbar-track {
+    background: rgba(255, 255, 255, 0.1);
+    border-radius: 10px;
+  }
+  .thumbnail::-webkit-scrollbar {
+    width: 4px;
+  }
+  .thumbnail::-webkit-scrollbar-thumb {
+    background: #4f9; 
+    border-radius: 10px;
+  }
+  .thumbnail::-webkit-scrollbar-track {
     background: rgba(255, 255, 255, 0.1);
     border-radius: 10px;
   }
