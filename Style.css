@@ -353,9 +353,6 @@ header .menu {
 .Container:hover img:not(:hover){
      filter: opacity(85%) saturate(80%); 
 }
-.Container::-webkit-scrollbar {
-    
-}
 .H3 {
     text-align: left;
     margin-left: 15px;
@@ -477,7 +474,19 @@ a {
     100% {color: red;}
 }
 
-
+@media (min-width: 500px) {
+  .Container::-webkit-scrollbar {
+    width: 6px;
+  }
+  .Container::-webkit-scrollbar-thumb {
+    background: #aaa; 
+    border-radius: 10px;
+  }
+  .Container::-webkit-scrollbar-track {
+    background: rgba(255, 255, 255, 0.1);
+    border-radius: 10px;
+  }
+}
 
 
 
