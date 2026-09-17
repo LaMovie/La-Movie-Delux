@@ -481,7 +481,7 @@ a {
     opacity: .5;
   }
   .Container::-webkit-scrollbar-thumb {
-    background: #aaa; 
+    background: rgba(255, 255, 255, 0.1); 
     border-radius: 10px;
   }
   .Container::-webkit-scrollbar-track {
@@ -493,7 +493,7 @@ a {
     opacity: .5;
   }
   .thumbnail::-webkit-scrollbar-thumb {
-    background: #4f9; 
+    background: transparent; 
     border-radius: 10px;
   }
   .thumbnail::-webkit-scrollbar-track {
