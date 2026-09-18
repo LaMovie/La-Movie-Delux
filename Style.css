@@ -473,6 +473,10 @@ a {
     50% {color: #4f3;}
     100% {color: red;}
 }
+#⚠️ {
+    color: #4f9;
+    opacity: .6;
+}
   
 
 @media (min-width: 500px) {
