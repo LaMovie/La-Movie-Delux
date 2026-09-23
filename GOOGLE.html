@@ -269,6 +269,10 @@ body { display: none !important; }
     color: #202124;
     padding: 0 2px;
   }
+  #X {
+    color: #aaa;
+    font-size: 13px;
+}
 </style>
 </head>
 <body>
@@ -311,6 +315,8 @@ body { display: none !important; }
       <img src="https://is.gd/NjNew4" alt="Búsqueda en curso">
  <h4 id="HH">Continúa la Búsqueda...</h4>
       <h3 id="TIME"></h3>
+   <progress max="100" value="0">
+ </progress><span id="X"></span>
     </div>
     <div class="instruction-body">
       <p style="margin: 0 0 8px 0;">Para poder navegar y disfrutar del catálogo multimedia de forma totalmente fluida y segura, te recomendamos preparar tu entorno de exploración.</p>
@@ -444,6 +450,21 @@ var TABS = document.querySelectorAll('.tabs div');
     }, 1000);
   }
 });
+</script>
+<script>
+    let CC = 0;
+    
+ setInterval(() =>  {
+         
+   var P = document.querySelector('progress');
+      P.value = CC++;
+      X.textContent = P.value + '%';
+      
+      if (P.value > 99) {
+  P.style.background = 'green';
+     };
+       
+  }, 30);       
 </script>
 </body>
 </html>
