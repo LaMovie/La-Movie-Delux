@@ -560,7 +560,8 @@ footer {
     }
 
 #Caja::-webkit-scrollbar {
-    height: 5px;     
+    height: 5px;  
+    display: block;  
     }
 
 #Caja::-webkit-scrollbar-track {
