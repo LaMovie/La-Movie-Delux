@@ -53,7 +53,7 @@ input {
     #038,
     purple
 );
-animation: rgbMoves 8s linear infinite;
+animation: rgbMove 8s linear infinite;
 background-size: 600% 600%;
     border: .8px solid blue; 
     box-shadow:
@@ -185,7 +185,7 @@ background-size: 600% 600%;
    NUEVA ANIMACIÓN ÉPICA PARA EL LOGO "X"
    "Explosión de Energía y Desvanecimiento Cuántico"
    ========================================================= */
-@keyframes X {
+@keyframes Xxx {
   0% {
     top: 0vh; left: 40vh;
     scale: 0.6;
