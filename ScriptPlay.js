@@ -151,7 +151,12 @@ function formatearEnlace(enlace) {
 
     if (enlace.includes('file')) {
         let audio = document.getElementById('AA');
+        var esMobile = /Mobi|Android|iPhone|iPad|iPod|BlackBerry|IEMobile|Opera Mini/i.test(navigator.userAgent);
+        
+    if (esMobile) {
         if (audio) audio.play().catch(e => console.log("Audio bloqueado", e));
+    } 
+    
         return enlace.split('view')[0] + 'preview';
     }
     if (enlace.includes('www.dropbox.com')) {
