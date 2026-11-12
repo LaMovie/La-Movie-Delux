@@ -261,8 +261,7 @@ Div.forEach(divElement => {
 }); */
 
 
-
-     // 🔀FISHER-YATES SHUFFLE
+    // 🔀FISHER-YATES SHUFFLE
  // --- FUNCIÓN PARA MEZCLAR EL SLIDER PRINCIPAL DE FORMA ALEATORIA ---
 document.addEventListener("DOMContentLoaded", () => {
     const sliderList = document.querySelector('.slider .list');
@@ -270,14 +269,11 @@ document.addEventListener("DOMContentLoaded", () => {
 
     if (!sliderList || !thumbnailContainer) return;
 
-    // Obtenemos los arreglos de elementos
     let sliderItems = Array.from(sliderList.querySelectorAll('.item'));
     let thumbnailItems = Array.from(thumbnailContainer.querySelectorAll('.item'));
 
-    // Verificamos que tengan la misma cantidad para no romper la estructura
     if (sliderItems.length !== thumbnailItems.length) return;
 
-    // Emparejamos cada slide con su miniatura correspondiente
     let pairedItems = sliderItems.map((slide, index) => {
         return {
             slide: slide,
@@ -285,19 +281,15 @@ document.addEventListener("DOMContentLoaded", () => {
         };
     });
 
-    // Algoritmo de mezcla aleatoria (Fisher-Yates Shuffle)
     for (let i = pairedItems.length - 1; i > 0; i--) {
         let j = Math.floor(Math.random() * (i + 1));
         [pairedItems[i], pairedItems[j]] = [pairedItems[j], pairedItems[i]];
     }
 
-    // Limpiamos los contenedores actuales
     sliderList.innerHTML = '';
     thumbnailContainer.innerHTML = '';
 
-    // Volvemos a insertar los elementos en el orden aleatorio generado
     pairedItems.forEach((pair, index) => {
-        // Aseguramos que solo el primero empiece con la clase 'active'
         if (index === 0) {
             pair.slide.classList.add('active');
             pair.thumbnail.classList.add('active');
@@ -310,18 +302,23 @@ document.addEventListener("DOMContentLoaded", () => {
         thumbnailContainer.appendChild(pair.thumbnail);
     });
 
-    // Actualizamos las referencias globales de tu Script.js si es necesario
     items = document.querySelectorAll('.slider .list .item');
     thumbnails = document.querySelectorAll('.thumbnail .item');
     countItem = items.length;
     itemActive = 0;
     
-    // Mostramos el slider inicializado correctamente
+    thumbnails.forEach((thumbnail, index) => {
+        thumbnail.onclick = () => {
+            itemActive = index;
+            showSlider();
+        };
+    });
+
     if (typeof showSlider === 'function') {
         showSlider();
     }
 });
-  
+
     
 
         // INTENT
@@ -356,8 +353,4 @@ function abrirFuera(urlDestino) {
  });
 
 
-  
-
-
-
-
+    
