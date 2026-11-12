@@ -189,8 +189,7 @@ Div.forEach(divElement => {
 
 
 
-
-        <!-- SWPLAYER -->
+     // --- SWPLAYER ---
    
     // Detectar dispositivo
 var isMobile = /Mobi|Android|iPhone|iPad|iPod|BlackBerry|IEMobile|Opera Mini/i.test(navigator.userAgent);
@@ -246,8 +245,9 @@ Div.forEach(divElement => {
     });
 });
 
+
 // Enlaces con retardo visual en tarjetas
-ENLACE.forEach(item => { 
+/*ENLACE.forEach(item => { 
     item.addEventListener('click', (event) => {
         var URL = item.href;
         // Si es un enlace normal de película en PC, no aplicar setTimeout para no colisionar
@@ -255,12 +255,73 @@ ENLACE.forEach(item => {
 
         event.preventDefault();
         setTimeout(() => {
-            window.location.href = URL;
+    window.location.href = URL;
         }, 300); // Reducido a 300ms para mejor respuesta
     });
+}); */
+
+
+
+     // 🔀FISHER-YATES SHUFFLE
+ // --- FUNCIÓN PARA MEZCLAR EL SLIDER PRINCIPAL DE FORMA ALEATORIA ---
+document.addEventListener("DOMContentLoaded", () => {
+    const sliderList = document.querySelector('.slider .list');
+    const thumbnailContainer = document.querySelector('.thumbnail');
+
+    if (!sliderList || !thumbnailContainer) return;
+
+    // Obtenemos los arreglos de elementos
+    let sliderItems = Array.from(sliderList.querySelectorAll('.item'));
+    let thumbnailItems = Array.from(thumbnailContainer.querySelectorAll('.item'));
+
+    // Verificamos que tengan la misma cantidad para no romper la estructura
+    if (sliderItems.length !== thumbnailItems.length) return;
+
+    // Emparejamos cada slide con su miniatura correspondiente
+    let pairedItems = sliderItems.map((slide, index) => {
+        return {
+            slide: slide,
+            thumbnail: thumbnailItems[index]
+        };
+    });
+
+    // Algoritmo de mezcla aleatoria (Fisher-Yates Shuffle)
+    for (let i = pairedItems.length - 1; i > 0; i--) {
+        let j = Math.floor(Math.random() * (i + 1));
+        [pairedItems[i], pairedItems[j]] = [pairedItems[j], pairedItems[i]];
+    }
+
+    // Limpiamos los contenedores actuales
+    sliderList.innerHTML = '';
+    thumbnailContainer.innerHTML = '';
+
+    // Volvemos a insertar los elementos en el orden aleatorio generado
+    pairedItems.forEach((pair, index) => {
+        // Aseguramos que solo el primero empiece con la clase 'active'
+        if (index === 0) {
+            pair.slide.classList.add('active');
+            pair.thumbnail.classList.add('active');
+        } else {
+            pair.slide.classList.remove('active');
+            pair.thumbnail.classList.remove('active');
+        }
+
+        sliderList.appendChild(pair.slide);
+        thumbnailContainer.appendChild(pair.thumbnail);
+    });
+
+    // Actualizamos las referencias globales de tu Script.js si es necesario
+    items = document.querySelectorAll('.slider .list .item');
+    thumbnails = document.querySelectorAll('.thumbnail .item');
+    countItem = items.length;
+    itemActive = 0;
+    
+    // Mostramos el slider inicializado correctamente
+    if (typeof showSlider === 'function') {
+        showSlider();
+    }
 });
-
-
+  
     
 
         // INTENT
@@ -295,7 +356,7 @@ function abrirFuera(urlDestino) {
  });
 
 
-
+  
 
 
 
