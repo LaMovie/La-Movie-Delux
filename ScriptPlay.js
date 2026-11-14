@@ -157,7 +157,7 @@ function formatearEnlace(enlace) {
         if (audio) audio.play().catch(e => console.log("Audio bloqueado", e));
     } 
     
-        return enlace.split('view')[0] + 'preview';
+        return enlace.replace(/view.*/, 'preview');
     }
     if (enlace.includes('www.dropbox.com')) {
         return enlace.replace('www.dropbox.com', 'dl.dropboxusercontent.com');
