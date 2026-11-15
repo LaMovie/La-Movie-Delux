@@ -353,7 +353,7 @@ function abrirFuera(urlDestino) {
  });
 
 
-
+         // 🔗 ERROR IMG
     var ALLIMG = document.querySelectorAll('img');
 
 ALLIMG.forEach(img => {
@@ -363,11 +363,35 @@ ALLIMG.forEach(img => {
 });
   
          
+  
+  
+  // ⚠️ NAVIGATOR INTERNET
+      function NS() {
+           document.documentElement.innerHTML = "<head></head><body style='background:#000; margin:2vh; display:flex; justify-content:center; align-items:center; height:100vh;'><marquee><a id='Nan' href='go:INICIO' style='color:#f03; font-family:sans-serif; text-decoration:none; font-size:24px; font-weight:bold;'>⚠️ SIN CONEXION ⚠️</a></marquee></body>";
+      };
  
     
+  function Check() {
+     if (!navigator.onLine) {
+   
+        NS();
+    }
+  }
+  window.addEventListener("DOMContentLoaded", Check);
+    
+    // 2. Escuchar cuando la red se cae durante la sesión  
+  window.addEventListener("offline", () => {
+         NS();
+     Nan.textContent = '⚠️ CONEXION D MIERDA ⚠️';
+    Nan.style.color = 'orange';
+  });
+
   
-    
-    
+  // 3. Escuchar cuando la red vuelve  
+  window.addEventListener("online", () => {
+     Nan.textContent = '¡Conexión Restablecida! 🥳 HAS CLICK!';
+    Nan.style.color = '#4f3';
+  });
     
     
     
