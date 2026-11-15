@@ -353,4 +353,23 @@ function abrirFuera(urlDestino) {
  });
 
 
+
+    var ALLIMG = document.querySelectorAll('img');
+
+ALLIMG.forEach(img => {
+    img.addEventListener('error', function() {
+        this.src = 'La%20Movie.png';
+    });    
+});
+  
+         
+ 
+    
+  
+    
+    
+    
+    
+    
+    
     
