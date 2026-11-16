@@ -1,0 +1,90 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Reproductor de Vimeo Aleatorio</title>
+<style>
+body {
+    background: #000;
+}
+#video-container {
+    max-width: 600px;
+    margin: 0 auto;
+    text-align: center;
+}
+#random-video {
+    width: 100%;
+    height: auto;
+}
+#X {
+    text-align: center;
+    color: orange;
+    font-family: cursive;
+}
+</style>
+</head>
+<body>
+<div id="video-container">
+    <div id="random-video"></div>
+</div>
+
+<script src="https://player.vimeo.com/api/player.js"></script>
+
+<h3 id="X">"BASS NATION"</h3>
+
+<script>
+    window.onload = function() {
+        var videos = [
+            '872315224',
+            '872323071',
+            '872758109',
+            '872334910',
+            '872413433'
+        ];
+
+        function getRandomTime() {
+            return Math.floor(Math.random() * 5400);
+        }
+
+        var randomIndex = Math.floor(Math.random() * videos.length);
+        var randomVideoId = videos[randomIndex];
+
+        var player = new Vimeo.Player('random-video', {
+            id: randomVideoId,
+            width: 350,
+            autopause: false,
+            autoplay: true
+        });
+
+        player.on('loaded', function() {
+            var randomTime = getRandomTime();
+            player.setCurrentTime(randomTime).then(function(seconds) {
+                player.play().catch(function(error) {
+                    console.error('Error al reproducir el video:', error);
+                });
+            }).catch(function(error) {
+                console.error('Error al establecer el tiempo de reproducción:', error);
+            });
+        });
+
+        player.on('ended', function() {
+            var newIndex = Math.floor(Math.random() * videos.length);
+            var newRandomVideoId = videos[newIndex];
+            player.loadVideo(newRandomVideoId).then(function() {
+                var randomTime = getRandomTime();
+                player.setCurrentTime(randomTime).then(function(seconds) {
+                    player.play().catch(function(error) {
+                        console.error('Error al reproducir el video:', error);
+                    });
+                }).catch(function(error) {
+                    console.error('Error al establecer el tiempo de reproducción:', error);
+                });
+            }).catch(function(error) {
+                console.error('Error al cargar el video:', error);
+            });
+        });
+    };
+</script>
+</body>
+</html>
