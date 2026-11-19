@@ -393,7 +393,30 @@ ALLIMG.forEach(img => {
     Nan.style.color = '#4f3';
   });
     
+
+
+    //🔗 --- CONTROLADOR DEL MENÚ LATERAL ---
+const hamburgerBtn = document.getElementById('hamburgerBtn');
+const sideMenu = document.getElementById('SideMenu');
+const menuOverlay = document.getElementById('MenuOverlay');
+const cerrarMenu = document.getElementById('CerrarMenu');
+
+    function toggleMenu() {
+    sideMenu.classList.toggle('open');
+    menuOverlay.classList.toggle('open');
     
-    
-    
+    // Oculta o muestra el botón de las tres barras al abrir/cerrar
+    if (hamburgerBtn) {
+        hamburgerBtn.classList.toggle('hidden');
+    }
+}
+
+if (hamburgerBtn) hamburgerBtn.addEventListener('click', toggleMenu);
+if (cerrarMenu) cerrarMenu.addEventListener('click', toggleMenu);
+if (menuOverlay) menuOverlay.addEventListener('click', toggleMenu);
+
+
+
+
+
     
