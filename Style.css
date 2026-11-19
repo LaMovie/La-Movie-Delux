@@ -20,6 +20,9 @@ svg{
     z-index: -1;
     position: absolute;
 }
+#Logo img {
+    border-radius: 50%;
+}
 header {    
     width: 100%;
     margin: 6vh 0;
@@ -34,10 +37,10 @@ header {
     padding: 2vh;
 }
 header .logo {
-    scale: 8%;
+    scale: 19%;
     font-weight: bold;    
     animation: Logo 1s linear infinite alternate;
-    z-index: 8850;
+    z-index: 8860;
 }
 header .menu {
     scale: 110%;
@@ -47,8 +50,6 @@ header .menu {
     display: flex;
     justify-content: center;
     gap: 20px;
-    left: 20vh;
-    position: fixed;
     font-weight: 500;
     z-index: 8850;
     border-radius: 20px;
@@ -276,8 +277,8 @@ header .menu {
     100% {opacity: 1; transform: translate(0, 0);}
 }
 @keyframes Logo {
-    from {scale: 8%;}
-    to {scale: 7%;}
+    from {scale: 19%;}
+    to {scale: 18%;}
 }
 #Search {
     width: 50px; 
