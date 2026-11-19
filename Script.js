@@ -416,7 +416,9 @@ if (cerrarMenu) cerrarMenu.addEventListener('click', toggleMenu);
 if (menuOverlay) menuOverlay.addEventListener('click', toggleMenu);
 
 
-
+        if (isMobile) {
+   hamburgerBtn.style.display = 'none';
+   }
 
 
     
