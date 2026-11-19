@@ -34,11 +34,8 @@ header {
     padding: 2vh;
 }
 header .logo {
-    top: -82vh;
-    left: -78vh;
     scale: 10%;
-    font-weight: bold;
-    position: fixed;
+    font-weight: bold;    
     animation: Logo 1s linear infinite alternate;
     z-index: 8850;
 }
