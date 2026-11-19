@@ -312,11 +312,11 @@ background-size: 600% 600%;
  }
 }
 #No {
-    scale: 70%;
+    scale: 130%;
     display: none;
-    margin-top: 27vh;
+    margin: 36vh 10vh;
     position: fixed; 
-    border-radius: 50px;
+    border-radius: 40px;
   &:hover {
       filter: hue-rotate(90deg);
   }
@@ -344,7 +344,7 @@ h1 {
     
            </div>
 </section>
-<img id="No" src="https://is.gd/NjNew4"/>
+<img id="No" src="IMG/LoEncontraremos.gif"/>
 `;
 
      Aux.innerHTML = HTML;
