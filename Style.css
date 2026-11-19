@@ -34,7 +34,7 @@ header {
     padding: 2vh;
 }
 header .logo {
-    scale: 10%;
+    scale: 8%;
     font-weight: bold;    
     animation: Logo 1s linear infinite alternate;
     z-index: 8850;
@@ -276,8 +276,8 @@ header .menu {
     100% {opacity: 1; transform: translate(0, 0);}
 }
 @keyframes Logo {
-    from {scale: 10%;}
-    to {scale: 9%;}
+    from {scale: 8%;}
+    to {scale: 7%;}
 }
 #Search {
     width: 50px; 
