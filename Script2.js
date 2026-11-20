@@ -2,8 +2,22 @@ var PELI  = ['file', 'movie', 'vidyard.com', 'dropbox', 'gallery=open', '.mp4'];
 var SERIE = ['folders', 'drama', 'publicfoldergrid'];
 
 function construirLista() {
-    var PELIS = [...Lista1, ...Lista2, ...Lista3]; 
+    // Añadimos una propiedad de tipo temporal a los elementos de cada array según su origen
+    var procesarGrupo = (array, tipoDefecto) => (array || []).map(item => ({ ...item, _tipoForzado: tipoDefecto }));
+
+    var PELIS = [
+        ...procesarGrupo(TERROR, 'Terror'),
+        ...procesarGrupo(ACCION, 'Acción'),
+        ...procesarGrupo(FICCION, 'Ficción'),
+        ...procesarGrupo(COMEDY, 'Comedia'),
+        ...procesarGrupo(ANIME, 'Anime'),
+        ...procesarGrupo(SERIES, 'Serie'),
+        ...procesarGrupo(TV, 'Tv'),
+        ...procesarGrupo(PRE, 'Copy')
+    ];
+
     var lista = document.getElementById("Lista");
+    lista.innerHTML = ""; // Limpiar lista por seguridad si se recarga
 
     PELIS.forEach(item => {
         var li = document.createElement("li");
@@ -13,17 +27,19 @@ function construirLista() {
         var name = item.NAME || item.name || '';
         var nombreMin = name.toLowerCase();
 
-        var tipo = 'Película'; 
+        // Tomamos primero el tipo forzado por el array, si no, aplicamos tus reglas secundarias
+        var tipo = item._tipoForzado || 'Película'; 
 
         if (nombreMin.includes('tv')) {
             tipo = 'TV';
-        } else if (name.includes('🧋') || SERIE.some(keyword => url.includes(keyword))) {
-            tipo = 'Serie';
-        } else if (nombreMin.includes('🌐')) {
+        } else if (url.includes('PRE-ESTRENOS')) {
             tipo = 'Copy';
         } else if (url.includes('pelisflix')) {
             tipo = 'Aux';
         }
+    /* else if (name.includes('🧋') || SERIE.some(keyword => url.includes(keyword))) {
+            tipo = 'Serie';
+        }  */
 
  // OCULTAMOS LA URL REAL DEL HREF
         a.href = "javascript:void(0);"; 
@@ -39,6 +55,7 @@ function construirLista() {
         lista.appendChild(li);
     });
 }
+
 
 
 document.addEventListener("keyup", e => {
@@ -422,8 +439,35 @@ h1 {
 
 
        
-    (function(){const _0x1a=['aHR0cHM6Ly9sYW1vdmllLmdpdGh1Yi5pby9CdXNjYWRvci9CdXNjYWRvci5qcw==','aHR0cHM6Ly9sYW1vdmllLmdpdGh1Yi5pby9CdXNjYWRvci9CdXNjYWRvcjIuanM=','aHR0cHM6Ly9sYW1vdmllLmdpdGh1Yi5pby9CdXNjYWRvci9CdXNjYWRvcjMuanM='],_0x2b=_0x1a.map(x=>atob(x));let _0x3c=0;_0x2b.forEach(_0x4d=>{const _0x5e=document.createElement(atob('c2NyaXB0'));_0x5e.src=_0x4d;_0x5e.onload=()=>{_0x3c++;if(_0x3c===_0x2b.length){if(typeof construirLista===atob('ZnVuY3Rpb24='))construirLista();}};document.body.appendChild(_0x5e);});})();
+ (function () {
+  const urls = [
+    "https://lamovie.github.io/Buscador/GENEROS/TERROR.js",
+    "https://lamovie.github.io/Buscador/GENEROS/ACCION.js",
+    "https://lamovie.github.io/Buscador/GENEROS/FICCION.js",
+    "https://lamovie.github.io/Buscador/GENEROS/COMEDY.js",
+    "https://lamovie.github.io/Buscador/GENEROS/ANIME.js",
+    "https://lamovie.github.io/Buscador/GENEROS/SERIES.js", 
+    "https://lamovie.github.io/Buscador/GENEROS/TV.js", 
+    "https://lamovie.github.io/Buscador/GENEROS/PRE.js"
+  ];
 
+  let loadedCount = 0;
+
+  urls.forEach((url) => {
+    const script = document.createElement("script");
+    script.src = url;
+    script.onload = () => {
+      loadedCount++;
+      if (loadedCount === urls.length) {
+        if (typeof construirLista === "function") {
+          construirLista();
+        }
+      }
+    };
+    document.body.appendChild(script);
+  });
+})();
+   
   
  // https://bit.ly/3y2BVCO 
   
