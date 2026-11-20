@@ -102,16 +102,17 @@ function procesarEnlace(matchedItem) {
     
     var isMobile = /Mobi|Android|iPhone|iPad|iPod|BlackBerry|IEMobile|Opera Mini/i.test(navigator.userAgent);
     
-    var EXE = ['movie', 'pcloud', 'share.vidyard'];
+    var EXE = ['movie', 'pcloud', 'share.vidyard', 'folder'];
 
     // RECUPERAMOS EL 'tipo' Y 'url' OCULTOS EN EL ELEMENTO
     var tipo = matchedItem.dataset.tipo;
     var url = matchedItem.dataset.url;
+    var PELICULAS = ['Terror', 'Acción', 'Ficción', 'Comedia', 'Anime'];
 
     // REDIRECCIÓN SIMPLIFICADA BASADA EN EL TIPO
     if (tipo === 'Copy') {
         window.location.href = `${url}?texto=${tituloLimpio}`;
-  } else if (tipo === 'Película' && !EXE.some(s => url.includes(s))) { 
+  } else if (PELICULAS.some(pp => tipo.includes(pp)) && !EXE.some(s => url.includes(s))) { 
         window.location.href = `PLAY.html?titulo=${encodeURIComponent(tituloLimpio)}`;
     } else if (tipo === 'Aux') {
         window.location.href = `AUX.html?titulo=${encodeURIComponent(NN)}`;
@@ -441,14 +442,14 @@ h1 {
        
  (function () {
   const urls = [
-    "https://lamovie.github.io/Buscador/GENEROS/TERROR.js",
-    "https://lamovie.github.io/Buscador/GENEROS/ACCION.js",
-    "https://lamovie.github.io/Buscador/GENEROS/FICCION.js",
-    "https://lamovie.github.io/Buscador/GENEROS/COMEDY.js",
-    "https://lamovie.github.io/Buscador/GENEROS/ANIME.js",
-    "https://lamovie.github.io/Buscador/GENEROS/SERIES.js", 
-    "https://lamovie.github.io/Buscador/GENEROS/TV.js", 
-    "https://lamovie.github.io/Buscador/GENEROS/PRE.js"
+    "GENEROS/TERROR.js",
+    "GENEROS/ACCION.js",
+    "GENEROS/FICCION.js",
+    "GENEROS/COMEDY.js",
+    "GENEROS/ANIME.js",
+    "GENEROS/SERIES.js", 
+    "GENEROS/TV.js", 
+    "GENEROS/PRE.js"
   ];
 
   let loadedCount = 0;
