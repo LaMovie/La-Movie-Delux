@@ -442,14 +442,14 @@ h1 {
        
  (function () {
   const urls = [
-    "GENEROS/TERROR.js",
-    "GENEROS/ACCION.js",
-    "GENEROS/FICCION.js",
-    "GENEROS/COMEDY.js",
-    "GENEROS/ANIME.js",
-    "GENEROS/SERIES.js", 
-    "GENEROS/TV.js", 
-    "GENEROS/PRE.js"
+    "https://lamovie.github.io/Buscador/GENEROS/TERROR.js",
+    "https://lamovie.github.io/Buscador/GENEROS/ACCION.js",
+    "https://lamovie.github.io/Buscador/GENEROS/FICCION.js",
+    "https://lamovie.github.io/Buscador/GENEROS/COMEDY.js",
+    "https://lamovie.github.io/Buscador/GENEROS/ANIME.js",
+    "https://lamovie.github.io/Buscador/GENEROS/SERIES.js", 
+    "https://lamovie.github.io/Buscador/GENEROS/TV.js", 
+    "https://lamovie.github.io/Buscador/GENEROS/PRE.js"
   ];
 
   let loadedCount = 0;
