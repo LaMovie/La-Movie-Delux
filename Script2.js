@@ -102,7 +102,7 @@ function procesarEnlace(matchedItem) {
     
     var isMobile = /Mobi|Android|iPhone|iPad|iPod|BlackBerry|IEMobile|Opera Mini/i.test(navigator.userAgent);
     
-    var EXE = ['movie', 'pcloud', 'share.vidyard', 'folder'];
+    var EXE = ['movie', 'pcloud', 'share.vidyard', 'folder', 'drama'];
 
     // RECUPERAMOS EL 'tipo' Y 'url' OCULTOS EN EL ELEMENTO
     var tipo = matchedItem.dataset.tipo;
