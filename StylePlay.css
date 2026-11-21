@@ -96,8 +96,7 @@ background-size: 600% 600%;
 .Data {
     color: #fff;
     font-weight: bold;
-    -webkit-text-stroke: .3px #ff00ff;    
-    text-shadow: 0px 0px 10px blue, 0px 0px 20px #fff;    
+    -webkit-text-stroke: .3px #ff00ff;          
     text-decoration: none;
     display: block;
     padding: 15px;
