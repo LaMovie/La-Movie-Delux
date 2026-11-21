@@ -36,7 +36,6 @@ document.addEventListener('fullscreenchange', function() {
   }
 });
 
-  X.style.animation = 'X 2.5s linear 18s forwards running'; 
 
 
      window.onload = () => {
@@ -105,9 +104,13 @@ function reproducirDesdeDB(tituloABuscar) {
     if (!tituloABuscar) return;
 
     let DB_COMPLETA = [];
-    if (typeof Lista1 !== 'undefined') DB_COMPLETA.push(...Lista1);
-    if (typeof Lista2 !== 'undefined') DB_COMPLETA.push(...Lista2);
-    if (typeof Lista3 !== 'undefined') DB_COMPLETA.push(...Lista3);
+const fuentes = [TERROR, ACCION, FICCION, COMEDY, SERIES, ANIME, TV, PRE];
+fuentes.forEach(arr => {
+  if (typeof arr !== 'undefined' && Array.isArray(arr)) {
+    DB_COMPLETA.push(...arr);
+  }
+});
+
 
     // ESTO FALTABA: Normalizar para que "Película 🍿" sea igual a "pelicula"
     function normalizarTexto(texto) {
