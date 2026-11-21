@@ -103,17 +103,24 @@ window.addEventListener('DOMContentLoaded', () => {
 function reproducirDesdeDB(tituloABuscar) {
     if (!tituloABuscar) return;
 
-    let DB_COMPLETA = [];
-const fuentes = [TERROR, ACCION, FICCION, COMEDY, SERIES, ANIME, TV, PRE];
-fuentes.forEach(arr => {
-  if (typeof arr !== 'undefined' && Array.isArray(arr)) {
-    DB_COMPLETA.push(...arr);
-  }
-});
+    var procesarGrupo = (array, tipoDefecto) =>
+        (typeof array !== 'undefined' && Array.isArray(array))
+            ? array.map(item => ({ ...item, _tipoForzado: tipoDefecto }))
+            : [];
 
+    let DB_COMPLETA = [
+        ...procesarGrupo(TERROR, 'Terror'),
+        ...procesarGrupo(ACCION, 'Acción'),
+        ...procesarGrupo(FICCION, 'Ficción'),
+        ...procesarGrupo(COMEDY, 'Comedia'),
+        ...procesarGrupo(ANIME, 'Anime'),
+        ...procesarGrupo(SERIES, 'Serie'),
+        ...procesarGrupo(TV, 'Tv'),
+        ...procesarGrupo(PRE, 'Copy')
+    ];
 
-    // ESTO FALTABA: Normalizar para que "Película 🍿" sea igual a "pelicula"
-    function normalizarTexto(texto) {
+    
+ function normalizarTexto(texto) {
         return texto.normalize("NFD").replace(/[\u0300-\u036f]/g, "").replace(/🍿|🌐|📺|⚙️|🧋/g, '').trim().toLowerCase();
     }
 
@@ -134,10 +141,9 @@ fuentes.forEach(arr => {
 
     let urlExtraida = itemEncontrado.URL || itemEncontrado.url || "";
 
-    
-    // 📎 MANEJO DE CAPÍTULOS O PELÍCULA
+    // 📎 MANEJO DE CAPÍTULOS O PELÍCULA[span_2](start_span)[span_2](end_span)
     if (itemEncontrado.CAPS && itemEncontrado.CAPS.length > 0) {
-        Caja.innerHTML = ''; 
+        Caja.innerHTML = '';
         let botones = [];
 
         itemEncontrado.CAPS.forEach((capitulo, index) => {
@@ -160,14 +166,15 @@ fuentes.forEach(arr => {
             Caja.appendChild(boton);
             botones.push(boton);
 
-            // Auto-reproducir capítulo 1
-            if (index === 0) boton.onclick(); 
+            // Auto-reproducir capítulo 1[span_3](start_span)[span_3](end_span)
+            if (index === 0) boton.onclick();
         });
     } else {
         Caja.innerHTML = '';
         Iframe.src = formatearEnlace(urlExtraida);
     }
 }
+
 
 // FUNCIÓN PARA FORMATEAR ENLACES (Mantiene tu lógica de PC intacta)
 function formatearEnlace(enlace) {
@@ -425,35 +432,47 @@ function enviarReporte() {
   var PELI  = ['file', 'movie', 'vidyard.com', 'dropbox', 'gallery=open', '.mp4'];
 var SERIE = ['folders', 'drama', 'publicfoldergrid'];
 
-function construirLista() {
-    var PELIS = [...TERROR, ...ACCION, ...FICCION, ...COMEDY, ...SERIES, ...ANIME, ...TV, ...PRE];
-     
+
+  function construirLista() {
+    var procesarGrupo = (array, tipoDefecto) =>
+        (typeof array !== 'undefined' && Array.isArray(array))
+            ? array.map(item => ({ ...item, _tipoForzado: tipoDefecto }))
+            : [];
+
+    var PELIS = [
+        ...procesarGrupo(TERROR, 'Terror'),
+        ...procesarGrupo(ACCION, 'Acción'),
+        ...procesarGrupo(FICCION, 'Ficción'),
+        ...procesarGrupo(COMEDY, 'Comedia'),
+        ...procesarGrupo(ANIME, 'Anime'),
+        ...procesarGrupo(SERIES, 'Serie'),
+        ...procesarGrupo(TV, 'Tv'),
+        ...procesarGrupo(PRE, 'Copy')
+    ];
+
     var lista = document.getElementById("Lista");
+    if (!lista) return;
+    lista.innerHTML = "";
 
     PELIS.forEach(item => {
         var li = document.createElement("li");
         var a = document.createElement("a");
-        
+
         var url = (item.URL || item.url || '');
         var name = item.NAME || item.name || '';
         var nombreMin = name.toLowerCase();
 
-        var tipo = 'Película'; 
+        var tipo = item._tipoForzado || 'Película';
 
         if (nombreMin.includes('tv')) {
             tipo = 'TV';
-        } else if (name.includes('🧋') || SERIE.some(keyword => url.includes(keyword))) {
-            tipo = 'Serie';
-        } else if (nombreMin.includes('🌐')) {
+        } else if (url.includes('PRE-ESTRENOS')) {
             tipo = 'Copy';
         } else if (url.includes('pelisflix')) {
             tipo = 'Aux';
         }
 
- // OCULTAMOS LA URL REAL DEL HREF
-        a.href = "javascript:void(0);"; 
-        
-        // PASAMOS LAS VARIABLES AL DOM PARA LEERLAS DESPUÉS
+        a.href = "javascript:void(0);";
         a.dataset.tipo = tipo;
         a.dataset.url = url;
 
@@ -464,7 +483,6 @@ function construirLista() {
         lista.appendChild(li);
     });
 }
-
 
 document.addEventListener("keyup", e => {
     function Tildes(texto, preservarÑ = false) {
@@ -482,7 +500,9 @@ document.addEventListener("keyup", e => {
     var Input = Tildes(In.replace(/\s+/g, ' '), incluyeÑ);
 
     if (e.target.matches("#buscador")) {
-        Lista.style.display = Input === '' ? "none" : "block";
+        var listaEl = document.getElementById("Lista");
+        var noEl = document.getElementById("No");
+        if (listaEl) listaEl.style.display = Input === '' ? "none" : "block";
 
         Data.forEach(item => {
             let elTitulo = item.querySelector(".titulo-txt") ? item.querySelector(".titulo-txt").textContent : item.textContent;
@@ -496,9 +516,10 @@ document.addEventListener("keyup", e => {
             }
         });
 
-        No.style.display = foundMatch ? "none" : "block";
+        if (noEl) noEl.style.display = foundMatch ? "none" : "block";
     }
 });
+
 
 // FUNCIÓN CENTRALIZADA PARA PROCESAR ENLACES
 function procesarEnlace(matchedItem) {
@@ -507,34 +528,33 @@ function procesarEnlace(matchedItem) {
     var spanTitulo = matchedItem.querySelector(".titulo-txt");
     var NN = spanTitulo ? spanTitulo.textContent : matchedItem.textContent;
     var tituloLimpio = NN.replace(/🍿|🌐|📺|⚙️|🧋/g, '').trim();
-    
+
     var isMobile = /Mobi|Android|iPhone|iPad|iPod|BlackBerry|IEMobile|Opera Mini/i.test(navigator.userAgent);
-    
-    var EXE = ['movie', 'pcloud', 'share.vidyard'];
-    
-    // RECUPERAMOS EL 'tipo' Y 'url' OCULTOS EN EL ELEMENTO
+
+    var EXE = ['movie', 'pcloud', 'share.vidyard', 'folder', 'drama'];
+
     var tipo = matchedItem.dataset.tipo;
     var url = matchedItem.dataset.url;
+    var PELICULAS = ['Terror', 'Acción', 'Ficción', 'Comedia', 'Anime'];
 
-    // REDIRECCIÓN SIMPLIFICADA BASADA EN EL TIPO
     if (tipo === 'Copy') {
-        window.location.href = `${url}?texto=${tituloLimpio}`;
-  } else if (tipo === 'Película' && !EXE.some(s => url.includes(s))) { 
+        window.location.href = `${url}?texto=${encodeURIComponent(tituloLimpio)}`;
+    } else if (PELICULAS.some(pp => tipo.includes(pp)) && !EXE.some(s => url.includes(s))) {
         window.location.href = `?titulo=${encodeURIComponent(tituloLimpio)}`;
     } else if (tipo === 'Aux') {
         window.location.href = `AUX.html?titulo=${encodeURIComponent(NN)}`;
     } else if (NN.includes('🧋')) {
         window.location.href = `?titulo=${encodeURIComponent(NN)}`;
-    } else if (NN.includes('Tv')) {
+    } else if (NN.includes('Tv') || tipo === 'TV' || tipo === 'Tv') {
         window.location.href = `?titulo=${encodeURIComponent(NN)}`;
     } else {
         if (isMobile) {
-      window.location.href = url;
+            window.location.href = url;
         } else {
-   window.location.href = url.replace('latino.solo-latino', 'h5.swplayer');
+            window.location.href = url.replace('latino.solo-latino', 'h5.swplayer');
         }
     }
-    
+
     var buscadorInput = document.getElementById("buscador");
     if (buscadorInput) {
         buscadorInput.value = '';
