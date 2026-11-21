@@ -67,7 +67,36 @@ window.addEventListener('DOMContentLoaded', () => {
     }
 
        
-    (function(){const _0x1a=['aHR0cHM6Ly9sYW1vdmllLmdpdGh1Yi5pby9CdXNjYWRvci9CdXNjYWRvci5qcw==','aHR0cHM6Ly9sYW1vdmllLmdpdGh1Yi5pby9CdXNjYWRvci9CdXNjYWRvcjIuanM=','aHR0cHM6Ly9sYW1vdmllLmdpdGh1Yi5pby9CdXNjYWRvci9CdXNjYWRvcjMuanM='],_0x2b=_0x1a.map(x=>atob(x));let _0x3c=0;_0x2b.forEach(_0x4d=>{const _0x5e=document.createElement(atob('c2NyaXB0'));_0x5e.src=_0x4d;_0x5e.onload=()=>{_0x3c++;if(_0x3c===_0x2b.length){if(typeof construirLista===atob('ZnVuY3Rpb24='))construirLista();if(URL_PARAM){document.getElementById('I').src=formatearEnlace(URL_PARAM);}else{reproducirDesdeDB(TITULO);}}};document.head.appendChild(_0x5e);});})();
+   (function () {
+  var scripts = [
+    "https://lamovie.github.io/Buscador/GENEROS/TERROR.js",
+    "https://lamovie.github.io/Buscador/GENEROS/ACCION.js",
+    "https://lamovie.github.io/Buscador/GENEROS/FICCION.js", 
+    "https://lamovie.github.io/Buscador/GENEROS/COMEDY.js", 
+    "https://lamovie.github.io/Buscador/GENEROS/SERIES.js", 
+    "https://lamovie.github.io/Buscador/GENEROS/ANIME.js", 
+    "https://lamovie.github.io/Buscador/GENEROS/TV.js", 
+    "https://lamovie.github.io/Buscador/GENEROS/PRE.js"
+  ];
+  var cargados = 0;
+
+  scripts.forEach(function (src) {
+    var el = document.createElement("script");
+    el.src = src;
+    el.onload = function () {
+      cargados++;
+      if (cargados === scripts.length) {
+        if (typeof construirLista === "function") construirLista();
+        if (URL_PARAM) {
+          document.getElementById("I").src = formatearEnlace(URL_PARAM);
+        } else {
+          reproducirDesdeDB(TITULO);
+        }
+      }
+    };
+    document.head.appendChild(el);
+  });
+})();
 
 });
 
@@ -394,7 +423,8 @@ function enviarReporte() {
 var SERIE = ['folders', 'drama', 'publicfoldergrid'];
 
 function construirLista() {
-    var PELIS = [...Lista1, ...Lista2, ...Lista3]; 
+    var PELIS = [...TERROR, ...ACCION, ...FICCION, ...COMEDY, ...SERIES, ...ANIME, ...TV, ...PRE];
+     
     var lista = document.getElementById("Lista");
 
     PELIS.forEach(item => {
