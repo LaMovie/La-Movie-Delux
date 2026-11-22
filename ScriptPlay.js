@@ -74,8 +74,7 @@ window.addEventListener('DOMContentLoaded', () => {
     "https://lamovie.github.io/Buscador/GENEROS/COMEDY.js", 
     "https://lamovie.github.io/Buscador/GENEROS/SERIES.js", 
     "https://lamovie.github.io/Buscador/GENEROS/ANIME.js", 
-    "https://lamovie.github.io/Buscador/GENEROS/TV.js", 
-    "https://lamovie.github.io/Buscador/GENEROS/PRE.js"
+    "https://lamovie.github.io/Buscador/GENEROS/TV.js"
   ];
   var cargados = 0;
 
@@ -115,8 +114,7 @@ function reproducirDesdeDB(tituloABuscar) {
         ...procesarGrupo(COMEDY, 'Comedia'),
         ...procesarGrupo(ANIME, 'Anime'),
         ...procesarGrupo(SERIES, 'Serie'),
-        ...procesarGrupo(TV, 'Tv'),
-        ...procesarGrupo(PRE, 'Copy')
+        ...procesarGrupo(TV, 'Tv')
     ];
 
     
@@ -446,8 +444,7 @@ var SERIE = ['folders', 'drama', 'publicfoldergrid'];
         ...procesarGrupo(COMEDY, 'Comedia'),
         ...procesarGrupo(ANIME, 'Anime'),
         ...procesarGrupo(SERIES, 'Serie'),
-        ...procesarGrupo(TV, 'Tv'),
-        ...procesarGrupo(PRE, 'Copy')
+        ...procesarGrupo(TV, 'Tv')
     ];
 
     var lista = document.getElementById("Lista");
