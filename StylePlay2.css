@@ -323,6 +323,9 @@ footer {
 	   text-align: center;	   
 	   justify-content: center;
 } 
+footer::-webkit-scrollbar {
+    display: none;
+}
 #P {
     font-size: 15px;
     margin-top: 0vh;
