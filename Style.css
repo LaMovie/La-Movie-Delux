@@ -35,12 +35,13 @@ header {
     background: #000;
     position: fixed;
     padding: 2vh;
+ /* overflow: auto; */
 }
 header .logo {
     scale: 19%;
     font-weight: bold;    
     animation: Logo 1s linear infinite alternate;
-    z-index: 8860;
+    z-index: 8860;    
 }
 header .menu {
     scale: 110%;
@@ -542,6 +543,9 @@ a {
     overflow-y: auto;
     padding: 20px 15px;
     box-sizing: border-box;
+}
+#SideMenu::-webkit-scrollbar {
+    display: none;
 }
 
 /* Estado Activo (Cuando se abre) */
