@@ -47,9 +47,16 @@ document.addEventListener('fullscreenchange', function() {
  }
 
 
-
+  
         // ⚠️ ATENCIÓN
-const API_KEY = "2c0b94c5ec729e2cc59b8be6ad7b2159"; 
+    function obtenerK() {
+  var t1 = atob("YWQ3YjIxNTk=");
+  var t2 = atob("MmMwYjk0YzU=");
+  var t3 = atob("YzU5YjhiZTY=");
+  var t4 = atob("ZWM3MjllMmM=");
+  return t2 + t4 + t3 + t1;
+}
+
 
     var params = new URLSearchParams(window.location.search);
      var TITULO = params.get('titulo'); 
@@ -207,14 +214,16 @@ function formatearEnlace(enlace) {
 async function cargarTMDB(N) {
     var Aux = document.getElementById("Aux");
     try {
-        var searchUrl = "https://api.themoviedb.org/3/search/movie?api_key=" + API_KEY + "&query=" + encodeURIComponent(N) + "&language=es-ES";
+        var k = obtenerK();
+var searchUrl = "https://api.themoviedb.org/3/search/movie?api_key=" + k + "&query=" + encodeURIComponent(N) + "&language=es-ES";
+
         var response = await fetch(searchUrl);
         var data = await response.json();
 
         if (data.results && data.results.length > 0) {
             var peli = data.results[0]; 
             var movieId = peli.id;
-            var detailUrl = "https://api.themoviedb.org/3/movie/" + movieId + "?api_key=" + API_KEY + "&language=es-ES&append_to_response=credits,videos&include_video_language=es,en";
+            var detailUrl = "https://api.themoviedb.org/3/movie/" + movieId + "?api_key=" + k + "&language=es-ES&append_to_response=credits,videos&include_video_language=es,en";
             var detailRes = await fetch(detailUrl);
             var detailData = await detailRes.json();
 
