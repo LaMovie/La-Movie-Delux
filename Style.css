@@ -332,12 +332,13 @@ header .menu {
  }
 }
 .Container a {
-    display: flex;
+    display: inline-block;
     flex-direction: column;
     align-items: center;
     text-align: center;
     width: 110px;
     text-decoration: none;
+    position: relative;
 }
 
 .Container h4 {
@@ -625,7 +626,27 @@ a {
 #SGN {
     opacity: .4;
 }
-     
+.year {
+    top: 6px;
+    float: left;
+    color: #000;
+    opacity: .7;
+    padding: 3px;    
+    z-index: 8888;
+    font-size: 9px;
+    transition: .6s;
+    background: gray;
+    font-weight: bold;    
+    position: absolute;
+    border-radius: 10px;  
+}  
+.Container a:hover .year,
+.Container div:hover .year,
+.Container img:hover ~ .year {
+    background: #4f9 !important;
+}
+
+  
     
 
 
