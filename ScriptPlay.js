@@ -189,8 +189,8 @@ function formatearEnlace(enlace) {
     
   
     // 💻 MODO PC
-    if (!isMobile && enlace.includes('latino.solo-latino')) {
-        enlace = enlace.replace('latino.solo-latino', 'h5.swplayer');
+    if (!isMobile && enlace.includes('latino.solo')) {
+    enlace = enlace.replace(/latino.*?latino/, 'h5.swplayer');
     }
 
     if (enlace.includes('file')) {
@@ -551,7 +551,7 @@ function procesarEnlace(matchedItem) {
         window.location.href = `AUX.html?titulo=${encodeURIComponent(NN)}`;
     } else if (NN.includes('🧋')) {
         window.location.href = `?titulo=${encodeURIComponent(NN)}`;
-    } else if (NN.includes('Tv') || tipo === 'TV' || tipo === 'Tv') {
+    } else if (NN.includes('Tv')) {
         window.location.href = `?titulo=${encodeURIComponent(NN)}`;
     } else {
         if (isMobile) {
